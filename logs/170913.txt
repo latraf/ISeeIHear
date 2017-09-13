@@ -10,3 +10,11 @@
 11:24am
 - after Chris' wake up call, ayun, starting na I'm trying to finish the settings popup
 and hopefully gumana na siya update you later
+
+2:40pm
+- finished background.html
+- committed in my git repo
+- also made a hidden git account para di ako stressed kay chris haha
+
+NEXT TO DO's:
+- experiment with webspeech API
