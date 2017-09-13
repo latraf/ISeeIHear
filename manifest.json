@@ -28,11 +28,11 @@
 	},
 	"author": "rflat",
 	"background": {
-		"scripts": ["background.js"],
+		"scripts": ["src/js/background.js"],
 		"persistent": false
 	},
 	"permissions": [
-		"activeTab",
-		"http://*.google.com"
+		"activeTab"
+		// "http://*.google.com"
 	]
 }

@@ -10,3 +10,20 @@
 11:24am
 - after Chris' wake up call, ayun, starting na I'm trying to finish the settings popup
 and hopefully gumana na siya update you later
+
+2:40pm
+- finished background.html
+- committed in my git repo
+- also made a hidden git account para di ako stressed kay chris haha
+
+Previous To Do's (from 170909 log):
+must do after all functionalities are done
+(or kapag ayaw ko muna magcode ng legit):
+- make carousel slides on how to use the google extension
+- think of name for google extension (update: "I See I Hear" is temp name)
+- make logo (logo for the setting tab and the extension icon) of some sort (update: may naDL na ako na mata at mic)
+- make settings tab appealable (appealable enough naman siya)
+
+NEXT TO DO's:
+- experiment with webspeech API
+- find out the NEXT TO DOs
