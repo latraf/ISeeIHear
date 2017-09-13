@@ -1,0 +1,22 @@
+Sept 9, 2017 
+
+8:56am
+Started coding for SP like legit.
+Looked for the easiest things to do.
+Settings tab.
+
+9:37am
+finsihed settings skeleton for settings tab.
+must do:
+- think of name for google extension
+- make logo of some sort
+- make settings tab appealable
+
+must do after all functionalities are done
+(or kapag ayaw ko muna magcode ng legit):
+- make carousel slides on how to use the google extension
+
+after settings tab:
+- find out kung ano 'yung susunod na gagawin
+- search on how to do the voice navigation
+

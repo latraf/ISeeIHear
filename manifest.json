@@ -1,0 +1,38 @@
+// referenced from: https://developer.chrome.com/extensions/manifest
+
+{
+	// required
+	"manifest_version": 2,
+	"name": "I see I Hear",
+	"version": "1.0",
+
+	// recommended
+	"description": "I See I Hear is a google chrome extension that allows human voice and human gaze to navigate webpages.",
+	
+	// change icons soon 
+	"icons": {
+		"16": "src/img/trial_logo.png",
+		"48": "src/img/trial_logo.png",
+		"128": "src/img/trial_logo.png"
+	},
+
+	"browser_action": {
+		// change browser icon soon
+		"default_icon": {
+			"16": "src/img/trial_logo.png",
+			"24": "src/img/trial_logo.png",
+			"32": "src/img/trial_logo.png"
+		},
+		"default_title": "I See I Hear",
+		"default_popup": "background.html"
+	},
+	"author": "rflat",
+	"background": {
+		"scripts": ["background.js"],
+		"persistent": false
+	},
+	"permissions": [
+		"activeTab",
+		"http://*.google.com"
+	]
+}
