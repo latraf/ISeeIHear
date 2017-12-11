@@ -1,7 +1,5 @@
 // background.js
 
+angular.module('ISeeIHear', ['ngMaterial', 'ngMessages'])
 
-// for collapsible settings
-$(document).ready(function() {
-	$('.collapsible').collapsible();
-});
+.controller('BgCtrl', function() {});

@@ -1,86 +1,75 @@
 <!DOCTYPE html>
 <!-- saved from url=(0080)https://developer.chrome.com/extensions/examples/tutorials/getstarted/popup.html -->
 
-<html>
+<html lang="en" ng-app="ISeeIHear">
 
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
 	
 	<!-- tentative extension title: I See I Hear -->
 	<title> I See I Hear </title>
 
 	<!-- Google Icon Font -->
-	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-	<!-- materialize -->
-	<link type="text/css" rel="stylesheet" href="src/css_ext/materialize.min.css">
-	<!-- slider bar -->
-	<link type="text/css" rel="stylesheet" href="src/css_ext/nouislider.min.css">
+	<!-- <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet"> -->
+	<!-- Angular Material CSS -->
+	<link type="text/css" rel="stylesheet" href="node_modules/angular-material/angular-material.css">
 
 	<!-- scripts -->
-	<script type="text/javascript" src="src/js_ext/jquery-3.1.1.min.js"> </script>
-	<script type="text/javascript" src="src/js_ext/materialize.min.js"> </script>
-	<script type="text/javascript" src="src/js_ext/nouislider.min.js"> </script>
+	<!-- AngularJS libraries -->
+	<script type="text/javascript" src="node_modules/angular/angular.js"> </script>	
+	<script type="text/javascript" src="node_modules/angular-animate/angular-animate.js"> </script>	
+	<script type="text/javascript" src="node_modules/angular-aria/angular-aria.js"> </script>
+	<script type="text/javascript" src="node_modules/angular-messages/angular-messages.js"> </script>	
+
+	<!-- Angular Material JS -->
+	<script type="text/javascript" src="node_modules/angular-material/angular-material.js"> </script>
 
 	<script src="src/js/background.js"> </script>
 
 </head>
 
-<body class="blue-grey darken-3">
-	
-	<div class="light-blue-text text-lighten-4 blue-grey darken-3 " id= "main">
-		<div id="inner-main">
-			<!-- Logo/Cover -->
-			<div class="row center" id="cover">
-				<img src="src/img/trial-cover.jpg">
-			</div>
+<body>
 
+	<div ng-controller="BgCtrl" ng-cloak="">
+		<!-- Cover Logo -->
+		<section flex layout="row" layout-align="center center" id="cover">
+			<img src="src/img/trial-cover2.jpg">
+		</section>
+
+		<md-content flex layout-padding>
 			<!-- Introduction Button -->
-			<div class="row center" id="intro">
-				<!-- choose between the two options for intro button -->
-				<a class="btn blue-grey darken-1 light-blue-text text-lighten-4"> How to Use I See I Hear </a>
-				<!-- <button> How to I See I Hear </button> -->
-			</div>
-
+			<section layout="row" layout-align="center center" id="intro">
+				<md-button class="md-raised"> How to App 101 </md-button>			
+			</section>
 			<!-- Settings -->
-			<div class="row" id="settings">
-				<h5 class="flow-text center"> Settings </h5>
-				<ul class="collapsible" data-collapsible="accordion">
-					<!-- opacity -->
-					<li> 
-						<div class="collapsible-header blue-grey darken-3 tooltipped" data-position="bottom" data-delay="30" data-tooltip="Adjust opacity of buttons according to your preference!"> 
-							Opacity 
-						</div>
-						<div class="collapsible-body blue-grey darken-3"> 
-							<form action="#">
-								<p class="range-field">
-									<input class="blue-grey darken-1 light-blue-text text-lighten-4" type="range" id="opacity-bar" min="0" max="100">
-								</p>
-							</form>
-						</div>
-					</li>
-					<!-- choose modality -->
-					<li>
-						<div class="collapsible-header blue-grey darken-3 tooltipped" data-position="bottom" data-delay="30" data-tooltip="Note: If either voice or gaze is chosen, functionalities for the other modalities will be disabled."> 
-							Choose Modality 
-						</div>
-						<div class="row collapsible-body blue-grey darken-3"> 
-							<form action="#">
-								<div class="col s4"> <input class="with-gap" name="modality-options" type="radio" id="voice">  <label for="voice"> Voice </label> </div>
-								<div class="col s4"> <input class="with-gap col s4" name="modality-options" type="radio" id="gaze">  <label for="gaze"> Gaze </label> </div>
-								<div class="col s4"> <input class="with-gap col s4" name="modality-options" type="radio" id="both">  <label for="both"> Both </label> </div>
-							</form>
-						</div>
-					</li>
-					<!-- edit bookmarks -->
-					<li>
-						<div class="collapsible-header blue-grey darken-3 tooltipped" data-position="bottom" data-delay="30" data-tooltip="Create your own keywords for navigation! Note: Only applicable for voice modality."> 
-							<a> Edit Bookmarks </a>
-						</div>
-					</li>
-				</ul>
+			<div>
+				<section layout="row" layout-align="center center"> 
+					<span class="md-body-1"> Opacity: {{opacity}} </span>
+				</section>
+				<section layout="row"> 
+					<md-slider step="25" min="0" max="100" ng-model="opacity"> </md-slider>
+				</section>
 			</div>
 
-		</div>
+			<div>
+				<section layout="row" layout-align="center center">
+					<span class="md-body-1"> Modality: {{modality}} </span>
+				</section>
+				<md-radio-group ng-model="modality">
+					<md-radio-button value="Voice"> Voice </md-radio-button>
+					<md-radio-button value="Gaze"> Gaze </md-radio-button>
+					<md-radio-button value="Both"> Both </md-radio-button>
+				</md-radio-group>
+			</div>
+			<section layout="row" layout-align="center center">
+				<md-button> Edit Bookmarks </md-button>			
+			</section>
+			<!-- Save Settings -->
+			<section layout="row" layout-align="center center">
+				<md-button class="md-raised"> Save Settings </md-button>	
+			</section>
+		</md-content>
 	</div>
 
 </body>
