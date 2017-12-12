@@ -32,7 +32,8 @@
 		"persistent": false
 	},
 	"permissions": [
-		"activeTab"
+		"activeTab",
+		"storage"
 		// "http://*.google.com"
 	]
 }

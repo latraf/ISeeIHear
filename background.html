@@ -1,5 +1,4 @@
 <!DOCTYPE html>
-<!-- saved from url=(0080)https://developer.chrome.com/extensions/examples/tutorials/getstarted/popup.html -->
 
 <html lang="en" ng-app="ISeeIHear">
 
@@ -16,6 +15,8 @@
 	<link type="text/css" rel="stylesheet" href="node_modules/angular-material/angular-material.css">
 
 	<!-- scripts -->
+	<script src="src/js_ext/jquery-3.1.1.min.js"> </script>
+
 	<!-- AngularJS libraries -->
 	<script type="text/javascript" src="node_modules/angular/angular.js"> </script>	
 	<script type="text/javascript" src="node_modules/angular-animate/angular-animate.js"> </script>	
@@ -39,8 +40,8 @@
 
 		<md-content flex layout-padding>
 			<!-- Introduction Button -->
-			<section layout="row" layout-align="center center" id="intro">
-				<md-button class="md-raised"> How to App 101 </md-button>			
+			<section layout="row" layout-align="center center">
+				<md-button class="md-raised" ng-click="howTo()"> How to App 101 </md-button>			
 			</section>
 			<!-- Settings -->
 			<div>
@@ -63,11 +64,11 @@
 				</md-radio-group>
 			</div>
 			<section layout="row" layout-align="center center">
-				<md-button> Edit Bookmarks </md-button>			
+				<md-button ng-click="editBookmarks()"> Edit Bookmarks </md-button>			
 			</section>
 			<!-- Save Settings -->
 			<section layout="row" layout-align="center center">
-				<md-button class="md-raised"> Save Settings </md-button>	
+				<md-button class="md-raised" ng-click="saveSettings()"> Save Settings </md-button>	
 			</section>
 		</md-content>
 	</div>
