@@ -38,10 +38,6 @@ angular.module('ISeeIHear', ['ngMaterial', 'ngMessages'])
 			}
 		});
 
-		// alert(typeof(SO) + "\n" + typeof(MO));
-		// $scope.settings.opacity = 50;
-		// $scope.settings.modality = "Both";
-
 		// Note: naseset naman 'yung opacity sa storage kaso hindi nagrereflect sa UI kapag sinasarado 'yung background.html 
 		// 	Resolved: (?) Kasi narereflect siya sa UI pero hindi mismo dun sa options hays :(
 		// Note: previous values ang lumalabas kapag napress ang save settings button naooverwrite lang siya if you press the save setting button again
