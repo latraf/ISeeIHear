@@ -27,12 +27,12 @@
 		"default_popup": "background.html"
 	},
 	"author": "rflat",
-	"background": {
-		"scripts": ["src/js/background.js"],
-		"persistent": false
-	},
+	// "background": {
+	// 	"scripts": ["src/js/background.js"],
+	// 	"persistent": false
+	// },
 	"permissions": [
-		"activeTab",
+		"tabs",
 		"storage"
 		// "http://*.google.com"
 	]

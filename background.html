@@ -46,18 +46,18 @@
 			<!-- Settings -->
 			<div>
 				<section layout="row" layout-align="center center"> 
-					<span class="md-body-1"> Opacity: {{opacity}} </span>
+					<span class="md-body-1"> Opacity: {{settings.opacity}} </span>
 				</section>
 				<section layout="row"> 
-					<md-slider step="25" min="0" max="100" ng-model="opacity"> </md-slider>
+					<md-slider step="25" min="0" max="100" ng-model="settings.opacity"> </md-slider>
 				</section>
 			</div>
 
 			<div>
 				<section layout="row" layout-align="center center">
-					<span class="md-body-1"> Modality: {{modality}} </span>
+					<span class="md-body-1"> Modality: {{settings.modality}} </span>
 				</section>
-				<md-radio-group ng-model="modality">
+				<md-radio-group ng-model="settings.modality">
 					<md-radio-button value="Voice"> Voice </md-radio-button>
 					<md-radio-button value="Gaze"> Gaze </md-radio-button>
 					<md-radio-button value="Both"> Both </md-radio-button>
@@ -68,7 +68,11 @@
 			</section>
 			<!-- Save Settings -->
 			<section layout="row" layout-align="center center">
-				<md-button class="md-raised" ng-click="saveSettings()"> Save Settings </md-button>	
+				<md-button class="md-raised" ng-click="saveSettings()" ng-model="saveBtn"> Save Settings </md-button>	
+			</section>
+			<section>
+				<h5 id="storageO"> </h6>
+				<h5 id="storageM"> </h6>
 			</section>
 		</md-content>
 	</div>
