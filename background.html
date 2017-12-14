@@ -49,7 +49,7 @@
 					<span class="md-body-1"> Opacity: {{settings.opacity}} </span>
 				</section>
 				<section layout="row"> 
-					<md-slider step="25" min="0" max="100" ng-model="settings.opacity"> </md-slider>
+					<md-slider step="25" min="0" max="100" ng-model="settings.opacity" ng-aria="slider"> </md-slider>
 				</section>
 			</div>
 
@@ -71,7 +71,7 @@
 				<md-button class="md-raised" ng-click="saveSettings()" ng-model="saveBtn"> Save Settings </md-button>	
 			</section>
 			<section>
-				<h5 id="storageO"> </h6>
+				<h5 id="storageO" ng-model="hello"> Hi there! </h6>
 				<h5 id="storageM"> </h6>
 			</section>
 		</md-content>

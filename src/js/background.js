@@ -3,14 +3,28 @@
 angular.module('ISeeIHear', ['ngMaterial', 'ngMessages'])
 
 .controller('BgCtrl', function($scope) {
+
+var newOpacity = 0;
+
+	function getKey(key, callback) {
+		chrome.storage.local.get(key, function(data) {
+			var value = data[key];
+			callback(value);
+		});
+	}
+
+	// $scope.settings = {
+	// 		opacity: 50,
+	// 		modality: "Both"
+	// };
 	
-	var SO = 0, MO, newOpacity = 0;
-	chrome.storage.local.get('opacity', function(settings) {
-		$('#storageO').text("Saved Opacity: " + settings.opacity);
+	console.log("Saved Settings:");
+	getKey('opacity', function(data) {
+		console.log("[getKey] Opacity: " + data);
 	});
 
-	chrome.storage.local.get('modality', function(settings) {
-		$('#storageM').text("Saved Modality: " + settings.modality);
+	getKey('modality', function(data) {
+		console.log("[getKey] Modality: " + data);
 	});
 
 	// insert tutorials part in this button
@@ -21,27 +35,31 @@ angular.module('ISeeIHear', ['ngMaterial', 'ngMessages'])
 	// save settings in variables
 	$scope.saveSettings = function() {
 
-		// how to use chrome.storage.sync.get and chrome.storage.sync.set
-		chrome.storage.local.get('opacity', function(settings) {
-			newOpacity = parseInt($scope.settings.opacity);
-			// if newOpacity is != 0
-			if(newOpacity) {
-				chrome.storage.local.set({'opacity': newOpacity});
-			}
+		console.log("SAVED BUTTON");
+		newOpacity = parseInt($scope.settings.opacity);
+		// if newOpacity is != 0
+		if(newOpacity) {
+			chrome.storage.local.set({'opacity': newOpacity});
+		}
+
+		var newModality;
+		newModality = $scope.settings.modality;
+		// if newModality has a value
+		if(newModality != undefined) {
+			chrome.storage.local.set({'modality':  newModality});
+		}
+		console.log("Newly Saved Settings:");
+		getKey('opacity', function(data) {
+			console.log("[getKey] Opacity " + data);
 		});
 
-		chrome.storage.local.get('modality', function(settings) {
-			var newModality = $scope.settings.modality;
-			// if newModality has a value
-			if(newModality != undefined) {
-				chrome.storage.local.set({'modality':  newModality});
-			}
+		getKey('modality', function(data) {
+			console.log("[getKey] Modality " + data);
 		});
 
-		// Note: naseset naman 'yung opacity sa storage kaso hindi nagrereflect sa UI kapag sinasarado 'yung background.html 
-		// 	Resolved: (?) Kasi narereflect siya sa UI pero hindi mismo dun sa options hays :(
-		// Note: previous values ang lumalabas kapag napress ang save settings button naooverwrite lang siya if you press the save setting button again
-		// Note: So it means na gumagana 'yung chrome storage :)
+		alert("Opacity: " + newOpacity + "\nModality: " + newModality + "\n\nSettings saved!");
+
+		// Note: gumagana 'yung chrome storage pero hindi nagrereflect sa UI kapag sinasarado 'yung background.html
 	}
 	
 	// edit bookmark
