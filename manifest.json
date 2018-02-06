@@ -15,7 +15,6 @@
 		"48": "src/img/trial_logo.png",
 		"128": "src/img/trial_logo.png"
 	},
-
 	"browser_action": {
 		// change browser icon soon
 		"default_icon": {
@@ -24,16 +23,28 @@
 			"32": "src/img/trial_logo.png"
 		},
 		"default_title": "I See I Hear",
-		"default_popup": "background.html"
+		// within the extension popup only
+		"default_popup": "popup.html"
 	},
+	// isolated environment; can use all chrome APIs
+	"background": {
+		"scripts": ["src/js/background.js"],
+		"persistent": false
+	},
+	// user DOM
+	"content_scripts": [
+		{
+			"matches": ["http://*/*", "https://*/*"],
+			"js": ["src/js/content.js"]
+		}
+	],
+
 	"author": "rflat",
-	// "background": {
-	// 	"scripts": ["src/js/background.js"],
-	// 	"persistent": false
-	// },
 	"permissions": [
 		"tabs",
 		"storage"
 		// "http://*.google.com"
 	]
 }
+
+// chrome ui overrides
