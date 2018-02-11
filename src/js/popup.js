@@ -1,4 +1,4 @@
-// background.js
+// popup.js
 
 angular.module('ISeeIHear', ['ngMaterial', 'ngMessages'])
 
