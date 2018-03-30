@@ -1,20 +1,6 @@
 // popup.js
 
-/* storing data into chrome storage */
-function setObjData(obj) {
-	chrome.storage.local.set(obj, function() {
-		console.log('Object Saved!', obj);
-	});
-}
-
-/* getting data from chrome storage */
-function getObjData(obj) {
-	chrome.storage.local.get(null, callback);
-}
-
-
 /*** UI ***/
-
 $(function() {
 	$('.modality').checkboxradio({
 		icon: false
@@ -33,37 +19,47 @@ function howToTab() {
 }
 
 /* saves modality into chrome storage when button is clicked */
-
 document.addEventListener('DOMContentLoaded', function() {
 	document.getElementById("saveBtn").addEventListener("click", saveSettings);
 });
 
-var mode = "";
+var modeOut = "", mode = 0;
 
 function saveSettings() {
-	mode = $('input[name=radio-1]:checked').attr('id');
+	mode = $('input[name=radio-1]:checked').val();
 	switch(mode) {
-		case 'radio-1': mode = "Gaze"; break;
-		case 'radio-2': mode = "Voice"; break;
-		case 'radio-3': mode = "Both"; break;
+		case '1': modeOut = "Gaze"; break;
+		case '2': modeOut = "Voice"; break;
+		case '3': modeOut = "Both"; break;
 	}
-	$("#mode").html("Mode: " + mode);
+	// $("#mode").html("Mode: " + modeOut);
 
-	console.log(mode);
-
+	// console.log(modeOut);
+	alert("Saved! Mode: " + modeOut);
 	chrome.storage.local.set({'mode': mode});
 }
 
+/* loads previously saved modality */
 function loadSettings() {
-	mode = "";
-
 	chrome.storage.local.get('mode', function(result) {
 		mode = result.mode;
-		$("#mode").html("Mode: " + mode);
-		alert(mode);
-	})
+		switch(mode) {
+			case '1': modeOut = "Gaze"; break;
+			case '2': modeOut = "Voice"; break;
+			case '3': modeOut = "Both"; break;
+		}
+		// $("#mode").html("Mode: " + modeOut);
+		// alert(modeOut);
+		
+		switch(mode) {
+			case "1": $('#radio-1').prop("checked", true); break;
+			case "2": $('#radio-2').prop("checked", true); break;
+			case "3": $('#radio-3').prop("checked", true); break;
+		}
+	});
 }
 
+/* calls loading function everytime popup.html loads*/
 window.onload = function() {
 	loadSettings();
 }
