@@ -36,20 +36,22 @@
 		{
 			"matches": ["http://*/*", "https://*/*"],
 			// "css": ["src/css/style.css"],
-			"js": ["src/js_ext/jquery-3.1.1.min.js", "src/js/content.js"]
+			"js": ["src/js_ext/jquery-3.1.1.min.js", "src/js_ext/jquery-ui.js", "src/js_ext/webgazer.js", "src/js/content.js"]
 		}
 	],
-	// "web_accessible_resources": [
-	// 	"src/toolbar.html", "src/css/style.css"
-	// ],
-
-
 	"author": "rflat",
 	"permissions": [
 		"tabs",
-		"storage"
-		// "http://*.google.com"
-	]
+		"activeTab",
+		"storage",
+		"webNavigation",
+		"http://*/*",
+		"https://*/*"
+	],
+	"web_accessible_resources": [
+		"src/js_ext/gaze-controls.css"
+	],
+	"content_security_policy": "script-src 'self' 'unsafe-eval'; object-src 'self'"
 }
 
 // chrome ui overrides
