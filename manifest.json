@@ -29,7 +29,7 @@
 	// isolated environment; can use all chrome APIs
 	"background": {
 		"scripts": ["src/js_ext/jquery-3.1.1.min.js", "src/js/background.js"],
-		"persistent": false
+		"persistent": true
 	},
 	// user DOM
 	"content_scripts": [
