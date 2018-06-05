@@ -40,6 +40,7 @@ function saveSettings() {
 	if(mode == '1' | mode == '3') {
 		connectWebGazer();
 		console.log('connecting webgazer...');
+		// alert('connecting webgazer...');
 	}
 }
 
@@ -48,29 +49,35 @@ function loadSettings() {
 	chrome.storage.local.get('mode', function(result) {
 		mode = result.mode;
 		switch(mode) {
-			case '1': modeOut = 'Gaze'; break;
-			case '2': modeOut = 'Voice'; break;
-			case '3': modeOut = 'Both'; break;
+			case '1': modeOut = 'Gaze';
+					$('#radio-1').prop('checked', true);
+					break;
+			case '2': modeOut = 'Voice'; 
+					$('#radio-2').prop('checked', true);
+					break;
+			case '3': modeOut = 'Both'; 
+					$('#radio-3').prop('checked', true);
+					break;
 		}
 		// $("#mode").html("Mode: " + modeOut);
 		// alert(modeOut);
-		
-		switch(mode) {
-			case '1': $('#radio-1').prop('checked', true); break;
-			case '2': $('#radio-2').prop('checked', true); break;
-			case '3': $('#radio-3').prop('checked', true); break;
-		}
+	});
+}
+
+
+/* function to connect webgazer.js to the extension */
+function connectWebGazer() {
+	// chrome.tabs.executeScript({file: 'src/js_ext/webgazer.js'}, function() {
+	// 	chrome.tabs.executeScript({file: 'src/js/gaze-controls.js'});
+	// });
+	chrome.tabs.executeScript(null, {
+		file: 'gaze-controls.js'
 	});
 }
 
 /* calls loading function everytime popup.html loads*/
 window.onload = function() {
-	loadSettings();
-}
-
-/* function to connect webgazer.js to the extension */
-function connectWebGazer() {
-	chrome.tabs.executeScript({file: 'src/js_ext/webgazer.js'}, function() {
-		chrome.tabs.executeScript({file: 'src/js/gaze-controls.js'});
-	});
+	// loadSettings();
+	alert("loaded!");
+	document.getElementById('clickMe').addEventListener('click', connectWebGazer);
 }
