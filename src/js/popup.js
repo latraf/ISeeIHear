@@ -20,6 +20,7 @@ function howToTab() {
 /* saves modality into chrome storage when button is clicked */
 document.addEventListener('DOMContentLoaded', function() {
 	document.getElementById('saveBtn').addEventListener('click', saveSettings);
+	document.getElementById('clickMe').addEventListener('click', connectWebGazer);
 });
 
 var modeOut = '', mode = 0;
@@ -67,17 +68,18 @@ function loadSettings() {
 
 /* function to connect webgazer.js to the extension */
 function connectWebGazer() {
-	// chrome.tabs.executeScript({file: 'src/js_ext/webgazer.js'}, function() {
-	// 	chrome.tabs.executeScript({file: 'src/js/gaze-controls.js'});
-	// });
-	chrome.tabs.executeScript(null, {
-		file: 'gaze-controls.js'
+	chrome.tabs.executeScript({file: 'src/js_ext/webgazer.js'}, function() {
+		chrome.tabs.executeScript({file: 'src/js/gaze-controls.js'});
+		alert("connectWebGazer()");
 	});
+	// chrome.tabs.executeScript(null, {
+	// 	file: 'gaze-controls.js'
+	// });
 }
 
 /* calls loading function everytime popup.html loads*/
 window.onload = function() {
 	// loadSettings();
-	alert("loaded!");
-	document.getElementById('clickMe').addEventListener('click', connectWebGazer);
+	console.log("popup loaded!");
+	// alert("popup loaded!");
 }
