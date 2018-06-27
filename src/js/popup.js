@@ -1,4 +1,4 @@
-// popup.js
+/* popup.js */
 
 /*** UI ***/
 $(function() {
