@@ -1,10 +1,7 @@
 /* gaze-controls.css (controls.css kay chris) */
 
-  /*----------------*/
- /*----Main Page---*/
-/*----------------*/
+/* MAIN PAGE */
 
-/*
 .t_inject_container {
 	position:fixed;
 	bottom:0px;
@@ -15,16 +12,12 @@
 	-moz-box-sizing: border-box;   
 	box-sizing: border-box;
 }
-*/
 
-/*
 .menu {
 	background-color:lightblue;
 	border-radius:5px;
 }
-*/
 
-/*
 .t_intect_button {
 	background-color:blue;
 	display:block;
@@ -40,9 +33,7 @@
 	box-sizing: border-box; 
 	border-radius:5px;
 }
-*/
 
-/*
 .minimize_button {
 	height: 20px;
 	width: 20px;
@@ -53,22 +44,115 @@
 	box-sizing: border-box; 
 	border-radius:5px;
 }
-*/
 
- /*-----------------*/
- /*Timeline Element*/
-/*----------------*/
+/* TIMELINE ELEMENT */
 
-/*
 .timeline_element {
 	background-color:red;
 	border-radius:5px;
 }
-*/
 
-/*
 .t_text_area {
 	height: 50px;
 	width: 100px;
+}
+
+
+/* ISEEIHEAR UI */
+body {
+	height: 100%;
+	width: 100%;
+}
+
+#main_frame {
+	top: 0%;
+	left: 0%;
+	right:0%;
+	bottom:0%;	
+	height: 100%;
+	width: 100%;
+	position:fixed;
+	background-color:pink;   
+}
+
+#myDivId {
+	top:30%;
+	left:30%;
+	right:30%;
+	bottom:30%;		
+	width:60%;   
+	height:60%;
+	position:fixed;
+	background-color:red;
+}
+
+#myButtonFormId {
+	top:30%;
+	left:30%;	
+	right:30%;
+	bottom:30%;	
+	width:50%;   
+	height:50%;
+	position:fixed;
+	background-color:blue;
+}
+
+#myButtonId {
+	top:30%;
+	left:30%;	
+	right:30%;
+	bottom:30%;	
+	width:20%;   
+	height:20%;
+	position:fixed;
+	background-color:yellow;
+}
+
+/* CALIBRATION POINT POSITION 
+
+#Pt1 {
+	top: 70px;
+	left:340px;
+}
+
+#Pt2 {
+	top: 70px;
+	left:50vw;
+	margin-left: 340;
+}
+
+#Pt3 {
+	top: 70px;
+	right:2vw;
+}
+
+#Pt4 {
+	top:50vh;
+	left:2vw;
+}
+
+#Pt5 {
+	top: 50vh;
+	left: 50vw;
+}
+
+#Pt6 {
+	top: 50vh;
+	right:2vw;
+}
+
+#Pt7 {
+	bottom:2vw;
+	left: 2vw;
+}
+
+#Pt8 {
+	bottom:2vw;
+	left:50vw;
+}
+
+#Pt9 {
+	bottom:2vw;
+	right:2vw;
 }
 */
