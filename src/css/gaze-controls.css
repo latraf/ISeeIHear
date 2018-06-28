@@ -59,6 +59,7 @@
 
 
 /*** ISEEIHEAR UI ***/
+
 body {
 	height: 100%;
 	width: 100%;
@@ -111,11 +112,10 @@ body {
 	background-color:#BFC7FF;
 }
 
-/*** ARROWS ***/
+/*** UI BUTTONS ***/
 
 /* ARROW BOXES */
 /* reference: https://css-tricks.com/snippets/css/css-triangle/ */
-
 
 #arrow_up {
 	top: 0;
@@ -162,6 +162,61 @@ body {
 	position:fixed;
 	background-color:red;
 }
+
+/* BUTTONS */
+
+#click_btn {
+	bottom: 0;
+	left: 0;
+	right: 0;
+	margin-left: 160px;
+	border-left: 50px solid transparent;
+	border-right: 50px solid transparent;
+	border-top: 50px solid transparent;
+	background-color:green;
+}
+
+#focus_btn {
+	bottom: 0;
+	left: 0;
+	right: 0;
+	margin-left: 270px;
+	border-left: 50px solid transparent;
+	border-right: 50px solid transparent;
+	border-top: 50px solid transparent;
+	background-color:pink;
+}
+
+#press_btn {
+	bottom: 0;
+	left: 0;
+	right: 0;
+	margin-left: 380px;
+	border-left: 50px solid transparent;
+	border-right: 50px solid transparent;
+	border-top: 50px solid transparent;
+	background-color:white;
+}
+
+#open_btn {
+	bottom: 0;
+	left: 0;
+	right: 0;
+	margin-left: 490px;
+	border-left: 50px solid transparent;
+	border-right: 50px solid transparent;
+	border-top: 50px solid transparent;
+	background-color:black;
+} 
+
+.gaze_btns {
+	width:0;   
+	height:0;
+	
+	position:fixed;
+} 
+
+
 
 /* CALIBRATION POINT POSITION 
 
