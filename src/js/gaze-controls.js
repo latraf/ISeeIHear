@@ -5,7 +5,7 @@
 document.documentElement.style.height = '100%';
 document.documentElement.style.width = '100%';
 
-/* HIGHLIGHTING OF LINKS, BUTTONS, AND TEXTBOXES */
+/* HIGHLIGHTING OF LINKS, BUTTONS, AND TEXTBOXES 
 
 $('a').addClass('selectLinks');
 $('button').addClass('selectBtns');
