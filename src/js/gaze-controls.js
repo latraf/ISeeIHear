@@ -15,35 +15,6 @@ $('body').append('<style>.selectLinks {color: white!important;background: violet
 
 /* END */
 
-var main_frame = document.createElement( 'div' );
-main_frame.setAttribute('class', 'main_frame');
-
-var div = document.createElement('div');
-// var btnForm = document.createElement('form');
-// var btn = document.createElement('input');
-
-// append elements into the main_frame
-document.body.appendChild( main_frame);
-main_frame.appendChild(div);
-// div.appendChild(btnForm);
-// btnForm.appendChild( btn );
-
-//set attributes for div
-// div.id = 'myDivId';
-div.setAttribute('id', 'myDivId');
-//set attributes for btnForm
-// btnForm.setAttribute('id', 'myButtonFormId');
-// btnForm.action = '';
-
-//set attributes for btn
-//"btn.removeAttribute( 'style' );
-// btn.setAttribute('id', 'myButtonId');
-// btn.type = 'button';
-// btn.value = 'hello';
-// btn.style.position = 'absolute';
-// btn.style.top = '50%';
-// btn.style.left = '50%';
-
 // create arrows
 var arrow_up = document.createElement('div');
 var arrow_down = document.createElement('div');
@@ -76,14 +47,39 @@ focus_btn.setAttribute('class', 'gaze_btns');
 press_btn.setAttribute('class', 'gaze_btns');
 open_btn.setAttribute('class', 'gaze_btns');
 
-// append arrows into main_frame
-main_frame.appendChild(arrow_up);
-main_frame.appendChild(arrow_down);
-main_frame.appendChild(arrow_left);
-main_frame.appendChild(arrow_right);
+// append arrows into body of every website
+document.body.appendChild(arrow_up);
+document.body.appendChild(arrow_down);
+document.body.appendChild(arrow_left);
+document.body.appendChild(arrow_right);
 
 // append buttons into main_frame
-main_frame.appendChild(click_btn);
-main_frame.appendChild(focus_btn);
-main_frame.appendChild(press_btn);
-main_frame.appendChild(open_btn);
+document.body.appendChild(click_btn);
+document.body.appendChild(focus_btn);
+document.body.appendChild(press_btn);
+document.body.appendChild(open_btn);
+
+var scrolled=0;
+
+$(document).ready(function(){
+
+    	
+    $("#arrow_down").on("click" ,function(){
+                scrolled=scrolled+300;
+        
+				$("html, body").animate({
+				        scrollTop:  scrolled
+				   });
+
+			});
+
+    
+    $("#arrow_up").on("click" ,function(){
+				scrolled=scrolled-300;
+				
+				$("html, body").animate({
+				        scrollTop:  scrolled
+				   });
+
+			});
+ });
