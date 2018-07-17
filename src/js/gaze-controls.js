@@ -84,4 +84,14 @@ $(document).ready(function() {
 		});
 	});
 
+	$("#arrow_left").on("click", function() {
+		window.history.back();
+	});
+
+	$("#arrow_right").on("click", function() {
+		window.history.forward();
+	});
+
 });
+
+/* END */
