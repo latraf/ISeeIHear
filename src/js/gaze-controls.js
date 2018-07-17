@@ -15,6 +15,8 @@ $('body').append('<style>.selectLinks {color: white!important;background: violet
 
 /* END */
 
+/* ARRROWS AND BUTTONS FOR GAZE UI */
+
 // create arrows
 var arrow_up = document.createElement('div');
 var arrow_down = document.createElement('div');
@@ -59,27 +61,27 @@ document.body.appendChild(focus_btn);
 document.body.appendChild(press_btn);
 document.body.appendChild(open_btn);
 
-var scrolled=0;
+/* END */
 
-$(document).ready(function(){
+/* GAZE SCROLL UP AND DOWN */
 
-    	
-    $("#arrow_down").on("click" ,function(){
-                scrolled=scrolled+300;
-        
-				$("html, body").animate({
-				        scrollTop:  scrolled
-				   });
+var scrolled=0, scroll_var=300;
 
-			});
+$(document).ready(function() {
+	$("#arrow_down").on("click", function() {
+		scrolled=scrolled+scroll_var;
+       
+		$("html, body").animate({
+			scrollTop: scrolled
+		});
+	});
 
-    
-    $("#arrow_up").on("click" ,function(){
-				scrolled=scrolled-300;
+	$("#arrow_up").on("click", function() {
+		scrolled=scrolled-scroll_var;
 				
-				$("html, body").animate({
-				        scrollTop:  scrolled
-				   });
+		$("html, body").animate({
+			scrollTop: scrolled
+		});
+	});
 
-			});
- });
+});

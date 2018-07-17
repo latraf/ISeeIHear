@@ -125,7 +125,6 @@ body {
 	border-left: 50px solid transparent;
 	border-right: 50px solid transparent;
 	border-bottom: 50px solid black;
-	z--index: 1;
 }
 
 #arrow_down {
