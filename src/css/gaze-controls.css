@@ -269,3 +269,20 @@ body {
 	bottom:2vw;
 	right:2vw;
 }
+
+/* HIGHLIGHT ELEMENTS FOR CLICK, PRESS, FOCUS, & OPEN */
+
+.selectLinks {
+	color: white!important;
+	background: violet!important;
+} 
+
+.selectBtns {
+	color: white!important;
+	background: orange!important;
+} 
+
+.selectInputs {
+	color: white!important;
+	background: black!important;
+}

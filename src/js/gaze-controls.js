@@ -5,16 +5,6 @@
 document.documentElement.style.height = '100%';
 document.documentElement.style.width = '100%';
 
-/* HIGHLIGHTING OF LINKS, BUTTONS, AND TEXTBOXES 
-
-$('a').addClass('selectLinks');
-$('button').addClass('selectBtns');
-$('input').addClass('selectInputs');
-
-$('body').append('<style>.selectLinks {color: white!important;background: violet!important;} .selectBtns {color: white!important;background: orange!important;} .selectInputs {color: white!important;background: black!important;}</style>');
-
-/* END */
-
 /* ARRROWS AND BUTTONS FOR GAZE UI */
 
 // create arrows
@@ -63,11 +53,13 @@ document.body.appendChild(open_btn);
 
 /* END */
 
-/* GAZE SCROLL UP AND DOWN */
+/* INDIVIDUAL FUNCTIONALITIES ON UI ELEMENTS */
 
 var scrolled=0, scroll_var=300;
 
 $(document).ready(function() {
+
+	// scroll down
 	$("#arrow_down").on("click", function() {
 		scrolled=scrolled+scroll_var;
        
@@ -76,6 +68,7 @@ $(document).ready(function() {
 		});
 	});
 
+	// scroll up
 	$("#arrow_up").on("click", function() {
 		scrolled=scrolled-scroll_var;
 				
@@ -84,13 +77,37 @@ $(document).ready(function() {
 		});
 	});
 
+	// back page
 	$("#arrow_left").on("click", function() {
 		window.history.back();
 	});
 
+	// forward page
 	$("#arrow_right").on("click", function() {
 		window.history.forward();
 	});
+
+	// click links 
+	$("#click_btn").on("click", function() {
+		$('a').addClass('selectLinks');
+	});
+
+	// press buttons
+	// :button selects <button> elements and <input> elements with type="button"
+	$("#press_btn").on("click", function() {
+		$(':button').addClass('selectBtns');
+	});
+
+	// focus form fields
+	$("#focus_btn").on("click", function() {
+		$('input').addClass('selectInputs');
+	});
+
+	// // open link to new window
+	// $("#open_btn").on("click", function() {
+
+
+	// });
 
 });
 
