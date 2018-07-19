@@ -109,4 +109,12 @@ $(document).ready(function() {
 	// });
 });
 
+function collectLinks() {
+	var link_arr = document.links;
+
+	// for(var i=0; i<link_arr.length; ++i) {
+	// 	console.log(link_arr[i].href);
+	// }
+}
+
 /* END */
