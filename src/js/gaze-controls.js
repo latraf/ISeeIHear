@@ -95,6 +95,7 @@ $(document).ready(function() {
 	// :button selects <button> elements and <input> elements with type="button"
 	$("#press_btn").on("click", function() {
 		$(':button').addClass('selectBtns');
+		collectButtons();
 	});
 
 	// focus form fields
@@ -114,6 +115,24 @@ function collectLinks() {
 
 	// for(var i=0; i<link_arr.length; ++i) {
 	// 	console.log(link_arr[i].href);
+	// }
+}
+
+function collectButtons() {
+	var button_arr = document.getElementsByTagName("button");
+	
+	for(var i=0; i<button_arr.length; ++i) {
+		// console.log('type: ' + button_arr[i].getAttribute("type"));
+		// console.log('value: ' + button_arr[i].getAttribute("value"));
+	}
+
+	var span_arr = $('button > span').toArray();
+	$('button > span').css('background-color', 'yellow');
+	// span_arr = $('button > span').toArray();
+	// console.log(span_arr);
+
+	// for(var i=0; i<span_arr.length; ++i) {
+		
 	// }
 }
 
