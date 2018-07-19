@@ -95,6 +95,7 @@ $(document).ready(function() {
 	// :button selects <button> elements and <input> elements with type="button"
 	$("#press_btn").on("click", function() {
 		$('button:visible').addClass('selectBtns');
+		$('input[value]').addClass('selectBtns');
 		collectButtons();
 	});
 
@@ -137,7 +138,5 @@ function collectButtons() {
 	// 	console.log('value: ' + button_arr[i].getAttribute("value"));
 	// }
 }
-
-
 
 /* END */ 
