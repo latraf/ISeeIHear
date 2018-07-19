@@ -1,7 +1,5 @@
 /* gaze-controls.js (insert.js kay chris) */
 
-// chrome.runtime.sendMessage(document.getElementsByTagName('title')[0].innerText);
-
 document.documentElement.style.height = '100%';
 document.documentElement.style.width = '100%';
 
@@ -90,6 +88,7 @@ $(document).ready(function() {
 	// click links 
 	$("#click_btn").on("click", function() {
 		$('a').addClass('selectLinks');
+		collectLinks();
 	});
 
 	// press buttons
@@ -108,7 +107,6 @@ $(document).ready(function() {
 
 
 	// });
-
 });
 
 /* END */

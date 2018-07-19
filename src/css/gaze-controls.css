@@ -1,4 +1,4 @@
- gaze-controls.css (controls.css kay chris) */
+/* gaze-controls.css (controls.css kay chris) */
 
 /*** MAIN PAGE ***/
 
@@ -73,33 +73,8 @@ body {
 	height: 100%;
 	width: 100%;
 	position:fixed;
-	/*background-color:#546BFF;   */
 	z-index: 1000 !important;
 }
-
-/*
-#myDivId {
-	top:30%;
-	left:30%;
-	right:30%;
-	bottom:30%;		
-	width:60%;   
-	height:60%;
-	position:fixed;
-	background-color:#9254FF;
-}
-
-#myButtonFormId {
-	top:30%;
-	left:30%;	
-	right:30%;
-	bottom:30%;	
-	width:50%;   
-	height:50%;
-	position:fixed;
-	background-color:#E854FF;
-}
-*/
 
 #myButtonId {
 	top:30%;
@@ -218,9 +193,7 @@ body {
 	height:0;
 	margin-bottom: 10px;
 	position:fixed;
-} 
-
-
+}
 
 /* CALIBRATION POINT POSITION 
 
