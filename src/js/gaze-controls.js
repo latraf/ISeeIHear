@@ -94,7 +94,7 @@ $(document).ready(function() {
 	// press buttons
 	// :button selects <button> elements and <input> elements with type="button"
 	$("#press_btn").on("click", function() {
-		$(':button').addClass('selectBtns');
+		$('button:visible').addClass('selectBtns');
 		collectButtons();
 	});
 
@@ -110,6 +110,11 @@ $(document).ready(function() {
 	// });
 });
 
+/* 	collectLinks() gets all anchor tags and puts it in an array 
+		To Do More:
+			- display links to click
+			- click specific link according on user's preference
+*/
 function collectLinks() {
 	var link_arr = document.links;
 
@@ -118,22 +123,21 @@ function collectLinks() {
 	// }
 }
 
+/* 	collectButtons() gets all elements with button tag and puts it in an array
+		To Do More:
+			- display filtered buttons to press
+			- press specific buttons according on user's preference
+*/
 function collectButtons() {
-	var button_arr = document.getElementsByTagName("button");
-	
-	for(var i=0; i<button_arr.length; ++i) {
-		// console.log('type: ' + button_arr[i].getAttribute("type"));
-		// console.log('value: ' + button_arr[i].getAttribute("value"));
-	}
+	var button_arr = $('button:visible').toArray();
 
-	var span_arr = $('button > span').toArray();
-	$('button > span').css('background-color', 'yellow');
-	// span_arr = $('button > span').toArray();
-	// console.log(span_arr);
-
-	// for(var i=0; i<span_arr.length; ++i) {
-		
+	// for(var i=0; i<button_arr.length; ++i) {
+	// 	console.log(button_arr[i].textContent);
+	// 	console.log('type: ' + button_arr[i].getAttribute("type"));
+	// 	console.log('value: ' + button_arr[i].getAttribute("value"));
 	// }
 }
 
-/* END */
+
+
+/* END */ 
