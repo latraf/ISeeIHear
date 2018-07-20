@@ -101,7 +101,10 @@ $(document).ready(function() {
 
 	// focus form fields
 	$("#focus_btn").on("click", function() {
-		$('input').addClass('selectInputs');
+		$('input:not(value)').addClass('selectInputs');
+		$('input[type="text"]').addClass('selectInputs');
+		$('input[type="password"]').addClass('selectInputs');
+		$('div[role="textbox"]').addClass('selectInputs');
 		collectFields();
 	});
 
@@ -140,6 +143,19 @@ function collectButtons() {
 	// 	console.log('type: ' + button_arr[i].getAttribute("type"));
 	// 	console.log('value: ' + button_arr[i].getAttribute("value"));
 	// }
+}
+
+/*	collectFields() gets all elements with input tags and puts it in an array
+		To Do More:
+			- display input fields to focus on
+			- click specific input fields according on user's preference 
+			- merge button_arr1 and button_arr2
+*/
+function collectFields() {
+		var field_arr1 = $('input:not(value)').toArray();
+		var field_arr2 = $('input[type="text"]').toArray();
+		var field_arr3 = $('input[type="password"]').toArray();
+		var field_arr4 = $('div[role="textbox"]').toArray();
 }
 
 /* END */ 
