@@ -102,6 +102,7 @@ $(document).ready(function() {
 	// focus form fields
 	$("#focus_btn").on("click", function() {
 		$('input').addClass('selectInputs');
+		collectFields();
 	});
 
 	// // open link to new window
@@ -128,9 +129,11 @@ function collectLinks() {
 		To Do More:
 			- display filtered buttons to press
 			- press specific buttons according on user's preference
+			- merge button_arr1 and button_arr2
 */
 function collectButtons() {
-	var button_arr = $('button:visible').toArray();
+	var button_arr1 = $('button:visible').toArray();
+	var button_arr2 = $('input[value]').toArray();
 
 	// for(var i=0; i<button_arr.length; ++i) {
 	// 	console.log(button_arr[i].textContent);
