@@ -87,43 +87,57 @@ $(document).ready(function() {
 
 	// click links 
 	$("#click_btn").on("click", function() {
-		$('a').addClass('selectLinks');
+		highlightLinks();
 		collectLinks();
 	});
 
 	// press buttons
-	// :button selects <button> elements and <input> elements with type="button"
 	$("#press_btn").on("click", function() {
-		$('button:visible').addClass('selectBtns');
-		$('input[value]').addClass('selectBtns');
-		$('a[class*="btn"]').addClass('selectBtns');
-		$('a[class*="button"]').addClass('selectBtns');
-		$('input[type="submit"]').addClass('selectBtns');
-		$('input[type="reset"]').addClass('selectBtns');
-		$('input[type="button"]').addClass('selectBtns');
+		highlightButtons();
 		collectButtons();
 	});
 
 	// focus form fields
 	$("#focus_btn").on("click", function() {
-		$('input:not(value)').addClass('selectInputs');
-		$('input[type="text"]').addClass('selectInputs');
-		$('input[type="password"]').addClass('selectInputs');
-		$('div[role="textbox"]').addClass('selectInputs');
+		highlightFields();
 		collectFields();
 	});
 
-	// // open link to new window
+	// // open links to new window
 	// $("#open_btn").on("click", function() {
 
 
 	// });
 });
 
+/* highlightLinks() */
+function highlightLinks() {
+	$('a').addClass('selectLinks');
+}
+
+/* highlightButtons() */
+function highlightButtons() {
+	$('button:visible').addClass('selectBtns');
+	$('input[value]').addClass('selectBtns');
+	$('a[class*="btn"]').addClass('selectBtns');
+	$('a[class*="button"]').addClass('selectBtns');
+	$('input[type="submit"]').addClass('selectBtns');
+	$('input[type="reset"]').addClass('selectBtns');
+	$('input[type="button"]').addClass('selectBtns');
+}
+
+/* highlightFields() */
+function highlightFields() {
+	$('input:not(value)').addClass('selectInputs');
+	$('input[type="text"]').addClass('selectInputs');
+	$('input[type="password"]').addClass('selectInputs');
+	$('div[role="textbox"]').addClass('selectInputs');
+}
+
 /* 	collectLinks() gets all anchor tags and puts it in an array 
-		To Do More:
-			- display links to click
-			- click specific link according on user's preference
+**		To Do More:
+**		- display links to click
+**		- click specific link according on user's preference
 */
 function collectLinks() {
 	var link_arr = document.links;
@@ -137,11 +151,19 @@ function collectLinks() {
 		To Do More:
 			- display filtered buttons to press
 			- press specific buttons according on user's preference
-			- merge button_arr1 and button_arr2
+			- merge button arrays into one array
 */
 function collectButtons() {
 	var button_arr1 = $('button:visible').toArray();
 	var button_arr2 = $('input[value]').toArray();
+
+	// $('button:visible').addClass('selectBtns');
+	// $('input[value]').addClass('selectBtns');
+	// $('a[class*="btn"]').addClass('selectBtns');
+	// $('a[class*="button"]').addClass('selectBtns');
+	// $('input[type="submit"]').addClass('selectBtns');
+	// $('input[type="reset"]').addClass('selectBtns');
+	// $('input[type="button"]').addClass('selectBtns');
 
 	// for(var i=0; i<button_arr.length; ++i) {
 	// 	console.log(button_arr[i].textContent);
@@ -154,13 +176,18 @@ function collectButtons() {
 		To Do More:
 			- display input fields to focus on
 			- click specific input fields according on user's preference 
-			- merge button_arr1 and button_arr2
+			- merge field arrays into one array
 */
 function collectFields() {
 		var field_arr1 = $('input:not(value)').toArray();
 		var field_arr2 = $('input[type="text"]').toArray();
 		var field_arr3 = $('input[type="password"]').toArray();
 		var field_arr4 = $('div[role="textbox"]').toArray();
+
+		// $('input:not(value)').addClass('selectInputs');
+		// $('input[type="text"]').addClass('selectInputs');
+		// $('input[type="password"]').addClass('selectInputs');
+		// $('div[role="textbox"]').addClass('selectInputs');
 }
 
 /* END */ 
