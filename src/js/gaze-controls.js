@@ -96,6 +96,11 @@ $(document).ready(function() {
 	$("#press_btn").on("click", function() {
 		$('button:visible').addClass('selectBtns');
 		$('input[value]').addClass('selectBtns');
+		$('a[class*="btn"]').addClass('selectBtns');
+		$('a[class*="button"]').addClass('selectBtns');
+		$('input[type="submit"]').addClass('selectBtns');
+		$('input[type="reset"]').addClass('selectBtns');
+		$('input[type="button"]').addClass('selectBtns');
 		collectButtons();
 	});
 
