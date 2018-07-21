@@ -43,7 +43,7 @@ document.body.appendChild(arrow_down);
 document.body.appendChild(arrow_left);
 document.body.appendChild(arrow_right);
 
-// append buttons into main_frame
+// append buttons into body of every website
 document.body.appendChild(click_btn);
 document.body.appendChild(focus_btn);
 document.body.appendChild(press_btn);
@@ -109,6 +109,10 @@ $(document).ready(function() {
 
 	// });
 });
+
+/* END */ 
+
+
 
 /* highlightLinks() */
 function highlightLinks() {
@@ -203,4 +207,3 @@ function addToArray(orig_array, array, array_length) {
 	return temp_array;
 }
 
-/* END */ 
