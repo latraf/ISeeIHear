@@ -124,9 +124,7 @@ body {
 	left: 0;
 	right: 0;
 	margin-left: 160px;
-	border-left: 50px solid transparent;
-	border-right: 50px solid transparent;
-	border-top: 50px solid transparent;
+	border: 30px solid transparent;
 	background-color:green;
 }
 
@@ -135,9 +133,7 @@ body {
 	left: 0;
 	right: 0;
 	margin-left: 270px;
-	border-left: 50px solid transparent;
-	border-right: 50px solid transparent;
-	border-top: 50px solid transparent;
+	border: 30px solid transparent;
 	background-color:pink;
 }
 
@@ -146,9 +142,7 @@ body {
 	left: 0;
 	right: 0;
 	margin-left: 380px;
-	border-left: 50px solid transparent;
-	border-right: 50px solid transparent;
-	border-top: 50px solid transparent;
+	border: 30px solid transparent;
 	background-color:blue;
 }
 
@@ -157,15 +151,13 @@ body {
 	left: 0;
 	right: 0;
 	margin-left: 490px;
-	border-left: 50px solid transparent;
-	border-right: 50px solid transparent;
-	border-top: 50px solid transparent;
+	border: 30px solid transparent;
 	background-color:black;
 } 
 
 .gaze_btns {
-	width:0;   
-	height:0;
+	width: 30px;   
+	height: 30px;
 	margin-bottom: 10px;
 	position:fixed;
 }
