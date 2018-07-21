@@ -148,46 +148,59 @@ function collectLinks() {
 }
 
 /* 	collectButtons() gets all elements with button tag and puts it in an array
-		To Do More:
-			- display filtered buttons to press
-			- press specific buttons according on user's preference
-			- merge button arrays into one array
+**		To Do More:
+**		- display filtered buttons to press
+**		- press specific buttons according on user's preference
+**		- subtract array of fields in array of buttons
 */
 function collectButtons() {
+	var button_arr = [], temp_arr = [];
+
 	var button_arr1 = $('button:visible').toArray();
-	var button_arr2 = $('input[value]').toArray();
+	var button_arr2 = $('input[value], input[type="submit"], input[type="reset"], input[type="button"]').toArray();
+	var button_arr3 = $('a[class*="btn"], a[class*="button"]').toArray();
 
-	// $('button:visible').addClass('selectBtns');
-	// $('input[value]').addClass('selectBtns');
-	// $('a[class*="btn"]').addClass('selectBtns');
-	// $('a[class*="button"]').addClass('selectBtns');
-	// $('input[type="submit"]').addClass('selectBtns');
-	// $('input[type="reset"]').addClass('selectBtns');
-	// $('input[type="button"]').addClass('selectBtns');
+	temp_arr = addToArray(temp_arr, button_arr1, button_arr1.length);
+	// console.log("button_arr1: " + button_arr1.length);
+	temp_arr = addToArray(temp_arr, button_arr2, button_arr2.length);
+	// console.log("button_arr2: " + button_arr2.length);
+	temp_arr = addToArray(temp_arr, button_arr3, button_arr3.length);
+	// console.log("button_arr3: " + button_arr3.length);
 
-	// for(var i=0; i<button_arr.length; ++i) {
-	// 	console.log(button_arr[i].textContent);
-	// 	console.log('type: ' + button_arr[i].getAttribute("type"));
-	// 	console.log('value: ' + button_arr[i].getAttribute("value"));
-	// }
+	button_arr = jQuery.unique(temp_arr);
+	console.log("Button Array: ");
+	console.log(button_arr);
 }
 
 /*	collectFields() gets all elements with input tags and puts it in an array
-		To Do More:
-			- display input fields to focus on
-			- click specific input fields according on user's preference 
-			- merge field arrays into one array
+**		To Do More:
+**		- display input fields to focus on
+**		- click specific input fields according on user's preference 
 */
 function collectFields() {
-		var field_arr1 = $('input:not(value)').toArray();
-		var field_arr2 = $('input[type="text"]').toArray();
-		var field_arr3 = $('input[type="password"]').toArray();
-		var field_arr4 = $('div[role="textbox"]').toArray();
+	var field_arr = [], temp_arr = [];
 
-		// $('input:not(value)').addClass('selectInputs');
-		// $('input[type="text"]').addClass('selectInputs');
-		// $('input[type="password"]').addClass('selectInputs');
-		// $('div[role="textbox"]').addClass('selectInputs');
+	var field_arr1 = $('input:not(value), input[type="text"], input[type="password"]').toArray();
+	var field_arr2 = $('div[role="textbox"]').toArray();
+
+	temp_arr = addToArray(temp_arr, field_arr1, field_arr1.length);
+	// console.log("field_arr1: " + field_arr1.length);
+	temp_arr = addToArray(temp_arr, field_arr2, field_arr2.length);
+	// console.log("field_arr2: " + field_arr2.length);
+
+	field_arr = jQuery.unique(temp_arr);
+	console.log("Field Array: ");
+	console.log(field_arr);
+}
+
+function addToArray(orig_array, array, array_length) {
+
+	var temp_array = orig_array;
+	for(var i=0, j=array_length; i<j; i++) {
+		temp_array.push(array[i]);
+	}
+
+	return temp_array;
 }
 
 /* END */ 
