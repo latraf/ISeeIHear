@@ -57,7 +57,6 @@
 	width: 100px;
 }
 
-
 body {
 	height: 100%;
 	width: 100%;
@@ -170,6 +169,108 @@ body {
 	margin-bottom: 10px;
 	position:fixed;
 }
+
+/* FOR BRANCH gazeButtons1*/
+
+.gaze_next {
+	border-top: 20px solid transparent;
+	border-bottom: 20px solid transparent;
+}
+
+.gaze_prev {
+	border-top: 20px solid transparent; 
+	border-bottom: 20px solid transparent;
+}
+
+.gaze_btns1 {
+	bottom: 0;
+	left: 0;
+	right: 0;
+	width: 0;
+	height: 0;
+	margin-bottom: 70px;
+	position:fixed;
+}
+
+.center_btns {
+	bottom: 0;
+	left: 0;
+	right: 0;
+	width: 0px;
+	height: 0px;
+	margin-bottom: 80px;
+	position:fixed;
+	/*background-color: red;*/
+}
+
+#click_next {
+	margin-left: 170px;
+	border-left: 20px solid green;
+}
+
+#click_prev {
+	margin-left: 233px;
+	border-right: 20px solid green;
+}
+
+#focus_next {
+	margin-left: 280px;
+	border-left: 20px solid pink;
+}
+
+#focus_prev {
+	margin-left: 343px;
+	border-right: 20px solid pink;
+}
+
+#press_next {
+	margin-left: 390px;
+	border-left: 20px solid blue;
+}
+
+#press_prev {
+	margin-left: 452px;
+	border-right: 20px solid blue;
+}
+
+#open_next {
+	margin-left: 500px;
+	border-left: 20px solid black;
+}
+
+#open_prev {
+	margin-left: 563px;
+	border-right: 20px solid black;
+}
+
+
+#click_center {
+	margin-left: 201px;
+	/*margin-bottom: 100px;*/
+	border: 10px solid green;
+}
+
+#focus_center {
+	margin-left: 311px;
+	/*margin-bottom: 100px;*/
+	border: 10px solid pink;
+}
+
+#press_center {
+	margin-left:421px;
+	/*margin-bottom: 100px;*/
+	border: 10px solid blue;
+}
+
+#open_center {
+	margin-left: 531px;
+	/*margin-bottom: 100px;*/
+	border: 10px solid black;
+}
+
+/* END */
+
+
 
 /* CALIBRATION POINT POSITION 
 
