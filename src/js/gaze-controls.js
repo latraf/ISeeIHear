@@ -389,4 +389,50 @@ function pickButtons() {
 }
 
 
+function pickFields() {
+	console.log("fields");
+
+	var i=0;
+
+	$('#focus_next').on('click', function() {
+		if(i==0) {
+			console.log("focus next if " + i);
+			field_arr[i].classList.add('selected');
+			i++;
+		}
+		else if(i>0 && i<field_arr.length) {
+			console.log("focus next elseif " + i);
+			field_arr[i-1].classList.remove('selected');
+			field_arr[i].classList.add('selected');
+			i++;
+		}
+		else {
+			alert("end of the list");
+		}
+	});
+
+	$('#focus_prev').on('click', function() {
+		if(i==(field_arr.length-1)) {
+			console.log("focus prev if " + i);
+			field_arr[i].classList.add('selected');
+			i--;
+		}
+		else if(i>0 && i<field_arr.length) {
+			i--;
+			console.log("focus prev elseif " + i);
+			field_arr[i+1].classList.remove('selected');
+			field_arr[i].classList.add('selected');
+		}
+		else {
+			alert("start of the list");
+		}
+	});
+
+	$('#focus_center').on('click', function() {
+		console.log("focus button")
+		field_arr[i].focus();
+	});
+}
+
+
 /* END */
