@@ -17,20 +17,6 @@ var focus_btn = document.createElement('div');
 var press_btn = document.createElement('div');
 var open_btn = document.createElement('div');
 
-// next and previous for every gaze button
-var click_next = document.createElement('div');
-var click_prev = document.createElement('div');
-var click_center = document.createElement('div');
-var focus_next = document.createElement('div');
-var focus_prev = document.createElement('div');
-var focus_center = document.createElement('div');
-var press_next = document.createElement('div');
-var press_prev = document.createElement('div');
-var press_center = document.createElement('div');
-var open_next = document.createElement('div');
-var open_prev = document.createElement('div');
-var open_center = document.createElement('div');
-
 arrow_up.setAttribute('class', 'arrows');
 arrow_down.setAttribute('class', 'arrows');
 arrow_left.setAttribute('class', 'arrows');
@@ -50,6 +36,40 @@ click_btn.setAttribute('id', 'click_btn');
 focus_btn.setAttribute('id', 'focus_btn');
 press_btn.setAttribute('id', 'press_btn');
 open_btn.setAttribute('id', 'open_btn');
+
+// append arrows into body of every website
+document.body.appendChild(arrow_up);
+document.body.appendChild(arrow_down);
+document.body.appendChild(arrow_left);
+document.body.appendChild(arrow_right);
+
+// append buttons into body of every website
+document.body.appendChild(click_btn);
+document.body.appendChild(focus_btn);
+document.body.appendChild(press_btn);
+document.body.appendChild(open_btn);
+
+/* END */
+
+
+
+
+
+/* FOR BRANCH gazeButtons1 */
+
+// next and previous for every gaze button
+var click_next = document.createElement('div');
+var click_prev = document.createElement('div');
+var click_center = document.createElement('div');
+var focus_next = document.createElement('div');
+var focus_prev = document.createElement('div');
+var focus_center = document.createElement('div');
+var press_next = document.createElement('div');
+var press_prev = document.createElement('div');
+var press_center = document.createElement('div');
+var open_next = document.createElement('div');
+var open_prev = document.createElement('div');
+var open_center = document.createElement('div');
 
 click_next.setAttribute('class', 'gaze_btns1');
 click_prev.setAttribute('class', 'gaze_btns1');
@@ -88,18 +108,6 @@ focus_center.setAttribute('id', 'focus_center');
 press_center.setAttribute('id', 'press_center');
 open_center.setAttribute('id', 'open_center');
 
-// append arrows into body of every website
-document.body.appendChild(arrow_up);
-document.body.appendChild(arrow_down);
-document.body.appendChild(arrow_left);
-document.body.appendChild(arrow_right);
-
-// append buttons into body of every website
-document.body.appendChild(click_btn);
-document.body.appendChild(focus_btn);
-document.body.appendChild(press_btn);
-document.body.appendChild(open_btn);
-
 // append gazeButtons1 into body
 document.body.appendChild(click_next);
 document.body.appendChild(click_prev);
@@ -116,6 +124,10 @@ document.body.appendChild(press_center);
 document.body.appendChild(open_center);
 
 /* END */
+
+
+
+
 
 /* INDIVIDUAL FUNCTIONALITIES ON UI ELEMENTS */
 
@@ -155,18 +167,21 @@ $(document).ready(function() {
 	$("#click_btn").on("click", function() {
 		highlightLinks();
 		collectLinks();
+		pickLinks();
 	});
 
 	// press buttons
 	$("#press_btn").on("click", function() {
 		highlightButtons();
 		collectButtons();
+		pickButtons();
 	});
 
 	// focus form fields
 	$("#focus_btn").on("click", function() {
 		highlightFields();
 		collectFields();
+		pickFields();
 	});
 
 	// // open links to new window
@@ -180,9 +195,11 @@ $(document).ready(function() {
 
 
 
+
+
 /* highlightLinks() */
 function highlightLinks() {
-	$('a').addClass('selectLinks');
+	$('a:visible').addClass('selectLinks');
 }
 
 /* highlightButtons() */
@@ -204,17 +221,20 @@ function highlightFields() {
 	$('div[role="textbox"]').addClass('selectInputs');
 }
 
+var link_arr = [], button_arr = [], field_arr = [];
+
 /* 	collectLinks() gets all anchor tags and puts it in an array 
 **		To Do More:
 **		- display links to click
 **		- click specific link according on user's preference
 */
 function collectLinks() {
-	var link_arr = document.links;
-
+	link_arr = $('a:visible').toArray();
 	// for(var i=0; i<link_arr.length; ++i) {
 	// 	console.log(link_arr[i].href);
 	// }
+	console.log("Link Array: ");
+	console.log(link_arr);
 }
 
 /* 	collectButtons() gets all elements with button tag and puts it in an array
@@ -224,7 +244,7 @@ function collectLinks() {
 **		- subtract array of fields in array of buttons
 */
 function collectButtons() {
-	var button_arr = [], temp_arr = [];
+	var temp_arr = [];
 
 	var button_arr1 = $('button:visible').toArray();
 	var button_arr2 = $('input[value], input[type="submit"], input[type="reset"], input[type="button"]').toArray();
@@ -248,7 +268,7 @@ function collectButtons() {
 **		- click specific input fields according on user's preference 
 */
 function collectFields() {
-	var field_arr = [], temp_arr = [];
+	var temp_arr = [];
 
 	var field_arr1 = $('input:not(value), input[type="text"], input[type="password"]').toArray();
 	var field_arr2 = $('div[role="textbox"]').toArray();
@@ -273,3 +293,35 @@ function addToArray(orig_array, array, array_length) {
 	return temp_array;
 }
 
+
+
+
+
+/* FOR BRANCH gazeButtons1 */
+
+function pickLinks() {
+	console.log("links");
+	var i=0;
+
+	$('#click_next').on('click', function() {
+		if(i==0) {
+			console.log("click next if " + i);
+			link_arr[i].classList.add('selected');
+			i++;
+		}
+		else if(i>0 && i<link_arr.length) {
+			console.log("click next elseif " + i);
+			link_arr[i-1].classList.remove('selected');
+			link_arr[i].classList.add('selected');
+			i++;
+		}
+		else {
+			alert("end of the list");
+		}
+	});
+	
+}
+
+
+
+/* END */

@@ -162,7 +162,7 @@ body {
 	position:fixed;
 }
 
-/* FOR BRANCH gazeButtons1*/
+/* FOR BRANCH gazeButtons1 */
 
 .gaze_next {
 	border-top: 20px solid transparent;
@@ -180,7 +180,7 @@ body {
 	right: 0;
 	width: 0;
 	height: 0;
-	margin-bottom: 70px;
+	margin-bottom: 110px;
 	position:fixed;
 }
 
@@ -188,76 +188,70 @@ body {
 	bottom: 0;
 	left: 0;
 	right: 0;
-	width: 0px;
-	height: 0px;
-	margin-bottom: 80px;
+	width: 0;
+	height: 0;
+	margin-bottom: 120px;
 	position:fixed;
-	/*background-color: red;*/
-}
-
-#click_next {
-	margin-left: 170px;
-	border-left: 20px solid green;
 }
 
 #click_prev {
-	margin-left: 233px;
+	margin-left: 165px;
 	border-right: 20px solid green;
 }
 
-#focus_next {
-	margin-left: 280px;
-	border-left: 20px solid pink;
-}
-
-#focus_prev {
-	margin-left: 343px;
-	border-right: 20px solid pink;
-}
-
-#press_next {
-	margin-left: 390px;
-	border-left: 20px solid blue;
-}
-
-#press_prev {
-	margin-left: 452px;
-	border-right: 20px solid blue;
-}
-
-#open_next {
-	margin-left: 500px;
-	border-left: 20px solid black;
-}
-
-#open_prev {
-	margin-left: 563px;
-	border-right: 20px solid black;
-}
-
-
 #click_center {
-	margin-left: 201px;
-	/*margin-bottom: 100px;*/
+	margin-left: 196px;
 	border: 10px solid green;
 }
 
+#click_next {
+	margin-left: 228px;
+	border-left: 20px solid green;
+}
+
+#focus_prev {
+	margin-left: 275px;
+	border-right: 20px solid pink;
+}
+
 #focus_center {
-	margin-left: 311px;
-	/*margin-bottom: 100px;*/
+	margin-left: 306px;
 	border: 10px solid pink;
 }
 
+#focus_next {
+	margin-left: 338px;
+	border-left: 20px solid pink;
+}
+
+#press_prev {
+	margin-left: 385px;
+	border-right: 20px solid blue;
+}
+
 #press_center {
-	margin-left:421px;
-	/*margin-bottom: 100px;*/
+	margin-left:416px;
 	border: 10px solid blue;
 }
 
+#press_next {
+	margin-left: 448px;
+	border-left: 20px solid blue;
+}
+
+#open_prev {
+	margin-left: 495px;
+	border-right: 20px solid black;
+}
+
 #open_center {
-	margin-left: 531px;
-	/*margin-bottom: 100px;*/
+	margin-left: 526px;
 	border: 10px solid black;
+}
+
+#open_next {
+	margin-left: 558px;
+	border-left: 20px solid black;
 }
 
 /* END */
@@ -328,3 +322,9 @@ body {
 	color: white!important;
 	background: black!important;
 }
+
+.selected {
+	background-color: yellow!important;
+}
+
+/* END */ 
