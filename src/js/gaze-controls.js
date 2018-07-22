@@ -338,10 +338,11 @@ function pickLinks() {
 	});
 
 	$('#click_center').on('click', function() {
-		console.log("click link")
-		var coor = getCoordinates(link_arr[i]);
+		console.log("click link " + link_arr[i-1]) 
+		var coor = getCoordinates(link_arr[i-1]);
 		console.log(coor);
-		link_arr[i].click();
+		link_arr[i-1].click();
+		link_arr[i-1].classList.remove('selected');
 	});
 }
 
@@ -442,6 +443,7 @@ function pickFields() {
 
 
 function getCoordinates(element) {
+	
 	var box = element.getBoundingClientRect();
 	var top_coordinate = box.top + pageYOffset;
 	var left_coordinate = box.left + pageXOffset;
