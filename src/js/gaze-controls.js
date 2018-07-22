@@ -336,6 +336,11 @@ function pickLinks() {
 			alert("start of the list");
 		}
 	});
+
+	$('#click_center').on('click', function() {
+		console.log("click link")
+		link_arr[i].click();
+	});
 }
 
 
