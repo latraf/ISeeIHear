@@ -435,4 +435,16 @@ function pickFields() {
 }
 
 
+function getCoordinates(element) {
+	var box = element.getBoundingClientRect();
+	var top_coordinate = box.top + pageYOffset;
+	var left_coordinate = box.left + pageXOffset;
+
+	return {
+		top: top_coordinate,
+		left: left_coordinate
+	}
+}
+
+
 /* END */
