@@ -339,6 +339,8 @@ function pickLinks() {
 
 	$('#click_center').on('click', function() {
 		console.log("click link")
+		var coor = getCoordinates(link_arr[i]);
+		console.log(coor);
 		link_arr[i].click();
 	});
 }
