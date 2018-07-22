@@ -350,6 +350,7 @@ function pickLinks() {
 
 
 function pickButtons() {
+	console.clear();
 	console.log("buttons");	
 	var i=0;
 
@@ -372,13 +373,13 @@ function pickButtons() {
 
 	$('#press_prev').on('click', function() {
 		if(i==(button_arr.length-1)) {
+			i--;
 			console.log("press prev if " + i);
 			button_arr[i].classList.add('selected');
-			i--;
 		}
 		else if(i>0 && i<button_arr.length) {
 			i--;
-			console.log("press prev elseif " + i);
+			console.log("press prev elseif " + i + " " + button_arr[i]);
 			button_arr[i+1].classList.remove('selected');
 			button_arr[i].classList.add('selected');
 		}
@@ -388,10 +389,13 @@ function pickButtons() {
 	});
 
 	$('#press_center').on('click', function() {
-		console.log("press button")
-		var coor = getCoordinates(button_arr[i]);
+		console.log("press button");
+		console.log(button_arr[i-1]);
+		var coor = getCoordinates(button_arr[i-1]);
 		console.log(coor);
-		button_arr[i].click();
+		button_arr[i-1].click();
+		button_arr[i-1].classList.remove('selected');
+		i=0;
 	});
 }
 
