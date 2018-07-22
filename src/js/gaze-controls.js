@@ -379,7 +379,8 @@ function pickButtons() {
 		}
 		else if(i>0 && i<button_arr.length) {
 			i--;
-			console.log("press prev elseif " + i + " " + button_arr[i]);
+			console.log("press prev elseif " + i);
+			console.log(button_arr[i]);
 			button_arr[i+1].classList.remove('selected');
 			button_arr[i].classList.add('selected');
 		}
@@ -401,8 +402,8 @@ function pickButtons() {
 
 
 function pickFields() {
+	console.clear();
 	console.log("fields");
-
 	var i=0;
 
 	$('#focus_next').on('click', function() {
@@ -424,13 +425,14 @@ function pickFields() {
 
 	$('#focus_prev').on('click', function() {
 		if(i==(field_arr.length-1)) {
+			i--;
 			console.log("focus prev if " + i);
 			field_arr[i].classList.add('selected');
-			i--;
 		}
 		else if(i>0 && i<field_arr.length) {
 			i--;
 			console.log("focus prev elseif " + i);
+			console.log(field_arr[i]);
 			field_arr[i+1].classList.remove('selected');
 			field_arr[i].classList.add('selected');
 		}
@@ -441,9 +443,12 @@ function pickFields() {
 
 	$('#focus_center').on('click', function() {
 		console.log("focus button");
-		var coor = getCoordinates(field_arr[i]);
+		console.log(field_arr[i-1]);
+		var coor = getCoordinates(field_arr[i-1]);
 		console.log(coor);
-		field_arr[i].focus();
+		field_arr[i-1].focus();
+		field_arr[i-1].classList.remove('selected');
+		i=0;
 	});
 }
 
