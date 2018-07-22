@@ -386,6 +386,8 @@ function pickButtons() {
 
 	$('#press_center').on('click', function() {
 		console.log("press button")
+		var coor = getCoordinates(button_arr[i]);
+		console.log(coor);
 		button_arr[i].click();
 	});
 }
