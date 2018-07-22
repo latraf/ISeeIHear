@@ -319,7 +319,23 @@ function pickLinks() {
 			alert("end of the list");
 		}
 	});
-	
+
+	$('#click_prev').on('click', function() {
+		if(i==(link_arr.length-1)) {
+			console.log("click prev if " + i);
+			link_arr[i].classList.add('selected');
+			i--;
+		}
+		else if(i>0 && i<link_arr.length) {
+			i--;
+			console.log("click prev elseif " + i);
+			link_arr[i+1].classList.remove('selected');
+			link_arr[i].classList.add('selected');
+		}
+		else {
+			alert("start of the list");
+		}
+	});
 }
 
 
