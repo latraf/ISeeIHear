@@ -300,6 +300,7 @@ function addToArray(orig_array, array, array_length) {
 /* FOR BRANCH gazeButtons1 */
 
 function pickLinks() {
+	console.clear();
 	console.log("links");
 	var i=0;
 
@@ -322,13 +323,13 @@ function pickLinks() {
 
 	$('#click_prev').on('click', function() {
 		if(i==(link_arr.length-1)) {
+			i--;
 			console.log("click prev if " + i);
 			link_arr[i].classList.add('selected');
-			i--;
 		}
 		else if(i>0 && i<link_arr.length) {
 			i--;
-			console.log("click prev elseif " + i);
+			console.log("click prev elseif " + i + " " + link_arr[i]);
 			link_arr[i+1].classList.remove('selected');
 			link_arr[i].classList.add('selected');
 		}
@@ -338,11 +339,12 @@ function pickLinks() {
 	});
 
 	$('#click_center').on('click', function() {
-		console.log("click link " + link_arr[i-1]) 
+		console.log("click link " + link_arr[i-1]);
 		var coor = getCoordinates(link_arr[i-1]);
 		console.log(coor);
 		link_arr[i-1].click();
 		link_arr[i-1].classList.remove('selected');
+		i=0;
 	});
 }
 
@@ -444,13 +446,26 @@ function pickFields() {
 
 function getCoordinates(element) {
 	
-	var box = element.getBoundingClientRect();
-	var top_coordinate = box.top + pageYOffset;
-	var left_coordinate = box.left + pageXOffset;
+	if(element == null) {
+		alert('element is null');
+	}
+	else{
+		var box = element.getBoundingClientRect();
+		var top_coordinate = box.top + pageYOffset;
+		var left_coordinate = box.left + pageXOffset;
+		var width = box.width;
+		var height = box.height;
+		var right_coordinate = box.right;
+		var bottom_coordinate =box.bottom;
 
-	return {
-		top: top_coordinate,
-		left: left_coordinate
+		return {
+			top: top_coordinate,
+			left: left_coordinate,
+			right: right_coordinate,
+			bottom: bottom_coordinate,
+			width: width,
+			height: height
+		}
 	}
 }
 
