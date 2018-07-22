@@ -344,5 +344,49 @@ function pickLinks() {
 }
 
 
+function pickButtons() {
+	console.log("buttons");	
+	var i=0;
+
+	$('#press_next').on('click', function() {
+		if(i==0) {
+			console.log("press next if " + i);
+			button_arr[i].classList.add('selected');
+			i++;
+		}
+		else if(i>0 && i<button_arr.length) {
+			console.log("press next elseif " + i);
+			button_arr[i-1].classList.remove('selected');
+			button_arr[i].classList.add('selected');
+			i++;
+		}
+		else {
+			alert("end of the list");
+		}
+	});
+
+	$('#press_prev').on('click', function() {
+		if(i==(button_arr.length-1)) {
+			console.log("press prev if " + i);
+			button_arr[i].classList.add('selected');
+			i--;
+		}
+		else if(i>0 && i<button_arr.length) {
+			i--;
+			console.log("press prev elseif " + i);
+			button_arr[i+1].classList.remove('selected');
+			button_arr[i].classList.add('selected');
+		}
+		else {
+			alert("start of the list");
+		}
+	});
+
+	$('#press_center').on('click', function() {
+		console.log("press button")
+		button_arr[i].click();
+	});
+}
+
 
 /* END */
