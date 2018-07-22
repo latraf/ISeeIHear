@@ -433,7 +433,9 @@ function pickFields() {
 	});
 
 	$('#focus_center').on('click', function() {
-		console.log("focus button")
+		console.log("focus button");
+		var coor = getCoordinates(field_arr[i]);
+		console.log(coor);
 		field_arr[i].focus();
 	});
 }
