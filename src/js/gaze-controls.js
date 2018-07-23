@@ -443,10 +443,10 @@ function pickFields() {
 
 	$('#focus_center').on('click', function() {
 		console.log("focus button");
-		console.log(field_arr[i-1]);
-		var coor = getCoordinates(field_arr[i-1]);
+		console.log(field_arr[i]);
+		var coor = getCoordinates(field_arr[i]);
 		console.log(coor);
-		field_arr[i-1].focus();
+		field_arr[i].focus();
 		field_arr[i-1].classList.remove('selected');
 		i=0;
 	});
