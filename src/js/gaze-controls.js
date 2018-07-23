@@ -123,8 +123,8 @@ function pressButton() {
 
 function focusButton() {
 	if (document.readyState == "complete") {
-	highlightFields();
-	collectFields();
+		highlightFields();
+		collectFields();
 	}
 	else alert('page not loaded yet!');
 }
@@ -248,3 +248,9 @@ function addToArray(orig_array, array, array_length) {
 
 	return temp_array;
 }
+
+
+
+
+
+/* FOR BRANCH gazeButtons2 */
