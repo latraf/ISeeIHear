@@ -57,66 +57,93 @@ var scrolled=0, scroll_var=300;
 
 $(document).ready(function() {
 
-	// scroll down
-	$("#arrow_down").on("click", function() {
-		scrolled=scrolled+scroll_var;
-       
-		$("html, body").animate({
-			scrollTop: scrolled
-		});
-	});
+	$('#arrow_down').on('click', scrollDown);
+	$('#arrow_up').on('click', scrollUp);
+	$('#arrow_left').on('click', previousPage);
+	$('#arrow_right').on('click', nextPage);
 
-	// scroll up
-	$("#arrow_up").on("click", function() {
-		scrolled=scrolled-scroll_var;
-				
-		$("html, body").animate({
-			scrollTop: scrolled
-		});
-	});
+	$('#click_btn').on('click', clickButton);
+	$('#press_btn').on('click', pressButton);
+	$('#focus_btn').on('click', focusButton);
+	// $('#open_btn').on('click', openButton);
 
-	// back page
-	$("#arrow_left").on("click", function() {
-		window.history.back();
-	});
-
-	// forward page
-	$("#arrow_right").on("click", function() {
-		window.history.forward();
-	});
-
-	// click links 
-	$("#click_btn").on("click", function() {
-		highlightLinks();
-		collectLinks();
-	});
-
-	// press buttons
-	$("#press_btn").on("click", function() {
-		highlightButtons();
-		collectButtons();
-	});
-
-	// focus form fields
-	$("#focus_btn").on("click", function() {
-		highlightFields();
-		collectFields();
-	});
-
-	// // open links to new window
-	// $("#open_btn").on("click", function() {
-
-
-	// });
 });
 
-/* END */ 
+function scrollDown() {
+	if (document.readyState == "complete") {
+		scrolled=scrolled+scroll_var;
+
+		$('html, body').animate({
+			scrollTop: scrolled
+		});
+	}
+	else alert('page not loaded yet!');
+	
+}
+
+function scrollUp() {
+	if (document.readyState == "complete") {
+		scrolled=scrolled-scroll_var;
+					
+		$('html, body').animate({
+			scrollTop: scrolled
+		});
+	}
+	else alert('page not loaded yet!');
+}
+
+function previousPage() {
+	if (document.readyState == "complete")
+		window.history.back();
+	else alert('page not loaded yet!');
+
+}
+
+function nextPage() {
+	if (document.readyState == "complete")
+		window.history.forward();
+	else alert('page not loaded yet!');
+}
+
+function clickButton() {
+	if (document.readyState == "complete") {
+		highlightLinks();
+		collectLinks();
+	}
+	else alert('page not loaded yet!');
+}
+
+function pressButton() {
+	if (document.readyState == "complete") {
+		highlightButtons();
+		collectButtons();
+	}
+	else alert('page not loaded yet!');
+}
+
+function focusButton() {
+	if (document.readyState == "complete") {
+	highlightFields();
+	collectFields();
+	}
+	else alert('page not loaded yet!');
+}
+
+function openButton() {
+	if (document.readyState == "complete") {
+	}
+	else alert('page not loaded yet!');
+}
+
+/* END */
+
+
 
 
 
 /* highlightLinks() */
 function highlightLinks() {
-	$('a').addClass('selectLinks');
+	$('a:visible').addClass('selectLinks');
 }
 
 /* highlightButtons() */
@@ -132,31 +159,28 @@ function highlightButtons() {
 
 /* highlightFields() */
 function highlightFields() {
-	$('input:not(value)').addClass('selectInputs');
 	$('input[type="text"]').addClass('selectInputs');
 	$('input[type="password"]').addClass('selectInputs');
 	$('div[role="textbox"]').addClass('selectInputs');
 }
 
-/* 	collectLinks() gets all anchor tags and puts it in an array 
-**		To Do More:
-**		- display links to click
-**		- click specific link according on user's preference
-*/
+/* 	collectLinks() gets all anchor tags and puts it in an array */
 function collectLinks() {
-	var link_arr = document.links;
+	var link_arr = $('a:visible').toArray();
 
-	// for(var i=0; i<link_arr.length; ++i) {
-	// 	console.log(link_arr[i].href);
-	// }
+	for(var i=0; i<link_arr.length; i++) {
+		var box = link_arr[i].getBoundingClientRect();
+		console.log(box);
+		if(box.width===0 && box.height===0) {
+			link_arr.splice(i, 1);
+		}
+	}
+
+	// console.log(link_arr);
+	console.log(link_arr.length);
 }
 
-/* 	collectButtons() gets all elements with button tag and puts it in an array
-**		To Do More:
-**		- display filtered buttons to press
-**		- press specific buttons according on user's preference
-**		- subtract array of fields in array of buttons
-*/
+/* 	collectButtons() gets all elements with button tag and puts it in an array */
 function collectButtons() {
 	var button_arr = [], temp_arr = [];
 
@@ -172,15 +196,21 @@ function collectButtons() {
 	// console.log("button_arr3: " + button_arr3.length);
 
 	button_arr = jQuery.unique(temp_arr);
-	console.log("Button Array: ");
-	console.log(button_arr);
+
+	for(var i=0; i<button_arr.length; i++) {
+		var box = button_arr[i].getBoundingClientRect();
+		console.log(box);
+		if(box.width===0 && box.height===0) {
+			button_arr.splice(i, 1);
+		}
+	}
+
+	// console.log("Button Array: ");
+	// console.log(button_arr);
+	console.log(button_arr.length);
 }
 
-/*	collectFields() gets all elements with input tags and puts it in an array
-**		To Do More:
-**		- display input fields to focus on
-**		- click specific input fields according on user's preference 
-*/
+/*	collectFields() gets all elements with input tags and puts it in an array */
 function collectFields() {
 	var field_arr = [], temp_arr = [];
 
@@ -191,10 +221,22 @@ function collectFields() {
 	// console.log("field_arr1: " + field_arr1.length);
 	temp_arr = addToArray(temp_arr, field_arr2, field_arr2.length);
 	// console.log("field_arr2: " + field_arr2.length);
-
+	
 	field_arr = jQuery.unique(temp_arr);
-	console.log("Field Array: ");
+	
+	for(var i=0; i<field_arr.length; i++) {
+		var box = field_arr[i].getBoundingClientRect();
+		console.log(box);
+		if(box.width===0 && box.height===0) {
+			field_arr.splice(i, 1);
+		}
+
+		console.log(field_arr[i]);
+	}
+	
+	// console.log("Field Array: ");
 	console.log(field_arr);
+	console.log(field_arr.length);
 }
 
 function addToArray(orig_array, array, array_length) {
@@ -206,4 +248,3 @@ function addToArray(orig_array, array, array_length) {
 
 	return temp_array;
 }
-
