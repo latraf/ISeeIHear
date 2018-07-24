@@ -150,6 +150,7 @@ function pressButton() {
 	if (document.readyState == "complete") {
 		highlightButtons();
 		collectButtons();
+		pickButtons();
 	}
 	else alert('page not loaded yet!');
 }
@@ -158,6 +159,7 @@ function focusButton() {
 	if (document.readyState == "complete") {
 		highlightFields();
 		collectFields();
+		pickFields();
 	}
 	else alert('page not loaded yet!');
 }
@@ -351,7 +353,6 @@ function addLabels(array, label_array, color) {
 }
 
 function pickLinks() {
-
 	console.clear();
 	console.log('links');
 
@@ -364,5 +365,21 @@ function pickLinks() {
 		// console.log('click center');
 		addLabels(link_arr, link_labels);
 		console.log(link_arr);
+	});
+}
+
+function pickButtons() {
+	console.clear();
+	console.log('buttons');
+
+	var button_labels = [];
+
+	button_labels = createLabelArray(button_arr);
+	console.log(button_labels);
+
+	$('#press_center').on('click', function() {
+		// console.log('click center');
+		addLabels(button_arr, button_labels);
+		console.log(button_arr);
 	});
 }
