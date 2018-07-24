@@ -141,6 +141,7 @@ function clickButton() {
 	if (document.readyState == "complete") {
 		highlightLinks();
 		collectLinks();
+		pickLinks();
 	}
 	else alert('page not loaded yet!');
 }
@@ -329,16 +330,39 @@ function createLabelArray(array) {
 	return label_arr;
 }
 
-function addLabels(array, label_array) {
+function addLabels(array, label_array, color) {
 	var length = array.length;
 
 	for(var i=0; i<length; i++) {
+		console.log(i);
 		var coordinates = getCoordinates(array[i]);
-		var x = coordinates.left;
-		var y = coordinates.left;
+		var x = coordinates.right;
+		var y = coordinates.top;
+
+		document.body.appendChild(label_array[i]);
 
 		label_array[i].style.position = 'absolute';
-		label_array[i].style.left = x+'px';
-		label_array[i].style.top = y+'px';
+		label_array[i].style.left = x + 'px';
+		label_array[i].style.top = y + 'px';
+		label_array[i].style.visibility = 'visible';
+		console.log(label_array[i].style.left + " " + label_array[i].style.top);
+
 	}
+}
+
+function pickLinks() {
+
+	console.clear();
+	console.log('links');
+
+	var link_labels = [];
+
+	link_labels = createLabelArray(link_arr);
+	console.log(link_labels);
+
+	$('#click_center').on('click', function() {
+		// console.log('click center');
+		addLabels(link_arr, link_labels);
+		console.log(link_arr);
+	});
 }
