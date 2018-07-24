@@ -164,9 +164,11 @@ function highlightFields() {
 	$('div[role="textbox"]').addClass('selectInputs');
 }
 
+var link_arr = [], button_arr = [], field_arr = [];
+
 /* 	collectLinks() gets all anchor tags and puts it in an array */
 function collectLinks() {
-	var link_arr = $('a:visible').toArray();
+	link_arr = $('a:visible').toArray();
 
 	for(var i=0; i<link_arr.length; i++) {
 		var box = link_arr[i].getBoundingClientRect();
@@ -182,7 +184,7 @@ function collectLinks() {
 
 /* 	collectButtons() gets all elements with button tag and puts it in an array */
 function collectButtons() {
-	var button_arr = [], temp_arr = [];
+	var temp_arr = [];
 
 	var button_arr1 = $('button:visible').toArray();
 	var button_arr2 = $('input[value], input[type="submit"], input[type="reset"], input[type="button"]').toArray();
@@ -212,7 +214,7 @@ function collectButtons() {
 
 /*	collectFields() gets all elements with input tags and puts it in an array */
 function collectFields() {
-	var field_arr = [], temp_arr = [];
+	var temp_arr = [];
 
 	var field_arr1 = $('input:not(value), input[type="text"], input[type="password"]').toArray();
 	var field_arr2 = $('div[role="textbox"]').toArray();
