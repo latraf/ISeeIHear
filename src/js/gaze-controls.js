@@ -51,6 +51,38 @@ document.body.appendChild(open_btn);
 
 /* END */
 
+
+
+
+
+/* FOR BRANCH gazeButtons2 */
+
+var click_center = document.createElement('div');
+var focus_center = document.createElement('div');
+var press_center = document.createElement('div');
+var open_center = document.createElement('div');
+
+click_center.setAttribute('class', 'center_btns');
+focus_center.setAttribute('class', 'center_btns');
+press_center.setAttribute('class', 'center_btns');
+open_center.setAttribute('class', 'center_btns');
+
+click_center.setAttribute('id', 'click_center');
+focus_center.setAttribute('id', 'focus_center');
+press_center.setAttribute('id', 'press_center');
+open_center.setAttribute('id', 'open_center');
+
+document.body.appendChild(click_center);
+document.body.appendChild(focus_center);
+document.body.appendChild(press_center);
+document.body.appendChild(open_center);
+
+/* END */
+
+
+
+
+
 /* INDIVIDUAL FUNCTIONALITIES ON UI ELEMENTS */
 
 var scrolled=0, scroll_var=300;
