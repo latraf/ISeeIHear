@@ -326,3 +326,17 @@ function createLabelArray(array) {
 
 	return label_arr;
 }
+
+function addLabels(array, label_array) {
+	var length = array.length;
+
+	for(var i=0; i<length; i++) {
+		var coordinates = getCoordinates(array[i]);
+		var x = coordinates.left;
+		var y = coordinates.left;
+
+		label_array[i].style.position = 'absolute';
+		label_array[i].style.left = x+'px';
+		label_array[i].style.top = y+'px';
+	}
+}
