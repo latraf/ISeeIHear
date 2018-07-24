@@ -504,8 +504,8 @@ function getCoordinates(element) {
 		var left_coordinate = box.left + pageXOffset;
 		var width = box.width;
 		var height = box.height;
-		var right_coordinate = box.right + pageYOffset;
-		var bottom_coordinate =box.bottom + pageXOffset;
+		var bottom_coordinate =box.bottom + pageYOffset;
+		var right_coordinate = box.right + pageXOffset;
 
 		return {
 			top: top_coordinate,
