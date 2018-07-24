@@ -202,6 +202,12 @@ body {
 	background-color: yellow!important;
 }
 
+.label {
+	width: 30px;
+	height: 30px;
+	position:absolute;
+}
+
 /* END */
 
 

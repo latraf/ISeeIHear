@@ -286,3 +286,28 @@ function addToArray(orig_array, array, array_length) {
 
 
 /* FOR BRANCH gazeButtons2 */
+
+function getCoordinates(element) {
+	
+	if(element == null) {
+		alert('element is null');
+	}
+	else{
+		var box = element.getBoundingClientRect();
+		var top_coordinate = box.top + pageYOffset;
+		var left_coordinate = box.left + pageXOffset;
+		var width = box.width;
+		var height = box.height;
+		var bottom_coordinate =box.bottom + pageYOffset;
+		var right_coordinate = box.right + pageXOffset;
+
+		return {
+			top: top_coordinate,
+			left: left_coordinate,
+			right: right_coordinate,
+			bottom: bottom_coordinate,
+			width: width,
+			height: height
+		}
+	}
+}
