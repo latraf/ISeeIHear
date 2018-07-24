@@ -383,3 +383,19 @@ function pickButtons() {
 		console.log(button_arr);
 	});
 }
+
+function pickFields() {
+	console.clear();
+	console.log('fields');
+
+	var field_labels = [];
+
+	field_labels = createLabelArray(field_arr);
+	console.log(field_labels);
+
+	$('#focus_center').on('click', function() {
+		// console.log('click center');
+		addLabels(field_arr, field_labels);
+		console.log(field_arr);
+	});
+}
