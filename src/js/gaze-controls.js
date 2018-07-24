@@ -311,3 +311,18 @@ function getCoordinates(element) {
 		}
 	}
 }
+
+function createLabelArray(array) {
+	var length = array.length;
+	var label_arr = [];
+
+	for(var i=0; i<length; i++) {
+		var label_div = document.createElement('div');
+
+		label_div.setAttribute('class', 'label');
+		label_div.innerHTML = i;
+		label_arr.push(label_div);
+	}
+
+	return label_arr;
+}
