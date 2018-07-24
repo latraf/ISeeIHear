@@ -62,6 +62,16 @@ var focus_center = document.createElement('div');
 var press_center = document.createElement('div');
 var open_center = document.createElement('div');
 
+var click_input = document.createElement('input');
+var focus_input = document.createElement('input');
+var press_input = document.createElement('input');
+var open_input = document.createElement('input');
+
+var click_btn2 = document.createElement('div');
+var focus_btn2 = document.createElement('div');
+var press_btn2 = document.createElement('div');
+var open_btn2 = document.createElement('div');
+
 click_center.setAttribute('class', 'center_btns');
 focus_center.setAttribute('class', 'center_btns');
 press_center.setAttribute('class', 'center_btns');
@@ -72,10 +82,45 @@ focus_center.setAttribute('id', 'focus_center');
 press_center.setAttribute('id', 'press_center');
 open_center.setAttribute('id', 'open_center');
 
+click_input.setAttribute('class', 'inputs');
+focus_input.setAttribute('class', 'inputs');
+press_input.setAttribute('class', 'inputs');
+open_input.setAttribute('class', 'inputs');
+
+click_input.setAttribute('id', 'click_input');
+focus_input.setAttribute('id', 'focus_input');
+press_input.setAttribute('id', 'press_input');
+open_input.setAttribute('id', 'open_input');
+
+click_input.type = 'text';
+focus_input.type = 'text';
+press_input.type = 'text';
+open_input.type = 'text';
+
+click_btn2.setAttribute('class', 'center_btns');
+focus_btn2.setAttribute('class', 'center_btns');
+press_btn2.setAttribute('class', 'center_btns');
+open_btn2.setAttribute('class', 'center_btns');
+
+click_btn2.setAttribute('id', 'click_btn2');
+focus_btn2.setAttribute('id', 'focus_btn2');
+press_btn2.setAttribute('id', 'press_btn2');
+open_btn2.setAttribute('id', 'open_btn2');
+
 document.body.appendChild(click_center);
 document.body.appendChild(focus_center);
 document.body.appendChild(press_center);
 document.body.appendChild(open_center);
+
+document.body.appendChild(click_input);
+document.body.appendChild(focus_input);
+document.body.appendChild(press_input);
+document.body.appendChild(open_input);
+
+document.body.appendChild(click_btn2);
+document.body.appendChild(focus_btn2);
+document.body.appendChild(press_btn2);
+document.body.appendChild(open_btn2);
 
 /* END */
 
