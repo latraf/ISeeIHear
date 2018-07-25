@@ -423,7 +423,9 @@ function pickLinks() {
 
 			setTimeout(function () {
 				console.log('clicked');
+				link_arr[label_num].classList.remove('selected');
 				link_arr[label_num].click();
+				link_arr[label_num].classList.add('selectLinks');
 			}, 3000);
 		}
 		else alert('no input');
@@ -455,7 +457,9 @@ function pickButtons() {
 
 			setTimeout(function () {
 				console.log('clicked');
+				button_arr[label_num].classList.remove('selected');
 				button_arr[label_num].click();
+				button_arr[label_num].classList.add('selectBtns');
 			}, 3000);
 		}
 		else alert('no input');
