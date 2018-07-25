@@ -444,6 +444,22 @@ function pickButtons() {
 		addLabels(button_arr, button_labels);
 		console.log(button_arr);
 	});
+
+	$('#press_btn2').on('click', function() {
+		var label_num = $('#press_input').val();
+		if(label_num.length != 0) {
+			console.log(label_num);
+			button_arr[label_num].classList.remove('selectBtns');
+			button_arr[label_num].classList.add('selected');
+			console.log(button_arr[label_num]);
+
+			setTimeout(function () {
+				console.log('clicked');
+				button_arr[label_num].click();
+			}, 3000);
+		}
+		else alert('no input');
+	});
 }
 
 function pickFields() {
