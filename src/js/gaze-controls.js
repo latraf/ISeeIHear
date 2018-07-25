@@ -411,6 +411,23 @@ function pickLinks() {
 		addLabels(link_arr, link_labels);
 		console.log(link_arr);
 	});
+
+
+	$('#click_btn2').on('click', function() {
+		var label_num = $('#click_input').val();
+		if(label_num.length != 0) {
+			console.log(label_num);
+			link_arr[label_num].classList.remove('selectLinks');
+			link_arr[label_num].classList.add('selected');
+			console.log(link_arr[label_num]);
+
+			setTimeout(function () {
+				console.log('clicked');
+				link_arr[label_num].click();
+			}, 3000);
+		}
+		else alert('no input');
+	});
 }
 
 function pickButtons() {
