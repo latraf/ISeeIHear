@@ -476,4 +476,22 @@ function pickFields() {
 		addLabels(field_arr, field_labels);
 		console.log(field_arr);
 	});
+
+	$('#focus_btn2').on('click', function() {
+		var label_num = $('#focus_input').val();
+		if(label_num.length != 0) {
+			console.log(label_num);
+			field_arr[label_num].classList.remove('selectInputs');
+			field_arr[label_num].classList.add('selected');
+			console.log(field_arr[label_num]);
+
+			setTimeout(function () {
+				console.log('focused');
+				field_arr[label_num].classList.remove('selected');
+				field_arr[label_num].focus();
+				field_arr[label_num].classList.add('selectInputs');
+			}, 3000);
+		}
+		else alert('no input');
+	});
 }
