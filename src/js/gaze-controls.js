@@ -377,6 +377,78 @@ function createLabelArray(array) {
 	return label_arr;
 }
 
+function createNumPad(textbox) {
+	console.log('num pad');
+
+	var length = 12, num_rows = 4, num_cols = 3;
+	var num_arr = new Array(num_rows);
+
+	for(var i=0; i<num_rows; i++) {
+		num_arr[i] = new Array(num_cols);
+
+		for(var j=0; j<num_cols; j++) {
+			var num_div = document.createElement('div');
+			num_div.setAttribute('class', 'num_div');
+			
+			num_arr[i][j] = num_div;
+			document.body.appendChild(num_arr[i][j]);
+		}
+	}
+	console.log(num_arr);
+	displayNumPad(num_arr, textbox);
+}
+
+function displayNumPad(array, textbox) {
+	var num_rows = 4, num_cols = 3;
+	var coordinates = getCoordinates(textbox);
+
+	var x = coordinates.left;
+	var y = coordinates.top;
+	console.log(coordinates);
+
+	// 1, 2, 3
+	array[0][0] = setCoordinates(array[0][0], x, y, 20, -80);
+	array[0][1] = setCoordinates(array[0][1], x, y, 40, -80);
+	array[0][2] = setCoordinates(array[0][2], x, y, 60, -80);
+
+	array[0][0].innerHTML = 1;
+	array[0][1].innerHTML = 2;
+	array[0][2].innerHTML = 3;
+
+	// 4, 5, 6
+	array[1][0] = setCoordinates(array[1][0], x, y, 20, -60);
+	array[1][1] = setCoordinates(array[1][1], x, y, 40, -60);
+	array[1][2] = setCoordinates(array[1][2], x, y, 60, -60);
+
+	array[1][0].innerHTML = 4;
+	array[1][1].innerHTML = 5;
+	array[1][2].innerHTML = 6;
+
+	// 7, 8, 9
+	array[2][0] = setCoordinates(array[2][0], x, y, 20, -40);
+	array[2][1] = setCoordinates(array[2][1], x, y, 40, -40);
+	array[2][2] = setCoordinates(array[2][2], x, y, 60, -40);
+
+	array[2][0].innerHTML = 7;
+	array[2][1].innerHTML = 8;
+	array[2][2].innerHTML = 9;
+
+	// 0 
+	array[3][0] = setCoordinates(array[3][0], x, y, 40, -20);
+
+	array[3][0].innerHTML = 0;
+
+}
+
+function setCoordinates(element, x, y, x_add, y_add) {
+	element.style.position = 'absolute';
+	element.style.left = (x+x_add) + 'px';
+	element.style.top = (y+y_add) + 'px';
+	element.style.visibility = 'visible';
+
+	return element;
+}
+
 function addLabels(array, label_array, color) {
 	var length = array.length;
 
@@ -404,22 +476,23 @@ function pickLinks() {
 	var link_labels = [];
 
 	link_labels = createLabelArray(link_arr);
-	console.log(link_labels);
+	// console.log(link_labels);
 
 	$('#click_center').on('click', function() {
 		// console.log('click center');
 		addLabels(link_arr, link_labels);
-		console.log(link_arr);
+		// console.log(link_arr);
 	});
 
+	// createNumPad(click_input);
 
 	$('#click_btn2').on('click', function() {
 		var label_num = $('#click_input').val();
 		if(label_num.length != 0) {
-			console.log(label_num);
+			// console.log(label_num);
 			link_arr[label_num].classList.remove('selectLinks');
 			link_arr[label_num].classList.add('selected');
-			console.log(link_arr[label_num]);
+			// console.log(link_arr[label_num]);
 
 			setTimeout(function () {
 				console.log('clicked');
@@ -430,6 +503,10 @@ function pickLinks() {
 		}
 		else alert('no input');
 	});
+
+	click_input.onfocus = function() {
+		createNumPad(click_btn2);
+	};
 }
 
 function pickButtons() {

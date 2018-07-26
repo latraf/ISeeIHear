@@ -263,6 +263,13 @@ body {
 	background-color: red!important;
 }
 
+.num_div {
+	width: 20px;
+	height: 20px;
+	position:absolute;
+	background-color: blue!important;
+}
+
 /* END */
 
 
