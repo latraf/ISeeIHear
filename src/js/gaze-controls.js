@@ -377,7 +377,7 @@ function createLabelArray(array) {
 	return label_arr;
 }
 
-function createNumPad(textbox) {
+function createNumPad(textbox, class_name) {
 	console.log('num pad');
 
 	var length = 12, num_rows = 4, num_cols = 3;
@@ -389,6 +389,7 @@ function createNumPad(textbox) {
 		for(var j=0; j<num_cols; j++) {
 			var num_div = document.createElement('div');
 			num_div.setAttribute('class', 'num_div');
+			num_div.classList.add(class_name);
 			
 			num_arr[i][j] = num_div;
 			document.body.appendChild(num_arr[i][j]);
@@ -404,7 +405,7 @@ function displayNumPad(array, textbox) {
 
 	var x = coordinates.left;
 	var y = coordinates.top;
-	console.log(coordinates);
+	// console.log(coordinates);
 
 	// 1, 2, 3
 	array[0][0] = setCoordinates(array[0][0], x, y, 20, -80);
@@ -415,6 +416,10 @@ function displayNumPad(array, textbox) {
 	array[0][1].innerHTML = 2;
 	array[0][2].innerHTML = 3;
 
+	// array[0][0].classList.add('one');
+	// array[0][1].classList.add('two');
+	// array[0][2].classList.add('three');
+
 	// 4, 5, 6
 	array[1][0] = setCoordinates(array[1][0], x, y, 20, -60);
 	array[1][1] = setCoordinates(array[1][1], x, y, 40, -60);
@@ -423,6 +428,10 @@ function displayNumPad(array, textbox) {
 	array[1][0].innerHTML = 4;
 	array[1][1].innerHTML = 5;
 	array[1][2].innerHTML = 6;
+
+	// array[1][0].classList.add('four');
+	// array[1][1].classList.add('five');
+	// array[1][2].classList.add('six');
 
 	// 7, 8, 9
 	array[2][0] = setCoordinates(array[2][0], x, y, 20, -40);
@@ -433,10 +442,22 @@ function displayNumPad(array, textbox) {
 	array[2][1].innerHTML = 8;
 	array[2][2].innerHTML = 9;
 
+	// array[2][0].classList.add('seven');
+	// array[2][1].classList.add('eight');
+	// array[2][2].classList.add('nine');
+
 	// 0 
 	array[3][0] = setCoordinates(array[3][0], x, y, 40, -20);
+	array[3][1] = setCoordinates(array[3][1], x, y, 60, -20);
 
 	array[3][0].innerHTML = 0;
+	array[3][1].innerHTML = '<';
+
+	array[3][1].classList.add('backspace');
+
+	// console.log(getCoordinates(array[0][0]));
+	// console.log(getCoordinates(array[0][2]));
+	// console.log(getCoordinates(array[3][0]));
 
 }
 
@@ -505,8 +526,22 @@ function pickLinks() {
 	});
 
 	click_input.onfocus = function() {
-		createNumPad(click_btn2);
+		createNumPad(click_btn2, 'click_num_divs');
+		// var input_coor = getCoordinates(click_input);
+		// console.log(input_coor);
+
+		// var click_num_divs = $('.click_num_divs').toArray();
+		$('.click_num_divs').on('click', function() {
+			console.log(this.innerHTML);
+			click_input.value = click_input.value + this.innerHTML;
+		});
+
+		$('.backspace').on('click', function() {
+			click_input.value = "";
+		});
 	};
+
+
 }
 
 function pickButtons() {
@@ -543,7 +578,7 @@ function pickButtons() {
 	});
 
 	press_input.onfocus = function() {
-		createNumPad(press_btn2);
+		createNumPad(press_btn2, 'press_num_divs');
 	};
 }
 
@@ -581,6 +616,6 @@ function pickFields() {
 	});
 
 	focus_input.onfocus = function() {
-		createNumPad(focus_btn2);
+		createNumPad(focus_btn2, 'focus_num_divs');
 	};
 }
