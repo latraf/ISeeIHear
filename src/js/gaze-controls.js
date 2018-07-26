@@ -541,6 +541,10 @@ function pickButtons() {
 		}
 		else alert('no input');
 	});
+
+	press_input.onfocus = function() {
+		createNumPad(press_btn2);
+	};
 }
 
 function pickFields() {
