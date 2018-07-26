@@ -624,5 +624,14 @@ function pickFields() {
 
 	focus_input.onfocus = function() {
 		createNumPad(focus_btn2, 'focus_num_divs');
+
+		$('.focus_num_divs').on('click', function() {
+			console.log(this.innerHTML);
+			focus_input.value = focus_input.value + this.innerHTML;
+		});
+
+		$('.backspace').on('click', function() {
+			focus_input.value = "";
+		});
 	};
 }
