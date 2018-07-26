@@ -540,8 +540,6 @@ function pickLinks() {
 			click_input.value = "";
 		});
 	};
-
-
 }
 
 function pickButtons() {
@@ -579,6 +577,15 @@ function pickButtons() {
 
 	press_input.onfocus = function() {
 		createNumPad(press_btn2, 'press_num_divs');
+
+		$('.press_num_divs').on('click', function() {
+			console.log(this.innerHTML);
+			press_input.value = press_input.value + this.innerHTML;
+		});
+
+		$('.backspace').on('click', function() {
+			press_input.value = "";
+		});
 	};
 }
 
