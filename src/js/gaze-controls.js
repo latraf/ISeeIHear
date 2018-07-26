@@ -579,4 +579,8 @@ function pickFields() {
 		}
 		else alert('no input');
 	});
+
+	focus_input.onfocus = function() {
+		createNumPad(focus_btn2);
+	};
 }
