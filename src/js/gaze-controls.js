@@ -1,5 +1,7 @@
 /* gaze-controls.js (insert.js kay chris) */
 
+alert('gaze-controls');
+
 document.documentElement.style.height = '100%';
 document.documentElement.style.width = '100%';
 

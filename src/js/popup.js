@@ -18,11 +18,6 @@ function howToTab() {
 }
 
 /* saves modality into chrome storage when button is clicked */
-document.addEventListener('DOMContentLoaded', function() {
-	document.getElementById('save_btn').addEventListener('click', saveSettings);
-	document.getElementById('click_me').addEventListener('click', connectWebGazer);
-});
-
 var mode_out = '', mode = 0;
 
 function saveSettings() {
@@ -39,7 +34,7 @@ function saveSettings() {
 	chrome.storage.local.set({'mode': mode});
 
 	if(mode == '1' | mode == '3') {
-		connectWebGazer();
+		// connectWebGazer();
 		console.log('connecting webgazer...');
 		// alert('connecting webgazer...');
 	}
@@ -68,13 +63,14 @@ function loadSettings() {
 
 /* function to connect webgazer.js to the extension */
 function connectWebGazer() {
-	chrome.tabs.executeScript({file: 'src/js_ext/webgazer.js'}, function() {
-		chrome.tabs.executeScript({file: 'src/js/gaze-controls.js'});
-		alert("connectWebGazer()");
-	});
-	// chrome.tabs.executeScript(null, {
-	// 	file: 'gaze-controls.js'
+	// chrome.tabs.executeScript({file: 'src/js_ext/webgazer.js'}, function() {
+	// 	chrome.tabs.executeScript({file: 'src/js/gaze-controls.js'});
+	// 	alert("connectWebGazer()");
 	// });
+	alert('hello');
+	chrome.tabs.executeScript({
+		file: 'src/js/gaze-controls.js'
+	});
 }
 
 /* calls loading function everytime popup.html loads*/
@@ -83,3 +79,15 @@ window.onload = function() {
 	console.log("popup loaded!");
 	// alert("popup loaded!");
 }
+
+// var click_me = document.getElementById('click_me');
+// console.log(click_me);
+// document.getElementById('click_me').addEventListener('click', connectWebGazer);
+
+document.addEventListener('DOMContentLoaded', function() {
+	document.getElementById('save_btn').addEventListener('click', saveSettings);
+	document.getElementById('click_me').addEventListener('click', connectWebGazer);
+// document.getElementById('click_me').addEventListener('click', connectWebGazer);
+// document.getElementById('click_me').addEventListener('click', connectWebGazer);
+});
+
