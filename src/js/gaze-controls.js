@@ -1,7 +1,5 @@
 /* gaze-controls.js (insert.js kay chris) */
 
-alert('gaze-controls');
-
 document.documentElement.style.height = '100%';
 document.documentElement.style.width = '100%';
 
@@ -50,6 +48,9 @@ document.body.appendChild(click_btn);
 document.body.appendChild(focus_btn);
 document.body.appendChild(press_btn);
 document.body.appendChild(open_btn);
+
+alert('gaze-controls');
+console.log('gaze-controls');
 
 /* END */
 

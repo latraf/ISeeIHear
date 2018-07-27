@@ -34,7 +34,7 @@ function saveSettings() {
 	chrome.storage.local.set({'mode': mode});
 
 	if(mode == '1' | mode == '3') {
-		// connectWebGazer();
+		connectWebGazer();
 		console.log('connecting webgazer...');
 		// alert('connecting webgazer...');
 	}
@@ -67,7 +67,7 @@ function connectWebGazer() {
 	// 	chrome.tabs.executeScript({file: 'src/js/gaze-controls.js'});
 	// 	alert("connectWebGazer()");
 	// });
-	alert('hello');
+	// alert('hello');
 	chrome.tabs.executeScript({
 		file: 'src/js/gaze-controls.js'
 	});
