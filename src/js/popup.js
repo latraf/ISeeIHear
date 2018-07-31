@@ -21,7 +21,8 @@ function howToTab() {
 var mode_out = '', mode = 0;
 
 function saveSettings() {
-	mode = $('input[type="radio"]:checked').val();
+	mode = $('input[name="radio"]:checked').val();
+	console.log('mode ' + mode);
 	switch(mode) {
 		case '1': mode_out = 'Gaze'; break;
 		case '2': mode_out = 'Voice'; break;
@@ -29,36 +30,41 @@ function saveSettings() {
 	}
 	// $("#mode").html("Mode: " + mode_out);
 
-	console.log(mode_out);
+	// console.log(mode_out);
 	chrome.storage.local.set({'mode': mode});
-	console.log('Saved! Mode: ' + mode_out);
+	// console.log('Saved! Mode: ' + mode_out);
 
 	if(mode == '1' | mode == '3') {
 		connectWebGazer();
 		console.log('connecting webgazer...');
 		// alert('connecting webgazer...');
 	}
-	console.log(mode_out);
+	else {
+		console.log('voice modality selected');
+	}
+	console.log("saved " + mode_out);
 }
 
 /* loads previously saved modality */
 function loadSettings() {
+	console.log("settings loaded!");
 	chrome.storage.local.get('mode', function(result) {
 		mode = result.mode;
+		// console.log('mode ' + mode);
 		switch(mode) {
 			case '1': mode_out = 'Gaze';
-					$('#radio-1').prop('checked', true);
+					$('#radio-1').prop("checked", true);
 					break;
 			case '2': mode_out = 'Voice'; 
-					$('#radio-2').prop('checked', true);
+					$('#radio-2').prop("checked", true);
 					break;
 			case '3': mode_out = 'Both'; 
-					$('#radio-3').prop('checked', true);
+					$('#radio-3').prop("checked", true);
 					break;
+			console.log("loaded " + mode_out);
 		}
 		// $("#mode").html("Mode: " + mode_out);
 	});
-	console.log(mode_out);
 }
 
 function connectWebGazer() {
@@ -70,8 +76,8 @@ function connectWebGazer() {
 /* calls loading function everytime popup.html loads*/
 window.onload = function() {
 	loadSettings();
-	console.log("previous settings loaded!");
+	console.log("popup loaded!");
 	document.getElementById('save_btn').addEventListener('click', saveSettings);
 	document.getElementById('click_me').addEventListener('click', connectWebGazer);
-	console.log("added event listener!");
+	// alert("added event listener!");
 }

@@ -28,7 +28,7 @@
 	},
 	// isolated environment; can use all chrome APIs
 	"background": {
-		"scripts": ["src/js_ext/jquery-3.1.1.min.js"],
+		"scripts": ["src/js_ext/jquery-3.1.1.min.js", "src/js/background.js"],
 		// "src/js/gaze-controls.js"
 		"persistent": false
 	},

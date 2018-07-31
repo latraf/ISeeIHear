@@ -9,6 +9,14 @@
 // 	alert(response);
 // });
 
-
+// alert('hello');
 
 // connect to popup.js
+
+chrome.tabs.onUpdated.addListener( function (tabId, changeInfo, tab) {
+  if (changeInfo.status == 'complete' && tab.active) {
+
+    alert('Status: Complete!');
+
+  }
+});

@@ -49,8 +49,8 @@ document.body.appendChild(focus_btn);
 document.body.appendChild(press_btn);
 document.body.appendChild(open_btn);
 
-alert('gaze-controls');
-console.log('gaze-controls');
+// alert('gaze-controls');
+// console.log('gaze-controls');
 
 /* END */
 
