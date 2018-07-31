@@ -69,7 +69,6 @@ $(document).ready(function() {
 	$('#press_btn').on('click', pressButton);
 	$('#focus_btn').on('click', focusButton);
 	// $('#open_btn').on('click', openButton);
-
 });
 
 function scrollDown() {
@@ -163,6 +162,7 @@ function highlightButtons() {
 /* highlightFields() */
 function highlightFields() {
 	$('input[type="text"]').addClass('selectInputs');
+	$('input[type="search"]').addClass('selectInputs');
 	$('input[type="email"]').addClass('selectInputs');
 	$('input[type="password"]').addClass('selectInputs');
 	$('div[role="textbox"]').addClass('selectInputs');
