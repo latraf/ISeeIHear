@@ -65,7 +65,20 @@ $(document).ready(function() {
 	$('#arrow_left').on('click', previousPage);
 	$('#arrow_right').on('click', nextPage);
 
-	$('#click_btn').on('click', clickButton);
+	var toggled=false;
+	$('#click_btn').on('click', function() {
+
+		toggled=!toggled;
+		if(toggled) {
+			clickButton();
+			alert('if ' + toggled);
+		}
+		else {
+			removeLinks();
+			alert('else ' + toggled);
+		}
+		// toggled=!toggled;
+	});
 	$('#press_btn').on('click', pressButton);
 	$('#focus_btn').on('click', focusButton);
 	// $('#open_btn').on('click', openButton);
@@ -80,7 +93,6 @@ function scrollDown() {
 		});
 	}
 	else alert('page not loaded yet!');
-	
 }
 
 function scrollUp() {
@@ -98,7 +110,6 @@ function previousPage() {
 	if (document.readyState == "complete")
 		window.history.back();
 	else alert('page not loaded yet!');
-
 }
 
 function nextPage() {
@@ -253,4 +264,11 @@ function addToArray(orig_array, array, array_length) {
 	}
 
 	return temp_array;
+}
+
+function removeLinks() {
+	for(var i=0; i<link_arr.length; i++) {
+		console.log(link_arr[i]);
+		link_arr[i].classList.remove('selectLinks');
+	}
 }
