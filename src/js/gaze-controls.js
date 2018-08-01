@@ -67,33 +67,28 @@ $(document).ready(function() {
 
 	var toggled=false;
 	$('#click_btn').on('click', function() {
-
 		toggled=!toggled;
-		if(toggled) {
+		if(toggled)
 			clickButton();
-			alert('if ' + toggled);
-		}
-		else {
+		else
 			removeLinks();
-			alert('else ' + toggled);
-		}
-		// toggled=!toggled;
 	});
 
 	$('#press_btn').on('click', function() {
-
 		toggled=!toggled;
-		if(toggled) {
+		if(toggled)
 			pressButton();
-			alert('if ' + toggled);
-		}
-		else {
+		else
 			removeButtons();
-			alert('else ' + toggled);
-		}
 	});
-	$('#focus_btn').on('click', focusButton);
-	// $('#open_btn').on('click', openButton);
+
+	$('#focus_btn').on('click', function() {
+		toggled=!toggled;
+		if(toggled)
+			focusButton();
+		else
+			removeFields();
+	});	
 });
 
 function scrollDown() {
@@ -286,4 +281,9 @@ function removeLinks() {
 function removeButtons() {
 	for(var i=0; i<button_arr.length; i++)
 		button_arr[i].classList.remove('selectBtns');
+}
+
+function removeFields() {
+	for(var i=0; i<field_arr.length; i++)
+		field_arr[i].classList.remove('selectInputs');
 }
