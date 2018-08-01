@@ -79,7 +79,19 @@ $(document).ready(function() {
 		}
 		// toggled=!toggled;
 	});
-	$('#press_btn').on('click', pressButton);
+
+	$('#press_btn').on('click', function() {
+
+		toggled=!toggled;
+		if(toggled) {
+			pressButton();
+			alert('if ' + toggled);
+		}
+		else {
+			removeButtons();
+			alert('else ' + toggled);
+		}
+	});
 	$('#focus_btn').on('click', focusButton);
 	// $('#open_btn').on('click', openButton);
 });
@@ -267,8 +279,11 @@ function addToArray(orig_array, array, array_length) {
 }
 
 function removeLinks() {
-	for(var i=0; i<link_arr.length; i++) {
-		console.log(link_arr[i]);
+	for(var i=0; i<link_arr.length; i++)
 		link_arr[i].classList.remove('selectLinks');
-	}
+}
+
+function removeButtons() {
+	for(var i=0; i<button_arr.length; i++)
+		button_arr[i].classList.remove('selectBtns');
 }
