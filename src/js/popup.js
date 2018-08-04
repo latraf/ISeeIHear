@@ -7,7 +7,7 @@ $(function() {
 	});
 });
 
-/* redirects to a new tab when "How To"is clicked */
+/* redirects to a new tab when "How To" is clicked */
 document.addEventListener('DOMContentLoaded', function() {
 	document.getElementById('how_to').addEventListener('click', howToTab);
 });
@@ -78,6 +78,11 @@ window.onload = function() {
 	loadSettings();
 	console.log("popup loaded!");
 	document.getElementById('save_btn').addEventListener('click', saveSettings);
-	document.getElementById('click_me').addEventListener('click', connectWebGazer);
-	// alert("added event listener!");
+	document.getElementById('turn_off').addEventListener('click', hello);
+}
+
+function hello() {
+	chrome.storage.local.get('window_id', function(result) {
+		alert(result.window_id);
+	});
 }

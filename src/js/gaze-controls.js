@@ -37,17 +37,22 @@ focus_btn.setAttribute('class', 'gaze_btns');
 press_btn.setAttribute('class', 'gaze_btns');
 open_btn.setAttribute('class', 'gaze_btns');
 
-// append arrows into body of every website
-document.body.appendChild(arrow_up);
-document.body.appendChild(arrow_down);
-document.body.appendChild(arrow_left);
-document.body.appendChild(arrow_right);
 
-// append buttons into body of every website
-document.body.appendChild(click_btn);
-document.body.appendChild(focus_btn);
-document.body.appendChild(press_btn);
-document.body.appendChild(open_btn);
+// if(extension_status == 'on') {
+// 	alert('on');
+	// append arrows into body of every website
+	document.body.appendChild(arrow_up);
+	document.body.appendChild(arrow_down);
+	document.body.appendChild(arrow_left);
+	document.body.appendChild(arrow_right);
+
+	// append buttons into body of every website
+	document.body.appendChild(click_btn);
+	document.body.appendChild(focus_btn);
+	document.body.appendChild(press_btn);
+	document.body.appendChild(open_btn);	
+// }
+// else alert('off');
 
 // alert('gaze-controls');
 // console.log('gaze-controls');
@@ -58,38 +63,39 @@ document.body.appendChild(open_btn);
 
 var scrolled=0, scroll_var=300;
 
-$(document).ready(function() {
+		$(document).ready(function() {
 
-	$('#arrow_down').on('click', scrollDown);
-	$('#arrow_up').on('click', scrollUp);
-	$('#arrow_left').on('click', previousPage);
-	$('#arrow_right').on('click', nextPage);
+			$('#arrow_down').on('click', scrollDown);
+			$('#arrow_up').on('click', scrollUp);
+			$('#arrow_left').on('click', previousPage);
+			$('#arrow_right').on('click', nextPage);
 
-	var toggled=false;
-	$('#click_btn').on('click', function() {
-		toggled=!toggled;
-		if(toggled)
-			clickButton();
-		else
-			removeLinks();
-	});
+			var toggled=false;
+			$('#click_btn').on('click', function() {
+				toggled=!toggled;
+				if(toggled)
+					clickButton();
+				else
+					removeLinks();
+			});
 
-	$('#press_btn').on('click', function() {
-		toggled=!toggled;
-		if(toggled)
-			pressButton();
-		else
-			removeButtons();
-	});
+			$('#press_btn').on('click', function() {
+				toggled=!toggled;
+				if(toggled)
+					pressButton();
+				else
+					removeButtons();
+			});
 
-	$('#focus_btn').on('click', function() {
-		toggled=!toggled;
-		if(toggled)
-			focusButton();
-		else
-			removeFields();
-	});	
-});
+			$('#focus_btn').on('click', function() {
+				toggled=!toggled;
+				if(toggled)
+					focusButton();
+				else
+					removeFields();
+			});	
+		});
+
 
 function scrollDown() {
 	if (document.readyState == "complete") {
