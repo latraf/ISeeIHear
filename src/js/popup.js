@@ -12,6 +12,16 @@ document.addEventListener('DOMContentLoaded', function() {
 	document.getElementById('how_to').addEventListener('click', howToTab);
 });
 
+function setData(data) {
+	chrome.storage.local.set(data, function() {
+		console.log(data);
+	});
+}
+
+function getData(callback) {
+	chrome.storage.local.get(null, callback);
+}
+
 function howToTab() {
 	chrome.tabs.create({'url': 'src/howto.html'}, function(tab) {
 	});
@@ -24,23 +34,24 @@ function saveSettings() {
 	mode = $('input[name="radio"]:checked').val();
 	console.log('mode ' + mode);
 	switch(mode) {
-		case '1': mode_out = 'Gaze'; break;
-		case '2': mode_out = 'Voice'; break;
-		case '3': mode_out = 'Both'; break;
+		case '1': mode_out = 'GAZE'; break;
+		case '2': mode_out = 'VOICE'; break;
+		case '3': mode_out = 'BOTH'; break;
 	}
-	// $("#mode").html("Mode: " + mode_out);
 
-	// console.log(mode_out);
-	chrome.storage.local.set({'mode': mode});
-	// console.log('Saved! Mode: ' + mode_out);
+	var data = {'mode' : mode_out}
+	setData(data);
 
-	if(mode == '1' | mode == '3') {
-		connectWebGazer();
+	if(data['mode']=='GAZE') {
+		connectGaze();
 		console.log('connecting webgazer...');
 		// alert('connecting webgazer...');
 	}
+	else if(data['mode']=='VOICE') {
+		connectVoice();
+	}
 	else {
-		console.log('voice modality selected');
+		connectBoth();
 	}
 	console.log("saved " + mode_out);
 }
@@ -48,29 +59,66 @@ function saveSettings() {
 /* loads previously saved modality */
 function loadSettings() {
 	console.log("settings loaded!");
-	chrome.storage.local.get('mode', function(result) {
-		mode = result.mode;
-		// console.log('mode ' + mode);
-		switch(mode) {
-			case '1': mode_out = 'Gaze';
-					$('#radio-1').prop("checked", true);
-					break;
-			case '2': mode_out = 'Voice'; 
-					$('#radio-2').prop("checked", true);
-					break;
-			case '3': mode_out = 'Both'; 
-					$('#radio-3').prop("checked", true);
-					break;
-			console.log("loaded " + mode_out);
+
+	getData(function(data) {
+		mode_out = data['mode'];
+		if(mode_out=='GAZE') {
+			$('#radio-1').prop("checked", true);
+			if(!data['gaze_mode']) connectGaze();
 		}
-		// $("#mode").html("Mode: " + mode_out);
+		else if(mode_out=='VOICE') {
+			$('#radio-2').prop("checked", true);
+			if(!data['voice_mode']) connectVoice();
+		}
+		else if(mode_out=='BOTH') {
+			$('#radio-3').prop("checked", true);
+			if(!data['both_mode']) connectBoth();
+		}
+		else console.log('Error!');
+		console.log("loaded " + mode_out);
+
+
 	});
 }
 
-function connectWebGazer() {
-	chrome.tabs.executeScript({
-		file: 'src/js/gaze-controls.js'
-	});
+function removeControls() {
+	chrome.tabs.executeScript({file: ''});
+}
+
+function connectGaze() {
+	var data = {
+		'gaze_mode' : true,
+		'voice_mode' : false,
+		'both_mode' : false
+	};
+	console.log('connectGaze');
+	setData(data);
+	chrome.tabs.executeScript({file: 'src/js/gaze-controls.js'});
+	// chrome.tabs.executeScript({file: ''});   // script that will disable voice-controls
+}
+
+function connectVoice() {
+	var data = {
+		'gaze_mode' : false,
+		'voice_mode' : true,
+		'both_mode' : false
+	};
+	console.log('connectVoice');
+	setData(data);
+	// chrome.tabs.executeScript({file: ''});   // script that will enable voice-controls
+	// chrome.tabs.executeScript({file: ''});   // script that will disable gaze-controls
+}
+
+function connectBoth() {
+	var data = {
+		'gaze_mode' : false,
+		'voice_mode' : false,
+		'both_mode' : true
+	};
+	console.log('connectBoth');
+	setData(data);
+	// chrome.tabs.executeScript({file: ''});   // script that will enable gaze-controls
+	// chrome.tabs.executeScript({file: ''});   // script that will enable voice-controls
 }
 
 /* calls loading function everytime popup.html loads*/
@@ -78,11 +126,5 @@ window.onload = function() {
 	loadSettings();
 	console.log("popup loaded!");
 	document.getElementById('save_btn').addEventListener('click', saveSettings);
-	document.getElementById('turn_off').addEventListener('click', hello);
-}
-
-function hello() {
-	chrome.storage.local.get('window_id', function(result) {
-		alert(result.window_id);
-	});
+	document.getElementById('turn_off').addEventListener('click', removeControls);
 }
