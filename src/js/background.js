@@ -46,18 +46,39 @@ function getData(callback) {
 
 chrome.tabs.onUpdated.addListener(maintainScript);
 
-function maintainScript(tabId, changeInfo, tab) {
+var curr_tab_id = 0, curr_window_id = 0;
 
+
+function maintainScript(tabId, changeInfo, tab) {
 	console.log('tab updated');
 
-	getData(function (data) {
-		var mode = data['mode'];
-		
-		if(mode=='GAZE' && data['gaze_mode']) connectGaze();
-		else if(mode=='VOICE' && data['voice_mode']) connectVoice();
-		else if(mode=='BOTH' && data['both_mode']) connectBoth();
-		else console.log('Error!');
-	});
+		curr_tab_id = tab.id;
+		curr_window_id = tab.windowId;
+
+		getData(function (data) {
+			var mode = data['mode'];
+			var active_tab_id = data['active_tab_id'];
+			var active_window_id = data ['active_window_id'];
+
+			if((curr_tab_id == active_tab_id) || (curr_window_id == active_window_id)) {
+				if(mode=='GAZE' && data['gaze_mode']) connectGaze();
+				else if(mode=='VOICE' && data['voice_mode']) connectVoice();
+				else if(mode=='BOTH' && data['both_mode']) connectBoth();
+				else if(mode=='OFF') console.log('Modes are turned off.');
+				else console.log('Error!');
+			}
+			else{
+				alert();
+			}
+
+			console.log('Active Tab ID: ' + active_tab_id);
+			console.log('Active Window ID: ' + active_window_id);
+			console.log('Current Tab ID: ' + curr_tab_id);
+			console.log('Current Window ID: ' + curr_window_id);
+
+			console.log(tab);
+			
+		});
 }
 
 function connectGaze() {

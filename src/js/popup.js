@@ -54,11 +54,39 @@ function saveSettings() {
 		connectBoth();
 	}
 	console.log("saved " + mode_out);
+
+
+	chrome.tabs.query({active: true, currentWindow: true}, function(tabs) {
+		var active_tab_id = tabs[0].id;
+		var active_window_id = tabs[0].windowId;
+		var data = {
+			'active_tab_id' : active_tab_id,
+			'active_window_id' : active_window_id
+		};
+		setData(data);
+		// console.log('Tab ID: ' + active_tab_id);
+		// console.log('Window ID: ' + active_window_id);
+		console.log(tabs[0]);
+	});	
+
 }
 
 /* loads previously saved modality */
 function loadSettings() {
 	console.log("settings loaded!");
+	var curr_tab_id = 0, curr_window_id = 0;
+	chrome.tabs.query({active: true, currentWindow: true}, function(tabs) {
+		curr_tab_id = tabs[0].id;
+		curr_window_id = tabs[0].windowId;
+		// var data = {
+		// 	'active_tab_id' : active_tab_id,
+		// 	'active_window_id' : active_window_id
+		// };
+		// setData(data);
+		// console.log('Tab ID: ' + active_tab_id);
+		// console.log('Window ID: ' + active_window_id);
+		console.log(tabs[0]);
+	});
 
 	getData(function(data) {
 		mode_out = data['mode'];
@@ -74,15 +102,31 @@ function loadSettings() {
 			$('#radio-3').prop("checked", true);
 			if(!data['both_mode']) connectBoth();
 		}
+		else if(mode_out=='OFF')  {
+			console.log('Modes are turned off.');
+			$('#radio-1').prop("checked", false);
+			$('#radio-2').prop("checked", false);
+			$('#radio-3').prop("checked", false);
+		}
 		else console.log('Error!');
 		console.log("loaded " + mode_out);
-
-
+		console.log('Active Tab ID: ' + data['active_tab_id']);
+		console.log('Active Window ID: ' + data['active_window_id']);
+		console.log('Current Tab ID: ' + curr_tab_id);
+		console.log('Current Window ID: ' + curr_window_id);
 	});
 }
 
 function removeControls() {
-	chrome.tabs.executeScript({file: ''});
+	var data = {
+		'gaze_mode' : false,
+		'voice_mode' : false,
+		'both_mode' : false,
+		'mode' : 'OFF'
+	};
+	console.log('Modes are turned off.');
+	setData(data);
+	chrome.tabs.executeScript({file: 'src/js/gaze-controls-off.js'});
 }
 
 function connectGaze() {

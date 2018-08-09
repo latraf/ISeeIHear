@@ -51,42 +51,52 @@ document.body.appendChild(open_btn);
 
 /* END */
 
+function setData(data) {
+	chrome.storage.local.set(data, function() {
+		console.log(data);
+	});
+}
+
+function getData(callback) {
+	chrome.storage.local.get(null, callback);
+}
+
 /* INDIVIDUAL FUNCTIONALITIES ON UI ELEMENTS */
 
 var scrolled=0, scroll_var=300;
 
-		$(document).ready(function() {
+$(document).ready(function() {
 
-			$('#arrow_down').on('click', scrollDown);
-			$('#arrow_up').on('click', scrollUp);
-			$('#arrow_left').on('click', previousPage);
-			$('#arrow_right').on('click', nextPage);
+	$('#arrow_down').on('click', scrollDown);
+	$('#arrow_up').on('click', scrollUp);
+	$('#arrow_left').on('click', previousPage);
+	$('#arrow_right').on('click', nextPage);
 
-			var toggled=false;
-			$('#click_btn').on('click', function() {
-				toggled=!toggled;
-				if(toggled)
-					clickButton();
-				else
-					removeLinks();
-			});
+	var toggled=false;
+	$('#click_btn').on('click', function() {
+		toggled=!toggled;
+		if(toggled)
+			clickButton();
+		else
+			removeLinks();
+	});
 
-			$('#press_btn').on('click', function() {
-				toggled=!toggled;
-				if(toggled)
-					pressButton();
-				else
-					removeButtons();
-			});
+	$('#press_btn').on('click', function() {
+		toggled=!toggled;
+		if(toggled)
+			pressButton();
+		else
+			removeButtons();
+	});
 
-			$('#focus_btn').on('click', function() {
-				toggled=!toggled;
-				if(toggled)
-					focusButton();
-				else
-					removeFields();
-			});	
-		});
+	$('#focus_btn').on('click', function() {
+		toggled=!toggled;
+		if(toggled)
+			focusButton();
+		else
+			removeFields();
+	});	
+});
 
 
 function scrollDown() {
