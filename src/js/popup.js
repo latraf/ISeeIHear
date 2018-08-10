@@ -31,6 +31,19 @@ function howToTab() {
 var mode_out = '', mode = 0;
 
 function saveSettings() {
+	var active_tab_id = 0, active_window_id = 0;
+
+	chrome.tabs.query({active: true, currentWindow: true}, function(tabs) {
+		var active_tab_id = tabs[0].id;
+		var active_window_id = tabs[0].windowId;
+		var data = {
+			'active_tab_id' : active_tab_id,
+			'active_window_id' : active_window_id
+		};
+		setData(data);
+	});	
+
+
 	mode = $('input[name="radio"]:checked').val();
 	console.log('mode ' + mode);
 	switch(mode) {
@@ -42,51 +55,30 @@ function saveSettings() {
 	var data = {'mode' : mode_out}
 	setData(data);
 
-	if(data['mode']=='GAZE') {
-		connectGaze();
-		console.log('connecting webgazer...');
-		// alert('connecting webgazer...');
-	}
-	else if(data['mode']=='VOICE') {
-		connectVoice();
-	}
-	else {
-		connectBoth();
-	}
-	console.log("saved " + mode_out);
+	getData(function(data) {
+		if(data['mode']=='GAZE') connectGaze(data['active_tab_id']);
+		else if(data['mode']=='VOICE') connectVoice(data['active_tab_id']);
+		else connectBoth();
+		console.log("saved " + mode_out);
+	});
+	
 
 
-	chrome.tabs.query({active: true, currentWindow: true}, function(tabs) {
-		var active_tab_id = tabs[0].id;
-		var active_window_id = tabs[0].windowId;
-		var data = {
-			'active_tab_id' : active_tab_id,
-			'active_window_id' : active_window_id
-		};
-		setData(data);
-		// console.log('Tab ID: ' + active_tab_id);
-		// console.log('Window ID: ' + active_window_id);
-		console.log(tabs[0]);
-	});	
+	
 
 }
 
 /* loads previously saved modality */
 function loadSettings() {
 	console.log("settings loaded!");
-	var curr_tab_id = 0, curr_window_id = 0;
-	chrome.tabs.query({active: true, currentWindow: true}, function(tabs) {
-		curr_tab_id = tabs[0].id;
-		curr_window_id = tabs[0].windowId;
-		// var data = {
-		// 	'active_tab_id' : active_tab_id,
-		// 	'active_window_id' : active_window_id
-		// };
-		// setData(data);
-		// console.log('Tab ID: ' + active_tab_id);
-		// console.log('Window ID: ' + active_window_id);
-		console.log(tabs[0]);
-	});
+	// var curr_tab_id = 0, curr_window_id = 0;
+
+	// chrome.tabs.query({active: true, currentWindow: true}, function(tabs) {
+	// 	curr_tab_id = tabs[0].id;
+	// 	curr_window_id = tabs[0].windowId;
+
+	// 	console.log(tabs[0]);
+	// });
 
 	getData(function(data) {
 		mode_out = data['mode'];
@@ -110,10 +102,11 @@ function loadSettings() {
 		}
 		else console.log('Error!');
 		console.log("loaded " + mode_out);
+
 		console.log('Active Tab ID: ' + data['active_tab_id']);
 		console.log('Active Window ID: ' + data['active_window_id']);
-		console.log('Current Tab ID: ' + curr_tab_id);
-		console.log('Current Window ID: ' + curr_window_id);
+		// console.log('Current Tab ID: ' + curr_tab_id);
+		// console.log('Current Window ID: ' + curr_window_id);
 	});
 }
 
@@ -167,6 +160,20 @@ function connectBoth() {
 
 /* calls loading function everytime popup.html loads*/
 window.onload = function() {
+	var curr_tab_id = 0, curr_window_id = 0;
+
+	chrome.tabs.query({active: true, currentWindow: true}, function(tabs) {
+		curr_tab_id = tabs[0].id;
+		curr_window_id = tabs[0].windowId;
+
+		console.log(tabs[0]);
+	});
+
+	// console.log('Current Tab ID: ' + curr_tab_id);
+	// console.log('Current Window ID: ' + curr_window_id);
+	
+	chrome.tabs.executeScript(curr_tab_id, {file: 'src/js_ext/jquery-3.1.1.min.js'});
+	// chrome.tabs.executeScript({file: 'src/js_ext/jquery-ui.min.js'});
 	loadSettings();
 	console.log("popup loaded!");
 	document.getElementById('save_btn').addEventListener('click', saveSettings);

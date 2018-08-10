@@ -63,7 +63,7 @@ function getData(callback) {
 
 /* INDIVIDUAL FUNCTIONALITIES ON UI ELEMENTS */
 
-var scrolled=0, scroll_var=300;
+var scrolled=0, scroll_var=300, toggled=false;
 
 $(document).ready(function() {
 
@@ -72,64 +72,51 @@ $(document).ready(function() {
 	$('#arrow_left').on('click', previousPage);
 	$('#arrow_right').on('click', nextPage);
 
-	var toggled=false;
 	$('#click_btn').on('click', function() {
 		toggled=!toggled;
-		if(toggled)
-			clickButton();
-		else
-			removeLinks();
+		if(toggled) clickButton();
+		else removeLinks();
 	});
 
 	$('#press_btn').on('click', function() {
 		toggled=!toggled;
-		if(toggled)
-			pressButton();
-		else
-			removeButtons();
+		if(toggled) pressButton();
+		else removeButtons();
 	});
 
 	$('#focus_btn').on('click', function() {
 		toggled=!toggled;
-		if(toggled)
-			focusButton();
-		else
-			removeFields();
+		if(toggled) focusButton();
+		else removeFields();
 	});	
 });
 
 
 function scrollDown() {
-	if (document.readyState == "complete") {
+	if (document.readyState == 'complete') {
 		scrolled=scrolled+scroll_var;
 
-		$('html, body').animate({
-			scrollTop: scrolled
-		});
+		$('html, body').animate({ scrollTop: scrolled });
 	}
 	else alert('page not loaded yet!');
 }
 
 function scrollUp() {
-	if (document.readyState == "complete") {
+	if (document.readyState == 'complete') {
 		scrolled=scrolled-scroll_var;
 					
-		$('html, body').animate({
-			scrollTop: scrolled
-		});
+		$('html, body').animate({ scrollTop: scrolled });
 	}
 	else alert('page not loaded yet!');
 }
 
 function previousPage() {
-	if (document.readyState == "complete")
-		window.history.back();
+	if (document.readyState == 'complete') window.history.back();
 	else alert('page not loaded yet!');
 }
 
 function nextPage() {
-	if (document.readyState == "complete")
-		window.history.forward();
+	if (document.readyState == 'complete') window.history.forward();
 	else alert('page not loaded yet!');
 }
 
@@ -151,23 +138,18 @@ function pressButton() {
 
 function focusButton() {
 	if (document.readyState == "complete") {
-	highlightFields();
-	collectFields();
+		highlightFields();
+		collectFields();
 	}
 	else alert('page not loaded yet!');
 }
 
 function openButton() {
-	if (document.readyState == "complete") {
-	}
+	if (document.readyState == "complete") {}
 	else alert('page not loaded yet!');
 }
 
 /* END */
-
-
-
-
 
 /* highlightLinks() */
 function highlightLinks() {
@@ -244,7 +226,8 @@ function collectFields() {
 	temp_arr = addToArray(temp_arr, field_arr1, field_arr1.length);
 	temp_arr = addToArray(temp_arr, field_arr2, field_arr2.length);
 	
-	field_arr = jQuery.unique(temp_arr);
+	// field_arr = jQuery.unique(temp_arr);
+	field_arr = temp_arr;
 	
 	for(var i=0; i<field_arr.length; i++) {
 		var box = field_arr[i].getBoundingClientRect();
