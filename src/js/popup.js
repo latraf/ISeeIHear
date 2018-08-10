@@ -58,41 +58,28 @@ function saveSettings() {
 	getData(function(data) {
 		if(data['mode']=='GAZE') connectGaze(data['active_tab_id']);
 		else if(data['mode']=='VOICE') connectVoice(data['active_tab_id']);
-		else connectBoth();
+		else connectBoth(data['active_tab_id']);
 		console.log("saved " + mode_out);
 	});
-	
-
-
-	
-
 }
 
 /* loads previously saved modality */
 function loadSettings() {
 	console.log("settings loaded!");
-	// var curr_tab_id = 0, curr_window_id = 0;
-
-	// chrome.tabs.query({active: true, currentWindow: true}, function(tabs) {
-	// 	curr_tab_id = tabs[0].id;
-	// 	curr_window_id = tabs[0].windowId;
-
-	// 	console.log(tabs[0]);
-	// });
 
 	getData(function(data) {
 		mode_out = data['mode'];
 		if(mode_out=='GAZE') {
 			$('#radio-1').prop("checked", true);
-			if(!data['gaze_mode']) connectGaze();
+			// if(!data['gaze_mode']) connectGaze();
 		}
 		else if(mode_out=='VOICE') {
 			$('#radio-2').prop("checked", true);
-			if(!data['voice_mode']) connectVoice();
+			// if(!data['voice_mode']) connectVoice();
 		}
 		else if(mode_out=='BOTH') {
 			$('#radio-3').prop("checked", true);
-			if(!data['both_mode']) connectBoth();
+			// if(!data['both_mode']) connectBoth();
 		}
 		else if(mode_out=='OFF')  {
 			console.log('Modes are turned off.');
@@ -103,8 +90,8 @@ function loadSettings() {
 		else console.log('Error!');
 		console.log("loaded " + mode_out);
 
-		console.log('Active Tab ID: ' + data['active_tab_id']);
-		console.log('Active Window ID: ' + data['active_window_id']);
+		// console.log('Active Tab ID: ' + data['active_tab_id']);
+		// console.log('Active Window ID: ' + data['active_window_id']);
 		// console.log('Current Tab ID: ' + curr_tab_id);
 		// console.log('Current Window ID: ' + curr_window_id);
 	});
@@ -122,7 +109,7 @@ function removeControls() {
 	chrome.tabs.executeScript({file: 'src/js/gaze-controls-off.js'});
 }
 
-function connectGaze() {
+function connectGaze(tab_id) {
 	var data = {
 		'gaze_mode' : true,
 		'voice_mode' : false,
@@ -130,11 +117,11 @@ function connectGaze() {
 	};
 	console.log('connectGaze');
 	setData(data);
-	chrome.tabs.executeScript({file: 'src/js/gaze-controls.js'});
+	chrome.tabs.executeScript(tab_id, {file: 'src/js/gaze-controls.js'});
 	// chrome.tabs.executeScript({file: ''});   // script that will disable voice-controls
 }
 
-function connectVoice() {
+function connectVoice(tab_id) {
 	var data = {
 		'gaze_mode' : false,
 		'voice_mode' : true,
@@ -142,11 +129,11 @@ function connectVoice() {
 	};
 	console.log('connectVoice');
 	setData(data);
-	// chrome.tabs.executeScript({file: ''});   // script that will enable voice-controls
-	// chrome.tabs.executeScript({file: ''});   // script that will disable gaze-controls
+	// chrome.tabs.executeScript(tab_id, {file: ''});   // script that will enable voice-controls
+	// chrome.tabs.executeScript(tab_id, {file: ''});   // script that will disable gaze-controls
 }
 
-function connectBoth() {
+function connectBoth(tab_id) {
 	var data = {
 		'gaze_mode' : false,
 		'voice_mode' : false,
@@ -154,8 +141,8 @@ function connectBoth() {
 	};
 	console.log('connectBoth');
 	setData(data);
-	// chrome.tabs.executeScript({file: ''});   // script that will enable gaze-controls
-	// chrome.tabs.executeScript({file: ''});   // script that will enable voice-controls
+	// chrome.tabs.executeScript(tab_id, {file: ''});   // script that will enable gaze-controls
+	// chrome.tabs.executeScript(tab_id, {file: ''});   // script that will enable voice-controls
 }
 
 /* calls loading function everytime popup.html loads*/
@@ -173,6 +160,7 @@ window.onload = function() {
 	// console.log('Current Window ID: ' + curr_window_id);
 	
 	chrome.tabs.executeScript(curr_tab_id, {file: 'src/js_ext/jquery-3.1.1.min.js'});
+	chrome.tabs.executeScript({file: 'src/js/gaze-controls-off.js'});
 	// chrome.tabs.executeScript({file: 'src/js_ext/jquery-ui.min.js'});
 	loadSettings();
 	console.log("popup loaded!");
