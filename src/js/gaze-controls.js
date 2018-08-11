@@ -67,7 +67,6 @@ function getData(callback) {
 var scrolled=0, scroll_var=300, toggled=false;
 
 $(document).ready(function() {
-
 	$('#arrow_down').on('click', scrollDown);
 	$('#arrow_up').on('click', scrollUp);
 	$('#arrow_left').on('click', previousPage);
