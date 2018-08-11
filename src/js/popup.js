@@ -117,7 +117,7 @@ function connectGaze(tab_id) {
 	};
 	console.log('connectGaze');
 	setData(data);
-	chrome.tabs.executeScript(tab_id, {file: 'src/js/gaze-controls.js'});
+	// chrome.tabs.executeScript(tab_id, {file: 'src/js/gaze-controls.js'});
 	// chrome.tabs.executeScript({file: ''});   // script that will disable voice-controls
 }
 
@@ -160,7 +160,7 @@ window.onload = function() {
 	// console.log('Current Window ID: ' + curr_window_id);
 	
 	chrome.tabs.executeScript(curr_tab_id, {file: 'src/js_ext/jquery-3.1.1.min.js'});
-	chrome.tabs.executeScript({file: 'src/js/gaze-controls-off.js'});
+	chrome.tabs.executeScript(curr_tab_id, {file: 'src/js/gaze-controls-off.js'});
 	// chrome.tabs.executeScript({file: 'src/js_ext/jquery-ui.min.js'});
 	loadSettings();
 	console.log("popup loaded!");

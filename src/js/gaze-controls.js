@@ -1,4 +1,5 @@
 /* gaze-controls.js (insert.js kay chris) */
+console.log('gc on');
 
 document.documentElement.style.height = '100%';
 document.documentElement.style.width = '100%';

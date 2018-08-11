@@ -1,15 +1,19 @@
+
 $(document).ready(function() {
-	$('.arrows').removeClass('arrows');
-	$('.gaze_btns').removeClass('.gaze_btns');
-	$('.gaze_btns').removeAttr('id');
+	// $('.arrows').removeClass('arrows');
+	// $('.gaze_btns').removeClass('.gaze_btns');
+	// $('.gaze_btns').removeAttr('id');
+	console.log('gc off');
+	$('div#arrow_up:lt(-1)').remove();
+	$('div#arrow_down:lt(-1)').remove();
+	$('div#arrow_left:lt(-1)').remove();
+	$('div#arrow_right:lt(-1)').remove();
 
-	$('#arrow_up:not(.arrows)').remove();
-	$('#arrow_down:not(.arrows)').remove();
-	$('#arrow_left:not(.arrows)').remove();
-	$('#arrow_right:not(.arrows)').remove();
-
-	$('#click_btn:not(.gaze_btns)').remove();
-	$('#focus_btn:not(.gaze_btns)').remove();
-	$('#press_btn:not(.gaze_btns)').remove();
-	$('#open_btn:not(.gaze_btns)').remove();
+	$('div#click_btn:lt(-1)').remove();
+	$('div#focus_btn:lt(-1)').remove();
+	$('div#press_btn:lt(-1)').remove();
+	$('div#open_btn:lt(-1)').remove();
 });
+
+// $('div#open_btn:not(.gaze_btns)').remove();
+// $('div#arrow_down:not(.arrows)').remove();
