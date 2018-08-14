@@ -74,14 +74,10 @@ function getData(callback) {
 
 /* INDIVIDUAL FUNCTIONALITIES ON UI ELEMENTS */
 
-var scrolled=0, scroll_var=300, toggled=false;
+var toggled=false;
+// var scrolled=0, scroll_var=300;
 
 $(document).ready(function() {
-	$('#arrow_down').on('click', scrollDown);
-	$('#arrow_up').on('click', scrollUp);
-	$('#arrow_left').on('click', previousPage);
-	$('#arrow_right').on('click', nextPage);
-
 	// $('#click_btn').on('click', function() {
 	// 	toggled=!toggled;
 	// 	if(toggled) clickButton();
@@ -102,70 +98,6 @@ $(document).ready(function() {
 
 	getPosition();
 });
-
-
-
-
-
-function scrollDown() {
-	if (document.readyState == 'complete') {
-		scrolled=scrolled+scroll_var;
-
-		var box = arrow_down.getBoundingClientRect();
-		var x = event.clientX, y = event.clientY;
-		// console.log(box);
-
-		var data = { 'current_x' : x, 'current_y' : y };
-
-		// $('html, body').animate({ scrollTop: scrolled });
-		// var data = {'arrow_down_x' : x, 'arrow_down_y' : y}
-		// console.log('x: ' + x + ' y: ' + y);
-		setData(data);
-	}
-	else alert('page not loaded yet!');
-}
-
-function scrollUp() {
-	if (document.readyState == 'complete') {
-		scrolled=scrolled-scroll_var;
-		
-		// var box = arrow_up.getBoundingClientRect()
-		// console.log(box);
-
-		// $('html, body').animate({ scrollTop: scrolled });
-		// var x = event.clientX, y = event.clientY;
-		// var data = {'arrow_up_x' : x, 'arrow_up_y' : y}
-		// console.log('x: ' + x + ' y: ' + y);
-		// setData(data);
-	}
-	else alert('page not loaded yet!');
-}
-
-function previousPage() {
-	if (document.readyState == 'complete') console.log('back'); // window.history.back();
-	else alert('page not loaded yet!');
-
-	// var box = arrow_left.getBoundingClientRect()
-	// console.log(box);
-
-	// var x = event.clientX, y = event.clientY;
-	// var data = {'arrow_left_x' : x, 'arrow_left_y' : y}
-	// console.log('x: ' + x + ' y: ' + y);
-	// setData(data);
-}
-
-function nextPage() {
-	if (document.readyState == 'complete') console.log('forward'); // window.history.forward();
-	else alert('page not loaded yet!');
-
-	// var box = arrow_left.getBoundingClientRect()
-	// console.log(box);
-
-	// var x = event.clientX, y = event.clientY;
-	// var data = {'arrow_right_x' : x, 'arrow_right_y' : y}
-	// console.log('x: ' + x + ' y: ' + y);
-	// setData(data);
-}
 
 function clickButton() {
 	if (document.readyState == "complete") {
