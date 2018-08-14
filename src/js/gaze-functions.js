@@ -24,16 +24,38 @@ webgazer.setGazeListener(function(data, elapsedTime) {
 
 	getData(function(data) {
 			var arrow_down = data['arrow_down'];
-			scrolled=scrolled+scroll_var;
+			var arrow_up = data['arrow_up'];
+			var arrow_left = data['arrow_left'];
+			var arrow_right = data['arrow_right'];
 
-			 if ((arrow_down.x<x_prediction && x_prediction<(arrow_down.x+100)) && (arrow_down.y<y_prediction && y_prediction<(arrow_down.y+100))) {
 
+			if ((arrow_down.x<x_prediction && x_prediction<(arrow_down.x+100)) && (arrow_down.y<y_prediction && y_prediction<(arrow_down.y+100))) {
+
+				scrolled+=scroll_var;
 				console.log('x_prediction: ' + x_prediction + ' y_prediction: ' + y_prediction);
 				console.log('arrow_down x: ' + arrow_down.x + ' arrow_down y: ' + arrow_down.y);
-			 	console.log('HELLO');
-			 	
+			 	console.log('DOWN');
+
 			 	$('html, body').animate({ scrollTop: scrolled });
-			 }
+			}
+			else if ((arrow_up.x<x_prediction && x_prediction<(arrow_up.x+100)) && (arrow_up.y<y_prediction && y_prediction<(arrow_up.y+100))) {
+				scrolled-=scroll_var;
+				console.log('x_prediction: ' + x_prediction + ' y_prediction: ' + y_prediction);
+				console.log('arrow_up x: ' + arrow_up.x + ' arrow_up y: ' + arrow_up.y);
+			 	console.log('UP');
+			}
+			else if((arrow_left.x<x_prediction && x_prediction<(arrow_left.x+100)) && (arrow_left.y<y_prediction && y_prediction<(arrow_left.y+100))) {
+				window.history.back();
+				console.log('x_prediction: ' + x_prediction + ' y_prediction: ' + y_prediction);
+				console.log('arrow_left x: ' + arrow_left.x + ' arrow_left y: ' + arrow_left.y);
+			 	console.log('LEFT');
+			}
+			else if((arrow_right.x<x_prediction && x_prediction<(arrow_right.x+100)) && (arrow_right.y<y_prediction && y_prediction<(arrow_right.y+100))) {
+				window.history.forward();
+				console.log('x_prediction: ' + x_prediction + ' y_prediction: ' + y_prediction);
+				console.log('arrow_right x: ' + arrow_right.x + ' arrow_right y: ' + arrow_right.y);
+			 	console.log('RIGHT');
+			}
 	});	
 }).begin().showPredictionPoints(true);
 
@@ -41,6 +63,8 @@ var width = 320;
 var height = 240;
 var topDist = '0px';
 var leftDist = '0px';
+
+
     
 var setup = function() {
 
