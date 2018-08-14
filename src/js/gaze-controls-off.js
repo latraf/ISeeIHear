@@ -25,6 +25,13 @@ $(document).ready(function() {
 	$('div#focus_btn:lt(-1)').remove();
 	$('div#press_btn:lt(-1)').remove();
 	$('div#open_btn:lt(-1)').remove();
+
+	$('.selectLinks').removeClass('selectLinks');
+	$('.selectBtns').removeClass('selectBtns');
+	$('.selectInputs').removeClass('selectInputs');
+
+	// webgazer.pause();
+	// console.log('wg off');
 });
 
 // $('div#open_btn:not(.gaze_btns)').remove();

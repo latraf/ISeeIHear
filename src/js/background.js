@@ -57,7 +57,9 @@ function connectGaze(tab_id) {
 	console.log('connectGaze');
 	setData(data);
 	chrome.tabs.executeScript(tab_id, {file: 'src/js_ext/jquery-3.1.1.min.js'});
-	chrome.tabs.executeScript(tab_id, {file: 'src/js/gaze-controls-off.js'});
+	// chrome.tabs.executeScript(tab_id, {file: 'src/js_ext/webgazer.js'}, function() {
+		chrome.tabs.executeScript({file: 'src/js/gaze-controls-off.js'});
+	// });
 	chrome.tabs.executeScript(tab_id, {file: 'src/js/gaze-controls.js'});
 	// chrome.tabs.executeScript(tab_id, {file: 'src/js_ext/webgazer.js'}, function() {
 	// 	chrome.tabs.executeScript({file: 'src/js/gaze-functions.js'});
@@ -74,7 +76,9 @@ function connectVoice(tab_id) {
 	alert('connectVoice');
 	setData(data);
 	chrome.tabs.executeScript(tab_id, {file: 'src/js_ext/jquery-3.1.1.min.js'});
-	chrome.tabs.executeScript(tab_id, {file: 'src/js/gaze-controls-off.js'});
+	// chrome.tabs.executeScript(tab_id, {file: 'src/js_ext/webgazer.js'}, function() {
+		chrome.tabs.executeScript({file: 'src/js/gaze-controls-off.js'});
+	// });
 	// chrome.tabs.executeScript(tab_id, {file: ''});   // script that will disable gaze-controls
 	// chrome.tabs.executeScript(tab_id, {file: ''});   // script that will enable voice-controls
 }
@@ -88,7 +92,9 @@ function connectBoth(tab_id) {
 	alert('connectBoth');
 	setData(data);
 	chrome.tabs.executeScript(tab_id, {file: 'src/js_ext/jquery-3.1.1.min.js'});
-	chrome.tabs.executeScript(tab_id, {file: 'src/js/gaze-controls-off.js'});
+	// chrome.tabs.executeScript(tab_id, {file: 'src/js_ext/webgazer.js'}, function() {
+		chrome.tabs.executeScript({file: 'src/js/gaze-controls-off.js'});
+	// });
 	// chrome.tabs.executeScript(tab_id, {file: ''});   // script that will enable gaze-controls
 	// chrome.tabs.executeScript(tab_id, {file: ''});   // script that will enable voice-controls
 }
@@ -103,5 +109,7 @@ function removeControls(tab_id) {
 	alert('Modes are turned off.');
 	setData(data);
 	chrome.tabs.executeScript(tab_id, {file: 'src/js_ext/jquery-3.1.1.min.js'});
-	chrome.tabs.executeScript(tab_id, {file: 'src/js/gaze-controls-off.js'});
+	// chrome.tabs.executeScript(tab_id, {file: 'src/js_ext/webgazer.js'}, function() {
+		chrome.tabs.executeScript({file: 'src/js/gaze-controls-off.js'});
+	// });
 }

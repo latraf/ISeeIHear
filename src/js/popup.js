@@ -107,8 +107,13 @@ function connectGaze(tab_id) {
 	};
 	console.log('connectGaze');
 	setData(data);
-	chrome.tabs.executeScript({file: 'src/js/gaze-controls-off.js'});
+	// chrome.tabs.executeScript(tab_id, {file: 'src/js_ext/webgazer.js'}, function() {
+		chrome.tabs.executeScript(tab_id, {file: 'src/js/gaze-controls-off.js'});
+	// });
 	chrome.tabs.executeScript(tab_id, {file: 'src/js/gaze-controls.js'});
+	// chrome.tabs.executeScript(tab_id, {file: 'src/js_ext/webgazer.js'}, function() {
+	// 	chrome.tabs.executeScript(tab_id, {file: 'src/js/gaze-functions.js'});
+	// });
 	// chrome.tabs.executeScript({file: ''});   // script that will disable voice-controls
 }
 
@@ -145,7 +150,9 @@ function removeControls() {
 	};
 	console.log('Modes are turned off.');
 	setData(data);
-	chrome.tabs.executeScript({file: 'src/js/gaze-controls-off2.js'});
+	// chrome.tabs.executeScript(tab_id, {file: 'src/js_ext/webgazer.js'}, function() {
+		chrome.tabs.executeScript({file: 'src/js/gaze-controls-off2.js'});
+	// });
 }
 
 /* calls loading function everytime popup.html loads*/
@@ -163,6 +170,9 @@ window.onload = function() {
 	// console.log('Current Window ID: ' + curr_window_id);
 	
 	chrome.tabs.executeScript(curr_tab_id, {file: 'src/js_ext/jquery-3.1.1.min.js'});
+	// chrome.tabs.executeScript(curr_tab_id, {file: 'src/js_ext/webgazer.js'}, function() {
+	// 	chrome.tabs.executeScript(curr_tab_id, {code: 'webgazer.pause()'});
+	// });
 	chrome.tabs.executeScript(curr_tab_id, {file: 'src/js/gaze-controls-off.js'});
 	// chrome.tabs.executeScript({file: 'src/js_ext/jquery-ui.min.js'});
 	loadSettings();

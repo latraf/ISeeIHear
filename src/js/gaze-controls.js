@@ -52,6 +52,11 @@ document.body.appendChild(open_btn);
 
 /* END */
 
+
+
+
+
+
 function setData(data) {
 	chrome.storage.local.set(data, function() {
 		console.log(data);
@@ -61,6 +66,11 @@ function setData(data) {
 function getData(callback) {
 	chrome.storage.local.get(null, callback);
 }
+
+
+
+
+
 
 /* INDIVIDUAL FUNCTIONALITIES ON UI ELEMENTS */
 
@@ -89,14 +99,26 @@ $(document).ready(function() {
 		if(toggled) focusButton();
 		else removeFields();
 	});	
+
+	getPosition();
 });
+
+
+
 
 
 function scrollDown() {
 	if (document.readyState == 'complete') {
 		scrolled=scrolled+scroll_var;
 
-		$('html, body').animate({ scrollTop: scrolled });
+		var box = arrow_down.getBoundingClientRect();
+		console.log(box);
+
+		// $('html, body').animate({ scrollTop: scrolled });
+		// var x = event.clientX, y = event.clientY;
+		// var data = {'arrow_down_x' : x, 'arrow_down_y' : y}
+		// console.log('x: ' + x + ' y: ' + y);
+		// setData(data);
 	}
 	else alert('page not loaded yet!');
 }
@@ -104,20 +126,43 @@ function scrollDown() {
 function scrollUp() {
 	if (document.readyState == 'complete') {
 		scrolled=scrolled-scroll_var;
-					
-		$('html, body').animate({ scrollTop: scrolled });
+		
+		var box = arrow_up.getBoundingClientRect()
+		console.log(box);
+
+		// $('html, body').animate({ scrollTop: scrolled });
+		// var x = event.clientX, y = event.clientY;
+		// var data = {'arrow_up_x' : x, 'arrow_up_y' : y}
+		// console.log('x: ' + x + ' y: ' + y);
+		// setData(data);
 	}
 	else alert('page not loaded yet!');
 }
 
 function previousPage() {
-	if (document.readyState == 'complete') window.history.back();
+	if (document.readyState == 'complete') console.log('back'); // window.history.back();
 	else alert('page not loaded yet!');
+
+	var box = arrow_left.getBoundingClientRect()
+	console.log(box);
+
+	// var x = event.clientX, y = event.clientY;
+	// var data = {'arrow_left_x' : x, 'arrow_left_y' : y}
+	// console.log('x: ' + x + ' y: ' + y);
+	// setData(data);
 }
 
 function nextPage() {
-	if (document.readyState == 'complete') window.history.forward();
+	if (document.readyState == 'complete') console.log('forward'); // window.history.forward();
 	else alert('page not loaded yet!');
+
+	var box = arrow_left.getBoundingClientRect()
+	console.log(box);
+
+	// var x = event.clientX, y = event.clientY;
+	// var data = {'arrow_right_x' : x, 'arrow_right_y' : y}
+	// console.log('x: ' + x + ' y: ' + y);
+	// setData(data);
 }
 
 function clickButton() {
@@ -151,6 +196,11 @@ function openButton() {
 
 /* END */
 
+
+
+
+
+
 /* highlightLinks() */
 function highlightLinks() {
 	$('a:visible').addClass('selectLinks');
@@ -175,6 +225,12 @@ function highlightFields() {
 	$('input[type="password"]').addClass('selectInputs');
 	$('div[role="textbox"]').addClass('selectInputs');
 }
+
+
+
+
+
+
 
 var link_arr = [], button_arr = [], field_arr = [];
 
@@ -240,6 +296,11 @@ function collectFields() {
 }
 
 
+
+
+
+
+
 function addToArray(orig_array, array, array_length) {
 	var temp_array = orig_array;
 
@@ -248,6 +309,11 @@ function addToArray(orig_array, array, array_length) {
 
 	return temp_array;
 }
+
+
+
+
+
 
 function removeLinks() {
 	for(var i=0; i<link_arr.length; i++)
@@ -262,4 +328,30 @@ function removeButtons() {
 function removeFields() {
 	for(var i=0; i<field_arr.length; i++)
 		field_arr[i].classList.remove('selectInputs');
+}
+
+
+
+
+
+
+function getPosition() {
+	var data = {};
+	var arrow_arr = ['arrow_down', 'arrow_up', 'arrow_left', 'arrow_right'];
+
+	arrow_arr.forEach(function(arrow) {
+		console.log(document.getElementById(arrow));
+
+		if(document.getElementById(arrow)) {
+      var box = document.getElementById(arrow).getBoundingClientRect();
+      var x = box.x, y = box.y;
+      // console.log('x: ' + x + ' y: ' + y);
+      console.log('x: ' + x + ' y: ' + y);
+
+      var arrow_coordinates = {'x' : x, 'y' : y}
+      data[arrow] = arrow_coordinates;
+		}
+	});
+	console.log(data);
+	setData(data);
 }
