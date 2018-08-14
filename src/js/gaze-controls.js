@@ -45,10 +45,10 @@ document.body.appendChild(arrow_left);
 document.body.appendChild(arrow_right);
 
 // append buttons into body of every website
-document.body.appendChild(click_btn);
-document.body.appendChild(focus_btn);
-document.body.appendChild(press_btn);
-document.body.appendChild(open_btn);	
+// document.body.appendChild(click_btn);
+// document.body.appendChild(focus_btn);
+// document.body.appendChild(press_btn);
+// document.body.appendChild(open_btn);	
 
 /* END */
 
@@ -82,23 +82,23 @@ $(document).ready(function() {
 	$('#arrow_left').on('click', previousPage);
 	$('#arrow_right').on('click', nextPage);
 
-	$('#click_btn').on('click', function() {
-		toggled=!toggled;
-		if(toggled) clickButton();
-		else removeLinks();
-	});
+	// $('#click_btn').on('click', function() {
+	// 	toggled=!toggled;
+	// 	if(toggled) clickButton();
+	// 	else removeLinks();
+	// });
 
-	$('#press_btn').on('click', function() {
-		toggled=!toggled;
-		if(toggled) pressButton();
-		else removeButtons();
-	});
+	// $('#press_btn').on('click', function() {
+	// 	toggled=!toggled;
+	// 	if(toggled) pressButton();
+	// 	else removeButtons();
+	// });
 
-	$('#focus_btn').on('click', function() {
-		toggled=!toggled;
-		if(toggled) focusButton();
-		else removeFields();
-	});	
+	// $('#focus_btn').on('click', function() {
+	// 	toggled=!toggled;
+	// 	if(toggled) focusButton();
+	// 	else removeFields();
+	// });	
 
 	getPosition();
 });
@@ -112,13 +112,15 @@ function scrollDown() {
 		scrolled=scrolled+scroll_var;
 
 		var box = arrow_down.getBoundingClientRect();
-		console.log(box);
+		var x = event.clientX, y = event.clientY;
+		// console.log(box);
+
+		var data = { 'current_x' : x, 'current_y' : y };
 
 		// $('html, body').animate({ scrollTop: scrolled });
-		// var x = event.clientX, y = event.clientY;
 		// var data = {'arrow_down_x' : x, 'arrow_down_y' : y}
 		// console.log('x: ' + x + ' y: ' + y);
-		// setData(data);
+		setData(data);
 	}
 	else alert('page not loaded yet!');
 }
@@ -127,8 +129,8 @@ function scrollUp() {
 	if (document.readyState == 'complete') {
 		scrolled=scrolled-scroll_var;
 		
-		var box = arrow_up.getBoundingClientRect()
-		console.log(box);
+		// var box = arrow_up.getBoundingClientRect()
+		// console.log(box);
 
 		// $('html, body').animate({ scrollTop: scrolled });
 		// var x = event.clientX, y = event.clientY;
@@ -143,8 +145,8 @@ function previousPage() {
 	if (document.readyState == 'complete') console.log('back'); // window.history.back();
 	else alert('page not loaded yet!');
 
-	var box = arrow_left.getBoundingClientRect()
-	console.log(box);
+	// var box = arrow_left.getBoundingClientRect()
+	// console.log(box);
 
 	// var x = event.clientX, y = event.clientY;
 	// var data = {'arrow_left_x' : x, 'arrow_left_y' : y}
@@ -156,8 +158,8 @@ function nextPage() {
 	if (document.readyState == 'complete') console.log('forward'); // window.history.forward();
 	else alert('page not loaded yet!');
 
-	var box = arrow_left.getBoundingClientRect()
-	console.log(box);
+	// var box = arrow_left.getBoundingClientRect()
+	// console.log(box);
 
 	// var x = event.clientX, y = event.clientY;
 	// var data = {'arrow_right_x' : x, 'arrow_right_y' : y}
