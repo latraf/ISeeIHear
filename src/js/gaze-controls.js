@@ -67,23 +67,23 @@ arrow_down_box.setAttribute('class', 'horizontal_box');
 arrow_right_box.setAttribute('class', 'vertical_box');
 arrow_left_box.setAttribute('class', 'vertical_box');
 
-// arrow_up_box.id = 'arrow_up_box';
-// arrow_up_box.width = '50px';
-// arrow_up_box.height = '50px';
-// arrow_up_box.style.position = 'fixed';
-// arrow_up_box.style.top = '150px';
-// arrow_up_box.style.left = '150px';
-// arrow_up_box.style.right = '150px';
-// arrow_up_box.style.border = '10px dashed transparent';
-// arrow_up_box.style.margin = '10px auto';
-// // arrow_up_box.style.outline = '1px';
-// arrow_up_box.backgroundColor = 'blue';
-
 document.body.appendChild(arrow_up_box);
 document.body.appendChild(arrow_down_box);
 document.body.appendChild(arrow_right_box);
 document.body.appendChild(arrow_left_box);
 
+
+var toggle_btn = document.createElement('div');
+var toggle_btn_box = document.createElement('div');
+
+toggle_btn.setAttribute('id', 'toggle_btn');
+// toggle_btn.setAttribute('class', 'gaze_btns');
+
+toggle_btn_box.setAttribute('id', 'toggle_btn_box');
+// toggle_btn_box.setAttribute('class', 'gaze_btns');
+
+document.body.appendChild(toggle_btn);
+document.body.appendChild(toggle_btn_box);
 
 
 function setData(data) {
