@@ -77,13 +77,23 @@ var toggle_btn = document.createElement('div');
 var toggle_btn_box = document.createElement('div');
 
 toggle_btn.setAttribute('id', 'toggle_btn');
-// toggle_btn.setAttribute('class', 'gaze_btns');
-
 toggle_btn_box.setAttribute('id', 'toggle_btn_box');
-// toggle_btn_box.setAttribute('class', 'gaze_btns');
 
 document.body.appendChild(toggle_btn);
 document.body.appendChild(toggle_btn_box);
+
+
+
+
+
+var calibration_div = document.createElement('div');
+calibration_div.setAttribute('class', 'calibration_div');
+document.body.appendChild(calibration_div);
+
+
+
+
+
 
 
 function setData(data) {
@@ -95,11 +105,6 @@ function setData(data) {
 function getData(callback) {
 	chrome.storage.local.get(null, callback);
 }
-
-
-
-
-
 
 /* INDIVIDUAL FUNCTIONALITIES ON UI ELEMENTS */
 
@@ -125,7 +130,11 @@ $(document).ready(function() {
 	// 	else removeFields();
 	// });	
 
-	getPosition();
+	getArrowPosition();
+	createPoints();
+	$('.calibration_btn:lt(-18)').remove();
+	getBoxCoordinates();
+	plotPoints();
 });
 
 function clickButton() {
@@ -158,6 +167,8 @@ function openButton() {
 }
 
 /* END */
+
+
 
 
 
@@ -298,30 +309,141 @@ function removeFields() {
 
 
 
-function getPosition() {
+function getArrowPosition() {
 	var data = {};
-	var arrow_arr = ['arrow_down', 'arrow_up', 'arrow_left', 'arrow_right'];
+	var arrow_arr = ['arrow_down', 'arrow_up', 'arrow_left', 'arrow_right', 'toggle_btn'];
 
 	arrow_arr.forEach(function(arrow) {
 		console.log(document.getElementById(arrow));
 
 		if(document.getElementById(arrow)) {
       var box = document.getElementById(arrow).getBoundingClientRect();
-      var x = box.x, y = box.y;
+      // var x = box.x, y = box.y;
 
-      // console.log('x: ' + x + ' y: ' + y);
-      // console.log('x: ' + x + ' y: ' + y);
-      // console.log(arrow + ': width: ' + box.width + ' height: '+ box.height);
-
-      var arrow_coordinates = {
-      	'x' 			: x, 
-      	'y' 			: y,
-      	'width' 	: box.width,
-      	'height' 	: box.height
-      };
+      var arrow_coordinates = { 'x' : box.x, 'y' : box.y, 'height' : box.height, 'width' : box.width };
       data[arrow] = arrow_coordinates;
 		}
 	});
-	console.log(data);
 	setData(data);
+
+	// var box2 = arrow_up_box.getBoundingClientRect();
+}
+
+var point_arr = [];
+
+function createPoints() {
+	var points_length = 18;
+	for(var i=0; i<points_length; i++) {
+		var point =  document.createElement('input');
+		var id = 'Pt' + (i+1);
+		// console.log(id);
+		point.setAttribute('type', 'button');
+		point.setAttribute('class', 'calibration_btn');
+		point.setAttribute('id', id);
+
+		point.style.width = '20px';
+		point.style.height = '20px';
+
+		point_arr.push(point);
+		calibration_div.appendChild(point);
+	}
+}
+
+function getBoxCoordinates() {
+	var data = {};
+	var box_arr = ['arrow_up_box', 'arrow_down_box', 'arrow_left_box', 'arrow_right_box', 'toggle_btn_box'];
+
+	box_arr.forEach(function(bounding_box) {
+		console.log(document.getElementById(bounding_box));
+
+		if(document.getElementById(bounding_box)) {
+      var box = document.getElementById(bounding_box).getBoundingClientRect();
+      // var x = box.x, y = box.y;
+
+      var box_data = { 
+      	'x' : box.x, 
+      	'y' : box.y,
+      	'height' : box.height,
+      	'width' : box.width 
+      };
+      data[bounding_box] = box_data;
+		}
+	});
+	setData(data);
+	// console.log(data);
+}
+
+function plotPoints() {
+	var box_data;
+	var left_coor = {}, right_coor = {}, top_coor = {}, bottom_coor = {}, center_coor = {};
+	getData(function(data) {
+		box_data = data['arrow_left_box'];
+		arrow_data = data['arrow_left'];
+
+		left_coor = { 'x' : arrow_data.x, 'y'	: (arrow_data.y+(arrow_data.height/2))-10 };
+		top_coor = { 'x' : (box_data.x+(box_data.width/2)), 'y' : box_data.y };
+		bottom_coor = { 'x' : (box_data.x+(box_data.width/2)), 'y' : (box_data.y+box_data.height) };
+		point_arr.forEach(function(point) {
+			if(point.id === 'Pt1')	setPointCoordinates(point, left_coor.x, left_coor.y);
+			if(point.id === 'Pt2')	setPointCoordinates(point, top_coor.x, top_coor.y);
+			if(point.id === 'Pt3') 	setPointCoordinates(point, bottom_coor.x, bottom_coor.y);
+		});
+
+
+		box_data = data['arrow_right_box'];
+		arrow_data = data['arrow_right'];
+
+		right_coor = { 'x' : (box_data.x+box_data.width)-30, 'y' : (arrow_data.y+(arrow_data.height/2))-10 };
+		top_coor = { 'x' : (box_data.x+(box_data.width/2)), 'y' : box_data.y };
+		bottom_coor = { 'x' : (box_data.x+(box_data.width/2)), 'y' : (box_data.y+box_data.height) };
+		point_arr.forEach(function(point) {
+			if(point.id === 'Pt4')	setPointCoordinates(point, right_coor.x, right_coor.y);
+			if(point.id === 'Pt5')	setPointCoordinates(point, top_coor.x, top_coor.y);
+			if(point.id === 'Pt6') 	setPointCoordinates(point, bottom_coor.x, bottom_coor.y);
+		});
+
+
+		box_data = data['arrow_up_box'];
+		arrow_data = data['arrow_up'];
+
+		left_coor = { 'x' : box_data.x, 'y'	: (box_data.y+arrow_data.height) };
+		right_coor = { 'x' : (box_data.x+box_data.width)-10, 'y'	: (box_data.y+arrow_data.height) };
+		center_coor = { 'x' : (arrow_data.x+(arrow_data.width/2))-10, 'y' : (box_data.y+arrow_data.height) };
+		point_arr.forEach(function(point) {
+			if(point.id === 'Pt7')	setPointCoordinates(point, left_coor.x, left_coor.y);
+			if(point.id === 'Pt8')	setPointCoordinates(point, right_coor.x, right_coor.y);
+			if(point.id === 'Pt9')	setPointCoordinates(point, center_coor.x, center_coor.y);
+		});
+
+
+		box_data = data['arrow_down_box'];
+		arrow_data = data['arrow_down'];
+
+		left_coor = { 'x' : box_data.x, 'y'	: box_data.y };
+		right_coor = { 'x' : (box_data.x+box_data.width)-10, 'y'	: box_data.y };
+		center_coor = { 'x' : (arrow_data.x+(arrow_data.width/2))-10, 'y' : box_data.y };
+		point_arr.forEach(function(point) {
+			if(point.id === 'Pt10')	setPointCoordinates(point, left_coor.x, left_coor.y);
+			if(point.id === 'Pt11')	setPointCoordinates(point, right_coor.x, right_coor.y);
+			if(point.id === 'Pt12')	setPointCoordinates(point, center_coor.x, center_coor.y);
+		});
+
+
+		box_data = data['toggle_btn_box'];
+		arrow_data = data['toggle_btn'];
+
+		left_coor = { 'x' : arrow_data.x-70, 'y'	: (arrow_data.y+(arrow_data.height/2))-10 };
+		right_coor = { 'x' : (arrow_data.x+arrow_data.width)+50, 'y'	: (arrow_data.y+(arrow_data.height/2))-10 };
+		center_coor = { 'x' : (arrow_data.x+(arrow_data.width/2))-10, 'y' : arrow_data.y-50 };
+		point_arr.forEach(function(point) {
+			if(point.id === 'Pt13')	setPointCoordinates(point, left_coor.x, left_coor.y);
+			if(point.id === 'Pt14')	setPointCoordinates(point, right_coor.x, right_coor.y);
+			if(point.id === 'Pt15')	setPointCoordinates(point, center_coor.x, center_coor.y);
+		});
+	});
+}
+
+function setPointCoordinates(point, x, y) {
+	point.style.left = x+'px';
+	point.style.top = y+'px';
 }
