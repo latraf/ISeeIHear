@@ -19,7 +19,10 @@ webgazer
 	.setTracker('clmtracker')
 	.setGazeListener(function(wg_data, elapsedTime) {
 		// console.log('wg on');
-		if(wg_data==null) return;
+		if(wg_data==null) {
+			console.log('null'); 
+			return;
+		}
 
 		var x_prediction = wg_data.x, y_prediction = wg_data.y;
 
@@ -28,7 +31,7 @@ webgazer
 				var arrow_up = data['arrow_up'];
 				var arrow_left = data['arrow_left'];
 				var arrow_right = data['arrow_right'];
-
+				// alert('hello');
 				if ((arrow_down.x<x_prediction && x_prediction<(arrow_down.x+100)) && (arrow_down.y<y_prediction && y_prediction<(arrow_down.y+100)))
 					scrollDown();
 				else if ((arrow_up.x<x_prediction && x_prediction<(arrow_up.x+100)) && (arrow_up.y<y_prediction && y_prediction<(arrow_up.y+100)))
@@ -43,35 +46,35 @@ webgazer
 	.showPredictionPoints(true);
 
 
+window.onbeforeunload = function() {
+	webgazer.pause(); 
+	// window.localStorage.clear(); //Comment out if you want to save data across different sessions	
+	return;
+}
+
 
 
 
 
 function scrollDown() {
 		scrolled+=scroll_var;
-
 	 	console.log('DOWN');
-
 		$('html, body').animate({ scrollTop: scrolled });
 }
 
 function scrollUp() {
-	scrolled-= scroll_var;
-
+	scrolled-=scroll_var;
  	console.log('UP');
-
  	$('html, body').animate({ scrollTop: scrolled });
 }
 
 function previousPage() {
 	window.history.back();
-
  	console.log('LEFT');
 }
 
 function nextPage() {
 	window.history.forward();
-
  	console.log('RIGHT');
 }
 

@@ -122,46 +122,57 @@ $(document).ready(function() {
 	setArrowPosition();
 	createPoints();
 	$('.calibration_btn:lt(-15)').remove();
-	// $('#toggle_btn:lt(-1)').remove();
 	setBoxCoordinates();
-	plotPoints();
+	$('#toggle_btn:lt(-1)').remove();
 
 	/* data collection */
 	// 1. show help modal
-	// 2. hide arrows, show data points
-	$('#toggle_btn:lt(-1)').remove();
-	hideArrows();
-	// 3. collect data by clicking the points 
-	// source: https://github.com/brownhci/WebGazer/blob/master/www/js/calibration.js
-	$('.calibration_btn').on('click', function() {
+	// insert help modal code here
 
-		var id = $(this).attr('id');
-		if (!calibration_points[id]) { // initialises if not done
-			calibration_points[id]=0;
-		}
+	getData(function(data) {
+		// alert(data['gaze_calibrated']);
+		if(!data['gaze_calibrated']) {
+			
+			// 2. hide arrows, show data points
+			plotPoints();
+			$('#toggle_btn:lt(-1)').remove();
+			hideArrows();
+			
+			// 3. collect data by clicking the points 
+			// source: https://github.com/brownhci/WebGazer/blob/master/www/js/calibration.js
+			$('.calibration_btn').on('click', function() {
 
-		calibration_points[id]++; // increments values
+				var id = $(this).attr('id');
+				if (!calibration_points[id]) { // initialises if not done
+					calibration_points[id]=0;
+				}
 
-		if (calibration_points[id]==5) { //only turn to yellow after 5 clicks
-			$(this).css('background-color','yellow');
-			$(this).prop('disabled', true); //disables the button
-			points_calibrated++;
-		} 
-		else if (calibration_points[id]<5) {
-		//Gradually increase the opacity of calibration points when click to give some indication to user.
-			var opacity = 0.2*calibration_points[id]+0.2;
-			$(this).css('opacity',opacity);
-		}
+				calibration_points[id]++; // increments values
 
-		// 4. after clicking all data points, hide points, show arrows
-		if (points_calibrated >= 15){ // last point is calibrated
-			alert('data collected');
-			$(".calibration_btn").hide();
-			showArrows();
+				if (calibration_points[id]==5) { // turns yellow after 5 clicks
+					$(this).css('background-color','yellow');
+					$(this).prop('disabled', true); 
+					points_calibrated++;
+				} 
+				else if (calibration_points[id]<5) {
+					// gradually increase the opacity of calibration points when clicked
+					var opacity = 0.2*calibration_points[id]+0.2;
+					$(this).css('opacity',opacity);
+				}
+
+				// 4. after clicking all data points, hide points, show arrows
+				if (points_calibrated >= 15){ // last point is calibrated
+					alert('data collected');
+					$(".calibration_btn").hide();
+					showArrows();
+					var data = { 'gaze_calibrated' : true };
+					setData(data);
+					alert('Webgazer Calibrated');
+				}
+			});
 		}
 
 	});
-
 
 	// $('#click_btn').on('click', function() {
 	// 	toggled=!toggled;

@@ -30,7 +30,7 @@ $(document).ready(function() {
 	$('.selectBtns').removeClass('selectBtns');
 	$('.selectInputs').removeClass('selectInputs');
 
-	$('.calibration_btn:lt(-18)').remove();
+	$('.calibration_btn:lt(-15)').remove();
 
 	// webgazer.pause();
 	// console.log('wg off');
