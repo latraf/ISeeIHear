@@ -91,11 +91,6 @@ function loadSettings() {
 		}
 		else console.log('Error!');
 		console.log("loaded " + mode_out);
-
-		// console.log('Active Tab ID: ' + data['active_tab_id']);
-		// console.log('Active Window ID: ' + data['active_window_id']);
-		// console.log('Current Tab ID: ' + curr_tab_id);
-		// console.log('Current Window ID: ' + curr_window_id);
 	});
 }
 
