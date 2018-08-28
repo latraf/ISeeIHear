@@ -47,7 +47,6 @@
 		"activeTab",
 		"storage",
 		"webNavigation",
-		"management",
 		"http://*/*",
 		"https://*/*"
 	],

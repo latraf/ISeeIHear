@@ -38,6 +38,11 @@ focus_btn.setAttribute('class', 'gaze_btns');
 press_btn.setAttribute('class', 'gaze_btns');
 open_btn.setAttribute('class', 'gaze_btns');
 
+click_btn.style.opacity='0';
+focus_btn.style.opacity='0';
+press_btn.style.opacity='0';
+open_btn.style.opacity='0';
+
 // append arrows into body of every website
 document.body.appendChild(arrow_up);
 document.body.appendChild(arrow_down);
@@ -45,10 +50,10 @@ document.body.appendChild(arrow_left);
 document.body.appendChild(arrow_right);
 
 // append buttons into body of every website
-// document.body.appendChild(click_btn);
-// document.body.appendChild(focus_btn);
-// document.body.appendChild(press_btn);
-// document.body.appendChild(open_btn);	
+document.body.appendChild(click_btn);
+document.body.appendChild(focus_btn);
+document.body.appendChild(press_btn);
+document.body.appendChild(open_btn);	
 
 /* END */
 
@@ -190,9 +195,8 @@ $(document).ready(function() {
 	// 	toggled=!toggled;
 	// 	if(toggled) focusButton();
 	// 	else removeFields();
-	// });	
+	// });
 
-	
 });
 
 

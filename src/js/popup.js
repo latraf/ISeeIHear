@@ -107,6 +107,7 @@ function connectGaze(tab_id) {
 	};
 	console.log('connectGaze');
 	setData(data);
+	chrome.tabs.executeScript(tab_id, {file: 'src/js_ext/jquery-3.1.1.min.js'});
 	// chrome.tabs.executeScript(tab_id, {file: 'src/js_ext/webgazer.js'}, function() {
 		chrome.tabs.executeScript(tab_id, {file: 'src/js/gaze-controls-off.js'});
 	// });
