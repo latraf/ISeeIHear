@@ -15,7 +15,7 @@ function getData(callback) {
 var scrolled=0, scroll_var=300;
 var toggled=false;
 
-var data = { 'scrolled' : scrolled };
+var data = { 'scrolled' : scrolled, 'arrow_to_buttons' : false };
 setData(data);
 webgazer
 	.setRegression('ridge')
@@ -49,6 +49,7 @@ webgazer
 			else if((arrow_right.x<x_prediction && x_prediction<(arrow_right.x+100)) && (arrow_right.y<y_prediction && y_prediction<(arrow_right.y+100)))
 				nextPage();
 			else if((toggle_btn.x<x_prediction && x_prediction<(toggle_btn.x+100)) && (toggle_btn.y<y_prediction && y_prediction<(toggle_btn.y+100))) {
+				data = { 'arrow_to_buttons' : true }
 				toggled=!toggled;
 				if(toggled) {
 					$('div#toggle_btn:lt(-1)').remove();
@@ -67,20 +68,22 @@ webgazer
 			}
 			else if((click_btn.x<x_prediction && x_prediction<(click_btn.x+100)) && (click_btn.y<y_prediction && y_prediction<(click_btn.y+100))) {
 				console.log('CLICK');
-				toggled=!toggled;
-				if(toggled) clickButton();
+				console.log(data['arrow_to_buttons']);
+				if(data['arrow_to_buttons']) clickButton();
 				else removeLinks();
 			}
 			else if((press_btn.x<x_prediction && x_prediction<(press_btn.x+100)) && (press_btn.y<y_prediction && y_prediction<(press_btn.y+100))) {
 				console.log('PRESS');
-				toggled=!toggled;
-				if(toggled) pressButton();
+				// toggled=!toggled;
+				console.log(data['arrow_to_buttons']);
+				if(data['arrow_to_buttons']) pressButton();
 				else removeButtons();
 			}
 			else if((focus_btn.x<x_prediction && x_prediction<(focus_btn.x+100)) && (focus_btn.y<y_prediction && y_prediction<(focus_btn.y+100))) {
 				console.log('FOCUS');
-				toggled=!toggled;
-				if(toggled) focusButton();
+				// toggled=!toggled;
+				console.log(data['arrow_to_buttons']);
+				if(data['arrow_to_buttons']) focusButton();
 				else removeFields();
 			}
 			else if((open_btn.x<x_prediction && x_prediction<(open_btn.x+100)) && (open_btn.y<y_prediction && y_prediction<(open_btn.y+100))) {
@@ -104,13 +107,18 @@ window.onbeforeunload = function() {
 
 function scrollDown(toggled) {
 	if(!toggled) {
-		getData(function(data) {
-			var scrolled_data = data['scrolled'];
-			scrolled_data+=scroll_var;
-			$('html, body').animate({ scrollTop: scrolled_data });
-	 		var data = { 'scrolled' : scrolled_data }
-	 		setData(data);
-		});
+		setTimeout(function() {
+			// alert('scroll down');
+			document.getElementById('arrow_down').style.opacity='50';
+			getData(function(data) {
+				var scrolled_data = data['scrolled'];
+				scrolled_data+=scroll_var;
+				$('html, body').animate({ scrollTop: scrolled_data });
+		 		var data = { 'scrolled' : scrolled_data }
+		 		setData(data);
+			});
+			document.getElementById('arrow_down').style.opacity='100';
+		}, 1000);
 	}
 }
 
