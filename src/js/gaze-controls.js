@@ -349,7 +349,7 @@ function hideArrows() {
 }
 
 function showArrows() {
-	$('.arrows').css('opacity', 100);
-	$('#toggle_btn').css('opacity', 100);
+	$('.arrows').css('opacity', 1);
+	$('#toggle_btn').css('opacity', 1);
 	toggle_btn.style.display = 'block';
 }

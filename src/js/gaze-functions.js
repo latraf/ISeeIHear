@@ -45,9 +45,9 @@ webgazer
 			else if ((arrow_up.x<x_prediction && x_prediction<(arrow_up.x+100)) && (arrow_up.y<y_prediction && y_prediction<(arrow_up.y+100)))
 				scrollUp(toggled);
 			else if((arrow_left.x<x_prediction && x_prediction<(arrow_left.x+100)) && (arrow_left.y<y_prediction && y_prediction<(arrow_left.y+100)))
-				previousPage();
+				previousPage(toggled);
 			else if((arrow_right.x<x_prediction && x_prediction<(arrow_right.x+100)) && (arrow_right.y<y_prediction && y_prediction<(arrow_right.y+100)))
-				nextPage();
+				nextPage(toggled);
 			else if((toggle_btn.x<x_prediction && x_prediction<(toggle_btn.x+100)) && (toggle_btn.y<y_prediction && y_prediction<(toggle_btn.y+100))) {
 				toggled=!toggled;
 				if(toggled) {
@@ -118,49 +118,65 @@ window.onbeforeunload = function() {
 
 function scrollDown(toggled) {
 	if(!toggled) {
-		document.getElementById('arrow_down').style.opacity='40';
-		setTimeout(function(){
-			console.log('wait');
-			getData(function(data) {
-				var scrolled_data = data['scrolled'];
-				scrolled_data+=scroll_var;
+		document.getElementById('arrow_down').style.opacity='0.5';
+		getData(function(data) {
+			var scrolled_data = data['scrolled'];
+			scrolled_data+=scroll_var;
+			setTimeout(function() {
+				console.log('wait');
 				$('html, body').animate({ scrollTop: scrolled_data });
 		 		var data = { 'scrolled' : scrolled_data }
 		 		setData(data);
-			});
-			document.getElementById('arrow_down').style.opacity='100';
-		}, 1000);
-		
-			// alert('scroll down');
-
+				document.getElementById('arrow_down').style.opacity='1';
+			}, 1000);
+		});
 	}
 }
 
 function scrollUp(toggled) {
 	if(!toggled) {
+		document.getElementById('arrow_up').style.opacity='0.5';
 		getData(function(data) {
 			var scrolled_data = data['scrolled'];
 			scrolled_data-=scroll_var;
-		 	$('html, body').animate({ scrollTop: scrolled_data });
-		 	var data = { 'scrolled' : scrolled_data }
-		 	setData(data);
+			setTimeout(function() {
+				console.log('wait');
+		 		$('html, body').animate({ scrollTop: scrolled_data });
+		 		var data = { 'scrolled' : scrolled_data }
+		 		setData(data);
+		 		document.getElementById('arrow_up').style.opacity='1';
+		 	}, 1000);
 		});
 	}
 }
 
-function previousPage() {
-	window.history.back();
+function previousPage(toggled) {
+	if(!toggled) {
+		document.getElementById('arrow_left').style.opacity='0.5';
+		setTimeout(function() {
+			console.log('wait');
+			window.history.back();
+			document.getElementById('arrow_left').style.opacity='1';
+		}, 1000);
+	}
 }
 
 function nextPage() {
-	window.history.forward();
+	if(!toggled) {
+		document.getElementById('arrow_right').style.opacity='0.5';
+		setTimeout(function() {
+			console.log('wait');
+			window.history.forward();
+			document.getElementById('arrow_right').style.opacity='1';
+		}, 1000);
+	}
 }
 
 function showGazeButtons() {
-	document.getElementById('click_btn').style.opacity='100';
-	document.getElementById('press_btn').style.opacity='100';
-	document.getElementById('focus_btn').style.opacity='100';
-	document.getElementById('open_btn').style.opacity='100';
+	document.getElementById('click_btn').style.opacity='1';
+	document.getElementById('press_btn').style.opacity='1';
+	document.getElementById('focus_btn').style.opacity='1';
+	document.getElementById('open_btn').style.opacity='1';
 
 	document.getElementById('arrow_down').style.opacity='0';
 	document.getElementById('arrow_up').style.opacity='0';
@@ -172,8 +188,8 @@ function hideGazeButtons() {
 	document.getElementById('focus_btn').style.opacity='0';
 	document.getElementById('open_btn').style.opacity='0';
 
-	document.getElementById('arrow_down').style.opacity='100';
-	document.getElementById('arrow_up').style.opacity='100';
+	document.getElementById('arrow_down').style.opacity='1';
+	document.getElementById('arrow_up').style.opacity='1';
 }
 
 
@@ -184,8 +200,12 @@ function hideGazeButtons() {
 
 function clickButton() {
 	if (document.readyState == "complete") {
-		highlightLinks();
-		collectLinks();
+		document.getElementById('click_btn').style.opacity='0.5';
+		setTimeout(function() {
+			highlightLinks();
+			collectLinks();
+			document.getElementById('click_btn').style.opacity='1';
+		}, 1000);
 	}
 	else alert('page not loaded yet!');
 }
@@ -193,8 +213,12 @@ function clickButton() {
 
 function pressButton() {
 	if (document.readyState == "complete") {
-		highlightButtons();
-		collectButtons();
+		document.getElementById('press_btn').style.opacity='0.5';
+		setTimeout(function() {
+			highlightButtons();
+			collectButtons();
+			document.getElementById('press_btn').style.opacity='1';
+		}, 1000);
 	}
 	else alert('page not loaded yet!');
 }
@@ -202,8 +226,12 @@ function pressButton() {
 
 function focusButton() {
 	if (document.readyState == "complete") {
-		highlightFields();
-		collectFields();
+		document.getElementById('focus_btn').style.opacity='0.5';
+		setTimeout(function() {
+			highlightFields();
+			collectFields();
+			document.getElementById('focus_btn').style.opacity='1';
+		}, 1000);
 	}
 	else alert('page not loaded yet!');
 }
