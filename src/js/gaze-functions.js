@@ -49,7 +49,6 @@ webgazer
 			else if((arrow_right.x<x_prediction && x_prediction<(arrow_right.x+100)) && (arrow_right.y<y_prediction && y_prediction<(arrow_right.y+100)))
 				nextPage();
 			else if((toggle_btn.x<x_prediction && x_prediction<(toggle_btn.x+100)) && (toggle_btn.y<y_prediction && y_prediction<(toggle_btn.y+100))) {
-				data = { 'arrow_to_buttons' : true }
 				toggled=!toggled;
 				if(toggled) {
 					$('div#toggle_btn:lt(-1)').remove();
@@ -67,27 +66,39 @@ webgazer
 				}
 			}
 			else if((click_btn.x<x_prediction && x_prediction<(click_btn.x+100)) && (click_btn.y<y_prediction && y_prediction<(click_btn.y+100))) {
-				console.log('CLICK');
-				console.log(data['arrow_to_buttons']);
-				if(data['arrow_to_buttons']) clickButton();
-				else removeLinks();
+				if(toggled) {
+					console.log('CLICK');
+					data['arrow_to_buttons']=!data['arrow_to_buttons'];
+					setData(data);
+					console.log('data: ' + data['arrow_to_buttons']);
+					if(data['arrow_to_buttons']) clickButton();
+					else removeLinks();
+				}
 			}
 			else if((press_btn.x<x_prediction && x_prediction<(press_btn.x+100)) && (press_btn.y<y_prediction && y_prediction<(press_btn.y+100))) {
-				console.log('PRESS');
-				// toggled=!toggled;
-				console.log(data['arrow_to_buttons']);
-				if(data['arrow_to_buttons']) pressButton();
-				else removeButtons();
+				if(toggled) {
+					console.log('PRESS');
+					data['arrow_to_buttons']=!data['arrow_to_buttons'];
+					setData(data);
+					console.log('data: ' + data['arrow_to_buttons']);
+					if(data['arrow_to_buttons']) pressButton();
+					else removeButtons();
+				}
 			}
 			else if((focus_btn.x<x_prediction && x_prediction<(focus_btn.x+100)) && (focus_btn.y<y_prediction && y_prediction<(focus_btn.y+100))) {
-				console.log('FOCUS');
-				// toggled=!toggled;
-				console.log(data['arrow_to_buttons']);
-				if(data['arrow_to_buttons']) focusButton();
-				else removeFields();
+				if(toggled) {
+					console.log('FOCUS');
+					data['arrow_to_buttons']=!data['arrow_to_buttons'];
+					setData(data);
+					console.log('data: ' + data['arrow_to_buttons']);
+					if(data['arrow_to_buttons']) focusButton();
+					else removeFields();
+				}
 			}
 			else if((open_btn.x<x_prediction && x_prediction<(open_btn.x+100)) && (open_btn.y<y_prediction && y_prediction<(open_btn.y+100))) {
-				console.log('OPEN');
+				if(toggled) {
+					console.log('OPEN');
+				}
 			}
 		});	
 	})
@@ -107,9 +118,9 @@ window.onbeforeunload = function() {
 
 function scrollDown(toggled) {
 	if(!toggled) {
-		setTimeout(function() {
-			// alert('scroll down');
-			document.getElementById('arrow_down').style.opacity='50';
+		document.getElementById('arrow_down').style.opacity='40';
+		setTimeout(function(){
+			console.log('wait');
 			getData(function(data) {
 				var scrolled_data = data['scrolled'];
 				scrolled_data+=scroll_var;
@@ -119,6 +130,9 @@ function scrollDown(toggled) {
 			});
 			document.getElementById('arrow_down').style.opacity='100';
 		}, 1000);
+		
+			// alert('scroll down');
+
 	}
 }
 
