@@ -7,10 +7,20 @@ $(function() {
 	});
 });
 
-/* redirects to a new tab when "How To"is clicked */
+/* redirects to a new tab when "How To" is clicked */
 document.addEventListener('DOMContentLoaded', function() {
 	document.getElementById('how_to').addEventListener('click', howToTab);
 });
+
+function setData(data) {
+	chrome.storage.local.set(data, function() {
+		console.log(data);
+	});
+}
+
+function getData(callback) {
+	chrome.storage.local.get(null, callback);
+}
 
 function howToTab() {
 	chrome.tabs.create({'url': 'src/howto.html'}, function(tab) {
@@ -18,68 +28,151 @@ function howToTab() {
 }
 
 /* saves modality into chrome storage when button is clicked */
-document.addEventListener('DOMContentLoaded', function() {
-	document.getElementById('save_btn').addEventListener('click', saveSettings);
-	document.getElementById('click_me').addEventListener('click', connectWebGazer);
-});
-
 var mode_out = '', mode = 0;
 
 function saveSettings() {
-	mode = $('input[name=radio-1]:checked').val();
+	// location.reload();
+	var active_tab_id = 0, active_window_id = 0;
+
+	chrome.tabs.query({active: true, currentWindow: true}, function(tabs) {
+		var active_tab_id = tabs[0].id;
+		var active_window_id = tabs[0].windowId;
+		var data = {
+			'active_tab_id' : active_tab_id,
+			'active_window_id' : active_window_id
+		};
+		setData(data);
+	});	
+
+
+	mode = $('input[name="radio"]:checked').val();
+	console.log('mode ' + mode);
 	switch(mode) {
-		case '1': mode_out = 'Gaze'; break;
-		case '2': mode_out = 'Voice'; break;
-		case '3': mode_out = 'Both'; break;
+		case '1': mode_out = 'GAZE'; break;
+		case '2': mode_out = 'VOICE'; break;
+		case '3': mode_out = 'BOTH'; break;
 	}
-	// $("#mode").html("Mode: " + mode_out);
 
-	// console.log(mode_out);
-	console.log('Saved! Mode: ' + mode_out);
-	chrome.storage.local.set({'mode': mode});
+	var data = {'mode' : mode_out}
+	setData(data);
 
-	if(mode == '1' | mode == '3') {
-		connectWebGazer();
-		console.log('connecting webgazer...');
-		// alert('connecting webgazer...');
-	}
+	getData(function(data) {
+		if(data['mode']=='GAZE') connectGaze(data['active_tab_id']);
+		else if(data['mode']=='VOICE') connectVoice(data['active_tab_id']);
+		else connectBoth(data['active_tab_id']);
+		console.log("saved " + mode_out);
+	});
+
 }
 
 /* loads previously saved modality */
 function loadSettings() {
-	chrome.storage.local.get('mode', function(result) {
-		mode = result.mode;
-		switch(mode) {
-			case '1': mode_out = 'Gaze';
-					$('#radio1').prop('checked', true);
-					break;
-			case '2': mode_out = 'Voice'; 
-					$('#radio2').prop('checked', true);
-					break;
-			case '3': mode_out = 'Both'; 
-					$('#radio3').prop('checked', true);
-					break;
+	console.log("settings loaded!");
+
+	getData(function(data) {
+		mode_out = data['mode'];
+		if(mode_out=='GAZE') {
+			$('#radio-1').prop("checked", true);
+			// if(!data['gaze_mode']) connectGaze();
 		}
-		// $("#mode").html("Mode: " + mode_out);
-		// alert(mode_out);
+		else if(mode_out=='VOICE') {
+			$('#radio-2').prop("checked", true);
+			// if(!data['voice_mode']) connectVoice();
+		}
+		else if(mode_out=='BOTH') {
+			$('#radio-3').prop("checked", true);
+			// if(!data['both_mode']) connectBoth();
+		}
+		else if(mode_out=='OFF')  {
+			console.log('Modes are turned off.');
+			$('#radio-1').prop("checked", false);
+			$('#radio-2').prop("checked", false);
+			$('#radio-3').prop("checked", false);
+		}
+		else console.log('Error!');
+		console.log("loaded " + mode_out);
 	});
 }
 
-
-/* function to connect webgazer.js to the extension */
-function connectWebGazer() {
-	chrome.tabs.executeScript({file: 'src/js_ext/webgazer.js'}, function() {
-		chrome.tabs.executeScript({file: 'src/js/gaze-controls.js'});
-		alert("connectWebGazer()");
+function connectGaze(tab_id) {
+	var data = {
+		'gaze_mode' : true,
+		'voice_mode' : false,
+		'both_mode' : false
+	};
+	console.log('connectGaze');
+	setData(data);
+	chrome.tabs.executeScript(tab_id, {file: 'src/js_ext/jquery-3.1.1.min.js'});
+	// chrome.tabs.executeScript(tab_id, {file: 'src/js_ext/webgazer.js'}, function() {
+		chrome.tabs.executeScript(tab_id, {file: 'src/js/gaze-controls-off.js'});
+	// });
+	chrome.tabs.executeScript(tab_id, {file: 'src/js/gaze-controls.js'});
+	chrome.tabs.executeScript(tab_id, {file: 'src/js_ext/webgazer.js'}, function() {
+		chrome.tabs.executeScript(tab_id, {file: 'src/js/gaze-functions.js'});
 	});
-	// chrome.tabs.executeScript(null, {
-	// 	file: 'gaze-controls.js'
+	// chrome.tabs.executeScript({file: ''});   // script that will disable voice-controls
+}
+
+function connectVoice(tab_id) {
+	var data = {
+		'gaze_mode' : false,
+		'voice_mode' : true,
+		'both_mode' : false
+	};
+	console.log('connectVoice');
+	setData(data);
+	// chrome.tabs.executeScript(tab_id, {file: ''});   // script that will enable voice-controls
+	// chrome.tabs.executeScript(tab_id, {file: ''});   // script that will disable gaze-controls
+}
+
+function connectBoth(tab_id) {
+	var data = {
+		'gaze_mode' : false,
+		'voice_mode' : false,
+		'both_mode' : true
+	};
+	console.log('connectBoth');
+	setData(data);
+	// chrome.tabs.executeScript(tab_id, {file: ''});   // script that will enable gaze-controls
+	// chrome.tabs.executeScript(tab_id, {file: ''});   // script that will enable voice-controls
+}
+
+function removeControls() {
+	var data = {
+		'gaze_mode' : false,
+		'voice_mode' : false,
+		'both_mode' : false,
+		'mode' : 'OFF'
+	};
+	console.log('Modes are turned off.');
+	setData(data);
+	// chrome.tabs.executeScript(tab_id, {file: 'src/js_ext/webgazer.js'}, function() {
+		chrome.tabs.executeScript({file: 'src/js/gaze-controls-off2.js'});
 	// });
 }
 
 /* calls loading function everytime popup.html loads*/
 window.onload = function() {
-	// loadSettings();
+	var curr_tab_id = 0, curr_window_id = 0;
+
+	chrome.tabs.query({active: true, currentWindow: true}, function(tabs) {
+		curr_tab_id = tabs[0].id;
+		curr_window_id = tabs[0].windowId;
+
+		console.log(tabs[0]);
+	});
+
+	// console.log('Current Tab ID: ' + curr_tab_id);
+	// console.log('Current Window ID: ' + curr_window_id);
+	
+	chrome.tabs.executeScript(curr_tab_id, {file: 'src/js_ext/jquery-3.1.1.min.js'});
+	// chrome.tabs.executeScript(curr_tab_id, {file: 'src/js_ext/webgazer.js'}, function() {
+	// 	chrome.tabs.executeScript(curr_tab_id, {code: 'webgazer.pause()'});
+	// });
+	chrome.tabs.executeScript(curr_tab_id, {file: 'src/js/gaze-controls-off.js'});
+	// chrome.tabs.executeScript({file: 'src/js_ext/jquery-ui.min.js'});
+	loadSettings();
 	console.log("popup loaded!");
-	// alert("popup loaded!");
+	document.getElementById('save_btn').addEventListener('click', saveSettings);
+	document.getElementById('turn_off').addEventListener('click', removeControls);
 }
