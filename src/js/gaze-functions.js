@@ -10,7 +10,12 @@ function getData(callback) {
 	chrome.storage.local.get(null, callback);
 }
 
-// $(document).ready(function() { console.log('on'); });
+$(document).ready(function() {
+	if (document.readyState == "complete") {
+		console.log('webgazer resumed'); 
+		webgazer.resume();
+	}
+});
 
 var scrolled=0, scroll_var=300, count=0;
 var toggled=false;
@@ -113,10 +118,13 @@ webgazer
 
 
 window.onbeforeunload = function() {
-	webgazer.pause(); 
+	webgazer.pause();
+	console.log('webgazer paused');
 	// window.localStorage.clear(); //Comment out if you want to save data across different sessions	
 	return;
 }
+
+
 
 
 
