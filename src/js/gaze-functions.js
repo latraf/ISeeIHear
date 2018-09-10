@@ -158,11 +158,13 @@ function scrollUp(toggled) {
 
 function previousPage(toggled) {
 	// if arrows are shown
+	var count=0;	// makes sure na once lang magbback page
 	if(!toggled) {
 		document.getElementById('arrow_left').style.opacity='0.5';
-		setTimeout(function() {
-			// console.log('wait');
-			window.history.back();
+		count++;
+		if(count==1) window.history.back();
+		else count=0;
+		setTimeout(function() {	
 			document.getElementById('arrow_left').style.opacity='1';
 		}, 1000);
 	}
@@ -173,11 +175,13 @@ function previousPage(toggled) {
 
 function nextPage() {
 	// if arrows are shown
+	var count=0;	// makes sure na once lang magfforward page
 	if(!toggled) {
 		document.getElementById('arrow_right').style.opacity='0.5';
+		count++;
+		if(count==1) window.history.forward();
+		else count=0;
 		setTimeout(function() {
-			// console.log('wait');
-			window.history.forward();
 			document.getElementById('arrow_right').style.opacity='1';
 		}, 1000);
 	}
