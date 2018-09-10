@@ -98,7 +98,7 @@ document.body.appendChild(calibration_div);
 
 function setData(data) {
 	chrome.storage.local.set(data, function() {
-		console.log(data);
+		// console.log(data);
 	});
 }
 
@@ -214,7 +214,7 @@ function setPosition() {
 	var element_arr = ['arrow_down', 'arrow_up', 'arrow_left', 'arrow_right', 'toggle_btn', 'click_btn', 'press_btn', 'focus_btn', 'open_btn'];
 
 	element_arr.forEach(function(element) {
-		console.log(document.getElementById(element));
+		// console.log(document.getElementById(element));
 
 		if(document.getElementById(element)) {
       var box = document.getElementById(element).getBoundingClientRect();
@@ -250,7 +250,7 @@ function setBoxCoordinates() {
 	var box_arr = ['arrow_up_box', 'arrow_down_box', 'arrow_left_box', 'arrow_right_box', 'toggle_btn_box'];
 
 	box_arr.forEach(function(bounding_box) {
-		console.log(document.getElementById(bounding_box));
+		// console.log(document.getElementById(bounding_box));
 
 		if(document.getElementById(bounding_box)) {
       var box = document.getElementById(bounding_box).getBoundingClientRect();

@@ -2,7 +2,7 @@
 
 function setData(data) {
 	chrome.storage.local.set(data, function() {
-		console.log(data);
+		// console.log(data);
 	});
 }
 
@@ -12,7 +12,7 @@ function getData(callback) {
 
 // $(document).ready(function() { console.log('on'); });
 
-var scrolled=0, scroll_var=300;
+var scrolled=0, scroll_var=300, count=0;
 var toggled=false;
 
 var data = { 'scrolled' : scrolled, 'arrow_to_buttons' : false };
@@ -22,7 +22,7 @@ webgazer
 	.setTracker('clmtracker')
 	.setGazeListener(function(wg_data, elapsedTime) {
 		if(wg_data==null) {
-			console.log('null'); 
+			// console.log('null'); 
 			return;
 		}
 
@@ -67,32 +67,38 @@ webgazer
 			}
 			else if((click_btn.x<x_prediction && x_prediction<(click_btn.x+100)) && (click_btn.y<y_prediction && y_prediction<(click_btn.y+100))) {
 				if(toggled) {
-					console.log('CLICK');
-					data['arrow_to_buttons']=!data['arrow_to_buttons'];
-					setData(data);
-					console.log('data: ' + data['arrow_to_buttons']);
-					if(data['arrow_to_buttons']) clickButton();
-					else removeLinks();
+					// setTimeout(function() {
+						console.log('CLICK');
+						data['arrow_to_buttons']=!data['arrow_to_buttons'];
+						setData(data);
+						// console.log('data: ' + data['arrow_to_buttons']);
+					// }, 1000);
+						if(data['arrow_to_buttons']) clickButton();
+						else removeLinks();
 				}
 			}
 			else if((press_btn.x<x_prediction && x_prediction<(press_btn.x+100)) && (press_btn.y<y_prediction && y_prediction<(press_btn.y+100))) {
 				if(toggled) {
-					console.log('PRESS');
-					data['arrow_to_buttons']=!data['arrow_to_buttons'];
-					setData(data);
-					console.log('data: ' + data['arrow_to_buttons']);
-					if(data['arrow_to_buttons']) pressButton();
-					else removeButtons();
+					// setTimeout(function() {
+						console.log('PRESS');
+						data['arrow_to_buttons']=!data['arrow_to_buttons'];
+						setData(data);
+						// console.log('data: ' + data['arrow_to_buttons']);
+					// }, 1000);
+						if(data['arrow_to_buttons']) pressButton();
+						else removeButtons();
 				}
 			}
 			else if((focus_btn.x<x_prediction && x_prediction<(focus_btn.x+100)) && (focus_btn.y<y_prediction && y_prediction<(focus_btn.y+100))) {
 				if(toggled) {
-					console.log('FOCUS');
-					data['arrow_to_buttons']=!data['arrow_to_buttons'];
-					setData(data);
-					console.log('data: ' + data['arrow_to_buttons']);
-					if(data['arrow_to_buttons']) focusButton();
-					else removeFields();
+					// setTimeout(function() {
+						console.log('FOCUS');
+						data['arrow_to_buttons']=!data['arrow_to_buttons'];
+						setData(data);
+						// console.log('data: ' + data['arrow_to_buttons']);
+					// }, 1000);
+						if(data['arrow_to_buttons']) focusButton();
+						else removeFields();
 				}
 			}
 			else if((open_btn.x<x_prediction && x_prediction<(open_btn.x+100)) && (open_btn.y<y_prediction && y_prediction<(open_btn.y+100))) {
@@ -123,7 +129,7 @@ function scrollDown(toggled) {
 			var scrolled_data = data['scrolled'];
 			scrolled_data+=scroll_var;
 			setTimeout(function() {
-				console.log('wait');
+				// console.log('wait');
 				$('html, body').animate({ scrollTop: scrolled_data });
 		 		var data = { 'scrolled' : scrolled_data }
 		 		setData(data);
@@ -140,7 +146,7 @@ function scrollUp(toggled) {
 			var scrolled_data = data['scrolled'];
 			scrolled_data-=scroll_var;
 			setTimeout(function() {
-				console.log('wait');
+				// console.log('wait');
 		 		$('html, body').animate({ scrollTop: scrolled_data });
 		 		var data = { 'scrolled' : scrolled_data }
 		 		setData(data);
@@ -151,24 +157,32 @@ function scrollUp(toggled) {
 }
 
 function previousPage(toggled) {
+	// if arrows are shown
 	if(!toggled) {
 		document.getElementById('arrow_left').style.opacity='0.5';
 		setTimeout(function() {
-			console.log('wait');
+			// console.log('wait');
 			window.history.back();
 			document.getElementById('arrow_left').style.opacity='1';
 		}, 1000);
 	}
+	// if gaze buttons are shown they will serve as navigation arrows
+	else {
+	}
 }
 
 function nextPage() {
+	// if arrows are shown
 	if(!toggled) {
 		document.getElementById('arrow_right').style.opacity='0.5';
 		setTimeout(function() {
-			console.log('wait');
+			// console.log('wait');
 			window.history.forward();
 			document.getElementById('arrow_right').style.opacity='1';
 		}, 1000);
+	}
+	// if gaze buttons are shown they will serve as navigation arrows
+	else {
 	}
 }
 
@@ -196,16 +210,40 @@ function hideGazeButtons() {
 
 
 
-
+var data = {
+	'click_btn_toggled' : false, 
+	'press_btn_toggled' : false, 
+	'focus_btn_toggled' : false 
+};
+setData(data);
 
 function clickButton() {
 	if (document.readyState == "complete") {
-		document.getElementById('click_btn').style.opacity='0.5';
-		setTimeout(function() {
-			highlightLinks();
-			collectLinks();
-			document.getElementById('click_btn').style.opacity='1';
-		}, 1000);
+		getData(function(data) {
+			data['click_btn_toggled']=!data['click_btn_toggled'];
+
+			console.log('click: ' + data['click_btn_toggled']);
+			console.log('press: ' + data['press_btn_toggled']);
+			console.log('focus: ' + data['focus_btn_toggled']);
+
+			if(data['click_btn_toggled'] && !data['press_btn_toggled'] && !data['focus_btn_toggled']) {
+				console.log('click - on');
+				document.getElementById('click_btn').style.opacity='0.5';
+				highlightLinks();
+				collectLinks();
+			}
+			else if(data['press_btn_toggled'] || data['focus_btn_toggled']) {
+				alert('click - i cant');
+				console.log('click - i cant');
+				data['click_btn_toggled'] = false;
+			}
+			else if(!data['click_btn_toggled']) {
+				console.log('click - off');
+				document.getElementById('click_btn').style.opacity='1';
+			}
+
+			setData(data);
+		});
 	}
 	else alert('page not loaded yet!');
 }
@@ -213,12 +251,31 @@ function clickButton() {
 
 function pressButton() {
 	if (document.readyState == "complete") {
-		document.getElementById('press_btn').style.opacity='0.5';
-		setTimeout(function() {
-			highlightButtons();
-			collectButtons();
-			document.getElementById('press_btn').style.opacity='1';
-		}, 1000);
+		getData(function(data) {
+			data['press_btn_toggled']=!data['press_btn_toggled'];
+
+			console.log('click: ' + data['click_btn_toggled']);
+			console.log('press: ' + data['press_btn_toggled']);
+			console.log('focus: ' + data['focus_btn_toggled']);
+
+			if(data['press_btn_toggled'] && !data['click_btn_toggled'] && !data['focus_btn_toggled']) {
+				console.log('press - on');
+				document.getElementById('press_btn').style.opacity='0.5';
+				highlightButtons();
+				collectButtons();
+			}
+			else if(data['click_btn_toggled'] || data['focus_btn_toggled']) {
+				alert('press - i cant');
+				console.log('press - i cant');
+				data['press_btn_toggled'] = false;
+			}
+			else if(!data['press_btn_toggled']) {
+				console.log('press - off');
+				document.getElementById('press_btn').style.opacity='1';
+			}
+
+			setData(data);
+		});
 	}
 	else alert('page not loaded yet!');
 }
@@ -226,12 +283,31 @@ function pressButton() {
 
 function focusButton() {
 	if (document.readyState == "complete") {
-		document.getElementById('focus_btn').style.opacity='0.5';
-		setTimeout(function() {
-			highlightFields();
-			collectFields();
-			document.getElementById('focus_btn').style.opacity='1';
-		}, 1000);
+		getData(function(data) {
+			data['focus_btn_toggled']=!data['focus_btn_toggled'];
+
+			console.log('click: ' + data['click_btn_toggled']);
+			console.log('press: ' + data['press_btn_toggled']);
+			console.log('focus: ' + data['focus_btn_toggled']);
+
+			if(data['focus_btn_toggled'] && !data['click_btn_toggled'] && !data['press_btn_toggled']) {
+				console.log('focus - on');	
+				document.getElementById('focus_btn').style.opacity='0.5';	
+				highlightFields();
+				collectFields();
+			}
+			else if(data['click_btn_toggled'] || data['press_btn_toggled']) {
+				alert('focus - i cant');
+				console.log('focus - i cant');	
+				data['focus_btn_toggled'] = false;
+			}
+			else if(!data['focus_btn_toggled']) {
+				console.log('focus - off');	
+				document.getElementById('focus_btn').style.opacity='1';
+			}
+
+			setData(data);
+		});
 	}
 	else alert('page not loaded yet!');
 }
