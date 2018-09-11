@@ -43,6 +43,10 @@ focus_btn.style.opacity='0';
 press_btn.style.opacity='0';
 open_btn.style.opacity='0';
 
+click_btn.prepend('Click!');
+focus_btn.prepend('Focus!');
+press_btn.prepend('Press!');
+open_btn.prepend('Open!');
 
 // append arrows into body of every website
 document.body.appendChild(arrow_up);
@@ -137,6 +141,22 @@ press_center.style.opacity='0';
 open_next.style.opacity='0';
 open_prev.style.opacity='0';
 open_center.style.opacity='0';
+
+click_next.prepend('Click Next!');
+click_prev.prepend('Click Prev!');
+click_center.prepend('Select Link!');
+
+focus_next.prepend('Focus Next!');
+focus_prev.prepend('Focus Prev!');
+focus_center.prepend('Select Inputfield!');
+
+press_next.prepend('Press Next!');
+press_prev.prepend('Press Prev!');
+press_center.prepend('Select Button!');
+
+// open_btn.prepend('Open!');
+// open_btn.prepend('Open!');
+// open_btn.prepend('Open!');
 
 // append gazeButtons1 into body
 document.body.appendChild(click_next);

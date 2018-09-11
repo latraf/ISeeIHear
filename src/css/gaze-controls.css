@@ -167,24 +167,85 @@ body {
 
 /* FOR BRANCH gazeButtons1 */
 
-.gaze_next {
-	border-top: 20px solid transparent;
-	border-bottom: 20px solid transparent;
+#click_prev {
+	border-right: 50px solid green;
+}
+
+#focus_prev {
+	border-right: 50px solid pink;
+}
+
+#press_prev {
+	border-right: 50px solid blue;
+}
+
+#open_prev {
+	border-right: 50px solid black;
 }
 
 .gaze_prev {
-	border-top: 20px solid transparent; 
-	border-bottom: 20px solid transparent;
+	border-top: 50px solid transparent; 
+	border-bottom: 50px solid transparent;
+	top: 0;
+	left: 0;
+	bottom: 0;
+	margin-left: 50px;
+}
+
+
+
+#click_next {
+	border-left: 50px solid green;
+}
+
+#focus_next {
+	border-left: 50px solid pink;
+}
+
+#press_next {
+	border-left: 50px solid blue;
+}
+
+#open_next {
+	border-left: 50px solid black;
+}
+
+.gaze_next {
+	border-top: 50px solid transparent;
+	border-bottom: 50px solid transparent;
+	top: 0;
+	bottom: 0;
+	right: 0;
+	margin-right: 50px;
 }
 
 .gaze_btns1 {
-	bottom: 0;
-	left: 0;
-	right: 0;
 	width: 0;
 	height: 0;
-	margin-bottom: 110px;
+	margin: auto;
 	position:fixed;
+}
+
+
+
+#click_center {
+	margin-left: 196px;
+	border: 30px solid green;
+}
+
+#focus_center {
+	margin-left: 306px;
+	border: 30px solid pink;
+}
+
+#press_center {
+	margin-left:416px;
+	border: 30px solid blue;
+}
+
+#open_center {
+	margin-left: 526px;
+	border: 30px solid black;
 }
 
 .center_btns {
@@ -195,66 +256,6 @@ body {
 	height: 0;
 	margin-bottom: 120px;
 	position:fixed;
-}
-
-#click_prev {
-	margin-left: 165px;
-	border-right: 20px solid green;
-}
-
-#click_center {
-	margin-left: 196px;
-	border: 10px solid green;
-}
-
-#click_next {
-	margin-left: 228px;
-	border-left: 20px solid green;
-}
-
-#focus_prev {
-	margin-left: 275px;
-	border-right: 20px solid pink;
-}
-
-#focus_center {
-	margin-left: 306px;
-	border: 10px solid pink;
-}
-
-#focus_next {
-	margin-left: 338px;
-	border-left: 20px solid pink;
-}
-
-#press_prev {
-	margin-left: 385px;
-	border-right: 20px solid blue;
-}
-
-#press_center {
-	margin-left:416px;
-	border: 10px solid blue;
-}
-
-#press_next {
-	margin-left: 448px;
-	border-left: 20px solid blue;
-}
-
-#open_prev {
-	margin-left: 495px;
-	border-right: 20px solid black;
-}
-
-#open_center {
-	margin-left: 526px;
-	border: 10px solid black;
-}
-
-#open_next {
-	margin-left: 558px;
-	border-left: 20px solid black;
 }
 
 /* END */

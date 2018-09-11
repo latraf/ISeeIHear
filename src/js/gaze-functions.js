@@ -10,7 +10,12 @@ function getData(callback) {
 	chrome.storage.local.get(null, callback);
 }
 
-// $(document).ready(function() { console.log('on'); });
+$(document).ready(function() {
+	if (document.readyState == "complete") {
+		console.log('webgazer resumed'); 
+		webgazer.resume();
+	}
+});
 
 var scrolled=0, scroll_var=300, count=0;
 var toggled=false;
@@ -53,6 +58,7 @@ webgazer
 				if(toggled) {
 					$('div#toggle_btn:lt(-1)').remove();
 					showGazeButtons();
+					hideArrows();
 					$('#toggle_btn').css({ 'bottom' : 'initial', 'top' : 0, 'left' : toggle_btn.x, 'top' : arrow_up.y });
 					data['toggle_btn'] = { 'x' : toggle_btn.x, 'y' : arrow_up.y }
 					setData(data);
@@ -60,6 +66,10 @@ webgazer
 				else {
 					$('div#toggle_btn:lt(-1)').remove();
 					hideGazeButtons();
+					showArrows();
+					removeLinks();
+					removeFields();
+					removeButtons();
 					$('#toggle_btn').css({ 'top' : 'initial', 'bottom' : 0, 'left' : toggle_btn.x, 'top' : arrow_down.y });
 					data['toggle_btn'] = { 'x' : toggle_btn.x, 'y' : arrow_down.y }
 					setData(data);
@@ -113,10 +123,13 @@ webgazer
 
 
 window.onbeforeunload = function() {
-	webgazer.pause(); 
+	webgazer.pause();
+	console.log('webgazer paused');
 	// window.localStorage.clear(); //Comment out if you want to save data across different sessions	
 	return;
 }
+
+
 
 
 
@@ -158,11 +171,13 @@ function scrollUp(toggled) {
 
 function previousPage(toggled) {
 	// if arrows are shown
+	var count=0;	// makes sure na once lang magbback page
 	if(!toggled) {
 		document.getElementById('arrow_left').style.opacity='0.5';
-		setTimeout(function() {
-			// console.log('wait');
-			window.history.back();
+		count++;
+		if(count==1) window.history.back();
+		else count=0;
+		setTimeout(function() {	
 			document.getElementById('arrow_left').style.opacity='1';
 		}, 1000);
 	}
@@ -173,11 +188,13 @@ function previousPage(toggled) {
 
 function nextPage() {
 	// if arrows are shown
+	var count=0;	// makes sure na once lang magfforward page
 	if(!toggled) {
 		document.getElementById('arrow_right').style.opacity='0.5';
+		count++;
+		if(count==1) window.history.forward();
+		else count=0;
 		setTimeout(function() {
-			// console.log('wait');
-			window.history.forward();
 			document.getElementById('arrow_right').style.opacity='1';
 		}, 1000);
 	}
@@ -192,24 +209,7 @@ function showGazeButtons() {
 	document.getElementById('focus_btn').style.opacity='1';
 	document.getElementById('open_btn').style.opacity='1';
 
-	document.getElementById('click_prev').style.opacity='1';
-	document.getElementById('click_next').style.opacity='1';
-	document.getElementById('click_center').style.opacity='1';
-
-	document.getElementById('press_prev').style.opacity='1';
-	document.getElementById('press_next').style.opacity='1';
-	document.getElementById('press_center').style.opacity='1';
-
-	document.getElementById('focus_prev').style.opacity='1';
-	document.getElementById('focus_next').style.opacity='1';
-	document.getElementById('focus_center').style.opacity='1';
-
-	document.getElementById('open_prev').style.opacity='1';
-	document.getElementById('open_next').style.opacity='1';
-	document.getElementById('open_center').style.opacity='1';
-
-	document.getElementById('arrow_down').style.opacity='0';
-	document.getElementById('arrow_up').style.opacity='0';
+	
 }
 
 function hideGazeButtons() {
@@ -233,11 +233,64 @@ function hideGazeButtons() {
 	document.getElementById('open_prev').style.opacity='0';
 	document.getElementById('open_next').style.opacity='0';
 	document.getElementById('open_center').style.opacity='0';
-
-	document.getElementById('arrow_down').style.opacity='1';
-	document.getElementById('arrow_up').style.opacity='1';
 }
 
+
+function showArrows() {
+	document.getElementById('arrow_up').style.opacity='1';
+	document.getElementById('arrow_down').style.opacity='1';
+	document.getElementById('arrow_left').style.opacity='1';
+	document.getElementById('arrow_right').style.opacity='1';
+}
+
+function hideArrows() {
+	document.getElementById('arrow_up').style.opacity='0';
+	document.getElementById('arrow_down').style.opacity='0';
+	document.getElementById('arrow_left').style.opacity='0';
+	document.getElementById('arrow_right').style.opacity='0';
+}
+
+function showGazeArrows() {
+	document.getElementById('click_prev').style.opacity='1';
+	document.getElementById('click_next').style.opacity='1';
+
+	document.getElementById('press_prev').style.opacity='1';
+	document.getElementById('press_next').style.opacity='1';
+
+	document.getElementById('focus_prev').style.opacity='1';
+	document.getElementById('focus_next').style.opacity='1';
+
+	document.getElementById('open_prev').style.opacity='1';
+	document.getElementById('open_next').style.opacity='1';
+}
+
+function hideGazeArrows() {
+	document.getElementById('click_prev').style.opacity='0';
+	document.getElementById('click_next').style.opacity='0';
+
+	document.getElementById('press_prev').style.opacity='0';
+	document.getElementById('press_next').style.opacity='0';
+
+	document.getElementById('focus_prev').style.opacity='0';
+	document.getElementById('focus_next').style.opacity='0';
+
+	document.getElementById('open_prev').style.opacity='0';
+	document.getElementById('open_next').style.opacity='0';
+}
+
+function showGazeCenterButtons() {
+	document.getElementById('click_center').style.opacity='1';
+	document.getElementById('press_center').style.opacity='1';
+	document.getElementById('focus_center').style.opacity='1';
+	document.getElementById('open_center').style.opacity='1';
+}
+
+function hideGazeCenterButtons() {
+	document.getElementById('click_center').style.opacity='0';
+	document.getElementById('press_center').style.opacity='0';
+	document.getElementById('focus_center').style.opacity='0';
+	document.getElementById('open_center').style.opacity='0';
+}
 
 
 
@@ -260,18 +313,26 @@ function clickButton() {
 
 			if(data['click_btn_toggled'] && !data['press_btn_toggled'] && !data['focus_btn_toggled']) {
 				console.log('click - on');
+				hideGazeButtons();
+				hideGazeArrows();
+				hideGazeCenterButtons();
 				document.getElementById('click_btn').style.opacity='0.5';
+				document.getElementById('click_prev').style.opacity='1';
+				document.getElementById('click_next').style.opacity='1';
+				document.getElementById('click_center').style.opacity='1';
 				highlightLinks();
 				collectLinks();
 			}
 			else if(data['press_btn_toggled'] || data['focus_btn_toggled']) {
-				alert('click - i cant');
+				// alert('click - i cant');
 				console.log('click - i cant');
 				data['click_btn_toggled'] = false;
 			}
 			else if(!data['click_btn_toggled']) {
 				console.log('click - off');
-				document.getElementById('click_btn').style.opacity='1';
+				showGazeButtons();
+				showGazeArrows();
+				showGazeCenterButtons();
 			}
 
 			setData(data);
@@ -292,18 +353,26 @@ function pressButton() {
 
 			if(data['press_btn_toggled'] && !data['click_btn_toggled'] && !data['focus_btn_toggled']) {
 				console.log('press - on');
+				hideGazeButtons();
+				hideGazeArrows();
+				hideGazeCenterButtons();
 				document.getElementById('press_btn').style.opacity='0.5';
+				document.getElementById('press_prev').style.opacity='1';
+				document.getElementById('press_next').style.opacity='1';
+				document.getElementById('press_center').style.opacity='1';
 				highlightButtons();
 				collectButtons();
 			}
 			else if(data['click_btn_toggled'] || data['focus_btn_toggled']) {
-				alert('press - i cant');
+				// alert('press - i cant');
 				console.log('press - i cant');
 				data['press_btn_toggled'] = false;
 			}
 			else if(!data['press_btn_toggled']) {
 				console.log('press - off');
-				document.getElementById('press_btn').style.opacity='1';
+				showGazeButtons();
+				showGazeArrows();
+				showGazeCenterButtons();
 			}
 
 			setData(data);
@@ -324,18 +393,26 @@ function focusButton() {
 
 			if(data['focus_btn_toggled'] && !data['click_btn_toggled'] && !data['press_btn_toggled']) {
 				console.log('focus - on');	
-				document.getElementById('focus_btn').style.opacity='0.5';	
+				hideGazeButtons();
+				hideGazeArrows();
+				hideGazeCenterButtons();
+				document.getElementById('focus_btn').style.opacity='0.5';
+				document.getElementById('focus_prev').style.opacity='1';
+				document.getElementById('focus_next').style.opacity='1';
+				document.getElementById('focus_center').style.opacity='1';
 				highlightFields();
 				collectFields();
 			}
 			else if(data['click_btn_toggled'] || data['press_btn_toggled']) {
-				alert('focus - i cant');
+				// alert('focus - i cant');
 				console.log('focus - i cant');	
 				data['focus_btn_toggled'] = false;
 			}
 			else if(!data['focus_btn_toggled']) {
 				console.log('focus - off');	
-				document.getElementById('focus_btn').style.opacity='1';
+				showGazeButtons();
+				showGazeArrows();
+				showGazeCenterButtons();
 			}
 
 			setData(data);

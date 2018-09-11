@@ -18,6 +18,7 @@ chrome.tabs.onUpdated.addListener(maintainScript);
 var curr_tab_id = 0, curr_window_id = 0;
 
 function maintainScript(tabId, changeInfo, tab) {
+
 	console.log('tab updated');
 
 	curr_tab_id = tab.id;
