@@ -43,6 +43,11 @@ focus_btn.style.opacity='0';
 press_btn.style.opacity='0';
 open_btn.style.opacity='0';
 
+click_btn.prepend('Click!');
+focus_btn.prepend('Focus!');
+press_btn.prepend('Press!');
+open_btn.prepend('Open!');
+
 // append arrows into body of every website
 document.body.appendChild(arrow_up);
 document.body.appendChild(arrow_down);

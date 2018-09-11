@@ -65,6 +65,9 @@ webgazer
 				else {
 					$('div#toggle_btn:lt(-1)').remove();
 					hideGazeButtons();
+					removeLinks();
+					removeFields();
+					removeButtons();
 					$('#toggle_btn').css({ 'top' : 'initial', 'bottom' : 0, 'left' : toggle_btn.x, 'top' : arrow_down.y });
 					data['toggle_btn'] = { 'x' : toggle_btn.x, 'y' : arrow_down.y }
 					setData(data);
