@@ -58,6 +58,7 @@ webgazer
 				if(toggled) {
 					$('div#toggle_btn:lt(-1)').remove();
 					showGazeButtons();
+					hideArrows();
 					$('#toggle_btn').css({ 'bottom' : 'initial', 'top' : 0, 'left' : toggle_btn.x, 'top' : arrow_up.y });
 					data['toggle_btn'] = { 'x' : toggle_btn.x, 'y' : arrow_up.y }
 					setData(data);
@@ -65,6 +66,7 @@ webgazer
 				else {
 					$('div#toggle_btn:lt(-1)').remove();
 					hideGazeButtons();
+					showArrows();
 					removeLinks();
 					removeFields();
 					removeButtons();
@@ -206,9 +208,6 @@ function showGazeButtons() {
 	document.getElementById('press_btn').style.opacity='1';
 	document.getElementById('focus_btn').style.opacity='1';
 	document.getElementById('open_btn').style.opacity='1';
-
-	document.getElementById('arrow_down').style.opacity='0';
-	document.getElementById('arrow_up').style.opacity='0';
 }
 
 function hideGazeButtons() {
@@ -216,11 +215,21 @@ function hideGazeButtons() {
 	document.getElementById('press_btn').style.opacity='0';
 	document.getElementById('focus_btn').style.opacity='0';
 	document.getElementById('open_btn').style.opacity='0';
-
-	document.getElementById('arrow_down').style.opacity='1';
-	document.getElementById('arrow_up').style.opacity='1';
 }
 
+function showArrows() {
+	document.getElementById('arrow_up').style.opacity='1';
+	document.getElementById('arrow_down').style.opacity='1';
+	document.getElementById('arrow_left').style.opacity='1';
+	document.getElementById('arrow_right').style.opacity='1';
+}
+
+function hideArrows() {
+	document.getElementById('arrow_up').style.opacity='0';
+	document.getElementById('arrow_down').style.opacity='0';
+	document.getElementById('arrow_left').style.opacity='0';
+	document.getElementById('arrow_right').style.opacity='0';
+}
 
 
 
@@ -243,18 +252,22 @@ function clickButton() {
 
 			if(data['click_btn_toggled'] && !data['press_btn_toggled'] && !data['focus_btn_toggled']) {
 				console.log('click - on');
+				hideGazeButtons();
 				document.getElementById('click_btn').style.opacity='0.5';
+				// document.getElementById('press_btn').style.opacity='0';
+				// document.getElementById('focus_btn').style.opacity='0';
+				// document.getElementById('open_btn').style.opacity='0';
 				highlightLinks();
 				collectLinks();
 			}
 			else if(data['press_btn_toggled'] || data['focus_btn_toggled']) {
-				alert('click - i cant');
+				// alert('click - i cant');
 				console.log('click - i cant');
 				data['click_btn_toggled'] = false;
 			}
 			else if(!data['click_btn_toggled']) {
 				console.log('click - off');
-				document.getElementById('click_btn').style.opacity='1';
+				showGazeButtons();
 			}
 
 			setData(data);
@@ -275,18 +288,23 @@ function pressButton() {
 
 			if(data['press_btn_toggled'] && !data['click_btn_toggled'] && !data['focus_btn_toggled']) {
 				console.log('press - on');
+				hideGazeButtons();
 				document.getElementById('press_btn').style.opacity='0.5';
+
+				// document.getElementById('click_btn').style.opacity='0';
+				// document.getElementById('focus_btn').style.opacity='0';
+				// document.getElementById('open_btn').style.opacity='0';
 				highlightButtons();
 				collectButtons();
 			}
 			else if(data['click_btn_toggled'] || data['focus_btn_toggled']) {
-				alert('press - i cant');
+				// alert('press - i cant');
 				console.log('press - i cant');
 				data['press_btn_toggled'] = false;
 			}
 			else if(!data['press_btn_toggled']) {
 				console.log('press - off');
-				document.getElementById('press_btn').style.opacity='1';
+				showGazeButtons();
 			}
 
 			setData(data);
@@ -307,18 +325,23 @@ function focusButton() {
 
 			if(data['focus_btn_toggled'] && !data['click_btn_toggled'] && !data['press_btn_toggled']) {
 				console.log('focus - on');	
-				document.getElementById('focus_btn').style.opacity='0.5';	
+				hideGazeButtons();
+				document.getElementById('focus_btn').style.opacity='0.5';
+
+				// document.getElementById('click_btn').style.opacity='0';
+				// document.getElementById('press_btn').style.opacity='0';
+				// document.getElementById('open_btn').style.opacity='0';
 				highlightFields();
 				collectFields();
 			}
 			else if(data['click_btn_toggled'] || data['press_btn_toggled']) {
-				alert('focus - i cant');
+				// alert('focus - i cant');
 				console.log('focus - i cant');	
 				data['focus_btn_toggled'] = false;
 			}
 			else if(!data['focus_btn_toggled']) {
 				console.log('focus - off');	
-				document.getElementById('focus_btn').style.opacity='1';
+				showGazeButtons();
 			}
 
 			setData(data);
