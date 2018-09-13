@@ -486,40 +486,6 @@ function pickLinks() {
 	console.log("links");
 	var i=0;
 
-	// $('#click_next').on('click', function() {
-	// 	if(i==0) {
-	// 		console.log("click next if " + i);
-	// 		link_arr[i].classList.add('selected');
-	// 		i++;
-	// 	}
-	// 	else if(i>0 && i<link_arr.length) {
-	// 		console.log("click next elseif " + i);
-	// 		link_arr[i-1].classList.remove('selected');
-	// 		link_arr[i].classList.add('selected');
-	// 		i++;
-	// 	}
-	// 	else {
-	// 		alert("end of the list");
-	// 	}
-	// });
-
-	// $('#click_prev').on('click', function() {
-	// 	if(i==(link_arr.length-1)) {
-	// 		i--;
-	// 		console.log("click prev if " + i);
-	// 		link_arr[i].classList.add('selected');
-	// 	}
-	// 	else if(i>0 && i<link_arr.length) {
-	// 		i--;
-	// 		console.log("click prev elseif " + i + " " + link_arr[i]);
-	// 		link_arr[i+1].classList.remove('selected');
-	// 		link_arr[i].classList.add('selected');
-	// 	}
-	// 	else {
-	// 		alert("start of the list");
-	// 	}
-	// });
-
 	$('#click_center').on('click', function() {
 		console.log("click link " + link_arr[i-1]);
 		var coor = getCoordinates(link_arr[i-1]);
