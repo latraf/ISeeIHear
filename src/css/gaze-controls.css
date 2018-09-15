@@ -229,32 +229,33 @@ body {
 
 
 #click_center {
-	margin-left: 196px;
+	/*margin-left: 10%;*/
 	border: 30px solid green;
 }
 
 #focus_center {
-	margin-left: 306px;
+	/*margin-left: 35%;*/
 	border: 30px solid pink;
 }
 
 #press_center {
-	margin-left:416px;
+	/*margin-left: 60%;*/
 	border: 30px solid blue;
 }
 
 #open_center {
-	margin-left: 526px;
+	/*margin-left: 85%;*/
 	border: 30px solid black;
 }
 
 .center_btns {
-	bottom: 0;
+	top: 0;
 	left: 0;
 	right: 0;
 	width: 0;
 	height: 0;
-	margin-bottom: 120px;
+	margin: auto;
+	margin-top: 60px;
 	position:fixed;
 }
 
