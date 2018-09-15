@@ -67,6 +67,9 @@ webgazer
 				}
 				else if(data['press_btn_toggled'] && !data['click_btn_toggled'] && !data['focus_btn_toggled']) {
 					console.log('select button');
+					button_selected.click();
+					button_selected.classList.remove('selected');
+					index=0;
 				}
 
 			}
@@ -126,7 +129,29 @@ webgazer
 					}
 				}
 				else if(data['press_btn_toggled'] && !data['click_btn_toggled'] && !data['focus_btn_toggled']) {
-
+					var length=button_arr.length;
+					if(index==0) {
+						index--;
+						button_selected.classList.remove('selected');
+						button_selected=button_arr[index];
+						button_selected.classList.add('selected');
+						console.log(index);
+					}
+					else if(index>0 && index<length) {
+						index--;
+						button_selected.classList.remove('selected');
+						button_selected=button_arr[index];
+						button_selected.classList.add('selected');
+						console.log(index);	
+					}
+					else {
+						// console.log(button_selected);
+						index=0;
+						button_selected=button_arr[index];
+						console.log(index);
+						// console.log(button_selected);
+						alert('start of the list');
+					}
 				}
 			}
 			else if((arrow_right.x<x_prediction && x_prediction<(arrow_right.x+100)) && (arrow_right.y<y_prediction && y_prediction<(arrow_right.y+100))) {			
@@ -176,16 +201,39 @@ webgazer
 							console.log(index);
 						}
 						else {
-							// console.log(link_selected);
+							// console.log(field_selected);
 							index=length-1;
 							field_selected=field_arr[index];
 							console.log(index);
-							// console.log(link_selected);
+							// console.log(field_selected);
 							alert('end of the list');
 						}
 				}
 				else if(data['press_btn_toggled'] && !data['click_btn_toggled'] && !data['focus_btn_toggled']) {
-
+					var length=button_arr.length;
+						// make sure na once lang ang pagnext sa array
+						if(index==0) {
+							index++;
+							button_selected.classList.remove('selected');
+							button_selected=button_arr[index];
+							button_selected.classList.add('selected');
+							console.log(index);
+						}
+						else if(index>0 && index<length) {
+							index++;
+							button_selected.classList.remove('selected');
+							button_selected=button_arr[index];
+							button_selected.classList.add('selected');
+							console.log(index);
+						}
+						else {
+							// console.log(button_selected);
+							index=length-1;
+							button_selected=button_arr[index];
+							console.log(index);
+							// console.log(button_selected);
+							alert('end of the list');
+						}
 				}
 			}
 			else if((toggle_btn.x<x_prediction && x_prediction<(toggle_btn.x+100)) && (toggle_btn.y<y_prediction && y_prediction<(toggle_btn.y+100))) {
