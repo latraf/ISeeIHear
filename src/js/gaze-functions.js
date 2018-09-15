@@ -256,6 +256,12 @@ webgazer
 					$('.selected').removeClass('selected');
 					$('#toggle_btn').css({ 'top' : 'initial', 'bottom' : 0, 'left' : toggle_btn.x, 'top' : arrow_down.y });
 					data['toggle_btn'] = { 'x' : toggle_btn.x, 'y' : arrow_down.y }
+					var data = {
+						'click_btn_toggled' : false, 
+						'press_btn_toggled' : false, 
+						'focus_btn_toggled' : false 
+					};
+
 					setData(data);
 				}
 			}
@@ -268,7 +274,12 @@ webgazer
 						// console.log('data: ' + data['arrow_to_buttons']);
 					// }, 1000);
 						if(data['arrow_to_buttons']) clickButton();
-						else removeLinks();
+						else {
+							removeLinks();
+							hideGazeArrows();
+							hideGazeCenterButtons();
+							index=0;
+						}
 				}
 			}
 			else if((press_btn.x<x_prediction && x_prediction<(press_btn.x+100)) && (press_btn.y<y_prediction && y_prediction<(press_btn.y+100))) {
@@ -280,7 +291,12 @@ webgazer
 						// console.log('data: ' + data['arrow_to_buttons']);
 					// }, 1000);
 						if(data['arrow_to_buttons']) pressButton();
-						else removeButtons();
+						else {
+							removeButtons();
+							hideGazeArrows();
+							hideGazeCenterButtons();
+							index=0;
+						}
 				}
 			}
 			else if((focus_btn.x<x_prediction && x_prediction<(focus_btn.x+100)) && (focus_btn.y<y_prediction && y_prediction<(focus_btn.y+100))) {
@@ -292,7 +308,12 @@ webgazer
 						// console.log('data: ' + data['arrow_to_buttons']);
 					// }, 1000);
 						if(data['arrow_to_buttons']) focusButton();
-						else removeFields();
+						else {
+							removeFields();
+							hideGazeArrows();
+							hideGazeCenterButtons();
+							index=0;
+						}
 				}
 			}
 			else if((open_btn.x<x_prediction && x_prediction<(open_btn.x+100)) && (open_btn.y<y_prediction && y_prediction<(open_btn.y+100))) {
