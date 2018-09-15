@@ -55,6 +55,9 @@ webgazer
 
 				if(data['click_btn_toggled'] && !data['press_btn_toggled'] && !data['focus_btn_toggled']) {
 					console.log('select link');
+					link_selected.click();
+					link_selected.classList.remove('selected');
+					index=0;
 				}
 				else if(data['focus_btn_toggled'] && !data['click_btn_toggled'] && !data['press_btn_toggled']) {
 					console.log('select field');
