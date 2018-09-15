@@ -61,6 +61,9 @@ webgazer
 				}
 				else if(data['focus_btn_toggled'] && !data['click_btn_toggled'] && !data['press_btn_toggled']) {
 					console.log('select field');
+					field_selected.focus();
+					field_selected.classList.remove('selected');
+					index=0;
 				}
 				else if(data['press_btn_toggled'] && !data['click_btn_toggled'] && !data['focus_btn_toggled']) {
 					console.log('select button');
@@ -98,7 +101,29 @@ webgazer
 					}
 				}
 				else if(data['focus_btn_toggled'] && !data['click_btn_toggled'] && !data['press_btn_toggled']) {
-
+					var length=field_arr.length;
+					if(index==0) {
+						index--;
+						field_selected.classList.remove('selected');
+						field_selected=field_arr[index];
+						field_selected.classList.add('selected');
+						console.log(index);
+					}
+					else if(index>0 && index<length) {
+						index--;
+						field_selected.classList.remove('selected');
+						field_selected=field_arr[index];
+						field_selected.classList.add('selected');
+						console.log(index);	
+					}
+					else {
+						// console.log(field_selected);
+						index=0;
+						field_selected=field_arr[index];
+						console.log(index);
+						// console.log(field_selected);
+						alert('start of the list');
+					}
 				}
 				else if(data['press_btn_toggled'] && !data['click_btn_toggled'] && !data['focus_btn_toggled']) {
 
@@ -134,7 +159,30 @@ webgazer
 						}
 				}
 				else if(data['focus_btn_toggled'] && !data['click_btn_toggled'] && !data['press_btn_toggled']) {
-
+					var length=field_arr.length;
+						// make sure na once lang ang pagnext sa array
+						if(index==0) {
+							index++;
+							field_selected.classList.remove('selected');
+							field_selected=field_arr[index];
+							field_selected.classList.add('selected');
+							console.log(index);
+						}
+						else if(index>0 && index<length) {
+							index++;
+							field_selected.classList.remove('selected');
+							field_selected=field_arr[index];
+							field_selected.classList.add('selected');
+							console.log(index);
+						}
+						else {
+							// console.log(link_selected);
+							index=length-1;
+							field_selected=field_arr[index];
+							console.log(index);
+							// console.log(link_selected);
+							alert('end of the list');
+						}
 				}
 				else if(data['press_btn_toggled'] && !data['click_btn_toggled'] && !data['focus_btn_toggled']) {
 
