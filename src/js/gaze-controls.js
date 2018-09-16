@@ -244,7 +244,7 @@ $(document).ready(function() {
 	/* pre data collection */
 	setPosition();
 	createPoints();
-	$('.calibration_btn:lt(-15)').remove();
+	$('.calibration_btn:lt(-12)').remove();
 	setBoxCoordinates();
 	$('#toggle_btn:lt(-1)').remove();
 
@@ -260,6 +260,7 @@ $(document).ready(function() {
 			plotPoints();
 			$('#toggle_btn:lt(-1)').remove();
 			hideArrows();
+			toggle_btn.style.opacity = '0';
 			
 			// 3. collect data by clicking the points 
 			// source: https://github.com/brownhci/WebGazer/blob/master/www/js/calibration.js
@@ -284,10 +285,11 @@ $(document).ready(function() {
 				}
 
 				// 4. after clicking all data points, hide points, show arrows
-				if (points_calibrated >= 15){ // last point is calibrated
+				if (points_calibrated >= 12){ // last point is calibrated
 					alert('data collected');
 					$(".calibration_btn").hide();
 					showArrows();
+					toggle_btn.style.opacity = '1';
 					var data = { 'gaze_calibrated' : true };
 					setData(data);
 					alert('Webgazer Calibrated');
@@ -296,24 +298,6 @@ $(document).ready(function() {
 		}
 
 	});
-
-	// $('#click_btn').on('click', function() {
-	// 	toggled=!toggled;
-	// 	if(toggled) clickButton();
-	// 	else removeLinks();
-	// });
-
-	// $('#press_btn').on('click', function() {
-	// 	toggled=!toggled;
-	// 	if(toggled) pressButton();
-	// 	else removeButtons();
-	// });
-
-	// $('#focus_btn').on('click', function() {
-	// 	toggled=!toggled;
-	// 	if(toggled) focusButton();
-	// 	else removeFields();
-	// });
 
 });
 
@@ -343,7 +327,7 @@ function setPosition() {
 var point_arr = [];
 
 function createPoints() {
-	var points_length = 15;
+	var points_length = 12;
 	for(var i=0; i<points_length; i++) {
 		var point =  document.createElement('input');
 		var id = 'Pt' + (i+1);
@@ -440,17 +424,17 @@ function plotPoints() {
 		});
 
 
-		box_data = data['toggle_btn_box'];
-		arrow_data = data['toggle_btn'];
+		// box_data = data['toggle_btn_box'];
+		// arrow_data = data['toggle_btn'];
 
-		left_coor = { 'x' : arrow_data.x-70, 'y'	: (arrow_data.y+(arrow_data.height/2))-10 };
-		right_coor = { 'x' : (arrow_data.x+arrow_data.width)+50, 'y'	: (arrow_data.y+(arrow_data.height/2))-10 };
-		center_coor = { 'x' : (arrow_data.x+(arrow_data.width/2))-10, 'y' : arrow_data.y-50 };
-		point_arr.forEach(function(point) {
-			if(point.id === 'Pt13')	setPointCoordinates(point, left_coor.x, left_coor.y);
-			if(point.id === 'Pt14')	setPointCoordinates(point, right_coor.x, right_coor.y);
-			if(point.id === 'Pt15')	setPointCoordinates(point, center_coor.x, center_coor.y);
-		});
+		// left_coor = { 'x' : arrow_data.x-70, 'y'	: (arrow_data.y+(arrow_data.height/2))-10 };
+		// // right_coor = { 'x' : (arrow_data.x+arrow_data.width)+50, 'y'	: (arrow_data.y+(arrow_data.height/2))-10 };
+		// center_coor = { 'x' : (arrow_data.x+(arrow_data.width/2))-10, 'y' : arrow_data.y-50 };
+		// point_arr.forEach(function(point) {
+		// 	if(point.id === 'Pt13')	setPointCoordinates(point, left_coor.x, left_coor.y);
+		// 	if(point.id === 'Pt14')	setPointCoordinates(point, center_coor.x, center_coor.y);
+		// 	// if(point.id === 'Pt15')	setPointCoordinates(point, center_coor.x, center_coor.y);
+		// });
 	});
 }
 
