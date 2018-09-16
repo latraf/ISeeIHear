@@ -29,6 +29,7 @@
 	// isolated environment; can use all chrome APIs
 	"background": {
 		"scripts": ["src/js_ext/jquery-3.1.1.min.js", "src/js/background.js"],
+		// "src/js/gaze-controls.js"
 		"persistent": false
 	},
 	// user DOM
@@ -36,7 +37,8 @@
 		{
 			"matches": ["http://*/*", "https://*/*"],
 			"css": ["src/css/gaze-controls.css"],
-			"js": ["src/js_ext/jquery-3.1.1.min.js", "src/js_ext/jquery-ui.js", "src/js_ext/webgazer.js","src/js/gaze-controls.js"]
+			"js": ["src/js_ext/jquery-3.1.1.min.js", "src/js_ext/jquery-ui.js"]
+			// "src/js_ext/webgazer.js",  , "src/js/gaze-controls.js"
 		}
 	],
 	"author": "rflat",
@@ -49,7 +51,7 @@
 		"https://*/*"
 	],
 	"web_accessible_resources": [
-		"src/js_ext/gaze-controls.css"
+		// "src/css/gaze-controls.css"
 	],
 	"content_security_policy": "script-src 'self' 'unsafe-eval'; object-src 'self'"
 }

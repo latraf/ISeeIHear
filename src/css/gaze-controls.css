@@ -72,7 +72,7 @@ body {
 	top: 0;
 	left: 0;
 	right: 0;
-	margin-top: 10px;
+	margin-top: 60px;
 	border-left: 50px solid transparent;
 	border-right: 50px solid transparent;
 	border-bottom: 50px solid black;
@@ -82,7 +82,7 @@ body {
 	bottom: 0;
 	left: 0;
 	right: 0;
-	margin-bottom: 10px;
+	margin-bottom: 15px;
 	border-left: 50px solid transparent;
 	border-right: 50px solid transparent;
 	border-top: 50px solid black;
@@ -92,7 +92,7 @@ body {
 	top: 0;
 	left: 0;
 	bottom: 0;
-	margin-left: 10px;
+	margin-left: 50px;
 	border-right: 50px solid black;
 	border-top: 50px solid transparent; 
 	border-bottom: 50px solid transparent;
@@ -102,7 +102,7 @@ body {
 	top: 0;
 	bottom: 0;
 	right: 0;
-	margin-right: 10px;
+	margin-right: 50px;
 	border-left: 50px solid black;
 	border-top: 50px solid transparent;
 	border-bottom: 50px solid transparent;
@@ -124,7 +124,7 @@ body {
 	bottom: 0;
 	left: 0;
 	right: 0;
-	margin-left: 160px;
+	margin-left: 10%;
 	border: 30px solid transparent;
 	background-color:green;
 }
@@ -133,7 +133,7 @@ body {
 	bottom: 0;
 	left: 0;
 	right: 0;
-	margin-left: 270px;
+	margin-left: 35%;
 	border: 30px solid transparent;
 	background-color:pink;
 }
@@ -142,7 +142,7 @@ body {
 	bottom: 0;
 	left: 0;
 	right: 0;
-	margin-left: 380px;
+	margin-left: 60%;
 	border: 30px solid transparent;
 	background-color:blue;
 }
@@ -151,7 +151,7 @@ body {
 	bottom: 0;
 	left: 0;
 	right: 0;
-	margin-left: 490px;
+	margin-left: 85%;
 	border: 30px solid transparent;
 	background-color:black;
 } 
@@ -162,6 +162,8 @@ body {
 	margin-bottom: 10px;
 	position:fixed;
 }
+
+
 
 
 
@@ -277,53 +279,7 @@ body {
 
 
 
-/* CALIBRATION POINT POSITION 
 
-#Pt1 {
-	top: 70px;
-	left:340px;
-}
-
-#Pt2 {
-	top: 70px;
-	left:50vw;
-	margin-left: 340;
-}
-
-#Pt3 {
-	top: 70px;
-	right:2vw;
-}
-
-#Pt4 {
-	top:50vh;
-	left:2vw;
-}
-
-#Pt5 {
-	top: 50vh;
-	left: 50vw;
-}
-
-#Pt6 {
-	top: 50vh;
-	right:2vw;
-}
-
-#Pt7 {
-	bottom:2vw;
-	left: 2vw;
-}
-
-#Pt8 {
-	bottom:2vw;
-	left:50vw;
-}
-
-#Pt9 {
-	bottom:2vw;
-	right:2vw;
-}
 
 /* HIGHLIGHT ELEMENTS FOR CLICK, PRESS, FOCUS, & OPEN */
 
@@ -340,4 +296,99 @@ body {
 .selectInputs {
 	color: white!important;
 	background: black!important;
+}
+
+
+
+
+
+/* CALIBRATION POINT POSITION */
+
+#arrow_up_box {
+	top: 0;
+	left: 0;
+	right: 0;
+	margin-top: 50px;
+	border: 5px solid red;
+}
+
+#arrow_down_box {
+	bottom: 0;
+	left: 0;
+	right: 0;
+	margin-bottom: 5px;
+	border: 5px solid red;
+	height: 10%;
+}
+
+.horizontal_box {
+	width: 60%;   
+	height: 20%;
+	margin: auto;
+	position:fixed;
+	z-index: -1000;
+	opacity: 0;
+}
+
+#arrow_left_box {
+	top: 0;
+	left: 0;
+	bottom: 0;
+	margin-left: 40px;
+	border: 5px solid red;
+}
+
+#arrow_right_box {
+	top: 0;
+	bottom: 0;
+	right: 0;
+	margin-right: 40px;
+	border: 5px solid red;
+}
+
+.vertical_box {
+	width: 14%;   
+	height: 75%;
+	margin: auto;
+	position:fixed;
+	z-index: -1000;
+	opacity: 0;
+}
+
+#toggle_btn {
+	bottom: 0;
+	left: 0;
+	right: 0;
+	margin: auto;
+	margin-bottom: 10px;
+	margin-right: 10px;
+	background-color:orange;
+	width: 90px;   
+	height: 90px;
+	position:fixed;
+}
+
+#toggle_btn_box {
+	bottom: 0;
+	right: 0;
+	left: 0;
+	margin-bottom: 8%;
+	margin-left: 35%;
+	width: 30%;   
+	height: 30%;
+	position:fixed;
+	border: 5px solid red;
+	z-index: -1000;
+	opacity: 0;
+}
+
+
+	/* CALIBRATION POINT POSITION */
+
+.calibration_btn {
+	border-radius: 50%;
+	background-color: red;
+	border: 1px solid black;
+	opacity: 0.2;
+	position: fixed;
 }
