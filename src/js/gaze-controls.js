@@ -296,9 +296,7 @@ $(document).ready(function() {
 				}
 			});
 		}
-
 	});
-
 });
 
 
@@ -422,19 +420,6 @@ function plotPoints() {
 			if(point.id === 'Pt11')	setPointCoordinates(point, right_coor.x, right_coor.y);
 			if(point.id === 'Pt12')	setPointCoordinates(point, center_coor.x, center_coor.y);
 		});
-
-
-		// box_data = data['toggle_btn_box'];
-		// arrow_data = data['toggle_btn'];
-
-		// left_coor = { 'x' : arrow_data.x-70, 'y'	: (arrow_data.y+(arrow_data.height/2))-10 };
-		// // right_coor = { 'x' : (arrow_data.x+arrow_data.width)+50, 'y'	: (arrow_data.y+(arrow_data.height/2))-10 };
-		// center_coor = { 'x' : (arrow_data.x+(arrow_data.width/2))-10, 'y' : arrow_data.y-50 };
-		// point_arr.forEach(function(point) {
-		// 	if(point.id === 'Pt13')	setPointCoordinates(point, left_coor.x, left_coor.y);
-		// 	if(point.id === 'Pt14')	setPointCoordinates(point, center_coor.x, center_coor.y);
-		// 	// if(point.id === 'Pt15')	setPointCoordinates(point, center_coor.x, center_coor.y);
-		// });
 	});
 }
 

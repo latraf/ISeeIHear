@@ -254,50 +254,50 @@ webgazer
 						}
 						else if((click_btn.x<x_prediction && x_prediction<(click_btn.x+100)) && (click_btn.y<y_prediction && y_prediction<(click_btn.y+100))) {
 							if(toggled) {
-									console.log('CLICK');
+								console.log('CLICK');
 
-									data['arrow_to_buttons']=!data['arrow_to_buttons'];
-									setData(data);
+								data['arrow_to_buttons']=!data['arrow_to_buttons'];
+								setData(data);
 
-									if(data['arrow_to_buttons']) clickButton();
-									else {
-										removeLinks();
-										hideGazeArrows();
-										hideGazeCenterButtons();
-										index=0;
-									}
+								if(data['arrow_to_buttons']) clickButton();
+								else {
+									removeLinks();
+									hideGazeArrows();
+									hideGazeCenterButtons();
+									index=0;
+								}
 							}
 						}
 						else if((press_btn.x<x_prediction && x_prediction<(press_btn.x+100)) && (press_btn.y<y_prediction && y_prediction<(press_btn.y+100))) {
 							if(toggled) {
-									console.log('PRESS');
+								console.log('PRESS');
 
-									data['arrow_to_buttons']=!data['arrow_to_buttons'];
-									setData(data);
-									
-									if(data['arrow_to_buttons']) pressButton();
-									else {
-										removeButtons();
-										hideGazeArrows();
-										hideGazeCenterButtons();
-										index=0;
-									}
+								data['arrow_to_buttons']=!data['arrow_to_buttons'];
+								setData(data);
+								
+								if(data['arrow_to_buttons']) pressButton();
+								else {
+									removeButtons();
+									hideGazeArrows();
+									hideGazeCenterButtons();
+									index=0;
+								}
 							}
 						}
 						else if((focus_btn.x<x_prediction && x_prediction<(focus_btn.x+100)) && (focus_btn.y<y_prediction && y_prediction<(focus_btn.y+100))) {
 							if(toggled) {
-									console.log('FOCUS');
+								console.log('FOCUS');
 
-									data['arrow_to_buttons']=!data['arrow_to_buttons'];
-									setData(data);
-									
-									if(data['arrow_to_buttons']) focusButton();
-									else {
-										removeFields();
-										hideGazeArrows();
-										hideGazeCenterButtons();
-										index=0;
-									}
+								data['arrow_to_buttons']=!data['arrow_to_buttons'];
+								setData(data);
+								
+								if(data['arrow_to_buttons']) focusButton();
+								else {
+									removeFields();
+									hideGazeArrows();
+									hideGazeCenterButtons();
+									index=0;
+								}
 							}
 						}
 						else if((open_btn.x<x_prediction && x_prediction<(open_btn.x+100)) && (open_btn.y<y_prediction && y_prediction<(open_btn.y+100))) {
@@ -306,10 +306,6 @@ webgazer
 							}
 						}
 
-
-
-
-				
 			}
 			
 		});	
@@ -424,9 +420,6 @@ function clickButton() {
 				hideGazeArrows();
 				hideGazeCenterButtons();
 				document.getElementById('click_btn').style.opacity='0.5';
-				document.getElementById('click_prev').style.opacity='1';
-				document.getElementById('click_next').style.opacity='1';
-				document.getElementById('click_center').style.opacity='1';
 				highlightLinks();
 				collectLinks();
 				link_selected=link_arr[index];
@@ -465,9 +458,6 @@ function pressButton() {
 				hideGazeArrows();
 				hideGazeCenterButtons();
 				document.getElementById('press_btn').style.opacity='0.5';
-				document.getElementById('press_prev').style.opacity='1';
-				document.getElementById('press_next').style.opacity='1';
-				document.getElementById('press_center').style.opacity='1';
 				highlightButtons();
 				collectButtons();
 				button_selected=button_arr[index];
@@ -506,9 +496,6 @@ function focusButton() {
 				hideGazeArrows();
 				hideGazeCenterButtons();
 				document.getElementById('focus_btn').style.opacity='0.5';
-				document.getElementById('focus_prev').style.opacity='1';
-				document.getElementById('focus_next').style.opacity='1';
-				document.getElementById('focus_center').style.opacity='1';
 				highlightFields();
 				collectFields();
 				field_selected=field_arr[index];
@@ -662,13 +649,16 @@ function removeFields() {
 }
 
 
+
+
+
+
+
 function showGazeButtons() {
 	document.getElementById('click_btn').style.opacity='1';
 	document.getElementById('press_btn').style.opacity='1';
 	document.getElementById('focus_btn').style.opacity='1';
 	document.getElementById('open_btn').style.opacity='1';
-
-	
 }
 
 function hideGazeButtons() {
@@ -750,9 +740,3 @@ function hideGazeCenterButtons() {
 	document.getElementById('focus_center').style.opacity='0';
 	document.getElementById('open_center').style.opacity='0';
 }
-
-
-
-
-
-
