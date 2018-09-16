@@ -45,76 +45,81 @@ webgazer
 			var focus_btn = data['focus_btn'];
 			var open_btn = data['open_btn'];
 
-			if ((arrow_down.x<x_prediction && x_prediction<(arrow_down.x+100)) && (arrow_down.y<y_prediction && y_prediction<(arrow_down.y+100)))
-				scrollDown(toggled);
-			else if ((arrow_up.x<x_prediction && x_prediction<(arrow_up.x+100)) && (arrow_up.y<y_prediction && y_prediction<(arrow_up.y+100)))
-				scrollUp(toggled);
-			else if((arrow_left.x<x_prediction && x_prediction<(arrow_left.x+100)) && (arrow_left.y<y_prediction && y_prediction<(arrow_left.y+100)))
-				previousPage(toggled);
-			else if((arrow_right.x<x_prediction && x_prediction<(arrow_right.x+100)) && (arrow_right.y<y_prediction && y_prediction<(arrow_right.y+100)))
-				nextPage(toggled);
-			else if((toggle_btn.x<x_prediction && x_prediction<(toggle_btn.x+100)) && (toggle_btn.y<y_prediction && y_prediction<(toggle_btn.y+100))) {
-				toggled=!toggled;
-				if(toggled) {
-					$('div#toggle_btn:lt(-1)').remove();
-					showGazeButtons();
-					hideArrows();
-					$('#toggle_btn').css({ 'bottom' : 'initial', 'top' : 0, 'left' : toggle_btn.x, 'top' : arrow_up.y });
-					data['toggle_btn'] = { 'x' : toggle_btn.x, 'y' : arrow_up.y }
-					setData(data);
-				}
-				else {
-					$('div#toggle_btn:lt(-1)').remove();
-					hideGazeButtons();
-					showArrows();
-					removeLinks();
-					removeFields();
-					removeButtons();
-					$('#toggle_btn').css({ 'top' : 'initial', 'bottom' : 0, 'left' : toggle_btn.x, 'top' : arrow_down.y });
-					data['toggle_btn'] = { 'x' : toggle_btn.x, 'y' : arrow_down.y }
-					setData(data);
-				}
-			}
-			else if((click_btn.x<x_prediction && x_prediction<(click_btn.x+100)) && (click_btn.y<y_prediction && y_prediction<(click_btn.y+100))) {
-				if(toggled) {
-					// setTimeout(function() {
-						console.log('CLICK');
-						data['arrow_to_buttons']=!data['arrow_to_buttons'];
-						setData(data);
-						// console.log('data: ' + data['arrow_to_buttons']);
-					// }, 1000);
-						if(data['arrow_to_buttons']) clickButton();
-						else removeLinks();
-				}
-			}
-			else if((press_btn.x<x_prediction && x_prediction<(press_btn.x+100)) && (press_btn.y<y_prediction && y_prediction<(press_btn.y+100))) {
-				if(toggled) {
-					// setTimeout(function() {
-						console.log('PRESS');
-						data['arrow_to_buttons']=!data['arrow_to_buttons'];
-						setData(data);
-						// console.log('data: ' + data['arrow_to_buttons']);
-					// }, 1000);
-						if(data['arrow_to_buttons']) pressButton();
-						else removeButtons();
-				}
-			}
-			else if((focus_btn.x<x_prediction && x_prediction<(focus_btn.x+100)) && (focus_btn.y<y_prediction && y_prediction<(focus_btn.y+100))) {
-				if(toggled) {
-					// setTimeout(function() {
-						console.log('FOCUS');
-						data['arrow_to_buttons']=!data['arrow_to_buttons'];
-						setData(data);
-						// console.log('data: ' + data['arrow_to_buttons']);
-					// }, 1000);
-						if(data['arrow_to_buttons']) focusButton();
-						else removeFields();
-				}
-			}
-			else if((open_btn.x<x_prediction && x_prediction<(open_btn.x+100)) && (open_btn.y<y_prediction && y_prediction<(open_btn.y+100))) {
-				if(toggled) {
-					console.log('OPEN');
-				}
+			if(data['gaze_calibrated']) {
+								if ((arrow_down.x<x_prediction && x_prediction<(arrow_down.x+100)) && (arrow_down.y<y_prediction && y_prediction<(arrow_down.y+100)))
+									scrollDown(toggled);
+								else if ((arrow_up.x<x_prediction && x_prediction<(arrow_up.x+100)) && (arrow_up.y<y_prediction && y_prediction<(arrow_up.y+100)))
+									scrollUp(toggled);
+								else if((arrow_left.x<x_prediction && x_prediction<(arrow_left.x+100)) && (arrow_left.y<y_prediction && y_prediction<(arrow_left.y+100)))
+									previousPage(toggled);
+								else if((arrow_right.x<x_prediction && x_prediction<(arrow_right.x+100)) && (arrow_right.y<y_prediction && y_prediction<(arrow_right.y+100)))
+									nextPage(toggled);
+								else if((toggle_btn.x<x_prediction && x_prediction<(toggle_btn.x+100)) && (toggle_btn.y<y_prediction && y_prediction<(toggle_btn.y+100))) {
+									toggled=!toggled;
+									if(toggled) {
+										$('div#toggle_btn:lt(-1)').remove();
+										showGazeButtons();
+										hideArrows();
+										$('#toggle_btn').css({ 'bottom' : 'initial', 'top' : 0, 'left' : toggle_btn.x, 'top' : arrow_up.y });
+										data['toggle_btn'] = { 'x' : toggle_btn.x, 'y' : arrow_up.y }
+										setData(data);
+									}
+									else {
+										$('div#toggle_btn:lt(-1)').remove();
+										hideGazeButtons();
+										showArrows();
+										removeLinks();
+										removeFields();
+										removeButtons();
+										$('#toggle_btn').css({ 'top' : 'initial', 'bottom' : 0, 'left' : toggle_btn.x, 'top' : arrow_down.y });
+										data['toggle_btn'] = { 'x' : toggle_btn.x, 'y' : arrow_down.y }
+										setData(data);
+									}
+								}
+								else if((click_btn.x<x_prediction && x_prediction<(click_btn.x+100)) && (click_btn.y<y_prediction && y_prediction<(click_btn.y+100))) {
+									if(toggled) {
+										// setTimeout(function() {
+											console.log('CLICK');
+											data['arrow_to_buttons']=!data['arrow_to_buttons'];
+											setData(data);
+											// console.log('data: ' + data['arrow_to_buttons']);
+										// }, 1000);
+											if(data['arrow_to_buttons']) clickButton();
+											else removeLinks();
+									}
+								}
+								else if((press_btn.x<x_prediction && x_prediction<(press_btn.x+100)) && (press_btn.y<y_prediction && y_prediction<(press_btn.y+100))) {
+									if(toggled) {
+										// setTimeout(function() {
+											console.log('PRESS');
+											data['arrow_to_buttons']=!data['arrow_to_buttons'];
+											setData(data);
+											// console.log('data: ' + data['arrow_to_buttons']);
+										// }, 1000);
+											if(data['arrow_to_buttons']) pressButton();
+											else removeButtons();
+									}
+								}
+								else if((focus_btn.x<x_prediction && x_prediction<(focus_btn.x+100)) && (focus_btn.y<y_prediction && y_prediction<(focus_btn.y+100))) {
+									if(toggled) {
+										// setTimeout(function() {
+											console.log('FOCUS');
+											data['arrow_to_buttons']=!data['arrow_to_buttons'];
+											setData(data);
+											// console.log('data: ' + data['arrow_to_buttons']);
+										// }, 1000);
+											if(data['arrow_to_buttons']) focusButton();
+											else removeFields();
+									}
+								}
+								else if((open_btn.x<x_prediction && x_prediction<(open_btn.x+100)) && (open_btn.y<y_prediction && y_prediction<(open_btn.y+100))) {
+									if(toggled) {
+										console.log('OPEN');
+									}
+								}
+
+
+
 			}
 		});	
 	})
@@ -254,9 +259,6 @@ function clickButton() {
 				console.log('click - on');
 				hideGazeButtons();
 				document.getElementById('click_btn').style.opacity='0.5';
-				// document.getElementById('press_btn').style.opacity='0';
-				// document.getElementById('focus_btn').style.opacity='0';
-				// document.getElementById('open_btn').style.opacity='0';
 				highlightLinks();
 				collectLinks();
 			}
@@ -290,10 +292,6 @@ function pressButton() {
 				console.log('press - on');
 				hideGazeButtons();
 				document.getElementById('press_btn').style.opacity='0.5';
-
-				// document.getElementById('click_btn').style.opacity='0';
-				// document.getElementById('focus_btn').style.opacity='0';
-				// document.getElementById('open_btn').style.opacity='0';
 				highlightButtons();
 				collectButtons();
 			}
@@ -327,10 +325,6 @@ function focusButton() {
 				console.log('focus - on');	
 				hideGazeButtons();
 				document.getElementById('focus_btn').style.opacity='0.5';
-
-				// document.getElementById('click_btn').style.opacity='0';
-				// document.getElementById('press_btn').style.opacity='0';
-				// document.getElementById('open_btn').style.opacity='0';
 				highlightFields();
 				collectFields();
 			}
@@ -473,54 +467,4 @@ function removeFields() {
 	for(var i=0; i<field_arr.length; i++)
 		field_arr[i].classList.remove('selectInputs');
 }
-
-
-
-
-
-// var width = 320;
-// var height = 240;
-// var topDist = '0px';
-// var leftDist = '0px';
-
-// function setup() {
-
-// 	var video = document.getElementById('webgazerVideoFeed');
-
-// 	video.style.display = 'block';
-// 	video.style.position = 'absolute';
-// 	video.style.top = topDist;
-// 	video.style.left = leftDist;
-// 	video.width = width;
-// 	video.height = height;
-// 	video.style.margin = '0px';
-
-// 	webgazer.params.imgWidth = width;
-// 	webgazer.params.imgHeight = height;
-
-// 	var overlay = document.createElement('canvas');
-
-// 	overlay.id = 'overlay';
-// 	overlay.style.position = 'absolute';
-// 	overlay.width = width;
-// 	overlay.height = height;
-// 	overlay.style.top = topDist;
-// 	overlay.style.left = leftDist;
-// 	overlay.style.margin = '0px';
-
-// 	document.body.appendChild(overlay);
-
-// 	var cl = webgazer.getTracker().clm;
-
-// 	function drawLoop() {
-// 		requestAnimFrame(drawLoop);
-// 		overlay.getContext('2d').clearRect(0,0,width,height);
-
-// 		if (cl.getCurrentPosition()) {
-// 			cl.draw(overlay);
-// 		}
-// 	}
-
-// 	drawLoop();
-// }
 
