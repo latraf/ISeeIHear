@@ -211,25 +211,25 @@ body {
 	background-color: red!important;
 }
 
-#click_btn2 {
+#click_select {
 	margin-left: 771px;
 	width: 50px;
 	border: 10px solid blue;
 }
 
-#focus_btn2 {
+#focus_select {
 	margin-left: 881px;
 	width: 50px;
 	border: 10px solid blue;
 }
 
-#press_btn2  {
+#press_select  {
 	margin-left: 991px;
 	width: 50px;
 	border: 10px solid blue;
 }
 
-#open_btn2 {
+#open_select {
 	margin-left: 1101px;
 	width: 50px;
 	border: 10px solid blue;

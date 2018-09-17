@@ -118,10 +118,10 @@ var focus_input = document.createElement('input');
 var press_input = document.createElement('input');
 var open_input = document.createElement('input');
 
-var click_btn2 = document.createElement('div');
-var focus_btn2 = document.createElement('div');
-var press_btn2 = document.createElement('div');
-var open_btn2 = document.createElement('div');
+var click_select = document.createElement('div');
+var focus_select = document.createElement('div');
+var press_select = document.createElement('div');
+var open_select = document.createElement('div');
 
 click_center.setAttribute('class', 'center_btns');
 focus_center.setAttribute('class', 'center_btns');
@@ -148,15 +148,15 @@ focus_input.type = 'text';
 press_input.type = 'text';
 open_input.type = 'text';
 
-click_btn2.setAttribute('class', 'center_btns');
-focus_btn2.setAttribute('class', 'center_btns');
-press_btn2.setAttribute('class', 'center_btns');
-open_btn2.setAttribute('class', 'center_btns');
+click_select.setAttribute('class', 'center_btns');
+focus_select.setAttribute('class', 'center_btns');
+press_select.setAttribute('class', 'center_btns');
+open_select.setAttribute('class', 'center_btns');
 
-click_btn2.setAttribute('id', 'click_btn2');
-focus_btn2.setAttribute('id', 'focus_btn2');
-press_btn2.setAttribute('id', 'press_btn2');
-open_btn2.setAttribute('id', 'open_btn2');
+click_select.setAttribute('id', 'click_select');
+focus_select.setAttribute('id', 'focus_select');
+press_select.setAttribute('id', 'press_select');
+open_select.setAttribute('id', 'open_select');
 
 document.body.appendChild(click_center);
 document.body.appendChild(focus_center);
@@ -168,10 +168,10 @@ document.body.appendChild(focus_input);
 document.body.appendChild(press_input);
 document.body.appendChild(open_input);
 
-document.body.appendChild(click_btn2);
-document.body.appendChild(focus_btn2);
-document.body.appendChild(press_btn2);
-document.body.appendChild(open_btn2);
+document.body.appendChild(click_select);
+document.body.appendChild(focus_select);
+document.body.appendChild(press_select);
+document.body.appendChild(open_select);
 
 /* END */
 
