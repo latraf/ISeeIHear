@@ -66,8 +66,6 @@ document.body.appendChild(open_btn);
 
 
 
-/* INDIVIDUAL FUNCTIONALITIES ON UI ELEMENTS */
-
 var arrow_up_box = document.createElement('div');
 var arrow_down_box = document.createElement('div');
 var arrow_right_box = document.createElement('div');
@@ -157,6 +155,42 @@ click_select.setAttribute('id', 'click_select');
 focus_select.setAttribute('id', 'focus_select');
 press_select.setAttribute('id', 'press_select');
 open_select.setAttribute('id', 'open_select');
+
+
+
+
+click_center.style.opacity='0';
+focus_center.style.opacity='0';
+press_center.style.opacity='0';
+open_center.style.opacity='0';
+
+click_input.style.opacity='0';
+focus_input.style.opacity='0';
+press_input.style.opacity='0';
+open_input.style.opacity='0';
+
+click_select.style.opacity='0';
+focus_select.style.opacity='0';
+press_select.style.opacity='0';
+open_select.style.opacity='0';
+
+
+
+
+click_center.prepend('Show link labels!');
+focus_center.prepend('Show field labels!');
+press_center.prepend('Show button labels!');
+// open_center.prepend('Show labels!');
+
+click_input.prepend('Enter link label#: ');
+focus_input.prepend('Enter field label#: ');
+press_input.prepend('Enter button label#: ');
+// open_input.prepend('Enter link label#: ');
+
+click_select.prepend('Select Link!');
+focus_select.prepend('Select Field!');
+press_select.prepend('Select Button!');
+// open_select.prepend('Select Link!');
 
 document.body.appendChild(click_center);
 document.body.appendChild(focus_center);
@@ -534,12 +568,7 @@ function pickLinks() {
 	console.log('links');
 
 	var link_labels = [];
-
 	link_labels = createLabelArray(link_arr);
-
-	$('#click_center').on('click', function() {
-		addLabels(link_arr, link_labels);
-	});
 
 
 	$('#click_btn2').on('click', function() {
@@ -579,10 +608,6 @@ function pickButtons() {
 
 	button_labels = createLabelArray(button_arr);
 
-	$('#press_center').on('click', function() {
-		addLabels(button_arr, button_labels);
-	});
-
 	$('#press_btn2').on('click', function() {
 		var label_num = $('#press_input').val();
 		if(label_num.length != 0) {
@@ -620,10 +645,6 @@ function pickFields() {
 	var field_labels = [];
 
 	field_labels = createLabelArray(field_arr);
-
-	$('#focus_center').on('click', function() {
-		addLabels(field_arr, field_labels);
-	});
 
 	$('#focus_btn2').on('click', function() {
 		var label_num = $('#focus_input').val();
