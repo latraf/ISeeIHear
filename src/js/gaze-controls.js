@@ -116,10 +116,8 @@ var focus_input = document.createElement('input');
 var press_input = document.createElement('input');
 var open_input = document.createElement('input');
 
-var click_select = document.createElement('div');
-var focus_select = document.createElement('div');
-var press_select = document.createElement('div');
-var open_select = document.createElement('div');
+
+
 
 click_center.setAttribute('class', 'center_btns');
 focus_center.setAttribute('class', 'center_btns');
@@ -146,15 +144,6 @@ focus_input.type = 'text';
 press_input.type = 'text';
 open_input.type = 'text';
 
-click_select.setAttribute('class', 'center_btns');
-focus_select.setAttribute('class', 'center_btns');
-press_select.setAttribute('class', 'center_btns');
-open_select.setAttribute('class', 'center_btns');
-
-click_select.setAttribute('id', 'click_select');
-focus_select.setAttribute('id', 'focus_select');
-press_select.setAttribute('id', 'press_select');
-open_select.setAttribute('id', 'open_select');
 
 
 
@@ -169,11 +158,6 @@ focus_input.style.opacity='0';
 press_input.style.opacity='0';
 open_input.style.opacity='0';
 
-click_select.style.opacity='0';
-focus_select.style.opacity='0';
-press_select.style.opacity='0';
-open_select.style.opacity='0';
-
 
 
 
@@ -187,10 +171,6 @@ focus_input.prepend('Enter field label#: ');
 press_input.prepend('Enter button label#: ');
 // open_input.prepend('Enter link label#: ');
 
-click_select.prepend('Select Link!');
-focus_select.prepend('Select Field!');
-press_select.prepend('Select Button!');
-// open_select.prepend('Select Link!');
 
 document.body.appendChild(click_center);
 document.body.appendChild(focus_center);
@@ -201,11 +181,6 @@ document.body.appendChild(click_input);
 document.body.appendChild(focus_input);
 document.body.appendChild(press_input);
 document.body.appendChild(open_input);
-
-document.body.appendChild(click_select);
-document.body.appendChild(focus_select);
-document.body.appendChild(press_select);
-document.body.appendChild(open_select);
 
 /* END */
 

@@ -255,7 +255,6 @@ function clickButton() {
 				document.getElementById('click_btn').style.opacity='0.5';
 				document.getElementById('click_center').style.opacity='1';
 				document.getElementById('click_input').style.opacity='1';
-				document.getElementById('click_select').style.opacity='1';
 				highlightLinks();
 				collectLinks();
 				addLabels(link_arr, link_labels);
@@ -296,7 +295,6 @@ function pressButton() {
 				document.getElementById('press_btn').style.opacity='0.5';
 				document.getElementById('press_center').style.opacity='1';
 				document.getElementById('press_input').style.opacity='1';
-				document.getElementById('press_select').style.opacity='1';
 				highlightButtons();
 				collectButtons();
 				addLabels(button_arr, button_labels);
@@ -337,7 +335,6 @@ function focusButton() {
 				document.getElementById('focus_btn').style.opacity='0.5';
 				document.getElementById('focus_center').style.opacity='1';
 				document.getElementById('focus_input').style.opacity='1';
-				document.getElementById('focus_select').style.opacity='1';
 				highlightFields();
 				collectFields();
 				addLabels(field_arr, field_labels);
@@ -491,7 +488,6 @@ function hideGazeUI() {
 	hideGazeButtons();
 	hideGazeCenterButtons();
 	hideGazeTextboxes();
-	hideGazeSelectButtons();
 }
 
 function showGazeButtons() {
@@ -548,20 +544,6 @@ function hideGazeTextboxes() {
 	document.getElementById('press_input').style.opacity='0';
 	document.getElementById('focus_input').style.opacity='0';
 	document.getElementById('open_input').style.opacity='0';
-}
-
-function showGazeSelectButtons() {
-	document.getElementById('click_select').style.opacity='1';
-	document.getElementById('press_select').style.opacity='1';
-	document.getElementById('focus_select').style.opacity='1';
-	document.getElementById('open_select').style.opacity='1';
-}
-
-function hideGazeSelectButtons() {
-	document.getElementById('click_select').style.opacity='0';
-	document.getElementById('press_select').style.opacity='0';
-	document.getElementById('focus_select').style.opacity='0';
-	document.getElementById('open_select').style.opacity='0';
 }
 
 
