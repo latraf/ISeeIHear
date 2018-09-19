@@ -426,87 +426,60 @@ function getCoordinates(element) {
 	}
 }
 
-function createLabelArray(array) {
-	var length = array.length;
-	var label_arr = [];
+var keypadDiv = document.createElement('div');
+var num_arr = [];
 
-	for(var i=0; i<length; i++) {
-		var label_div = document.createElement('div');
-
-		label_div.setAttribute('class', 'label');
-		label_div.innerHTML = i;
-		label_arr.push(label_div);
-	}
-
-	return label_arr;
-}
 
 function createNumPad(textbox, class_name) {
-	console.log('num pad');
+	console.log('create num pad');
 
-	var length = 12, num_rows = 4, num_cols = 3;
-	var num_arr = new Array(num_rows);
+	var length = 11, num_div;
 
-	for(var i=0; i<num_rows; i++) {
-		num_arr[i] = new Array(num_cols);
-
-		for(var j=0; j<num_cols; j++) {
-			var num_div = document.createElement('div');
-			num_div.setAttribute('class', 'num_div');
-			num_div.classList.add(class_name);
-			
-			num_arr[i][j] = num_div;
-			document.body.appendChild(num_arr[i][j]);
-		}
+	for (var i=0; i<length; i++) {
+		num_div = document.createElement('div');
+		num_div.setAttribute('class', 'num_div');
+		num_arr.push(num_div);
+		// keypadDiv.appendChild(num_div);
 	}
-	console.log(num_arr);
-	displayNumPad(num_arr, textbox);
+
+	for (var i=0; i<length; i++) 
+		keypadDiv.appendChild(num_arr[i]);
+
+	document.body.appendChild(keypadDiv);
+
+	// console.log(num_arr);
+	// displayNumPad(num_arr, textbox);
 }
 
 function displayNumPad(array, textbox) {
-	var num_rows = 4, num_cols = 3;
-	var coordinates = getCoordinates(textbox);
+	var length=11;
+	var box = getCoordinates(arrow_up_box);
 
-	var x = coordinates.left;
-	var y = coordinates.top;
+	var x = box.left, y = box.top;
+	var height = box.height, width = box.width;
+
+	for(var i=0; i<length; i++) {
+		num_arr[i].innerHTML = i+1;
+		if(i<6) {
+			num_arr[i] = setCoordinates(num_arr[i], x, y, 0, 100);
+		}
+		else if(i>5 || i<length) {
+			num_arr[i] = setCoordinates(num_arr[i], x, y, 0, 150);
+		}
+	}
+
+	num_arr[9].innerHTML = 0;
+	num_arr[10].innerHTML = '<<';
+	num_arr[10].classList.add('backspace');
+
 	// console.log(coordinates);
 
-	// 1, 2, 3
-	array[0][0] = setCoordinates(array[0][0], x, y, 20, -80);
-	array[0][1] = setCoordinates(array[0][1], x, y, 40, -80);
-	array[0][2] = setCoordinates(array[0][2], x, y, 60, -80);
-
-	array[0][0].innerHTML = 1;
-	array[0][1].innerHTML = 2;
-	array[0][2].innerHTML = 3;
-
-	// 4, 5, 6
-	array[1][0] = setCoordinates(array[1][0], x, y, 20, -60);
-	array[1][1] = setCoordinates(array[1][1], x, y, 40, -60);
-	array[1][2] = setCoordinates(array[1][2], x, y, 60, -60);
-
-	array[1][0].innerHTML = 4;
-	array[1][1].innerHTML = 5;
-	array[1][2].innerHTML = 6;
-
-	// 7, 8, 9
-	array[2][0] = setCoordinates(array[2][0], x, y, 20, -40);
-	array[2][1] = setCoordinates(array[2][1], x, y, 40, -40);
-	array[2][2] = setCoordinates(array[2][2], x, y, 60, -40);
-
-	array[2][0].innerHTML = 7;
-	array[2][1].innerHTML = 8;
-	array[2][2].innerHTML = 9;
-
-	// 0 
-	array[3][0] = setCoordinates(array[3][0], x, y, 40, -20);
-	array[3][1] = setCoordinates(array[3][1], x, y, 60, -20);
-
-	array[3][0].innerHTML = 0;
-	array[3][1].innerHTML = '<<';
-
-	array[3][1].classList.add('backspace');
-
+	/* 
+		1. position num divs in two horizontal lines
+			- 1-6 
+			- 7-9, 0, and clear
+		2. 
+	*/ 
 }
 
 function setCoordinates(element, x, y, x_add, y_add) {
@@ -518,32 +491,14 @@ function setCoordinates(element, x, y, x_add, y_add) {
 	return element;
 }
 
-function addLabels(array, label_array) {
-	var length = array.length;
 
-	for(var i=0; i<length; i++) {
-		console.log(i);
-		var coordinates = getCoordinates(array[i]);
-		var x = coordinates.right;
-		var y = coordinates.top;
-
-		document.body.appendChild(label_array[i]);
-
-		label_array[i].style.position = 'absolute';
-		label_array[i].style.left = x + 'px';
-		label_array[i].style.top = y + 'px';
-		label_array[i].style.visibility = 'visible';
-		console.log(label_array[i].style.left + " " + label_array[i].style.top);
-
-	}
-}
 
 function pickLinks() {
 	console.clear();
 	console.log('links');
 
-	var link_labels = [];
-	link_labels = createLabelArray(link_arr);
+	// var link_labels = [];
+	// link_labels = createLabelArray(link_arr);
 
 
 	$('#click_btn2').on('click', function() {
@@ -563,7 +518,7 @@ function pickLinks() {
 	});
 
 	click_input.onfocus = function() {
-		createNumPad(click_btn2, 'click_num_divs');
+		// createNumPad(click_btn2, 'click_num_divs');
 		$('.click_num_divs').on('click', function() {
 			console.log(this.innerHTML);
 			click_input.value = click_input.value + this.innerHTML;
@@ -579,9 +534,8 @@ function pickButtons() {
 	console.clear();
 	console.log('buttons');
 
-	var button_labels = [];
-
-	button_labels = createLabelArray(button_arr);
+	// var button_labels = [];
+	// button_labels = createLabelArray(button_arr);
 
 	$('#press_btn2').on('click', function() {
 		var label_num = $('#press_input').val();
@@ -600,7 +554,7 @@ function pickButtons() {
 	});
 
 	press_input.onfocus = function() {
-		createNumPad(press_btn2, 'press_num_divs');
+		// createNumPad(press_btn2, 'press_num_divs');
 
 		$('.press_num_divs').on('click', function() {
 			console.log(this.innerHTML);
@@ -618,7 +572,6 @@ function pickFields() {
 	console.log('fields');
 
 	var field_labels = [];
-
 	field_labels = createLabelArray(field_arr);
 
 	$('#focus_btn2').on('click', function() {
@@ -638,7 +591,7 @@ function pickFields() {
 	});
 
 	focus_input.onfocus = function() {
-		createNumPad(focus_btn2, 'focus_num_divs');
+		// createNumPad(focus_btn2, 'focus_num_divs');
 
 		$('.focus_num_divs').on('click', function() {
 			console.log(this.innerHTML);

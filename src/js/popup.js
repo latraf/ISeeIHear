@@ -57,8 +57,8 @@ function saveSettings() {
 	setData(data);
 
 	getData(function(data) {
-		if(data['mode']=='GAZE') connectGaze(data['active_tab_id']);
-		else if(data['mode']=='VOICE') connectVoice(data['active_tab_id']);
+		if(data['mode']=='GAZE') connectGaze();
+		else if(data['mode']=='VOICE') connectVoice();
 		else connectBoth(data['active_tab_id']);
 		console.log("saved " + mode_out);
 	});
@@ -94,7 +94,7 @@ function loadSettings() {
 	});
 }
 
-function connectGaze(tab_id) {
+function connectGaze() {
 	var data = {
 		'gaze_mode' : true,
 		'voice_mode' : false,
@@ -102,18 +102,18 @@ function connectGaze(tab_id) {
 	};
 	console.log('connectGaze');
 	setData(data);
-	chrome.tabs.executeScript(tab_id, {file: 'src/js_ext/jquery-3.1.1.min.js'});
+	chrome.tabs.executeScript({file: 'src/js_ext/jquery-3.1.1.min.js'});
 	// chrome.tabs.executeScript(tab_id, {file: 'src/js_ext/webgazer.js'}, function() {
-		chrome.tabs.executeScript(tab_id, {file: 'src/js/gaze-controls-off.js'});
+		chrome.tabs.executeScript({file: 'src/js/gaze-controls-off.js'});
 	// });
-	chrome.tabs.executeScript(tab_id, {file: 'src/js/gaze-controls.js'});
-	chrome.tabs.executeScript(tab_id, {file: 'src/js_ext/webgazer.js'}, function() {
-		chrome.tabs.executeScript(tab_id, {file: 'src/js/gaze-functions.js'});
+	chrome.tabs.executeScript({file: 'src/js/gaze-controls.js'});
+	chrome.tabs.executeScript({file: 'src/js_ext/webgazer.js'}, function() {
+		chrome.tabs.executeScript({file: 'src/js/gaze-functions.js'});
 	});
 	// chrome.tabs.executeScript({file: ''});   // script that will disable voice-controls
 }
 
-function connectVoice(tab_id) {
+function connectVoice() {
 	var data = {
 		'gaze_mode' : false,
 		'voice_mode' : true,
@@ -165,11 +165,11 @@ window.onload = function() {
 	// console.log('Current Tab ID: ' + curr_tab_id);
 	// console.log('Current Window ID: ' + curr_window_id);
 	
-	chrome.tabs.executeScript(curr_tab_id, {file: 'src/js_ext/jquery-3.1.1.min.js'});
+	chrome.tabs.executeScript({file: 'src/js_ext/jquery-3.1.1.min.js'});
 	// chrome.tabs.executeScript(curr_tab_id, {file: 'src/js_ext/webgazer.js'}, function() {
 	// 	chrome.tabs.executeScript(curr_tab_id, {code: 'webgazer.pause()'});
 	// });
-	chrome.tabs.executeScript(curr_tab_id, {file: 'src/js/gaze-controls-off.js'});
+	chrome.tabs.executeScript({file: 'src/js/gaze-controls-off.js'});
 	// chrome.tabs.executeScript({file: 'src/js_ext/jquery-ui.min.js'});
 	loadSettings();
 	console.log("popup loaded!");

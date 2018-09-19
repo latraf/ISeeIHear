@@ -38,6 +38,7 @@ webgazer
 		}
 
 		var x_prediction = wg_data.x, y_prediction = wg_data.y;
+		createNumPad();
 
 		getData(function(data) {
 			var arrow_down = data['arrow_down'];
@@ -147,7 +148,7 @@ webgazer
 
 
 
-
+/* ARROW FUNCTIONS */
 
 function scrollDown(toggled) {
 	if(!toggled) {
@@ -220,7 +221,7 @@ function nextPage() {
 
 
 
-
+/* GAZE BUTTON FUNCTIONS */
 
 var data = {
 	'click_btn_toggled' : false, 
@@ -250,8 +251,10 @@ function clickButton() {
 				document.getElementById('click_center').style.opacity='1';
 				document.getElementById('click_input').style.opacity='1';
 				highlightLinks();
-				collectLinks();
 				addLabels(link_arr, link_labels);
+				collectLinks();
+				// createNumPad();
+				showNumPad();
 			}
 			else if(data['press_btn_toggled'] || data['focus_btn_toggled']) {
 				// alert('click - i cant');
@@ -262,6 +265,7 @@ function clickButton() {
 				console.log('click - off');
 				showGazeButtons();
 				removeLabels();
+				hideNumPad();
 			}
 
 			setData(data);
@@ -290,8 +294,10 @@ function pressButton() {
 				document.getElementById('press_center').style.opacity='1';
 				document.getElementById('press_input').style.opacity='1';
 				highlightButtons();
-				collectButtons();
 				addLabels(button_arr, button_labels);
+				collectButtons();
+				// createNumPad();
+				showNumPad();
 			}
 			else if(data['click_btn_toggled'] || data['focus_btn_toggled']) {
 				// alert('press - i cant');
@@ -302,6 +308,7 @@ function pressButton() {
 				console.log('press - off');
 				showGazeButtons();
 				removeLabels();
+				hideNumPad();
 			}
 
 			setData(data);
@@ -330,8 +337,10 @@ function focusButton() {
 				document.getElementById('focus_center').style.opacity='1';
 				document.getElementById('focus_input').style.opacity='1';
 				highlightFields();
-				collectFields();
 				addLabels(field_arr, field_labels);
+				collectFields();
+				// createNumPad();
+				showNumPad();
 			}
 			else if(data['click_btn_toggled'] || data['press_btn_toggled']) {
 				// alert('focus - i cant');
@@ -342,6 +351,7 @@ function focusButton() {
 				console.log('focus - off');	
 				showGazeButtons();
 				removeLabels();
+				hideNumPad();
 			}
 
 			setData(data);
@@ -358,6 +368,8 @@ function openButton() {
 
 
 
+
+/* HIGHLIGHT AND COLLECTION OF DOM ELEMENTS FOR GAZE BUTTONS */
 
 function highlightLinks() {
 	$('a:visible').addClass('selectLinks');
@@ -449,6 +461,11 @@ function collectFields() {
 }
 
 
+
+
+
+
+
 function addToArray(orig_array, array, array_length) {
 	var temp_array = orig_array;
 
@@ -457,7 +474,6 @@ function addToArray(orig_array, array, array_length) {
 
 	return temp_array;
 }
-
 
 function removeLinks() {
 	for(var i=0; i<link_arr.length; i++)
@@ -541,7 +557,7 @@ function hideGazeTextboxes() {
 }
 
 
-/* LABELS FOR EVERY HIGHLIGHTED ELEMENT ON DOM */
+
 
 function getCoordinates(element) {
 	
@@ -565,6 +581,19 @@ function getCoordinates(element) {
 		}
 	}
 }
+
+function setCoordinates(element, x, y, x_add, y_add) {
+	element.style.position = 'absolute';
+	element.style.left = (x+x_add) + 'px';
+	element.style.top = (y+y_add) + 'px';
+	element.style.visibility = 'visible';
+
+	return element;
+}
+
+
+
+/* LABELS FOR EVERY HIGHLIGHTED ELEMENT ON DOM */
 
 function createLabelArray(array) {
 	var length = array.length;
@@ -605,3 +634,61 @@ function addLabels(array, label_array) {
 function removeLabels() {
 	$('.label').remove();
 }
+
+
+
+/* KEYPAD FOR LABEL SELECTION */
+
+var keypadDiv = document.createElement('div');
+var num_arr = [];
+
+
+function createNumPad() {
+	console.log('create num pad');
+
+	var length = 11, num_div;
+
+	for (var i=0; i<length; i++) {
+		num_div = document.createElement('div');
+		num_div.setAttribute('class', 'num_div');
+		num_div.style.opacity = '0';
+		num_arr.push(num_div);
+		// keypadDiv.appendChild(num_div);
+	}
+
+	for (var i=0; i<length; i++) 
+		keypadDiv.appendChild(num_arr[i]);
+
+	document.body.appendChild(keypadDiv);
+}
+
+function showNumPad() {
+	var length=11;
+	var box = getCoordinates(arrow_up_box);
+
+	var x = box.left, y = box.top;
+	var height = box.height, width = box.width;
+
+	for(var i=0; i<length; i++) {
+		num_arr[i].innerHTML = i+1;
+		num_arr[i].style.opacity = '1';
+		if(i<6) {
+			num_arr[i] = setCoordinates(num_arr[i], x, y, ((i-1)*200), 150);
+		}
+		else if(i>5 || i<length) {
+			num_arr[i] = setCoordinates(num_arr[i], x, y, ((i-6)*200), 250);
+		}
+	}
+
+	num_arr[9].innerHTML = 0;
+	num_arr[10].innerHTML = '<<';
+	num_arr[10].classList.add('backspace');
+}
+
+function hideNumPad() {
+	var length=11;
+
+	for(var i=0; i<length; i++)
+		num_arr[i].style.opacity = '0';
+}
+
