@@ -161,9 +161,9 @@ open_input.style.opacity='0';
 
 
 
-click_center.prepend('Show link labels!');
-focus_center.prepend('Show field labels!');
-press_center.prepend('Show button labels!');
+click_center.prepend('Select link!');
+focus_center.prepend('Select field!');
+press_center.prepend('Select button!');
 // open_center.prepend('Show labels!');
 
 click_input.prepend('Enter link label#: ');

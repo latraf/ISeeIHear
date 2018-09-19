@@ -170,35 +170,44 @@ body {
 
 /* FOR BRANCH gazeButtons2 */
 
-.center_btns {
-	bottom: 0;
-	left: 0;
-	right: 0;
-	width: 50px;
-	height: 0;
-	margin-bottom: 120px;
-	position:fixed;
-}
 
 #click_center {
-	margin-left: 171px;
-	border: 10px solid green;
+	/*margin-left: 171px;*/
+	border: 30px solid green;
 }
 
 #focus_center {
-	margin-left: 281px;
-	border: 10px solid pink;
+	/*margin-left: 281px;*/
+	border: 30px solid pink;
 }
 
 #press_center {
-	margin-left: 391px;
-	border: 10px solid blue;
+	/*margin-left: 391px;*/
+	border: 30px solid blue;
 }
 
 #open_center {
-	margin-left: 501px;
-	border: 10px solid black;
+	/*margin-left: 501px;*/
+	border: 30px solid black;
 }
+
+.center_btns {
+	top: 0;
+	bottom: 0;
+	left: 0;
+	right: 0;
+	width: 0;
+	height: 0;
+	margin: auto;
+	margin-top: 60px;
+	position:fixed;
+}
+
+
+
+
+
+
 
 .selected {
 	background-color: yellow!important;
@@ -211,28 +220,28 @@ body {
 	background-color: red!important;
 }
 
-#click_select {
-	margin-left: 771px;
-	width: 50px;
-	border: 10px solid blue;
+
+
+
+
+#click_input {
+	margin-left: 10%;
+	background-color: violet!important;
 }
 
-#focus_select {
-	margin-left: 881px;
-	width: 50px;
-	border: 10px solid blue;
+#focus_input {
+	margin-left: 35%;
+	background-color: violet!important;
 }
 
-#press_select  {
-	margin-left: 991px;
-	width: 50px;
-	border: 10px solid blue;
+#press_input {
+	margin-left: 60%;
+	background-color: violet!important;
 }
 
-#open_select {
-	margin-left: 1101px;
-	width: 50px;
-	border: 10px solid blue;
+#open_input {
+	margin-left: 85%;
+	background-color: violet!important;
 }
 
 .inputs {
@@ -241,28 +250,9 @@ body {
 	right: 0;
 	width: 70px;
 	height: 20px;
-	margin-bottom: 30px;
+	/*margin: auto;*/
+	margin-bottom: 150px;
 	position:fixed;
-}
-
-#click_input {
-	margin-left: 771px;
-	background-color: red!important;
-}
-
-#focus_input {
-	margin-left: 881px;
-	background-color: red!important;
-}
-
-#press_input {
-	margin-left: 991px;
-	background-color: red!important;
-}
-
-#open_input {
-	margin-left: 1101px;
-	background-color: red!important;
 }
 
 .num_div {

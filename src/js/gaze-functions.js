@@ -1,13 +1,18 @@
 /* webgazerjs.js (chris) */
 
 function setData(data) {
-	chrome.storage.local.set(data, function() {
-		// console.log(data);
-	});
+	chrome.storage.local.set(data, function() {});
 }
 
 function getData(callback) {
 	chrome.storage.local.get(null, callback);
+}
+
+window.onbeforeunload = function() {
+	webgazer.pause();
+	console.log('webgazer paused');
+	// window.localStorage.clear(); //Comment out if you want to save data across different sessions	
+	return;
 }
 
 $(document).ready(function() {
@@ -132,22 +137,11 @@ webgazer
 						console.log('OPEN');
 					}
 				}
-
-
-
 			}
 		});	
 	})
 	.begin()
 	.showPredictionPoints(true);
-
-
-window.onbeforeunload = function() {
-	webgazer.pause();
-	console.log('webgazer paused');
-	// window.localStorage.clear(); //Comment out if you want to save data across different sessions	
-	return;
-}
 
 
 
