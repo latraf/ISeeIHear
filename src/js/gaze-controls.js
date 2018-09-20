@@ -475,7 +475,7 @@ function createNumPad() {
 
 	num_arr[9].innerHTML = 0;
 	num_arr[10].innerHTML = '<<';
-	num_arr[10].classList.add('backspace');
+	// num_arr[10].classList.add('backspace');
 
 }
 

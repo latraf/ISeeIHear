@@ -145,28 +145,28 @@ webgazer
 				}
 				/* IF USER GAZES ON KEYPAD DIVS */
 				else if((one.x<x_prediction && x_prediction<(one.x+50)) && (one.y<y_prediction && y_prediction<(one.y+50)))
-					printNum(1);
+					if(toggled) printNum(1);
 				else if((two.x<x_prediction && x_prediction<(two.x+50)) && (two.y<y_prediction && y_prediction<(two.y+50)))
-					printNum(2);
+					if(toggled) printNum(2);
 				else if((three.x<x_prediction && x_prediction<(three.x+50)) && (three.y<y_prediction && y_prediction<(three.y+50)))
-					printNum(3);
+					if(toggled) printNum(3);
 				else if((four.x<x_prediction && x_prediction<(four.x+50)) && (four.y<y_prediction && y_prediction<(four.y+50)))
-					printNum(4);
+					if(toggled) printNum(4);
 				else if((five.x<x_prediction && x_prediction<(five.x+50)) && (five.y<y_prediction && y_prediction<(five.y+50)))
-					printNum(5);
+					if(toggled) printNum(5);
 				else if((six.x<x_prediction && x_prediction<(six.x+50)) && (six.y<y_prediction && y_prediction<(six.y+50)))
-					printNum(6);
+					if(toggled) printNum(6);
 				else if((seven.x<x_prediction && x_prediction<(seven.x+50)) && (seven.y<y_prediction && y_prediction<(seven.y+50)))
-					printNum(7);
+					if(toggled) printNum(7);
 				else if((eight.x<x_prediction && x_prediction<(eight.x+50)) && (eight.y<y_prediction && y_prediction<(eight.y+50)))
-					printNum(8);
+					if(toggled) printNum(8);
 				else if((nine.x<x_prediction && x_prediction<(nine.x+50)) && (nine.y<y_prediction && y_prediction<(nine.y+50)))
-					printNum(9);
+					if(toggled) printNum(9);
 				else if((zero.x<x_prediction && x_prediction<(zero.x+50)) && (zero.y<y_prediction && y_prediction<(zero.y+50)))
-					printNum(0);
+					if(toggled) printNum(0);
 				else if((clear.x<x_prediction && x_prediction<(clear.x+50)) && (clear.y<y_prediction && y_prediction<(clear.y+50)))
 					// function for clearing the textbox of a particular gaze function 
-					clearInput();
+					if(toggled) clearInput();
 			}
 		});	
 	})
@@ -651,10 +651,48 @@ function removeLabels() {
 /* FOR THE KEYPAD - LABEL SELECTION */
 
 function printNum(number) {
-	console.log(document.getElementById('one').innerHTML);
+	// console.log(document.getElementById('one').innerHTML);
+
+	getData(function(data) {
+		// if click gaze button is toggled put input in 'click_input'
+		if(data['click_btn_toggled'] && !data['focus_btn_toggled'] && !data['press_btn_toggled']) {
+			var click_input = document.getElementById('click_input');
+			click_input.value = click_input.value + number;
+		}
+		// if focus gaze button is toggled put input in 'focus_input'
+		else if(data['focus_btn_toggled'] && !data['click_btn_toggled'] && !data['press_btn_toggled']) {
+			var focus_input = document.getElementById('focus_input');
+			focus_input.value = focus_input.value + number;
+		}
+		// if press gaze button is toggled put input in 'press_input'
+		else if(data['press_btn_toggled'] && !data['click_btn_toggled'] && !data['focus_btn_toggled']) {
+			var press_input = document.getElementById('press_input');
+			press_input.value = press_input.value + number;
+		}
+	
+	});
+
+
 }
 
 // function for clearing the textbox of a particular gaze function 
 function clearInput() {
-	
+	getData(function(data) {
+		// if click gaze button is toggled clear 'click_input'
+		if(data['click_btn_toggled'] && !data['focus_btn_toggled'] && !data['press_btn_toggled']) {
+			var click_input = document.getElementById('click_input');
+			click_input.value = "";
+
+		}
+		// if focus gaze button is toggled clear 'focus_input'
+		else if(data['focus_btn_toggled'] && !data['click_btn_toggled'] && !data['press_btn_toggled']) {
+			var focus_input = document.getElementById('focus_input');
+			focus_input.value = "";
+		}
+		// if press gaze button is toggled clear 'press_input'
+		else if(data['press_btn_toggled'] && !data['click_btn_toggled'] && !data['focus_btn_toggled']) {
+			var press_input = document.getElementById('press_input');
+			press_input.value = "";
+		}
+	});
 }
