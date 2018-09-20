@@ -38,7 +38,7 @@ webgazer
 		}
 
 		var x_prediction = wg_data.x, y_prediction = wg_data.y;
-		createNumPad();
+		// createNumPad();
 
 		getData(function(data) {
 			var arrow_down = data['arrow_down'];
@@ -75,9 +75,7 @@ webgazer
 						$('div#toggle_btn:lt(-1)').remove();
 						hideGazeUI();
 						showArrows();
-						removeLinks();
-						removeFields();
-						removeButtons();
+						removeLinks(); removeFields(); removeButtons();
 						$('.selected').removeClass('selected');
 						$('#toggle_btn').css({ 'top' : 'initial', 'bottom' : 0, 'left' : toggle_btn.x, 'top' : arrow_down.y });
 						data['toggle_btn'] = { 'x' : toggle_btn.x, 'y' : arrow_down.y }
@@ -196,9 +194,6 @@ function previousPage(toggled) {
 			document.getElementById('arrow_left').style.opacity='1';
 		}, 1000);
 	}
-	// if gaze buttons are shown they will serve as navigation arrows
-	else {
-	}
 }
 
 function nextPage() {
@@ -212,9 +207,6 @@ function nextPage() {
 		setTimeout(function() {
 			document.getElementById('arrow_right').style.opacity='1';
 		}, 1000);
-	}
-	// if gaze buttons are shown they will serve as navigation arrows
-	else {
 	}
 }
 
@@ -240,10 +232,6 @@ function clickButton() {
 		getData(function(data) {
 			data['click_btn_toggled']=!data['click_btn_toggled'];
 
-			// console.log('click: ' + data['click_btn_toggled']);
-			// console.log('press: ' + data['press_btn_toggled']);
-			// console.log('focus: ' + data['focus_btn_toggled']);
-
 			if(data['click_btn_toggled'] && !data['press_btn_toggled'] && !data['focus_btn_toggled']) {
 				console.log('click - on');
 				hideGazeButtons();
@@ -253,11 +241,9 @@ function clickButton() {
 				highlightLinks();
 				addLabels(link_arr, link_labels);
 				collectLinks();
-				// createNumPad();
 				showNumPad();
 			}
 			else if(data['press_btn_toggled'] || data['focus_btn_toggled']) {
-				// alert('click - i cant');
 				console.log('click - i cant');
 				data['click_btn_toggled'] = false;
 			}
@@ -283,10 +269,6 @@ function pressButton() {
 		getData(function(data) {
 			data['press_btn_toggled']=!data['press_btn_toggled'];
 
-			// console.log('click: ' + data['click_btn_toggled']);
-			// console.log('press: ' + data['press_btn_toggled']);
-			// console.log('focus: ' + data['focus_btn_toggled']);
-
 			if(data['press_btn_toggled'] && !data['click_btn_toggled'] && !data['focus_btn_toggled']) {
 				console.log('press - on');
 				hideGazeButtons();
@@ -296,11 +278,9 @@ function pressButton() {
 				highlightButtons();
 				addLabels(button_arr, button_labels);
 				collectButtons();
-				// createNumPad();
 				showNumPad();
 			}
 			else if(data['click_btn_toggled'] || data['focus_btn_toggled']) {
-				// alert('press - i cant');
 				console.log('press - i cant');
 				data['press_btn_toggled'] = false;
 			}
@@ -326,10 +306,6 @@ function focusButton() {
 		getData(function(data) {
 			data['focus_btn_toggled']=!data['focus_btn_toggled'];
 
-			// console.log('click: ' + data['click_btn_toggled']);
-			// console.log('press: ' + data['press_btn_toggled']);
-			// console.log('focus: ' + data['focus_btn_toggled']);
-
 			if(data['focus_btn_toggled'] && !data['click_btn_toggled'] && !data['press_btn_toggled']) {
 				console.log('focus - on');	
 				hideGazeButtons();
@@ -339,11 +315,9 @@ function focusButton() {
 				highlightFields();
 				addLabels(field_arr, field_labels);
 				collectFields();
-				// createNumPad();
 				showNumPad();
 			}
 			else if(data['click_btn_toggled'] || data['press_btn_toggled']) {
-				// alert('focus - i cant');
 				console.log('focus - i cant');	
 				data['focus_btn_toggled'] = false;
 			}
@@ -398,7 +372,6 @@ function highlightFields() {
 
 
 var link_arr = [], button_arr = [], field_arr = [];
-
 
 function collectLinks() {
 	link_arr = $('a:visible').toArray();
@@ -556,12 +529,20 @@ function hideGazeTextboxes() {
 	document.getElementById('open_input').style.opacity='0';
 }
 
+function showNumPad() {
+	$('.num_div').css('opacity', 1);
+}
+
+function hideNumPad() {
+	$('.num_div').css('opacity', 0);
+}
+
 
 
 
 function getCoordinates(element) {
 	
-	if(element == null) alert('element is null');
+	if(element == null) console.log('element is null');
 	else {
 		var box = element.getBoundingClientRect();
 		var top_coordinate = box.top + pageYOffset;
@@ -615,7 +596,7 @@ function addLabels(array, label_array) {
 	var length = array.length;
 
 	for(var i=0; i<length; i++) {
-		console.log(i);
+		// console.log(i);
 		var coordinates = getCoordinates(array[i]);
 		var x = coordinates.right;
 		var y = coordinates.top;
@@ -626,7 +607,7 @@ function addLabels(array, label_array) {
 		label_array[i].style.left = x + 'px';
 		label_array[i].style.top = y + 'px';
 		label_array[i].style.visibility = 'visible';
-		console.log(label_array[i].style.left + " " + label_array[i].style.top);
+		// console.log(label_array[i].style.left + " " + label_array[i].style.top);
 
 	}
 }
@@ -637,58 +618,5 @@ function removeLabels() {
 
 
 
-/* KEYPAD FOR LABEL SELECTION */
 
-var keypadDiv = document.createElement('div');
-var num_arr = [];
-
-
-function createNumPad() {
-	console.log('create num pad');
-
-	var length = 11, num_div;
-
-	for (var i=0; i<length; i++) {
-		num_div = document.createElement('div');
-		num_div.setAttribute('class', 'num_div');
-		num_div.style.opacity = '0';
-		num_arr.push(num_div);
-		// keypadDiv.appendChild(num_div);
-	}
-
-	for (var i=0; i<length; i++) 
-		keypadDiv.appendChild(num_arr[i]);
-
-	document.body.appendChild(keypadDiv);
-}
-
-function showNumPad() {
-	var length=11;
-	var box = getCoordinates(arrow_up_box);
-
-	var x = box.left, y = box.top;
-	var height = box.height, width = box.width;
-
-	for(var i=0; i<length; i++) {
-		num_arr[i].innerHTML = i+1;
-		num_arr[i].style.opacity = '1';
-		if(i<6) {
-			num_arr[i] = setCoordinates(num_arr[i], x, y, ((i-1)*200), 150);
-		}
-		else if(i>5 || i<length) {
-			num_arr[i] = setCoordinates(num_arr[i], x, y, ((i-6)*200), 250);
-		}
-	}
-
-	num_arr[9].innerHTML = 0;
-	num_arr[10].innerHTML = '<<';
-	num_arr[10].classList.add('backspace');
-}
-
-function hideNumPad() {
-	var length=11;
-
-	for(var i=0; i<length; i++)
-		num_arr[i].style.opacity = '0';
-}
 

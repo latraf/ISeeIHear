@@ -246,7 +246,7 @@ $(document).ready(function() {
 				else if (calibration_points[id]<5) {
 					// gradually increase the opacity of calibration points when clicked
 					var opacity = 0.2*calibration_points[id]+0.2;
-					$(this).css('opacity',opacity);
+					$(this).css('opacity', opacity);
 				}
 
 				// 4. after clicking all data points, hide points, show arrows
@@ -261,6 +261,8 @@ $(document).ready(function() {
 			});
 		}
 	});
+
+	createNumPad();
 });
 
 
@@ -426,62 +428,6 @@ function getCoordinates(element) {
 	}
 }
 
-var keypadDiv = document.createElement('div');
-var num_arr = [];
-
-
-function createNumPad(textbox, class_name) {
-	console.log('create num pad');
-
-	var length = 11, num_div;
-
-	for (var i=0; i<length; i++) {
-		num_div = document.createElement('div');
-		num_div.setAttribute('class', 'num_div');
-		num_arr.push(num_div);
-		// keypadDiv.appendChild(num_div);
-	}
-
-	for (var i=0; i<length; i++) 
-		keypadDiv.appendChild(num_arr[i]);
-
-	document.body.appendChild(keypadDiv);
-
-	// console.log(num_arr);
-	// displayNumPad(num_arr, textbox);
-}
-
-function displayNumPad(array, textbox) {
-	var length=11;
-	var box = getCoordinates(arrow_up_box);
-
-	var x = box.left, y = box.top;
-	var height = box.height, width = box.width;
-
-	for(var i=0; i<length; i++) {
-		num_arr[i].innerHTML = i+1;
-		if(i<6) {
-			num_arr[i] = setCoordinates(num_arr[i], x, y, 0, 100);
-		}
-		else if(i>5 || i<length) {
-			num_arr[i] = setCoordinates(num_arr[i], x, y, 0, 150);
-		}
-	}
-
-	num_arr[9].innerHTML = 0;
-	num_arr[10].innerHTML = '<<';
-	num_arr[10].classList.add('backspace');
-
-	// console.log(coordinates);
-
-	/* 
-		1. position num divs in two horizontal lines
-			- 1-6 
-			- 7-9, 0, and clear
-		2. 
-	*/ 
-}
-
 function setCoordinates(element, x, y, x_add, y_add) {
 	element.style.position = 'absolute';
 	element.style.left = (x+x_add) + 'px';
@@ -489,6 +435,45 @@ function setCoordinates(element, x, y, x_add, y_add) {
 	element.style.visibility = 'visible';
 
 	return element;
+}
+
+var keypadDiv = document.createElement('div');
+var num_arr = [];
+
+
+function createNumPad() {
+	console.log('create num pad');
+
+	var length=11, num_div;
+
+
+	for (var i=0; i<length; i++) {
+		num_div = document.createElement('div');
+		num_div.setAttribute('class', 'num_div');
+		num_div.style.opacity = '0';
+		num_arr.push(num_div);
+	}
+
+	for (var i=0; i<length; i++) 
+		keypadDiv.appendChild(num_arr[i]);
+
+	document.body.appendChild(keypadDiv);
+
+	var box = getCoordinates(arrow_up_box);
+	var x = box.left, y = box.top;
+	var height = box.height, width = box.width;
+
+	for(var i=0; i<length; i++) {
+		num_arr[i].innerHTML = i+1;
+		// num_arr[i].style.opacity = '1';
+		if(i<6) num_arr[i] = setCoordinates(num_arr[i], x, y, ((i-1)*200), 150);
+		else if(i>5 || i<length) num_arr[i] = setCoordinates(num_arr[i], x, y, ((i-6)*200), 250);
+	}
+
+	num_arr[9].innerHTML = 0;
+	num_arr[10].innerHTML = '<<';
+	num_arr[10].classList.add('backspace');
+
 }
 
 
