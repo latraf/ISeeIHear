@@ -212,6 +212,7 @@ $(document).ready(function() {
 	$('.calibration_btn:lt(-12)').remove();
 	setBoxCoordinates();
 	$('#toggle_btn:lt(-1)').remove();
+	createNumPad();
 
 	/* data collection */
 	// 1. show help modal
@@ -260,15 +261,15 @@ $(document).ready(function() {
 				}
 			});
 		}
-	});
-
-	createNumPad();
+	});	
 });
 
 
 function setPosition() {
 	var data = {};
-	var element_arr = ['arrow_down', 'arrow_up', 'arrow_left', 'arrow_right', 'toggle_btn', 'click_btn', 'press_btn', 'focus_btn', 'open_btn'];
+	var element_arr = ['arrow_down', 'arrow_up', 'arrow_left', 'arrow_right', 'toggle_btn', 
+		'click_btn', 'press_btn', 'focus_btn', 'open_btn',
+		'one', 'two', 'three', 'four', 'five', 'six', 'seven', 'eight', 'nine', 'zero', 'clear'];
 
 	element_arr.forEach(function(element) {
 		// console.log(document.getElementById(element));
@@ -445,11 +446,13 @@ function createNumPad() {
 	console.log('create num pad');
 
 	var length=11, num_div;
+	var id_name = ['one', 'two', 'three', 'four', 'five', 'six', 'seven', 'eight', 'nine', 'zero', 'clear'];
 
 
 	for (var i=0; i<length; i++) {
 		num_div = document.createElement('div');
 		num_div.setAttribute('class', 'num_div');
+		num_div.setAttribute('id', id_name[i]);
 		num_div.style.opacity = '0';
 		num_arr.push(num_div);
 	}
