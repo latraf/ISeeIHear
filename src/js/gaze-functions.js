@@ -52,7 +52,12 @@ webgazer
 			var focus_btn = data['focus_btn'];
 			var open_btn = data['open_btn'];
 
+			var one = data['one'], two = data['two'], three = data['three'], four = data['four'], 
+				five = data['five'], six = data['six'], seven = data['seven'], eight = data['eight'], 
+				nine = data['nine'], zero = data['zero'], clear = data['clear'];
+
 			if(data['gaze_calibrated']) {
+				/* IF USER GAZES ON ARROWS */
 				if ((arrow_down.x<x_prediction && x_prediction<(arrow_down.x+100)) && (arrow_down.y<y_prediction && y_prediction<(arrow_down.y+100)))
 					scrollDown(toggled);
 				else if ((arrow_up.x<x_prediction && x_prediction<(arrow_up.x+100)) && (arrow_up.y<y_prediction && y_prediction<(arrow_up.y+100)))
@@ -61,6 +66,7 @@ webgazer
 					previousPage(toggled);
 				else if((arrow_right.x<x_prediction && x_prediction<(arrow_right.x+100)) && (arrow_right.y<y_prediction && y_prediction<(arrow_right.y+100)))
 					nextPage(toggled);
+				/* IF USER GAZES ON THE TOGGLE BUTTON */
 				else if((toggle_btn.x<x_prediction && x_prediction<(toggle_btn.x+100)) && (toggle_btn.y<y_prediction && y_prediction<(toggle_btn.y+100))) {
 					toggled=!toggled;
 					if(toggled) {
@@ -87,6 +93,7 @@ webgazer
 						setData(data);
 					}
 				}
+				/* IF USER GAZES ON GAZE BUTTONS */
 				else if((click_btn.x<x_prediction && x_prediction<(click_btn.x+100)) && (click_btn.y<y_prediction && y_prediction<(click_btn.y+100))) {
 					// if toggle button is toggled
 					if(toggled) {
@@ -136,6 +143,30 @@ webgazer
 						console.log('OPEN');
 					}
 				}
+				/* IF USER GAZES ON KEYPAD DIVS */
+				else if((one.x<x_prediction && x_prediction<(one.x+50)) && (one.y<y_prediction && y_prediction<(one.y+50)))
+					printNum(1);
+				else if((two.x<x_prediction && x_prediction<(two.x+50)) && (two.y<y_prediction && y_prediction<(two.y+50)))
+					printNum(2);
+				else if((three.x<x_prediction && x_prediction<(three.x+50)) && (three.y<y_prediction && y_prediction<(three.y+50)))
+					printNum(3);
+				else if((four.x<x_prediction && x_prediction<(four.x+50)) && (four.y<y_prediction && y_prediction<(four.y+50)))
+					printNum(4);
+				else if((five.x<x_prediction && x_prediction<(five.x+50)) && (five.y<y_prediction && y_prediction<(five.y+50)))
+					printNum(5);
+				else if((six.x<x_prediction && x_prediction<(six.x+50)) && (six.y<y_prediction && y_prediction<(six.y+50)))
+					printNum(6);
+				else if((seven.x<x_prediction && x_prediction<(seven.x+50)) && (seven.y<y_prediction && y_prediction<(seven.y+50)))
+					printNum(7);
+				else if((eight.x<x_prediction && x_prediction<(eight.x+50)) && (eight.y<y_prediction && y_prediction<(eight.y+50)))
+					printNum(8);
+				else if((nine.x<x_prediction && x_prediction<(nine.x+50)) && (nine.y<y_prediction && y_prediction<(nine.y+50)))
+					printNum(9);
+				else if((zero.x<x_prediction && x_prediction<(zero.x+50)) && (zero.y<y_prediction && y_prediction<(zero.y+50)))
+					printNum(0);
+				else if((clear.x<x_prediction && x_prediction<(clear.x+50)) && (clear.y<y_prediction && y_prediction<(clear.y+50)))
+					// function for clearing the textbox of a particular gaze function 
+					clearInput();
 			}
 		});	
 	})
@@ -617,6 +648,13 @@ function removeLabels() {
 }
 
 
+/* FOR THE KEYPAD - LABEL SELECTION */
 
+function printNum(number) {
+	console.log(document.getElementById('one').innerHTML);
+}
 
-
+// function for clearing the textbox of a particular gaze function 
+function clearInput() {
+	
+}
