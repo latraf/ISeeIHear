@@ -60,8 +60,26 @@ webgazer
 				/* IF USER GAZES ON ARROWS */
 				if ((arrow_down.x<x_prediction && x_prediction<(arrow_down.x+100)) && (arrow_down.y<y_prediction && y_prediction<(arrow_down.y+100)))
 					scrollDown(toggled);
-				else if ((arrow_up.x<x_prediction && x_prediction<(arrow_up.x+100)) && (arrow_up.y<y_prediction && y_prediction<(arrow_up.y+100)))
+				else if ((arrow_up.x<x_prediction && x_prediction<(arrow_up.x+100)) && (arrow_up.y<y_prediction && y_prediction<(arrow_up.y+100))) {
 					scrollUp(toggled);
+					if(toggled) {
+						if(data['click_btn_toggled'] && !data['press_btn_toggled'] && !data['focus_btn_toggled']) {
+							var label_num = $('#click_input').val();
+							if(label_num) link_arr[label_num].click();
+							else alert('click - no input');
+						}
+						else if(data['focus_btn_toggled'] && !data['click_btn_toggled'] && !data['press_btn_toggled']) {
+							var label_num = $('#focus_input').val();
+							if(label_num) field_arr[label_num].focus();
+							else alert('focus - no input');
+						}
+						else if(data['press_btn_toggled'] && !data['click_btn_toggled'] && !data['focus_btn_toggled']) {
+							var label_num = $('#press_input').val();
+							if(label_num) button_arr[label_num].click();
+							else alert('press - no input');
+						}
+					}
+				}
 				else if((arrow_left.x<x_prediction && x_prediction<(arrow_left.x+100)) && (arrow_left.y<y_prediction && y_prediction<(arrow_left.y+100)))
 					previousPage(toggled);
 				else if((arrow_right.x<x_prediction && x_prediction<(arrow_right.x+100)) && (arrow_right.y<y_prediction && y_prediction<(arrow_right.y+100)))
