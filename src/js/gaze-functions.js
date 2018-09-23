@@ -56,6 +56,8 @@ webgazer
 				five = data['five'], six = data['six'], seven = data['seven'], eight = data['eight'], 
 				nine = data['nine'], zero = data['zero'], clear = data['clear'];
 
+			
+
 			if(data['gaze_calibrated']) {
 				/* IF USER GAZES ON ARROWS */
 				if ((arrow_down.x<x_prediction && x_prediction<(arrow_down.x+100)) && (arrow_down.y<y_prediction && y_prediction<(arrow_down.y+100)))
@@ -162,27 +164,87 @@ webgazer
 					}
 				}
 				/* IF USER GAZES ON KEYPAD DIVS */
-				else if((one.x<x_prediction && x_prediction<(one.x+50)) && (one.y<y_prediction && y_prediction<(one.y+50)))
-					if(toggled) printNum(1);
-				else if((two.x<x_prediction && x_prediction<(two.x+50)) && (two.y<y_prediction && y_prediction<(two.y+50)))
-					if(toggled) printNum(2);
-				else if((three.x<x_prediction && x_prediction<(three.x+50)) && (three.y<y_prediction && y_prediction<(three.y+50)))
-					if(toggled) printNum(3);
-				else if((four.x<x_prediction && x_prediction<(four.x+50)) && (four.y<y_prediction && y_prediction<(four.y+50)))
-					if(toggled) printNum(4);
-				else if((five.x<x_prediction && x_prediction<(five.x+50)) && (five.y<y_prediction && y_prediction<(five.y+50)))
-					if(toggled) printNum(5);
-				else if((six.x<x_prediction && x_prediction<(six.x+50)) && (six.y<y_prediction && y_prediction<(six.y+50)))
-					if(toggled) printNum(6);
-				else if((seven.x<x_prediction && x_prediction<(seven.x+50)) && (seven.y<y_prediction && y_prediction<(seven.y+50)))
-					if(toggled) printNum(7);
-				else if((eight.x<x_prediction && x_prediction<(eight.x+50)) && (eight.y<y_prediction && y_prediction<(eight.y+50)))
-					if(toggled) printNum(8);
-				else if((nine.x<x_prediction && x_prediction<(nine.x+50)) && (nine.y<y_prediction && y_prediction<(nine.y+50)))
-					if(toggled) printNum(9);
-				else if((zero.x<x_prediction && x_prediction<(zero.x+50)) && (zero.y<y_prediction && y_prediction<(zero.y+50)))
-					if(toggled) printNum(0);
-				else if((clear.x<x_prediction && x_prediction<(clear.x+50)) && (clear.y<y_prediction && y_prediction<(clear.y+50)))
+				else if((one.x<x_prediction && x_prediction<(one.x+30)) && (one.y<y_prediction && y_prediction<(one.y+30))) {
+					var count_num=0;
+					if(toggled) {
+						count_num++;
+						if(count_num==1) printNum(1);
+						else count_num=0;
+					}
+				}
+				else if((two.x<x_prediction && x_prediction<(two.x+30)) && (two.y<y_prediction && y_prediction<(two.y+30))) {
+					var count_num=0;
+					if(toggled) {
+						count_num++;
+						if(count_num==1) printNum(2);
+						else count_num=0;
+					}
+				}
+				else if((three.x<x_prediction && x_prediction<(three.x+30)) && (three.y<y_prediction && y_prediction<(three.y+30))) {
+					var count_num=0;
+					if(toggled) {
+						count_num++;
+						if(count_num==1) printNum(3);
+						else count_num=0;
+					}
+				}
+				else if((four.x<x_prediction && x_prediction<(four.x+30)) && (four.y<y_prediction && y_prediction<(four.y+30))) {
+					var count_num=0;
+					if(toggled) {
+						count_num++;
+						if(count_num==1) printNum(4);
+						else count_num=0;
+					}
+				}
+				else if((five.x<x_prediction && x_prediction<(five.x+30)) && (five.y<y_prediction && y_prediction<(five.y+30))) {
+					var count_num=0;
+					if(toggled) {
+						count_num++;
+						if(count_num==1) printNum(5);
+						else count_num=0;
+					}
+				}
+				else if((six.x<x_prediction && x_prediction<(six.x+30)) && (six.y<y_prediction && y_prediction<(six.y+30))) {
+					var count_num=0;
+					if(toggled) {
+						count_num++;
+						if(count_num==1) printNum(6);
+						else count_num=0;
+					}
+				}
+				else if((seven.x<x_prediction && x_prediction<(seven.x+30)) && (seven.y<y_prediction && y_prediction<(seven.y+30))) {
+					var count_num=0;
+					if(toggled) {
+						count_num++;
+						if(count_num==1) printNum(7);
+						else count_num=0;
+					}
+				}
+				else if((eight.x<x_prediction && x_prediction<(eight.x+30)) && (eight.y<y_prediction && y_prediction<(eight.y+30))) {
+					var count_num=0;
+					if(toggled) {
+						count_num++;
+						if(count_num==1) printNum(8);
+						else count_num=0;
+					}
+				}
+				else if((nine.x<x_prediction && x_prediction<(nine.x+30)) && (nine.y<y_prediction && y_prediction<(nine.y+30))) {
+					var count_num=0;
+					if(toggled) {
+						count_num++;
+						if(count_num==1) printNum(9);
+						else count_num=0;
+					}
+				}
+				else if((zero.x<x_prediction && x_prediction<(zero.x+30)) && (zero.y<y_prediction && y_prediction<(zero.y+30))) {
+					var count_num=0;
+					if(toggled) {
+						count_num++;
+						if(count_num==1) printNum(0);
+						else count_num=0;
+					}
+				}
+				else if((clear.x<x_prediction && x_prediction<(clear.x+30)) && (clear.y<y_prediction && y_prediction<(clear.y+30)))
 					// function for clearing the textbox of a particular gaze function 
 					if(toggled) clearInput();
 			}

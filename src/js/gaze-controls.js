@@ -464,13 +464,15 @@ function createNumPad() {
 
 	var box = getCoordinates(arrow_up_box);
 	var x = box.left, y = box.top;
-	var height = box.height, width = box.width;
+	// var height = box.height, width = box.width;
 
 	for(var i=0; i<length; i++) {
 		num_arr[i].innerHTML = i+1;
 		// num_arr[i].style.opacity = '1';
-		if(i<6) num_arr[i] = setCoordinates(num_arr[i], x, y, ((i-1)*200), 150);
-		else if(i>5 || i<length) num_arr[i] = setCoordinates(num_arr[i], x, y, ((i-6)*200), 250);
+		if(i==0 || i<=2) num_arr[i] = setCoordinates(num_arr[i], x, y, ((i+1)*200), 100);
+		else if(i==3 || i<=5) num_arr[i] = setCoordinates(num_arr[i], x, y, ((i-2)*200), 200);
+		else if(i==6 || i<=8) num_arr[i] = setCoordinates(num_arr[i], x, y, ((i-5)*200), 300);
+		else if (i==9 || i==10) num_arr[i] = setCoordinates(num_arr[i], x, y, ((i-7)*200), 400);
 	}
 
 	num_arr[9].innerHTML = 0;
@@ -481,113 +483,113 @@ function createNumPad() {
 
 
 
-function pickLinks() {
-	console.clear();
-	console.log('links');
+// function pickLinks() {
+// 	console.clear();
+// 	console.log('links');
 
-	// var link_labels = [];
-	// link_labels = createLabelArray(link_arr);
+// 	// var link_labels = [];
+// 	// link_labels = createLabelArray(link_arr);
 
 
-	$('#click_btn2').on('click', function() {
-		var label_num = $('#click_input').val();
-		if(label_num.length != 0) {
-			link_arr[label_num].classList.remove('selectLinks');
-			link_arr[label_num].classList.add('selected');
+// 	$('#click_btn2').on('click', function() {
+// 		var label_num = $('#click_input').val();
+// 		if(label_num.length != 0) {
+// 			link_arr[label_num].classList.remove('selectLinks');
+// 			link_arr[label_num].classList.add('selected');
 
-			setTimeout(function () {
-				console.log('clicked');
-				link_arr[label_num].classList.remove('selected');
-				link_arr[label_num].click();
-				link_arr[label_num].classList.add('selectLinks');
-			}, 3000);
-		}
-		else alert('no input');
-	});
+// 			setTimeout(function () {
+// 				console.log('clicked');
+// 				link_arr[label_num].classList.remove('selected');
+// 				link_arr[label_num].click();
+// 				link_arr[label_num].classList.add('selectLinks');
+// 			}, 3000);
+// 		}
+// 		else alert('no input');
+// 	});
 
-	click_input.onfocus = function() {
-		// createNumPad(click_btn2, 'click_num_divs');
-		$('.click_num_divs').on('click', function() {
-			console.log(this.innerHTML);
-			click_input.value = click_input.value + this.innerHTML;
-		});
+// 	click_input.onfocus = function() {
+// 		// createNumPad(click_btn2, 'click_num_divs');
+// 		$('.click_num_divs').on('click', function() {
+// 			console.log(this.innerHTML);
+// 			click_input.value = click_input.value + this.innerHTML;
+// 		});
 
-		$('.backspace').on('click', function() {
-			click_input.value = "";
-		});
-	};
-}
+// 		$('.backspace').on('click', function() {
+// 			click_input.value = "";
+// 		});
+// 	};
+// }
 
-function pickButtons() {
-	console.clear();
-	console.log('buttons');
+// function pickButtons() {
+// 	console.clear();
+// 	console.log('buttons');
 
-	// var button_labels = [];
-	// button_labels = createLabelArray(button_arr);
+// 	// var button_labels = [];
+// 	// button_labels = createLabelArray(button_arr);
 
-	$('#press_btn2').on('click', function() {
-		var label_num = $('#press_input').val();
-		if(label_num.length != 0) {
-			button_arr[label_num].classList.remove('selectBtns');
-			button_arr[label_num].classList.add('selected');
+// 	$('#press_btn2').on('click', function() {
+// 		var label_num = $('#press_input').val();
+// 		if(label_num.length != 0) {
+// 			button_arr[label_num].classList.remove('selectBtns');
+// 			button_arr[label_num].classList.add('selected');
 
-			setTimeout(function () {
-				console.log('pressed');
-				button_arr[label_num].classList.remove('selected');
-				button_arr[label_num].click();
-				button_arr[label_num].classList.add('selectBtns');
-			}, 3000);
-		}
-		else alert('no input');
-	});
+// 			setTimeout(function () {
+// 				console.log('pressed');
+// 				button_arr[label_num].classList.remove('selected');
+// 				button_arr[label_num].click();
+// 				button_arr[label_num].classList.add('selectBtns');
+// 			}, 3000);
+// 		}
+// 		else alert('no input');
+// 	});
 
-	press_input.onfocus = function() {
-		// createNumPad(press_btn2, 'press_num_divs');
+// 	press_input.onfocus = function() {
+// 		// createNumPad(press_btn2, 'press_num_divs');
 
-		$('.press_num_divs').on('click', function() {
-			console.log(this.innerHTML);
-			press_input.value = press_input.value + this.innerHTML;
-		});
+// 		$('.press_num_divs').on('click', function() {
+// 			console.log(this.innerHTML);
+// 			press_input.value = press_input.value + this.innerHTML;
+// 		});
 
-		$('.backspace').on('click', function() {
-			press_input.value = "";
-		});
-	};
-}
+// 		$('.backspace').on('click', function() {
+// 			press_input.value = "";
+// 		});
+// 	};
+// }
 
-function pickFields() {
-	console.clear();
-	console.log('fields');
+// function pickFields() {
+// 	console.clear();
+// 	console.log('fields');
 
-	var field_labels = [];
-	field_labels = createLabelArray(field_arr);
+// 	var field_labels = [];
+// 	field_labels = createLabelArray(field_arr);
 
-	$('#focus_btn2').on('click', function() {
-		var label_num = $('#focus_input').val();
-		if(label_num.length != 0) {
-			field_arr[label_num].classList.remove('selectInputs');
-			field_arr[label_num].classList.add('selected');
+// 	$('#focus_btn2').on('click', function() {
+// 		var label_num = $('#focus_input').val();
+// 		if(label_num.length != 0) {
+// 			field_arr[label_num].classList.remove('selectInputs');
+// 			field_arr[label_num].classList.add('selected');
 
-			setTimeout(function () {
-				console.log('focused');
-				field_arr[label_num].classList.remove('selected');
-				field_arr[label_num].focus();
-				field_arr[label_num].classList.add('selectInputs');
-			}, 3000);
-		}
-		else alert('no input');
-	});
+// 			setTimeout(function () {
+// 				console.log('focused');
+// 				field_arr[label_num].classList.remove('selected');
+// 				field_arr[label_num].focus();
+// 				field_arr[label_num].classList.add('selectInputs');
+// 			}, 3000);
+// 		}
+// 		else alert('no input');
+// 	});
 
-	focus_input.onfocus = function() {
-		// createNumPad(focus_btn2, 'focus_num_divs');
+// 	focus_input.onfocus = function() {
+// 		// createNumPad(focus_btn2, 'focus_num_divs');
 
-		$('.focus_num_divs').on('click', function() {
-			console.log(this.innerHTML);
-			focus_input.value = focus_input.value + this.innerHTML;
-		});
+// 		$('.focus_num_divs').on('click', function() {
+// 			console.log(this.innerHTML);
+// 			focus_input.value = focus_input.value + this.innerHTML;
+// 		});
 
-		$('.backspace').on('click', function() {
-			focus_input.value = "";
-		});
-	};
-}
+// 		$('.backspace').on('click', function() {
+// 			focus_input.value = "";
+// 		});
+// 	};
+// }
