@@ -101,8 +101,9 @@ webgazer
 						$('div#toggle_btn:lt(-1)').remove();
 						hideGazeUI();
 						showArrows();
-						removeLinks(); removeFields(); removeButtons();
+						removeLinks(); removeFields(); removeButtons(); removeLabels();
 						$('.selected').removeClass('selected');
+						$('.num_div').css('opacity', 0);
 						$('#toggle_btn').css({ 'top' : 'initial', 'bottom' : 0, 'left' : toggle_btn.x, 'top' : arrow_down.y });
 						data['toggle_btn'] = { 'x' : toggle_btn.x, 'y' : arrow_down.y }
 						var data = {
