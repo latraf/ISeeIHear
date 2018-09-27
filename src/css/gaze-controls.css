@@ -229,6 +229,18 @@ body {
 	width: 200px;
 	height: 30px;
 	margin-top: 10%;
-	margin-left: 70%;
+	margin-right: 3%;
 	position:fixed;
+}
+
+#voice_btn {
+	top: 0;
+	right: 0;
+	bottom: 0;
+	width: 30px;
+	height: 40px;
+	margin-top: 10%;
+	margin-right: 0.5%;
+	position: fixed;
+	background-color: red;
 }
