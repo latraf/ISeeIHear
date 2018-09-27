@@ -125,13 +125,9 @@ function connectVoice(tab_id) {
 	// script that will disable gaze-controls
 	chrome.tabs.executeScript(tab_id, {file: 'src/js/gaze-controls-off.js'});
 	chrome.tabs.executeScript(tab_id, {file: 'src/js/gaze-controls-off2.js'});
-	// chrome.tabs.executeScript(tab_id, {file: 'src/js_ext/webgazer.js'}, function() {
-	// 	chrome.tabs.executeScript(tab_id, {code: 'webgazer.pause();'});
-	// 	// chrome.tabs.executeScript(tab_id, {code: 'alert("wg end");'});
-	// });
-
-
-	// chrome.tabs.executeScript(tab_id, {file: ''});   // script that will enable voice-controls
+	// script that will enable voice-controls
+	chrome.tabs.executeScript(tab_id, {file: 'src/js/voice.js'});
+	
 }
 
 function connectBoth(tab_id) {
