@@ -169,7 +169,9 @@ webgazer
 					var count_num=0;
 					if(toggled) {
 						count_num++;
-						if(count_num==1) printNum(1);
+						if(count_num==1) {
+							setTimeout(printNum(1), 1000);
+						}
 						else count_num=0;
 					}
 				}
@@ -177,7 +179,9 @@ webgazer
 					var count_num=0;
 					if(toggled) {
 						count_num++;
-						if(count_num==1) printNum(2);
+						if(count_num==1) {
+							setTimeout(printNum(2), 1000);
+						}
 						else count_num=0;
 					}
 				}
@@ -185,7 +189,9 @@ webgazer
 					var count_num=0;
 					if(toggled) {
 						count_num++;
-						if(count_num==1) printNum(3);
+						if(count_num==1) {
+							setTimeout(printNum(3), 1000);
+						}
 						else count_num=0;
 					}
 				}
@@ -193,7 +199,9 @@ webgazer
 					var count_num=0;
 					if(toggled) {
 						count_num++;
-						if(count_num==1) printNum(4);
+						if(count_num==1) {
+							setTimeout(printNum(4), 1000);
+						}
 						else count_num=0;
 					}
 				}
@@ -201,7 +209,9 @@ webgazer
 					var count_num=0;
 					if(toggled) {
 						count_num++;
-						if(count_num==1) printNum(5);
+						if(count_num==1) {
+							setTimeout(printNum(5), 1000);
+						}
 						else count_num=0;
 					}
 				}
@@ -209,7 +219,9 @@ webgazer
 					var count_num=0;
 					if(toggled) {
 						count_num++;
-						if(count_num==1) printNum(6);
+						if(count_num==1) {
+							setTimeout(printNum(6), 1000);
+						}
 						else count_num=0;
 					}
 				}
@@ -217,7 +229,9 @@ webgazer
 					var count_num=0;
 					if(toggled) {
 						count_num++;
-						if(count_num==1) printNum(7);
+						if(count_num==1) {
+							setTimeout(printNum(7), 1000);
+						}
 						else count_num=0;
 					}
 				}
@@ -225,7 +239,9 @@ webgazer
 					var count_num=0;
 					if(toggled) {
 						count_num++;
-						if(count_num==1) printNum(8);
+						if(count_num==1) {
+							setTimeout(printNum(8), 1000);
+						}
 						else count_num=0;
 					}
 				}
@@ -233,7 +249,9 @@ webgazer
 					var count_num=0;
 					if(toggled) {
 						count_num++;
-						if(count_num==1) printNum(9);
+						if(count_num==1) {
+							setTimeout(printNum(9), 1000);
+						}
 						else count_num=0;
 					}
 				}
@@ -241,7 +259,9 @@ webgazer
 					var count_num=0;
 					if(toggled) {
 						count_num++;
-						if(count_num==1) printNum(0);
+						if(count_num==1) {
+							setTimeout(printNum(0), 1000);
+						}
 						else count_num=0;
 					}
 				}
@@ -733,7 +753,7 @@ function removeLabels() {
 
 function printNum(number) {
 	// console.log(document.getElementById('one').innerHTML);
-
+	console.log(number);
 	getData(function(data) {
 		// if click gaze button is toggled put input in 'click_input'
 		if(data['click_btn_toggled'] && !data['focus_btn_toggled'] && !data['press_btn_toggled']) {
