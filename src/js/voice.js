@@ -1,6 +1,19 @@
 // alert('voice');
 console.log('voice');
 
+
+/* CHROME STORAGE GETTER/SETTER */
+function setData(data) {
+	chrome.storage.local.set(data, function() {
+	});
+}
+
+function getData(callback) {
+	chrome.storage.local.get(null, callback);
+}
+
+/* VOICE UI */
+
 document.documentElement.style.height = '100%';
 document.documentElement.style.width = '100%';
 
@@ -22,6 +35,8 @@ document.body.appendChild(voice_input);
 document.body.appendChild(voice_start_btn);
 document.body.appendChild(voice_stop_btn);
 
+
+/* VOICE RECOGNITION */
 /* reference: https://www.sitepoint.com/introducing-web-speech-api/ */
 window.SpeechRecognition = window.SpeechRecognition  || window.webkitSpeechRecognition || null;
 
@@ -59,13 +74,31 @@ if(window.SpeechRecognition !== null) {
 			}
 		}
 
-		if(voice_input.value) console.log('recognized: ' + voice_input.value);
+		console.log('recognized: ' + voice_input.value);
+		switch(voice_input.value) {
+			case 'scroll up': scrollUp()
+												break;
+			case 'scroll down': scrollDown()
+												break;
+			case 'previous': previousPage();
+												break;
+			case 'next': nextPage();
+												break;																								
+			case 'click': clickButton();
+												break;
+			case 'focus': focusButton();
+												break;
+			case 'press': pressButton();
+												break;
+			case 'open': openButton();
+												break;												
+		}
 
 	// 	recognizer.start();
 	}
 
 	voice_start_btn.addEventListener('click', function() {
-		console.log('activate voice recognition');
+		console.log('start voice recognition');
 
 		try {
 			recognizer.start();
@@ -76,5 +109,79 @@ if(window.SpeechRecognition !== null) {
 		}
 	});
 
+
+	voice_stop_btn.addEventListener('click', function() {
+		console.log('stop voice recognition');
+
+		recognizer.stop();
+		console.log('recog stopped');
+		voice_input.value = 'VOICE RECOGNITION STOPPED';
+		
+	});
+
 }
 
+var scrolled=0, scroll_var=300;
+
+/* VOICE INDIVIDUAL FUNCTIONALITIES */
+
+function scrollUp() {
+	console.log('up');
+	if(scrolled===0) {
+		alert('on top of webpage');
+	}
+	else if(scrolled>0) {
+		scrolled-=scroll_var;
+	}
+	else {
+		console.log('negative');
+		scrolled=0;
+	}
+
+	$('html, body').animate({ scrollTop: scrolled });
+	voice_input.value='';
+}
+
+function scrollDown() {
+	console.log('down');
+	
+	// var limit = document.body.offsetHeight - window.innerHeight;
+	scrolled+=scroll_var;
+	// if(scrolled===limit) {
+	// 	alert('bottom of webpage');
+	// }
+	// else if(scrolled>=0) {
+		
+	// }
+	// else {
+	// 	console.log('negative');
+	// 	scrolled=0;
+	// }
+
+	$('html, body').animate({ scrollTop: scrolled });
+	voice_input.value='';
+}
+
+function previousPage() {
+
+}
+
+function nextPage() {
+
+}
+
+function clickButton() {
+
+}
+
+function focusButton() {
+
+}
+
+function pressButton() {
+
+}
+
+function openButton() {
+
+}
