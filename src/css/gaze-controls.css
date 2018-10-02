@@ -1,5 +1,4 @@
-/* gaze-controls.css (controls.css kay chris) */ 	
-
+/* gaze-controls.css (controls.css kay chris) */
 
 body {
 	height: 100%;
@@ -108,6 +107,113 @@ body {
 
 
 
+
+
+
+/* FOR BRANCH gazeButtons2 */
+
+
+#click_center {
+	/*margin-left: 171px;*/
+	border: 30px solid green;
+}
+
+#focus_center {
+	/*margin-left: 281px;*/
+	border: 30px solid pink;
+}
+
+#press_center {
+	/*margin-left: 391px;*/
+	border: 30px solid blue;
+}
+
+#open_center {
+	/*margin-left: 501px;*/
+	border: 30px solid black;
+}
+
+.center_btns {
+	top: 0;
+	bottom: 0;
+	left: 0;
+	right: 0;
+	width: 0;
+	height: 0;
+	margin: auto;
+	margin-top: 60px;
+	position:fixed;
+}
+
+
+
+
+
+
+
+.selected {
+	background-color: yellow!important;
+}
+
+.label {
+	width: 20px;
+	height: 20px;
+	position:absolute;
+	background-color: red!important;
+}
+
+
+
+
+
+#click_input {
+	margin-left: 10%;
+	background-color: violet!important;
+}
+
+#focus_input {
+	margin-left: 35%;
+	background-color: violet!important;
+}
+
+#press_input {
+	margin-left: 60%;
+	background-color: violet!important;
+}
+
+#open_input {
+	margin-left: 85%;
+	background-color: violet!important;
+}
+
+.inputs {
+	/*bottom: 0;*/
+	top: 0;
+	left: 0;
+	right: 0;
+	width: 70px;
+	height: 20px;
+	/*margin: auto;*/
+	margin-top: 60px;
+	position:fixed;
+}
+
+.num_div {
+	width: 50px;
+	height: 50px;
+	position:fixed;
+	border: 1px solid black;
+	background-color: blue!important;
+}
+
+/* END */
+
+
+
+
+
+
+
 /* HIGHLIGHT ELEMENTS FOR CLICK, PRESS, FOCUS, & OPEN */
 
 .selectLinks {
@@ -129,7 +235,7 @@ body {
 
 
 
-
+/* CALIBRATION POINT POSITION */
 
 #arrow_up_box {
 	top: 0;
@@ -193,7 +299,6 @@ body {
 	width: 90px;   
 	height: 90px;
 	position:fixed;
-	/*z-index: 1000;*/
 }
 
 #toggle_btn_box {
@@ -210,7 +315,8 @@ body {
 	opacity: 0;
 }
 
-/* CALIBRATION POINT POSITION */
+
+	/* CALIBRATION POINT POSITION */
 
 .calibration_btn {
 	border-radius: 50%;
@@ -229,18 +335,26 @@ body {
 	width: 200px;
 	height: 30px;
 	margin-top: 10%;
-	margin-right: 3%;
+	margin-right: 7%;
 	position:fixed;
 }
 
-#voice_btn {
+.voice_btn {
 	top: 0;
 	right: 0;
 	bottom: 0;
 	width: 30px;
 	height: 40px;
 	margin-top: 10%;
-	margin-right: 0.5%;
 	position: fixed;
+}
+
+#voice_start_btn {
+	background-color: green;
+	margin-right: 4%;
+}
+
+#voice_stop_btn {
 	background-color: red;
+	margin-right: 1%;
 }

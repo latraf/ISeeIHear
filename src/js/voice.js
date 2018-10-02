@@ -5,16 +5,22 @@ document.documentElement.style.height = '100%';
 document.documentElement.style.width = '100%';
 
 var voice_input = document.createElement('input');
-var voice_btn = document.createElement('button');
+var voice_start_btn = document.createElement('button');
+var voice_stop_btn = document.createElement('button');
 
 voice_input.setAttribute('id', 'voice_input');
 voice_input.type = 'text';
 voice_input.disabled = true;
 
-voice_btn.setAttribute('id', 'voice_btn');
+voice_start_btn.setAttribute('id', 'voice_start_btn');
+voice_start_btn.setAttribute('class', 'voice_btn');
+
+voice_stop_btn.setAttribute('id', 'voice_stop_btn');
+voice_stop_btn.setAttribute('class', 'voice_btn');
 
 document.body.appendChild(voice_input);
-document.body.appendChild(voice_btn);
+document.body.appendChild(voice_start_btn);
+document.body.appendChild(voice_stop_btn);
 
 /* reference: https://www.sitepoint.com/introducing-web-speech-api/ */
 window.SpeechRecognition = window.SpeechRecognition  || window.webkitSpeechRecognition || null;
@@ -53,12 +59,12 @@ if(window.SpeechRecognition !== null) {
 			}
 		}
 
-		if(voice_input.value === 'hello') console.log('recognized: ' + voice_input.value);
+		if(voice_input.value) console.log('recognized: ' + voice_input.value);
 
 	// 	recognizer.start();
 	}
 
-	voice_btn.addEventListener('click', function() {
+	voice_start_btn.addEventListener('click', function() {
 		console.log('activate voice recognition');
 
 		try {
