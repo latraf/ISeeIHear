@@ -46,7 +46,7 @@ if(window.SpeechRecognition !== null) {
 	var recognizer = new window.SpeechRecognition();
 	// var text = document.getElementById('voice_input');
 
-	recognizer.continuous = true;
+	// recognizer.continuous = true;
 	// recognizer.start();
 
 	// text.value = '';
@@ -76,9 +76,13 @@ if(window.SpeechRecognition !== null) {
 
 		console.log('recognized: ' + voice_input.value);
 		switch(voice_input.value) {
-			case 'scroll up': scrollUp()
+			case 'scroll up': scrollUp();
+												recognizer.stop();
+												console.log('stop');
 												break;
-			case 'scroll down': scrollDown()
+			case 'scroll down': scrollDown();
+												recognizer.stop();
+												console.log('stop');
 												break;
 			case 'previous': previousPage();
 												break;
@@ -92,9 +96,21 @@ if(window.SpeechRecognition !== null) {
 												break;
 			case 'open': openButton();
 												break;												
-		}
+		}		
+	}
 
-	// 	recognizer.start();
+	recognizer.onend = function(event) {
+		console.log('onend');
+		if(up_toggle) {
+			recognizer.start();
+			console.log('onend up');
+			up_toggle=false;
+		}
+		else if(down_toggle) {
+			recognizer.start();
+			console.log('onend down');
+			down_toggle=false;
+		}
 	}
 
 	voice_start_btn.addEventListener('click', function() {
@@ -122,11 +138,13 @@ if(window.SpeechRecognition !== null) {
 }
 
 var scrolled=0, scroll_var=300;
+var up_toggle=false, down_toggle=false;
 
 /* VOICE INDIVIDUAL FUNCTIONALITIES */
 
 function scrollUp() {
 	console.log('up');
+	up_toggle=true;
 	if(scrolled===0) {
 		alert('on top of webpage');
 	}
@@ -139,27 +157,16 @@ function scrollUp() {
 	}
 
 	$('html, body').animate({ scrollTop: scrolled });
-	voice_input.value='';
+	setTimeout(function() {voice_input.value='';}, 1000);
+
 }
 
 function scrollDown() {
 	console.log('down');
-	
-	// var limit = document.body.offsetHeight - window.innerHeight;
+	down_toggle=true;
 	scrolled+=scroll_var;
-	// if(scrolled===limit) {
-	// 	alert('bottom of webpage');
-	// }
-	// else if(scrolled>=0) {
-		
-	// }
-	// else {
-	// 	console.log('negative');
-	// 	scrolled=0;
-	// }
-
 	$('html, body').animate({ scrollTop: scrolled });
-	voice_input.value='';
+	setTimeout(function() {voice_input.value='';}, 1000);
 }
 
 function previousPage() {
