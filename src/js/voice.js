@@ -38,32 +38,18 @@ document.body.appendChild(voice_stop_btn);
 
 /* VOICE RECOGNITION */
 /* reference: https://www.sitepoint.com/introducing-web-speech-api/ */
+// var data = { 'voice_toggle' : false };
+// setData(data);
 window.SpeechRecognition = window.SpeechRecognition  || window.webkitSpeechRecognition || null;
 
 if(window.SpeechRecognition !== null) {
 	console.log('has speech recog yaaay');
-
 	var recognizer = new window.SpeechRecognition();
-	// var text = document.getElementById('voice_input');
-
+	// voice_toggle=true;
 	// recognizer.continuous = true;
-	// recognizer.start();
-
-	// text.value = '';
-
-	// for(var i=event.resultIndex; i<event.results.length; i++) {
-	// 	text.value = event.results[i][0].transcript;
-	// }
-	// recognizer.onstart = function(event) {
-	// 	voice_input.value = 'onstart';
-	// 	console.log(event.resultIndex);
-	// 	// recognizer.start();
-	// 	// console.log(event.results.length);
-	// }
 
 	recognizer.onresult = function(event) {
 		console.log('onresult');
-
 
 		for(var i=event.resultIndex; i<event.results.length; i++) {
 			if(event.results[i].isFinal) {
@@ -111,10 +97,27 @@ if(window.SpeechRecognition !== null) {
 			console.log('onend down');
 			down_toggle=false;
 		}
+		else if(prev_toggle) {
+			recognizer.start();
+			console.log('onend prev');
+			prev_toggle=false;
+		}
+		else if(next_toggle) {
+			recognizer.start();
+			console.log('onend next');
+			next_toggle=false;
+		}
+		else {
+			recognizer.start();
+			console.log('else');
+			text.value='';
+		}
 	}
 
 	voice_start_btn.addEventListener('click', function() {
 		console.log('start voice recognition');
+		var data = { 'voice_toggle' : true };
+		setData(data);
 
 		try {
 			recognizer.start();
@@ -128,6 +131,8 @@ if(window.SpeechRecognition !== null) {
 
 	voice_stop_btn.addEventListener('click', function() {
 		console.log('stop voice recognition');
+		var data = { 'voice_toggle' : false };
+		setData(data);
 
 		recognizer.stop();
 		console.log('recog stopped');
@@ -135,12 +140,26 @@ if(window.SpeechRecognition !== null) {
 		
 	});
 
+
 }
 
-var scrolled=0, scroll_var=300;
-var up_toggle=false, down_toggle=false;
+$(document).ready(function() {
+	getData(function(data) {
+		console.log('voice toggle: ' + data['voice_toggle']);
+		if(data['voice_toggle']) {
+			// console.log('voice toggle true');
+			voice_start_btn.click();
+			// voice_toggle=false;
+		}
+	});
+});
+
 
 /* VOICE INDIVIDUAL FUNCTIONALITIES */
+
+var scrolled=0, scroll_var=300;
+var up_toggle=false, down_toggle=false, prev_toggle=false, next_toggle=false;
+
 
 function scrollUp() {
 	console.log('up');
@@ -157,7 +176,7 @@ function scrollUp() {
 	}
 
 	$('html, body').animate({ scrollTop: scrolled });
-	setTimeout(function() {voice_input.value='';}, 1000);
+	setTimeout(function() {voice_input.value='';}, 3000);
 
 }
 
@@ -166,15 +185,25 @@ function scrollDown() {
 	down_toggle=true;
 	scrolled+=scroll_var;
 	$('html, body').animate({ scrollTop: scrolled });
-	setTimeout(function() {voice_input.value='';}, 1000);
+	setTimeout(function() {voice_input.value='';}, 3000);
 }
 
 function previousPage() {
-
+	console.log('prev');
+	prev_toggle=true;
+	window.history.back();
+	// setTimeout(function() {voice_input.value='';}, 3000);
+	var data = { 'voice_toggle' : true };
+	setData(data);
 }
 
 function nextPage() {
-
+	console.log('next');
+	next_toggle=true;
+	window.history.forward();
+	// setTimeout(function() {voice_input.value='';}, 3000);
+	var data = { 'voice_toggle' : true };
+	setData(data);
 }
 
 function clickButton() {
