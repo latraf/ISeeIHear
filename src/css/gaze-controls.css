@@ -358,3 +358,13 @@ body {
 	background-color: red;
 	margin-right: 1%;
 }
+
+
+/* SELECTION OF DOM ELEMENTS */
+
+.label {
+	width: 20px;
+	height: 20px;
+	position:absolute;
+	background-color: red!important;
+}
