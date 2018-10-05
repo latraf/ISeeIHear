@@ -59,6 +59,8 @@ if(window.SpeechRecognition !== null) {
 
 		/* when user says the keyword, it calls the corresponding function */
 		// console.log('recognized: ' + voice_input.value);
+		var data, label_number;
+
 		switch(voice_input.value) {
 			case 'scroll up': scrollUp();
 												recognizer.stop();
@@ -79,8 +81,14 @@ if(window.SpeechRecognition !== null) {
 			case 'press': pressButton();
 										break;
 			case 'open': openButton();
-										break;												
+										break;
+			case 'stop': voice_stop_btn.click();
+										break;
+			default: label_number = inputNum(voice_input.value);		
 		}		
+
+		data = { 'label_number' : label_number };
+		setData(data);
 	}
 
 	/* after calling recognizer.stop() above, it will go here to start the recognizer and check if the 
@@ -146,6 +154,7 @@ if(window.SpeechRecognition !== null) {
 		recognizer.stop();
 		console.log('recog stopped');
 		voice_input.value = 'VOICE RECOGNITION STOPPED';
+		removeLinks(); removeFields(); removeButtons(); removeLabels();
 	});
 }
 
@@ -213,7 +222,62 @@ function nextPage() {
 }
 
 
+var link_labels = [], field_labels = [], button_labels = [];
 
+function clickButton() {
+	click_toggle=!click_toggle;
+	if(click_toggle && !focus_toggle && !press_toggle) {
+		highlightLinks();
+		collectLinks();
+		link_labels = createLabelArray(link_arr);
+		addLabels(link_arr, link_labels);
+	}
+	else if(focus_toggle || press_toggle) {
+		console.log('other function is toggled');
+	}
+	else {
+		removeLinks();
+		removeLabels();
+	}
+}
+
+function focusButton() {
+	focus_toggle=!focus_toggle;
+	if(focus_toggle && !click_toggle && !press_toggle) {
+		highlightFields();
+		collectFields();
+		field_labels = createLabelArray(field_arr);
+		addLabels(field_arr, field_labels);
+	}
+	else if(click_toggle || press_toggle) {
+		console.log('other function is toggled');
+	}
+	else {
+		removeFields();
+		removeLabels();
+	}
+}
+
+function pressButton() {
+	press_toggle=!press_toggle;
+	if(press_toggle && !click_toggle && !focus_toggle) {
+		highlightButtons();
+		collectButtons();
+		button_labels = createLabelArray(button_arr);
+		addLabels(button_arr, button_labels);
+	}
+	else if(click_toggle || focus_toggle) {
+		console.log('other function is toggled');
+	}
+	else {
+		removeButtons();
+		removeLabels();
+	}
+}
+
+function openButton() {
+
+}
 
 
 
@@ -414,47 +478,21 @@ function removeLabels() {
 
 
 
-
-
-
-
-var link_labels = [];
-
-function clickButton() {
-	// var temp_arr = [];
-	// console.log('link_arr');
-	// console.log(link_arr);
-	click_toggle=!click_toggle;
-	if(click_toggle) {
-		highlightLinks();
-		collectLinks();
-		link_labels = createLabelArray(link_arr);
-		addLabels(link_arr, link_labels);
+function inputNum(number) {
+	if(typeof number !== 'number') {
+		switch(number) {
+			case 'one': number=1; break;
+			case 'two': number=2; break;
+			case 'three': number=3; break;
+			case 'four': number=4; break;
+			case 'five': number=5; break;
+			case 'six': number=6; break;
+			case 'seven': number=7; break;
+			case 'eight': number=8; break;
+			case 'nine': number=9; break;
+		}
 	}
-	else {
-		removeLinks();
-		removeLabels();
-	}
-}
 
-function focusButton() {
-	focus_toggle=!focus_toggle;
-	if(focus_toggle) {
-		highlightFields();
-		collectFields();
-	}
-	else removeFields();
-}
-
-function pressButton() {
-	press_toggle=!press_toggle;
-	if(press_toggle) {
-		highlightButtons();
-		collectButtons();
-	}
-	else removeButtons();
-}
-
-function openButton() {
-
+	console.log('number: ' + number);
+	return number;
 }
