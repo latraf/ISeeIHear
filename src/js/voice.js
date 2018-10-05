@@ -58,7 +58,7 @@ if(window.SpeechRecognition !== null) {
 		}
 
 		/* when user says the keyword, it calls the corresponding function */
-		console.log('recognized: ' + voice_input.value);
+		// console.log('recognized: ' + voice_input.value);
 		switch(voice_input.value) {
 			case 'scroll up': scrollUp();
 												recognizer.stop();
@@ -71,15 +71,15 @@ if(window.SpeechRecognition !== null) {
 			case 'previous': previousPage();
 												break;
 			case 'next': nextPage();
-												break;																								
+										break;																								
 			case 'click': clickButton();
-												break;
+										break;
 			case 'focus': focusButton();
-												break;
+										break;
 			case 'press': pressButton();
-												break;
+										break;
 			case 'open': openButton();
-												break;												
+										break;												
 		}		
 	}
 
@@ -147,8 +147,6 @@ if(window.SpeechRecognition !== null) {
 		console.log('recog stopped');
 		voice_input.value = 'VOICE RECOGNITION STOPPED';
 	});
-
-
 }
 
 /* upon every reload if a webpage, it checks voice_toggle,
@@ -214,44 +212,7 @@ function nextPage() {
 	setData(data);
 }
 
-var link_labels = [];
 
-function clickButton() {
-	link_labels = createLabelArray(link_arr);
-	console.log(link_labels);
-	click_toggle=!click_toggle;
-	if(click_toggle) {
-		highlightLinks();
-		collectLinks();
-		addLabels(link_arr, link_labels);
-	}
-	else {
-		removeLinks();
-		removeLabels();
-	}
-}
-
-function focusButton() {
-	focus_toggle=!focus_toggle;
-	if(focus_toggle) {
-		highlightFields();
-		collectFields();
-	}
-	else removeFields();
-}
-
-function pressButton() {
-	press_toggle=!press_toggle;
-	if(press_toggle) {
-		highlightButtons();
-		collectButtons();
-	}
-	else removeButtons();
-}
-
-function openButton() {
-
-}
 
 
 
@@ -301,6 +262,7 @@ function collectLinks() {
 			link_arr.splice(i, 1);
 		}
 	}
+	
 	console.log(link_arr.length);
 }
 
@@ -434,8 +396,8 @@ function addLabels(array, label_array) {
 		var x = coordinates.right;
 		var y = coordinates.top;
 
-		// document.body.appendChild(label_array[i]);
-		console.log(label_array[i]);
+		document.body.appendChild(label_array[i]);
+		// console.log(label_array);
 
 		label_array[i].style.position = 'absolute';
 		label_array[i].style.left = x + 'px';
@@ -448,4 +410,51 @@ function addLabels(array, label_array) {
 
 function removeLabels() {
 	$('.label').remove();
+}
+
+
+
+
+
+
+
+var link_labels = [];
+
+function clickButton() {
+	// var temp_arr = [];
+	// console.log('link_arr');
+	// console.log(link_arr);
+	click_toggle=!click_toggle;
+	if(click_toggle) {
+		highlightLinks();
+		collectLinks();
+		link_labels = createLabelArray(link_arr);
+		addLabels(link_arr, link_labels);
+	}
+	else {
+		removeLinks();
+		removeLabels();
+	}
+}
+
+function focusButton() {
+	focus_toggle=!focus_toggle;
+	if(focus_toggle) {
+		highlightFields();
+		collectFields();
+	}
+	else removeFields();
+}
+
+function pressButton() {
+	press_toggle=!press_toggle;
+	if(press_toggle) {
+		highlightButtons();
+		collectButtons();
+	}
+	else removeButtons();
+}
+
+function openButton() {
+
 }
