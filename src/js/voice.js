@@ -84,11 +84,13 @@ if(window.SpeechRecognition !== null) {
 										break;
 			case 'stop': voice_stop_btn.click();
 										break;
-			default: label_number = inputNum(voice_input.value);		
+			default: inputNum(voice_input.value);		
+								break;
 		}		
 
-		data = { 'label_number' : label_number };
-		setData(data);
+		// console.log('label_number ' + label_number);
+		// data = { 'label_number' : label_number };
+		// setData(data);
 	}
 
 	/* after calling recognizer.stop() above, it will go here to start the recognizer and check if the 
@@ -494,5 +496,29 @@ function inputNum(number) {
 	}
 
 	console.log('number: ' + number);
-	return number;
+	if(click_toggle && !focus_toggle && !press_toggle) {
+		selectElement(number, link_arr);
+	}
+	else if(focus_toggle && !click_toggle && !press_toggle) {
+		selectElement(number, field_arr);	
+	}
+	else if(press_toggle && !click_toggle && !focus_toggle) {
+		selectElement(number, button_arr);
+	}
+	// return number;
 }
+
+function selectElement(label_number, array) {
+	if(click_toggle && !focus_toggle && !press_toggle) {
+		console.log('link clicked');
+		array[label_number].click();
+	}
+	else if(focus_toggle && !click_toggle && !press_toggle) {
+		console.log('field focused');
+		array[label_number].focus();
+	}
+	else if(press_toggle && !click_toggle && !focus_toggle) {
+		console.log('button pressed');
+		array[label_number].click();
+	}
+}	
