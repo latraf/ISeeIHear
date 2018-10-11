@@ -167,6 +167,10 @@ $(document).ready(function() {
 	getData(function(data) {
 		console.log('voice toggle: ' + data['voice_toggle']);
 		if(data['voice_toggle']) voice_start_btn.click();
+		else {
+			voice_stop_btn.click();
+			removeLabels();
+		}
 	});
 });
 
@@ -175,7 +179,7 @@ $(document).ready(function() {
 
 var scrolled=0, scroll_var=300;
 var up_toggle=false, down_toggle=false, prev_toggle=false, next_toggle=false;
-var click_toggle=false, focus_toggle=false, press_toggle=false;
+var click_toggle=false, focus_toggle=false, press_toggle=false, open_toggle=false;
 
 
 function scrollUp() {
@@ -228,13 +232,13 @@ var link_labels = [], field_labels = [], button_labels = [];
 
 function clickButton() {
 	click_toggle=!click_toggle;
-	if(click_toggle && !focus_toggle && !press_toggle) {
+	if(click_toggle && !focus_toggle && !press_toggle && !open_toggle) {
 		highlightLinks();
 		collectLinks();
 		link_labels = createLabelArray(link_arr);
 		addLabels(link_arr, link_labels);
 	}
-	else if(focus_toggle || press_toggle) {
+	else if(focus_toggle || press_toggle || open_toggle) {
 		console.log('other function is toggled');
 	}
 	else {
@@ -245,13 +249,13 @@ function clickButton() {
 
 function focusButton() {
 	focus_toggle=!focus_toggle;
-	if(focus_toggle && !click_toggle && !press_toggle) {
+	if(focus_toggle && !click_toggle && !press_toggle && !open_toggle) {
 		highlightFields();
 		collectFields();
 		field_labels = createLabelArray(field_arr);
 		addLabels(field_arr, field_labels);
 	}
-	else if(click_toggle || press_toggle) {
+	else if(click_toggle || press_toggle || open_toggle) {
 		console.log('other function is toggled');
 	}
 	else {
@@ -262,13 +266,13 @@ function focusButton() {
 
 function pressButton() {
 	press_toggle=!press_toggle;
-	if(press_toggle && !click_toggle && !focus_toggle) {
+	if(press_toggle && !click_toggle && !focus_toggle && !open_toggle) {
 		highlightButtons();
 		collectButtons();
 		button_labels = createLabelArray(button_arr);
 		addLabels(button_arr, button_labels);
 	}
-	else if(click_toggle || focus_toggle) {
+	else if(click_toggle || focus_toggle || open_toggle) {
 		console.log('other function is toggled');
 	}
 	else {
@@ -278,7 +282,20 @@ function pressButton() {
 }
 
 function openButton() {
-
+	open_toggle=!open_toggle;
+	if(open_toggle && !click_toggle && !focus_toggle &&!press_toggle) {
+		highlightLinks();
+		collectLinks();
+		link_labels = createLabelArray(link_arr);
+		addLabels(link_arr, link_labels);
+	}
+	else if(click_toggle || focus_toggle || press_toggle) {
+		console.log('other function is toggled');
+	}
+	else {
+		removeLinks();
+		removeLabels();
+	}
 }
 
 
@@ -475,7 +492,7 @@ function addLabels(array, label_array) {
 }
 
 function removeLabels() {
-	$('.label').remove();
+	$('.label').css('opacity', 0);
 }
 
 
@@ -496,29 +513,40 @@ function inputNum(number) {
 	}
 
 	console.log('number: ' + number);
-	if(click_toggle && !focus_toggle && !press_toggle) {
+	if(click_toggle && !focus_toggle && !press_toggle && !open_toggle) {
 		selectElement(number, link_arr);
 	}
-	else if(focus_toggle && !click_toggle && !press_toggle) {
+	else if(focus_toggle && !click_toggle && !press_toggle && !open_toggle) {
 		selectElement(number, field_arr);	
 	}
-	else if(press_toggle && !click_toggle && !focus_toggle) {
+	else if(press_toggle && !click_toggle && !focus_toggle && !open_toggle) {
 		selectElement(number, button_arr);
+	}
+	else if(open_toggle && !click_toggle && !focus_toggle && !press_toggle) {
+		selectElement(number, link_arr);
 	}
 	// return number;
 }
 
 function selectElement(label_number, array) {
-	if(click_toggle && !focus_toggle && !press_toggle) {
+	if(click_toggle && !focus_toggle && !press_toggle && !open_toggle) {
 		console.log('link clicked');
 		array[label_number].click();
 	}
-	else if(focus_toggle && !click_toggle && !press_toggle) {
+	else if(focus_toggle && !click_toggle && !press_toggle && !open_toggle) {
 		console.log('field focused');
 		array[label_number].focus();
 	}
-	else if(press_toggle && !click_toggle && !focus_toggle) {
+	else if(press_toggle && !click_toggle && !focus_toggle && !open_toggle) {
 		console.log('button pressed');
 		array[label_number].click();
+	}
+	else if(open_toggle && !click_toggle && !focus_toggle && !press_toggle) {
+		// console.log(array[label_number]);
+		console.log(array[label_number].href);
+		var link = array[label_number].href;
+		console.log(link);
+		window.open(link, '_blank');
+		voice_stop_btn.click();
 	}
 }	

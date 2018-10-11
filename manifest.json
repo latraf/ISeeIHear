@@ -36,7 +36,7 @@
 	"content_scripts": [
 		{
 			"matches": ["http://*/*", "https://*/*"],
-			"css": ["src/css/gaze-controls.css"],
+			"css": ["src/css/controls.css"],
 			"js": ["src/js_ext/jquery-3.1.1.min.js", "src/js_ext/jquery-ui.js"]
 			// "src/js_ext/webgazer.js",  , "src/js/gaze-controls.js"
 		}
