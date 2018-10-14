@@ -10,129 +10,130 @@ function getData(callback) {
 	chrome.storage.local.get(null, callback);
 }
 
-$(document).ready(function() {
-	if (document.readyState == "complete") {
-		console.log('webgazer resumed'); 
-		webgazer.resume();
-	}
-});
+// $(document).ready(function() {
+// 	if (document.readyState == "complete") {
+// 		console.log('webgazer resumed'); 
+// 		webgazer.resume();
+// 	}
+// });
 
 var scrolled=0, scroll_var=300, count=0;
 var toggled=false;
 
 var data = { 'scrolled' : scrolled, 'arrow_to_buttons' : false };
 setData(data);
-webgazer
-	.setRegression('ridge')
-	.setTracker('clmtracker')
-	.setGazeListener(function(wg_data, elapsedTime) {
-		if(wg_data==null) {
-			// console.log('null'); 
-			return;
-		}
 
-		var x_prediction = wg_data.x, y_prediction = wg_data.y;
+// webgazer
+// 	.setRegression('ridge')
+// 	.setTracker('clmtracker')
+// 	.setGazeListener(function(wg_data, elapsedTime) {
+// 		if(wg_data==null) {
+// 			// console.log('null'); 
+// 			return;
+// 		}
 
-		getData(function(data) {
-			var arrow_down = data['arrow_down'];
-			var arrow_up = data['arrow_up'];
-			var arrow_left = data['arrow_left'];
-			var arrow_right = data['arrow_right'];
-			var toggle_btn = data['toggle_btn'];
+// 		var x_prediction = wg_data.x, y_prediction = wg_data.y;
 
-			var click_btn = data['click_btn'];
-			var press_btn = data['press_btn'];
-			var focus_btn = data['focus_btn'];
-			var open_btn = data['open_btn'];
+// 		getData(function(data) {
+// 			var arrow_down = data['arrow_down'];
+// 			var arrow_up = data['arrow_up'];
+// 			var arrow_left = data['arrow_left'];
+// 			var arrow_right = data['arrow_right'];
+// 			var toggle_btn = data['toggle_btn'];
 
-			if(data['gaze_calibrated']) {
-								if ((arrow_down.x<x_prediction && x_prediction<(arrow_down.x+100)) && (arrow_down.y<y_prediction && y_prediction<(arrow_down.y+100)))
-									scrollDown(toggled);
-								else if ((arrow_up.x<x_prediction && x_prediction<(arrow_up.x+100)) && (arrow_up.y<y_prediction && y_prediction<(arrow_up.y+100)))
-									scrollUp(toggled);
-								else if((arrow_left.x<x_prediction && x_prediction<(arrow_left.x+100)) && (arrow_left.y<y_prediction && y_prediction<(arrow_left.y+100)))
-									previousPage(toggled);
-								else if((arrow_right.x<x_prediction && x_prediction<(arrow_right.x+100)) && (arrow_right.y<y_prediction && y_prediction<(arrow_right.y+100)))
-									nextPage(toggled);
-								else if((toggle_btn.x<x_prediction && x_prediction<(toggle_btn.x+100)) && (toggle_btn.y<y_prediction && y_prediction<(toggle_btn.y+100))) {
-									toggled=!toggled;
-									if(toggled) {
-										$('div#toggle_btn:lt(-1)').remove();
-										showGazeButtons();
-										hideArrows();
-										$('#toggle_btn').css({ 'bottom' : 'initial', 'top' : 0, 'left' : toggle_btn.x, 'top' : arrow_up.y });
-										data['toggle_btn'] = { 'x' : toggle_btn.x, 'y' : arrow_up.y }
-										setData(data);
-									}
-									else {
-										$('div#toggle_btn:lt(-1)').remove();
-										hideGazeButtons();
-										showArrows();
-										removeLinks();
-										removeFields();
-										removeButtons();
-										$('#toggle_btn').css({ 'top' : 'initial', 'bottom' : 0, 'left' : toggle_btn.x, 'top' : arrow_down.y });
-										data['toggle_btn'] = { 'x' : toggle_btn.x, 'y' : arrow_down.y }
-										setData(data);
-									}
-								}
-								else if((click_btn.x<x_prediction && x_prediction<(click_btn.x+100)) && (click_btn.y<y_prediction && y_prediction<(click_btn.y+100))) {
-									if(toggled) {
-										// setTimeout(function() {
-											console.log('CLICK');
-											data['arrow_to_buttons']=!data['arrow_to_buttons'];
-											setData(data);
-											// console.log('data: ' + data['arrow_to_buttons']);
-										// }, 1000);
-											if(data['arrow_to_buttons']) clickButton();
-											else removeLinks();
-									}
-								}
-								else if((press_btn.x<x_prediction && x_prediction<(press_btn.x+100)) && (press_btn.y<y_prediction && y_prediction<(press_btn.y+100))) {
-									if(toggled) {
-										// setTimeout(function() {
-											console.log('PRESS');
-											data['arrow_to_buttons']=!data['arrow_to_buttons'];
-											setData(data);
-											// console.log('data: ' + data['arrow_to_buttons']);
-										// }, 1000);
-											if(data['arrow_to_buttons']) pressButton();
-											else removeButtons();
-									}
-								}
-								else if((focus_btn.x<x_prediction && x_prediction<(focus_btn.x+100)) && (focus_btn.y<y_prediction && y_prediction<(focus_btn.y+100))) {
-									if(toggled) {
-										// setTimeout(function() {
-											console.log('FOCUS');
-											data['arrow_to_buttons']=!data['arrow_to_buttons'];
-											setData(data);
-											// console.log('data: ' + data['arrow_to_buttons']);
-										// }, 1000);
-											if(data['arrow_to_buttons']) focusButton();
-											else removeFields();
-									}
-								}
-								else if((open_btn.x<x_prediction && x_prediction<(open_btn.x+100)) && (open_btn.y<y_prediction && y_prediction<(open_btn.y+100))) {
-									if(toggled) {
-										console.log('OPEN');
-									}
-								}
+// 			var click_btn = data['click_btn'];
+// 			var press_btn = data['press_btn'];
+// 			var focus_btn = data['focus_btn'];
+// 			var open_btn = data['open_btn'];
 
-
-
-			}
-		});	
-	})
-	.begin()
-	.showPredictionPoints(true);
+// 			if(data['gaze_calibrated']) {
+// 								if ((arrow_down.x<x_prediction && x_prediction<(arrow_down.x+100)) && (arrow_down.y<y_prediction && y_prediction<(arrow_down.y+100)))
+// 									scrollDown(toggled);
+// 								else if ((arrow_up.x<x_prediction && x_prediction<(arrow_up.x+100)) && (arrow_up.y<y_prediction && y_prediction<(arrow_up.y+100)))
+// 									scrollUp(toggled);
+// 								else if((arrow_left.x<x_prediction && x_prediction<(arrow_left.x+100)) && (arrow_left.y<y_prediction && y_prediction<(arrow_left.y+100)))
+// 									previousPage(toggled);
+// 								else if((arrow_right.x<x_prediction && x_prediction<(arrow_right.x+100)) && (arrow_right.y<y_prediction && y_prediction<(arrow_right.y+100)))
+// 									nextPage(toggled);
+// 								else if((toggle_btn.x<x_prediction && x_prediction<(toggle_btn.x+100)) && (toggle_btn.y<y_prediction && y_prediction<(toggle_btn.y+100))) {
+// 									toggled=!toggled;
+// 									if(toggled) {
+// 										$('div#toggle_btn:lt(-1)').remove();
+// 										showGazeButtons();
+// 										hideArrows();
+// 										$('#toggle_btn').css({ 'bottom' : 'initial', 'top' : 0, 'left' : toggle_btn.x, 'top' : arrow_up.y });
+// 										data['toggle_btn'] = { 'x' : toggle_btn.x, 'y' : arrow_up.y }
+// 										setData(data);
+// 									}
+// 									else {
+// 										$('div#toggle_btn:lt(-1)').remove();
+// 										hideGazeButtons();
+// 										showArrows();
+// 										removeLinks();
+// 										removeFields();
+// 										removeButtons();
+// 										$('#toggle_btn').css({ 'top' : 'initial', 'bottom' : 0, 'left' : toggle_btn.x, 'top' : arrow_down.y });
+// 										data['toggle_btn'] = { 'x' : toggle_btn.x, 'y' : arrow_down.y }
+// 										setData(data);
+// 									}
+// 								}
+// 								else if((click_btn.x<x_prediction && x_prediction<(click_btn.x+100)) && (click_btn.y<y_prediction && y_prediction<(click_btn.y+100))) {
+// 									if(toggled) {
+// 										// setTimeout(function() {
+// 											console.log('CLICK');
+// 											data['arrow_to_buttons']=!data['arrow_to_buttons'];
+// 											setData(data);
+// 											// console.log('data: ' + data['arrow_to_buttons']);
+// 										// }, 1000);
+// 											if(data['arrow_to_buttons']) clickButton();
+// 											else removeLinks();
+// 									}
+// 								}
+// 								else if((press_btn.x<x_prediction && x_prediction<(press_btn.x+100)) && (press_btn.y<y_prediction && y_prediction<(press_btn.y+100))) {
+// 									if(toggled) {
+// 										// setTimeout(function() {
+// 											console.log('PRESS');
+// 											data['arrow_to_buttons']=!data['arrow_to_buttons'];
+// 											setData(data);
+// 											// console.log('data: ' + data['arrow_to_buttons']);
+// 										// }, 1000);
+// 											if(data['arrow_to_buttons']) pressButton();
+// 											else removeButtons();
+// 									}
+// 								}
+// 								else if((focus_btn.x<x_prediction && x_prediction<(focus_btn.x+100)) && (focus_btn.y<y_prediction && y_prediction<(focus_btn.y+100))) {
+// 									if(toggled) {
+// 										// setTimeout(function() {
+// 											console.log('FOCUS');
+// 											data['arrow_to_buttons']=!data['arrow_to_buttons'];
+// 											setData(data);
+// 											// console.log('data: ' + data['arrow_to_buttons']);
+// 										// }, 1000);
+// 											if(data['arrow_to_buttons']) focusButton();
+// 											else removeFields();
+// 									}
+// 								}
+// 								else if((open_btn.x<x_prediction && x_prediction<(open_btn.x+100)) && (open_btn.y<y_prediction && y_prediction<(open_btn.y+100))) {
+// 									if(toggled) {
+// 										console.log('OPEN');
+// 									}
+// 								}
 
 
-window.onbeforeunload = function() {
-	webgazer.pause();
-	console.log('webgazer paused');
-	// window.localStorage.clear(); //Comment out if you want to save data across different sessions	
-	return;
-}
+
+// 			}
+// 		});	
+// 	})
+// 	.begin()
+// 	.showPredictionPoints(true);
+
+
+// window.onbeforeunload = function() {
+// 	webgazer.pause();
+// 	console.log('webgazer paused');
+// 	// window.localStorage.clear(); //Comment out if you want to save data across different sessions	
+// 	return;
+// }
 
 
 

@@ -347,7 +347,7 @@ body {
 	width: 200px;
 	height: 30px;
 	margin-top: 20%;
-	margin-right: 7%;
+	margin-right: 10%;
 	position:fixed;
 	z-index: 1000;
 }
@@ -365,12 +365,54 @@ body {
 
 #voice_start_btn {
 	background-color: green;
-	margin-right: 4%;
+	margin-right: 7%;
 }
 
 #voice_stop_btn {
 	background-color: red;
+	margin-right: 4%;
+}
+
+#voice_help_btn {
+	background-color: blue;
 	margin-right: 1%;
+	color: white!important;
+}
+
+#voice_help_span {
+	top: 0;
+	right: 0;
+	bottom: 0;
+	height: 200px;
+	margin-top: 25%;
+	margin-right: 3%;
+	position:fixed;
+	z-index: 1000;
+	background-color:white!important;
+	padding: 10px;
+	/*visibility: hidden;*/
 }
 
 /*** END ***/
+
+
+/*.tooltip {
+    position: relative;
+    display: inline-block;
+}*/
+
+/*.tooltiptext {
+    visibility: hidden;
+    width: 120px;
+    background-color: black;
+    color: #fff;
+    text-align: center;
+    border-radius: 6px;
+    padding: 5px 0;
+
+    position: absolute;
+}
+
+.tooltip:hover .tooltiptext {
+    visibility: visible;
+}*/

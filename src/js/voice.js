@@ -1,4 +1,3 @@
-// alert('voice');
 console.log('voice');
 
 
@@ -20,6 +19,8 @@ document.documentElement.style.width = '100%';
 var voice_input = document.createElement('input');
 var voice_start_btn = document.createElement('button');
 var voice_stop_btn = document.createElement('button');
+var voice_help_btn = document.createElement('button');
+var voice_help_span = document.createElement('span');
 
 voice_input.setAttribute('id', 'voice_input');
 voice_input.type = 'text';
@@ -31,9 +32,33 @@ voice_start_btn.setAttribute('class', 'voice_btn');
 voice_stop_btn.setAttribute('id', 'voice_stop_btn');
 voice_stop_btn.setAttribute('class', 'voice_btn');
 
+voice_help_btn.setAttribute('id', 'voice_help_btn');
+voice_help_btn.setAttribute('class', 'voice_btn');
+voice_help_btn.prepend('?');
+
+voice_help_span.setAttribute('id', 'voice_help_span');
+voice_help_span.style.display = 'none';
+voice_help_span.innerHTML = 
+	'<h3> Keywords: </h3><br>' +  '1. <i>Scroll Up/Scroll Down</i> <br>' + '2. <i>Back/Forward Page</i> <br>' +
+	'3. <strong>For links: </strong> <i> Click </i> + <tt>label_number</tt> <br>' + 
+	'4. <strong>For inputboxes: </strong> <i> Focus </i> + <tt>label_number</tt> <br>' +
+	'5. <strong>For buttons: </strong> <i> Press </i> + <tt>label_number</tt> <br>' + 
+	'6. <strong>For opening links in new tab: </strong> <br>&nbsp&nbsp&nbsp&nbsp<i>Open </i> + <tt>label_number</tt> <br>';
+
+voice_help_btn.onmouseover = function() {
+	voice_help_span.style.display = 'block';
+}
+
+voice_help_btn.onmouseout = function() {
+	voice_help_span.style.display = 'none';
+}
+
 document.body.appendChild(voice_input);
 document.body.appendChild(voice_start_btn);
 document.body.appendChild(voice_stop_btn);
+document.body.appendChild(voice_help_btn);
+document.body.appendChild(voice_help_span);
+
 
 
 /* VOICE RECOGNITION */
@@ -58,7 +83,6 @@ if(window.SpeechRecognition !== null) {
 		}
 
 		/* when user says the keyword, it calls the corresponding function */
-		// console.log('recognized: ' + voice_input.value);
 		var data, label_number;
 
 		switch(voice_input.value) {
@@ -70,9 +94,9 @@ if(window.SpeechRecognition !== null) {
 												recognizer.stop();
 												console.log('stop');
 												break;
-			case 'previous': previousPage();
+			case 'back page': backPage();
 												break;
-			case 'next': nextPage();
+			case 'forward page': forwardPage();
 										break;																								
 			case 'click': clickButton();
 										break;
@@ -87,10 +111,6 @@ if(window.SpeechRecognition !== null) {
 			default: inputNum(voice_input.value);		
 								break;
 		}		
-
-		// console.log('label_number ' + label_number);
-		// data = { 'label_number' : label_number };
-		// setData(data);
 	}
 
 	/* after calling recognizer.stop() above, it will go here to start the recognizer and check if the 
@@ -141,6 +161,7 @@ if(window.SpeechRecognition !== null) {
 		try {
 			recognizer.start();
 			console.log('recog starting');
+			voice_input.value = 'VOICE RECOGNITION STARTING';
 		}
 		catch(ex) {
 			console.log(ex.message);
@@ -174,7 +195,6 @@ $(document).ready(function() {
 	});
 });
 
-
 /* VOICE INDIVIDUAL FUNCTIONALITIES */
 
 var scrolled=0, scroll_var=300;
@@ -184,6 +204,7 @@ var click_toggle=false, focus_toggle=false, press_toggle=false, open_toggle=fals
 
 function scrollUp() {
 	console.log('up');
+	voice_input.value='scroll up';
 	up_toggle=true;
 	if(scrolled===0) {
 		alert('on top of webpage');
@@ -203,14 +224,16 @@ function scrollUp() {
 
 function scrollDown() {
 	console.log('down');
+	voice_input.value='scroll down';
 	down_toggle=true;
 	scrolled+=scroll_var;
 	$('html, body').animate({ scrollTop: scrolled });
 	setTimeout(function() {voice_input.value='';}, 3000);
 }
 
-function previousPage() {
+function backPage() {
 	console.log('prev');
+	voice_input.value='back page';
 	prev_toggle=true;
 	window.history.back();
 	// setTimeout(function() {voice_input.value='';}, 3000);
@@ -218,8 +241,9 @@ function previousPage() {
 	setData(data);
 }
 
-function nextPage() {
+function forwardPage() {
 	console.log('next');
+	voice_input.value='forward page';
 	next_toggle=true;
 	window.history.forward();
 	// setTimeout(function() {voice_input.value='';}, 3000);
@@ -233,6 +257,7 @@ var link_labels = [], field_labels = [], button_labels = [];
 function clickButton() {
 	click_toggle=!click_toggle;
 	if(click_toggle && !focus_toggle && !press_toggle && !open_toggle) {
+		voice_input.value='click';
 		highlightLinks();
 		collectLinks();
 		link_labels = createLabelArray(link_arr);
@@ -250,6 +275,7 @@ function clickButton() {
 function focusButton() {
 	focus_toggle=!focus_toggle;
 	if(focus_toggle && !click_toggle && !press_toggle && !open_toggle) {
+		voice_input.value='focus';
 		highlightFields();
 		collectFields();
 		field_labels = createLabelArray(field_arr);
@@ -267,6 +293,7 @@ function focusButton() {
 function pressButton() {
 	press_toggle=!press_toggle;
 	if(press_toggle && !click_toggle && !focus_toggle && !open_toggle) {
+		voice_input.value='press';
 		highlightButtons();
 		collectButtons();
 		button_labels = createLabelArray(button_arr);
@@ -284,6 +311,7 @@ function pressButton() {
 function openButton() {
 	open_toggle=!open_toggle;
 	if(open_toggle && !click_toggle && !focus_toggle &&!press_toggle) {
+		voice_input.value='open';
 		highlightLinks();
 		collectLinks();
 		link_labels = createLabelArray(link_arr);
@@ -383,7 +411,6 @@ function collectFields() {
 	temp_arr = addToArray(temp_arr, field_arr1, field_arr1.length);
 	temp_arr = addToArray(temp_arr, field_arr2, field_arr2.length);
 	
-	// field_arr = jQuery.unique(temp_arr);
 	field_arr = temp_arr;
 	
 	for(var i=0; i<field_arr.length; i++) {
@@ -436,19 +463,11 @@ function getCoordinates(element) {
 	else {
 		var box = element.getBoundingClientRect();
 		var top_coordinate = box.top + pageYOffset;
-		var left_coordinate = box.left + pageXOffset;
-		var width = box.width;
-		var height = box.height;
-		var bottom_coordinate = box.bottom + pageYOffset;
 		var right_coordinate = box.right + pageXOffset;
 
 		return {
 			top: top_coordinate,
-			left: left_coordinate,
 			right: right_coordinate,
-			bottom: bottom_coordinate,
-			width: width,
-			height: height
 		}
 	}
 }
@@ -474,19 +493,16 @@ function addLabels(array, label_array) {
 	var length = array.length;
 
 	for(var i=0; i<length; i++) {
-		// console.log(i);
 		var coordinates = getCoordinates(array[i]);
 		var x = coordinates.right;
 		var y = coordinates.top;
 
 		document.body.appendChild(label_array[i]);
-		// console.log(label_array);
 
 		label_array[i].style.position = 'absolute';
 		label_array[i].style.left = x + 'px';
 		label_array[i].style.top = y + 'px';
 		label_array[i].style.visibility = 'visible';
-		// console.log(label_array[i].style.left + " " + label_array[i].style.top);
 
 	}
 }
@@ -525,7 +541,6 @@ function inputNum(number) {
 	else if(open_toggle && !click_toggle && !focus_toggle && !press_toggle) {
 		selectElement(number, link_arr);
 	}
-	// return number;
 }
 
 function selectElement(label_number, array) {
@@ -542,8 +557,6 @@ function selectElement(label_number, array) {
 		array[label_number].click();
 	}
 	else if(open_toggle && !click_toggle && !focus_toggle && !press_toggle) {
-		// console.log(array[label_number]);
-		console.log(array[label_number].href);
 		var link = array[label_number].href;
 		console.log(link);
 		window.open(link, '_blank');
