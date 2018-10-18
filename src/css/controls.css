@@ -6,101 +6,41 @@ body {
 }
 
 
-/*** CALIBRATION POINT POSITION ***/
-
-#arrow_up_box {
-	top: 0;
-	left: 0;
-	right: 0;
-	margin-top: 50px;
-	border: 5px solid red;
-}
-
-#arrow_down_box {
-	bottom: 0;
-	left: 0;
-	right: 0;
-	margin-bottom: 5px;
-	border: 5px solid red;
-	height: 10%;
-}
-
-.horizontal_box {
-	width: 60%;   
-	height: 20%;
-	margin: auto;
-	position:fixed;
-	z-index: -1000;
-	opacity: 0;
-}
-
-#arrow_left_box {
-	top: 0;
-	left: 0;
-	bottom: 0;
-	margin-left: 40px;
-	border: 5px solid red;
-}
-
-#arrow_right_box {
+.calibration_divs {
 	top: 0;
 	bottom: 0;
-	right: 0;
-	margin-right: 40px;
-	border: 5px solid red;
-}
-
-.vertical_box {
-	width: 14%;   
-	height: 75%;
-	margin: auto;
-	position:fixed;
-	z-index: -1000;
-	opacity: 0;
-}
-
-
-
-#toggle_btn_box {
-	bottom: 0;
-	right: 0;
 	left: 0;
-	margin-bottom: 8%;
-	margin-left: 35%;
-	width: 30%;   
-	height: 30%;
-	position:fixed;
-	border: 5px solid red;
-	z-index: -1000;
-	opacity: 0;
-}
-
-.calibration_btn {
-	border-radius: 50%;
-	background-color: red;
-	border: 1px solid black;
-	opacity: 0.2;
+	right: 0;
+	height: 100%;
+	width: 100%;
 	position: fixed;
-	z-index: 1000;
+	margin: auto;
+	background-color: white!important;
 }
 
-/*** END ***/
-
-
-
-
-
+#calibration_notes {
+	top: 0;
+	bottom: 0;
+	left: 0;
+	right: 0;
+	position: fixed;
+	margin: auto;
+	height: 25%;
+	width: 45%;
+	/*background-color: grey!important;*/
+	padding: 10px;
+}
 
 /*** GAZE UI BUTTONS ***/
 
-/* ARROW BOXES */
+/* ARROWS */
 /* reference: https://css-tricks.com/snippets/css/css-triangle/ */
 
 #arrow_up {
 	top: 0;
 	left: 0;
 	right: 0;
-	margin-top: 60px;
+	margin-top: 5%;
 	border-left: 50px solid transparent;
 	border-right: 50px solid transparent;
 	border-bottom: 50px solid black;
@@ -110,7 +50,7 @@ body {
 	bottom: 0;
 	left: 0;
 	right: 0;
-	margin-bottom: 15px;
+	margin-bottom: 3%;
 	border-left: 50px solid transparent;
 	border-right: 50px solid transparent;
 	border-top: 50px solid black;
@@ -120,7 +60,7 @@ body {
 	top: 0;
 	left: 0;
 	bottom: 0;
-	margin-left: 50px;
+	margin-left: 3%;
 	border-right: 50px solid black;
 	border-top: 50px solid transparent; 
 	border-bottom: 50px solid transparent;
@@ -130,7 +70,7 @@ body {
 	top: 0;
 	bottom: 0;
 	right: 0;
-	margin-right: 50px;
+	margin-right: 3%;
 	border-left: 50px solid black;
 	border-top: 50px solid transparent;
 	border-bottom: 50px solid transparent;
@@ -143,68 +83,60 @@ body {
 	height:0;
 	margin: auto;
 	position:fixed;
-	/*background-color:red;*/
-	z-index: 1000;
+	z-index: 2000;
 }
 
 /* BUTTONS */
 
 #click_btn {
-	bottom: 0;
-	left: 0;
-	right: 0;
 	margin-left: 10%;
-	border: 30px solid transparent;
+	border: 50px solid transparent;
 	background-color:green;
 }
 
 #focus_btn {
-	bottom: 0;
-	left: 0;
-	right: 0;
-	margin-left: 35%;
-	border: 30px solid transparent;
+	margin-left: 33%;
+	border: 50px solid transparent;
 	background-color:pink;
 }
 
 #press_btn {
-	bottom: 0;
-	left: 0;
-	right: 0;
-	margin-left: 60%;
-	border: 30px solid transparent;
+	margin-right: 33%;
+	border: 50px solid transparent;
 	background-color:blue;
 }
 
 #open_btn {
-	bottom: 0;
-	left: 0;
-	right: 0;
-	margin-left: 85%;
-	border: 30px solid transparent;
+	margin-right: 10%;
+	border: 50px solid transparent;
 	background-color:black;
 } 
 
-#toggle_btn {
-	bottom: 0;
+.toggle_btn {
+	top: 0;
 	left: 0;
 	right: 0;
 	margin: auto;
-	margin-bottom: 10px;
+	margin-top: 60px;
 	margin-right: 10px;
 	background-color:orange;
-	width: 90px;   
-	height: 90px;
+	width: 120px;   
+	height: 120px;
 	position:fixed;
 	z-index: 1000;
 }
 
 .gaze_btns {
+	bottom: 0;
+	left: 0;
+	right: 0;
+	top:0;
 	width: 30px;   
 	height: 30px;
-	margin-bottom: 10px;
 	position:fixed;
+	margin: auto;
 	z-index: 1000;
+	color: white!important;
 }
 
 
@@ -247,93 +179,6 @@ body {
 }
 
 /*** END ***/
-
-
-
-/*** FOR BRANCH gazeButtons2 ***/
-
-
-#click_center {
-	/*margin-left: 171px;*/
-	border: 30px solid green;
-}
-
-#focus_center {
-	/*margin-left: 281px;*/
-	border: 30px solid pink;
-}
-
-#press_center {
-	/*margin-left: 391px;*/
-	border: 30px solid blue;
-}
-
-#open_center {
-	/*margin-left: 501px;*/
-	border: 30px solid black;
-}
-
-.center_btns {
-	top: 0;
-	bottom: 0;
-	left: 0;
-	right: 0;
-	width: 0;
-	height: 0;
-	margin: auto;
-	margin-top: 60px;
-	position:fixed;
-	z-index: 1000;
-}
-
-
-#click_input {
-	margin-left: 10%;
-	background-color: violet!important;
-}
-
-#focus_input {
-	margin-left: 35%;
-	background-color: violet!important;
-}
-
-#press_input {
-	margin-left: 60%;
-	background-color: violet!important;
-}
-
-#open_input {
-	margin-left: 85%;
-	background-color: violet!important;
-}
-
-.inputs {
-	/*bottom: 0;*/
-	top: 0;
-	left: 0;
-	right: 0;
-	width: 70px;
-	height: 20px;
-	/*margin: auto;*/
-	margin-top: 60px;
-	position:fixed;
-	z-index: 1000;
-}
-
-.num_div {
-	width: 50px;
-	height: 50px;
-	position:fixed;
-	border: 1px solid black;
-	background-color: blue!important;
-	z-index: 1000;
-}
-
-/*** END ***/
-
-
-
-
 
 
 
@@ -390,29 +235,6 @@ body {
 	z-index: 1000;
 	background-color:white!important;
 	padding: 10px;
-	/*visibility: hidden;*/
 }
 
 /*** END ***/
-
-
-/*.tooltip {
-    position: relative;
-    display: inline-block;
-}*/
-
-/*.tooltiptext {
-    visibility: hidden;
-    width: 120px;
-    background-color: black;
-    color: #fff;
-    text-align: center;
-    border-radius: 6px;
-    padding: 5px 0;
-
-    position: absolute;
-}
-
-.tooltip:hover .tooltiptext {
-    visibility: visible;
-}*/

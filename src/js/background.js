@@ -109,8 +109,8 @@ function removeControls(tab_id) {
 
 chrome.runtime.onInstalled.addListener(function(extension) {
 	if(extension.reason == 'install') {
-		var data = { 'gaze_calibrated' : false };
-		setData(data);
+		// var data = { 'gaze_calibrated' : false };
+		// setData(data);
 		alert('newly installed!');
 	}
 });

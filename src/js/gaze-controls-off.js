@@ -1,10 +1,6 @@
 $(document).ready(function() {
 	console.log('gc off');
 
-	// $('.arrows').removeClass('.arrows');
-	// $('.gaze_btns').removeClass('.gaze_btns');
-	// $('.gaze_btns').removeAttr('id');
-
 	$('div#arrow_up').not('.arrows').remove();
 	$('div#arrow_down').not('.arrows').remove();
 	$('div#arrow_left').not('.arrows').remove();
@@ -24,16 +20,17 @@ $(document).ready(function() {
 	$('div#focus_btn:lt(-1)').remove();
 	$('div#press_btn:lt(-1)').remove();
 	$('div#open_btn:lt(-1)').remove();
+	
+	$('div#toggle1_btn:lt(-1)').remove();
+	$('div#toggle2_btn:lt(-1)').remove();
+
+	$('div#calibration1_div:lt(-1)').remove();
+	$('div#arrows_div:lt(-1)').remove();
+	$('div#gaze_btns_div:lt(-1)').remove();
 
 	$('.selectLinks').removeClass('selectLinks');
 	$('.selectBtns').removeClass('selectBtns');
 	$('.selectInputs').removeClass('selectInputs');
 
 	$('.calibration_btn:lt(-15)').remove();
-
-	// webgazer.pause();
-	// console.log('wg off');
 });
-
-// $('div#open_btn:not(.gaze_btns)').remove();
-// $('div#arrow_down:not(.arrows)').remove();

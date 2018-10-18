@@ -23,117 +23,125 @@ var toggled=false;
 var data = { 'scrolled' : scrolled, 'arrow_to_buttons' : false };
 setData(data);
 
+
+
 // webgazer
 // 	.setRegression('ridge')
-// 	.setTracker('clmtracker')
+// 	.setTracker('clmtrackr')
 // 	.setGazeListener(function(wg_data, elapsedTime) {
 // 		if(wg_data==null) {
 // 			// console.log('null'); 
 // 			return;
 // 		}
-
-// 		var x_prediction = wg_data.x, y_prediction = wg_data.y;
+// 		var xp = wg_data.x, yp = wg_data.y;
 
 // 		getData(function(data) {
 // 			var arrow_down = data['arrow_down'];
 // 			var arrow_up = data['arrow_up'];
 // 			var arrow_left = data['arrow_left'];
 // 			var arrow_right = data['arrow_right'];
-// 			var toggle_btn = data['toggle_btn'];
+// 			var toggle1_btn = data['toggle1_btn'];
 
 // 			var click_btn = data['click_btn'];
 // 			var press_btn = data['press_btn'];
 // 			var focus_btn = data['focus_btn'];
 // 			var open_btn = data['open_btn'];
+// 			var toggle2_btn = data['toggle2_btn'];
 
-// 			if(data['gaze_calibrated']) {
-// 								if ((arrow_down.x<x_prediction && x_prediction<(arrow_down.x+100)) && (arrow_down.y<y_prediction && y_prediction<(arrow_down.y+100)))
-// 									scrollDown(toggled);
-// 								else if ((arrow_up.x<x_prediction && x_prediction<(arrow_up.x+100)) && (arrow_up.y<y_prediction && y_prediction<(arrow_up.y+100)))
-// 									scrollUp(toggled);
-// 								else if((arrow_left.x<x_prediction && x_prediction<(arrow_left.x+100)) && (arrow_left.y<y_prediction && y_prediction<(arrow_left.y+100)))
-// 									previousPage(toggled);
-// 								else if((arrow_right.x<x_prediction && x_prediction<(arrow_right.x+100)) && (arrow_right.y<y_prediction && y_prediction<(arrow_right.y+100)))
-// 									nextPage(toggled);
-// 								else if((toggle_btn.x<x_prediction && x_prediction<(toggle_btn.x+100)) && (toggle_btn.y<y_prediction && y_prediction<(toggle_btn.y+100))) {
-// 									toggled=!toggled;
-// 									if(toggled) {
-// 										$('div#toggle_btn:lt(-1)').remove();
-// 										showGazeButtons();
-// 										hideArrows();
-// 										$('#toggle_btn').css({ 'bottom' : 'initial', 'top' : 0, 'left' : toggle_btn.x, 'top' : arrow_up.y });
-// 										data['toggle_btn'] = { 'x' : toggle_btn.x, 'y' : arrow_up.y }
-// 										setData(data);
-// 									}
-// 									else {
-// 										$('div#toggle_btn:lt(-1)').remove();
-// 										hideGazeButtons();
-// 										showArrows();
-// 										removeLinks();
-// 										removeFields();
-// 										removeButtons();
-// 										$('#toggle_btn').css({ 'top' : 'initial', 'bottom' : 0, 'left' : toggle_btn.x, 'top' : arrow_down.y });
-// 										data['toggle_btn'] = { 'x' : toggle_btn.x, 'y' : arrow_down.y }
-// 										setData(data);
-// 									}
-// 								}
-// 								else if((click_btn.x<x_prediction && x_prediction<(click_btn.x+100)) && (click_btn.y<y_prediction && y_prediction<(click_btn.y+100))) {
-// 									if(toggled) {
-// 										// setTimeout(function() {
-// 											console.log('CLICK');
-// 											data['arrow_to_buttons']=!data['arrow_to_buttons'];
-// 											setData(data);
-// 											// console.log('data: ' + data['arrow_to_buttons']);
-// 										// }, 1000);
-// 											if(data['arrow_to_buttons']) clickButton();
-// 											else removeLinks();
-// 									}
-// 								}
-// 								else if((press_btn.x<x_prediction && x_prediction<(press_btn.x+100)) && (press_btn.y<y_prediction && y_prediction<(press_btn.y+100))) {
-// 									if(toggled) {
-// 										// setTimeout(function() {
-// 											console.log('PRESS');
-// 											data['arrow_to_buttons']=!data['arrow_to_buttons'];
-// 											setData(data);
-// 											// console.log('data: ' + data['arrow_to_buttons']);
-// 										// }, 1000);
-// 											if(data['arrow_to_buttons']) pressButton();
-// 											else removeButtons();
-// 									}
-// 								}
-// 								else if((focus_btn.x<x_prediction && x_prediction<(focus_btn.x+100)) && (focus_btn.y<y_prediction && y_prediction<(focus_btn.y+100))) {
-// 									if(toggled) {
-// 										// setTimeout(function() {
-// 											console.log('FOCUS');
-// 											data['arrow_to_buttons']=!data['arrow_to_buttons'];
-// 											setData(data);
-// 											// console.log('data: ' + data['arrow_to_buttons']);
-// 										// }, 1000);
-// 											if(data['arrow_to_buttons']) focusButton();
-// 											else removeFields();
-// 									}
-// 								}
-// 								else if((open_btn.x<x_prediction && x_prediction<(open_btn.x+100)) && (open_btn.y<y_prediction && y_prediction<(open_btn.y+100))) {
-// 									if(toggled) {
-// 										console.log('OPEN');
-// 									}
-// 								}
+// 			var toggle_fxn;
+
+// 			// puts an id for gaze listener dot removes its duplicates
+// 			$('div[style*="position: fixed; z-index: 99999; left: -5px; top: -5px; width: 10px; height: 10px; background: red; display: block; border-radius: 100%; opacity: 0.7;"]').attr('id', 'gaze_listener');
+// 			$('div#gaze_listener:lt(-1)').remove();
+// 			var gaze_listener = $('div#gaze_listener');
+// 			// gaze_listener.css('background-color', 'green');
+
+			
+// 					if ((arrow_down.x<xp && xp<(arrow_down.x+50)) && (arrow_down.y<yp && yp<(arrow_down.y+50)))
+// 						scrollDown(toggled);
+// 					else if ((arrow_up.x<xp && xp<(arrow_up.x+50)) && (arrow_up.y<yp && yp<(arrow_up.y+50)))
+// 						scrollUp(toggled);
+// 					else if((arrow_left.x<xp && xp<(arrow_left.x+50)) && (arrow_left.y<yp && yp<(arrow_left.y+50)))
+// 						previousPage(toggled);
+// 					else if((arrow_right.x<xp && xp<(arrow_right.x+50)) && (arrow_right.y<yp && yp<(arrow_right.y+50)))
+// 						nextPage(toggled);
+// 					if((toggle1_btn.x<xp && xp<(toggle1_btn.x+50)) && (toggle1_btn.y<yp && yp<(toggle1_btn.y+50))) {
+// 						toggled=!toggled;
+// 						if(toggled) {
+// 							// $('div#toggle_btn:lt(-1)').remove();
+// 							// showGazeButtons();
+// 							// hideArrows();
+// 							// $('#toggle_btn').css({ 'bottom' : 'initial', 'top' : 0, 'left' : toggle_btn.x, 'top' : arrow_up.y });
+// 							// data['toggle_btn'] = { 'x' : toggle_btn.x, 'y' : arrow_up.y }
+// 							// setData(data);
+// 							document.getElementById('arrows_div').style.opacity = '0';
+// 							document.getElementById('gaze_btns_div').style.opacity = '1';
+// 						}
+// 						else {
+// 							// $('div#toggle_btn:lt(-1)').remove();
+// 							document.getElementById('arrows_div').style.opacity = '1';
+// 							document.getElementById('gaze_btns_div').style.opacity = '0';
+// 							removeLinks();
+// 							removeFields();
+// 							removeButtons();
+// 							// $('#toggle_btn').css({ 'top' : 'initial', 'bottom' : 0, 'left' : toggle_btn.x, 'top' : arrow_down.y });
+// 							// data['toggle_btn'] = { 'x' : toggle_btn.x, 'y' : arrow_down.y }
+// 							// setData(data);
+// 						}
+// 					}
+					// else if((click_btn.x<xp && xp<(click_btn.x+50)) && (click_btn.y<yp && yp<(click_btn.y+50))) {
+					// 	if(toggled) {
+					// 		// setTimeout(function() {
+					// 			console.log('CLICK');
+					// 			data['arrow_to_buttons']=!data['arrow_to_buttons'];
+					// 			setData(data);
+					// 			// console.log('data: ' + data['arrow_to_buttons']);
+					// 		// }, 1000);
+					// 			if(data['arrow_to_buttons']) clickButton();
+					// 			else removeLinks();
+					// 	}
+					// }
+					// else if((press_btn.x<xp && xp<(press_btn.x+50)) && (press_btn.y<yp && yp<(press_btn.y+50))) {
+					// 	if(toggled) {
+					// 		// setTimeout(function() {
+					// 			console.log('PRESS');
+					// 			data['arrow_to_buttons']=!data['arrow_to_buttons'];
+					// 			setData(data);
+					// 			// console.log('data: ' + data['arrow_to_buttons']);
+					// 		// }, 1000);
+					// 			if(data['arrow_to_buttons']) pressButton();
+					// 			else removeButtons();
+					// 	}
+					// }
+					// else if((focus_btn.x<xp && xp<(focus_btn.x+50)) && (focus_btn.y<yp && yp<(focus_btn.y+50))) {
+					// 	if(toggled) {
+					// 		// setTimeout(function() {
+					// 			console.log('FOCUS');
+					// 			data['arrow_to_buttons']=!data['arrow_to_buttons'];
+					// 			setData(data);
+					// 			// console.log('data: ' + data['arrow_to_buttons']);
+					// 		// }, 1000);
+					// 			if(data['arrow_to_buttons']) focusButton();
+					// 			else removeFields();
+					// 	}
+					// }
+					// else if((open_btn.x<xp && xp<(open_btn.x+50)) && (open_btn.y<yp && yp<(open_btn.y+50))) {
+					// 	if(toggled) {
+					// 		console.log('OPEN');
+					// 	}
+					// }
+	// 	});
+	// })
+	// .begin()
+	// .showPredictionPoints(true);
 
 
-
-// 			}
-// 		});	
-// 	})
-// 	.begin()
-// 	.showPredictionPoints(true);
-
-
-// window.onbeforeunload = function() {
-// 	webgazer.pause();
-// 	console.log('webgazer paused');
-// 	// window.localStorage.clear(); //Comment out if you want to save data across different sessions	
-// 	return;
-// }
+window.onbeforeunload = function() {
+	webgazer.clearGazeListener();
+	console.log('webgazer ended');
+	// window.localStorage.clear(); //Comment out if you want to save data across different sessions	
+	return;
+}
 
 
 
@@ -210,31 +218,31 @@ function nextPage() {
 }
 
 function showGazeButtons() {
-	document.getElementById('click_btn').style.opacity='1';
-	document.getElementById('press_btn').style.opacity='1';
-	document.getElementById('focus_btn').style.opacity='1';
-	document.getElementById('open_btn').style.opacity='1';
+	document.getElementById('gaze_btns_div').style.opacity='1';
+	// document.getElementById('press_btn').style.opacity='1';
+	// document.getElementById('focus_btn').style.opacity='1';
+	// document.getElementById('open_btn').style.opacity='1';
 }
 
 function hideGazeButtons() {
-	document.getElementById('click_btn').style.opacity='0';
-	document.getElementById('press_btn').style.opacity='0';
-	document.getElementById('focus_btn').style.opacity='0';
-	document.getElementById('open_btn').style.opacity='0';
+	document.getElementById('gaze_btns_div').style.opacity='0';
+	// document.getElementById('press_btn').style.opacity='0';
+	// document.getElementById('focus_btn').style.opacity='0';
+	// document.getElementById('open_btn').style.opacity='0';
 }
 
 function showArrows() {
-	document.getElementById('arrow_up').style.opacity='1';
-	document.getElementById('arrow_down').style.opacity='1';
-	document.getElementById('arrow_left').style.opacity='1';
-	document.getElementById('arrow_right').style.opacity='1';
+	document.getElementById('arrows_div').style.opacity='1';
+	// document.getElementById('arrow_down').style.opacity='1';
+	// document.getElementById('arrow_left').style.opacity='1';
+	// document.getElementById('arrow_right').style.opacity='1';
 }
 
 function hideArrows() {
-	document.getElementById('arrow_up').style.opacity='0';
-	document.getElementById('arrow_down').style.opacity='0';
-	document.getElementById('arrow_left').style.opacity='0';
-	document.getElementById('arrow_right').style.opacity='0';
+	document.getElementById('arrows_div').style.opacity='0';
+	// document.getElementById('arrow_down').style.opacity='0';
+	// document.getElementById('arrow_left').style.opacity='0';
+	// document.getElementById('arrow_right').style.opacity='0';
 }
 
 
@@ -468,4 +476,3 @@ function removeFields() {
 	for(var i=0; i<field_arr.length; i++)
 		field_arr[i].classList.remove('selectInputs');
 }
-
