@@ -108,9 +108,9 @@ function connectGaze(tab_id) {
 	chrome.tabs.executeScript({file: 'src/js/gaze-controls-off.js'});
 	chrome.tabs.executeScript({file: 'src/js/voice-off.js'});
 	chrome.tabs.executeScript({file: 'src/js/gaze-controls.js'});
-	chrome.tabs.executeScript({file: 'src/js_ext/webgazer.js'}, function() {
-		chrome.tabs.executeScript({file: 'src/js/gaze-functions.js'});
-	});
+	// chrome.tabs.executeScript({file: 'src/js_ext/webgazer.js'}, function() {
+	// 	chrome.tabs.executeScript({file: 'src/js/gaze-functions.js'});
+	// });
 }
 
 function connectVoice(tab_id) {

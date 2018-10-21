@@ -77,15 +77,17 @@ if(window.SpeechRecognition !== null) {
 	recognizer.onresult = function(event) {
 		console.log('onresult');
 
+		var voice_results;
+
 		for(var i=event.resultIndex; i<event.results.length; i++) {
-			if(event.results[i].isFinal) voice_input.value = event.results[i][0].transcript;
-			else voice_input.value += event.results[i][0].transcript;
+			if(event.results[i].isFinal) voice_results = event.results[i][0].transcript;
+			else voice_results += event.results[i][0].transcript;
 		}
 
 		/* when user says the keyword, it calls the corresponding function */
 		var data, label_number;
-
-		switch(voice_input.value) {
+		console.log(voice_results);
+		switch(voice_results) {
 			case 'scroll up': scrollUp();
 												recognizer.stop();
 												console.log('stop');
@@ -94,6 +96,7 @@ if(window.SpeechRecognition !== null) {
 												recognizer.stop();
 												console.log('stop');
 												break;
+			case 'backpage':												
 			case 'back page': backPage();
 												break;
 			case 'forward page': forwardPage();
@@ -108,7 +111,7 @@ if(window.SpeechRecognition !== null) {
 										break;
 			case 'stop': voice_stop_btn.click();
 										break;
-			default: inputNum(voice_input.value);		
+			default: inputNum(voice_results);		
 								break;
 		}		
 	}
@@ -176,8 +179,8 @@ if(window.SpeechRecognition !== null) {
 
 		recognizer.stop();
 		console.log('recog stopped');
-		voice_input.value = 'VOICE RECOGNITION STOPPED';
 		removeLinks(); removeFields(); removeButtons(); removeLabels();
+		voice_input.value = 'VOICE RECOGNITION STOPPED';
 	});
 }
 
@@ -264,7 +267,8 @@ function clickButton() {
 		addLabels(link_arr, link_labels);
 	}
 	else if(focus_toggle || press_toggle || open_toggle) {
-		console.log('other function is toggled');
+		console.log('click function is toggled');
+		// clickButton();
 	}
 	else {
 		removeLinks();
@@ -282,7 +286,8 @@ function focusButton() {
 		addLabels(field_arr, field_labels);
 	}
 	else if(click_toggle || press_toggle || open_toggle) {
-		console.log('other function is toggled');
+		console.log('focus function is toggled');
+		// focusButton();
 	}
 	else {
 		removeFields();
@@ -300,7 +305,7 @@ function pressButton() {
 		addLabels(button_arr, button_labels);
 	}
 	else if(click_toggle || focus_toggle || open_toggle) {
-		console.log('other function is toggled');
+		console.log('press function is toggled');
 	}
 	else {
 		removeButtons();
@@ -318,7 +323,7 @@ function openButton() {
 		addLabels(link_arr, link_labels);
 	}
 	else if(click_toggle || focus_toggle || press_toggle) {
-		console.log('other function is toggled');
+		console.log('open function is toggled');
 	}
 	else {
 		removeLinks();
@@ -547,19 +552,29 @@ function selectElement(label_number, array) {
 	if(click_toggle && !focus_toggle && !press_toggle && !open_toggle) {
 		console.log('link clicked');
 		array[label_number].click();
+		removeLabels();
+		removeLinks();
+		click_toggle=false;
 	}
 	else if(focus_toggle && !click_toggle && !press_toggle && !open_toggle) {
 		console.log('field focused');
 		array[label_number].focus();
+		removeLabels();
+		removeFields();
+		focus_toggle=false;
 	}
 	else if(press_toggle && !click_toggle && !focus_toggle && !open_toggle) {
 		console.log('button pressed');
 		array[label_number].click();
+		removeLabels();
+		removeButtons();
+		press_toggle=false;
 	}
 	else if(open_toggle && !click_toggle && !focus_toggle && !press_toggle) {
 		var link = array[label_number].href;
 		console.log(link);
 		window.open(link, '_blank');
 		voice_stop_btn.click();
+		open_toggle=false;
 	}
-}	
+}

@@ -58,7 +58,7 @@ function connectGaze(tab_id) {
 	chrome.tabs.executeScript({file: 'src/js/gaze-controls.js'});
 	chrome.tabs.executeScript({file: 'src/js_ext/webgazer.js'}, function() {
 		chrome.tabs.executeScript({file: 'src/js/gaze-functions.js'});
-	});
+	});	
 	// chrome.tabs.executeScript(tab_id, {file: ''});   // script that will disable voice-controls
 }
 
