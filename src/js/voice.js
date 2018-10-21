@@ -99,6 +99,7 @@ if(window.SpeechRecognition !== null) {
 			case 'backpage':												
 			case 'back page': backPage();
 												break;
+			case 'forwardpage':												
 			case 'forward page': forwardPage();
 										break;																								
 			case 'click': clickButton();
@@ -136,20 +137,20 @@ if(window.SpeechRecognition !== null) {
 			}
 			else if(prev_toggle) {
 				recognizer.start();
-				console.log('onend prev');
+				console.log('onend back page');
 				prev_toggle=false;
 			}
 			else if(next_toggle) {
 				recognizer.start();
-				console.log('onend next');
+				console.log('onend forward page');
 				next_toggle=false;
 			}
 			// when voice_end_btn is clicked/data['voice_toggle'] is false
 			else if(!data['voice_toggle']) {}
 			else {
 				recognizer.start();
-				console.log('else');
-				text.value='';
+				// console.log('else');
+				// voice_input.value='wrong keyword';
 			}
 		});
 	}
@@ -530,6 +531,7 @@ function inputNum(number) {
 			case 'seven': number=7; break;
 			case 'eight': number=8; break;
 			case 'nine': number=9; break;
+			default: voice_input.value='wrong keyword';
 		}
 	}
 

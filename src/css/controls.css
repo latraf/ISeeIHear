@@ -192,9 +192,9 @@ body {
 	width: 200px;
 	height: 30px;
 	margin-top: 20%;
-	margin-right: 10%;
+	margin-right: 15%;
 	position:fixed;
-	z-index: 1000;
+	z-index: 9000;
 }
 
 .voice_btn {
@@ -205,22 +205,22 @@ body {
 	height: 40px;
 	margin-top: 20%;
 	position: fixed;
-	z-index: 1000;
+	z-index: 9000;
 }
 
 #voice_start_btn {
 	background-color: green;
-	margin-right: 7%;
+	margin-right: 12%;
 }
 
 #voice_stop_btn {
 	background-color: red;
-	margin-right: 4%;
+	margin-right: 9%;
 }
 
 #voice_help_btn {
 	background-color: blue;
-	margin-right: 1%;
+	margin-right: 6%;
 	color: white!important;
 }
 
@@ -230,9 +230,9 @@ body {
 	bottom: 0;
 	height: 200px;
 	margin-top: 25%;
-	margin-right: 3%;
+	margin-right: 8%;
 	position:fixed;
-	z-index: 1000;
+	z-index: 9000;
 	background-color:white!important;
 	padding: 10px;
 }
