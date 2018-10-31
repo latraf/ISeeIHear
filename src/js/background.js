@@ -78,7 +78,7 @@ function connectVoice(tab_id) {
 
 function connectBoth(tab_id) {
 	var data = {
-		'gaze_mode' : false,
+		'gaze_mode' : false,	
 		'voice_mode' : false,
 		'both_mode' : true
 	};
@@ -112,5 +112,6 @@ chrome.runtime.onInstalled.addListener(function(extension) {
 		// var data = { 'gaze_calibrated' : false };
 		// setData(data);
 		alert('newly installed!');
+		chrome.tabs.create( {url: chrome.extension.getURL("src/howto.html")}, function(){});
 	}
 });

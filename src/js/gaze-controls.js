@@ -126,7 +126,7 @@ calibration2_div.appendChild(focus_btn);
 calibration2_div.appendChild(open_btn);
 calibration2_div.appendChild(toggle2_btn);
 
-// document.body.appendChild(calibration1_div);
+document.body.appendChild(calibration1_div);
 
 /* CALIBRATION */
 
