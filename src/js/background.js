@@ -19,50 +19,49 @@ var curr_tab_id = 0, curr_window_id = 0;
 
 function maintainScript(tabId, changeInfo, tab) {
 
-	console.log('tab updated');
-
-	curr_tab_id = tab.id;
-	curr_window_id = tab.windowId;
+	console.log('tab reloaded');
+	var data = { 'gaze_toggle' :  false };
+	setData(data);
 
 	getData(function (data) {
 		var mode = data['mode'];
-		// var active_tab_id = data['active_tab_id'];
-		// var active_window_id = data ['active_window_id'];
 
 		if(changeInfo.status=='complete') {
-				if(mode=='GAZE') connectGaze(curr_tab_id);
-				else if(mode=='VOICE') connectVoice(curr_tab_id);
-				else if(mode=='BOTH') connectBoth(curr_tab_id);
+				if(mode=='GAZE') connectGaze();
+				else if(mode=='VOICE') connectVoice();
+				else if(mode=='BOTH') connectBoth();
 				else if(mode=='OFF') {
 					console.log('Modes are turned off.');
-					removeControls(curr_tab_id);
+					removeControls();
 				}
 				else console.log('Error!');	
 		}
-
-		// console.log(tab);
 	});	
 }
 
-function connectGaze(tab_id) {
-	var data = {
-		'gaze_mode' : true,
-		'voice_mode' : false,
-		'both_mode' : false
-	};
-	console.log('connectGaze');
-	setData(data);
-	chrome.tabs.executeScript({file: 'src/js_ext/jquery-3.1.1.min.js'});
-	chrome.tabs.executeScript({file: 'src/js/gaze-controls-off.js'});
-	chrome.tabs.executeScript({file: 'src/js/voice-off.js'});
-	chrome.tabs.executeScript({file: 'src/js/gaze-controls.js'});
-	chrome.tabs.executeScript({file: 'src/js_ext/webgazer.js'}, function() {
-		chrome.tabs.executeScript({file: 'src/js/gaze-functions.js'});
-	});	
-	// chrome.tabs.executeScript(tab_id, {file: ''});   // script that will disable voice-controls
+function connectGaze() {
+	getData(function(data) {
+		if(!data['gaze_toggle']) {
+			var data = {
+				'gaze_mode' : true,
+				'voice_mode' : false,
+				'both_mode' : false,
+				'gaze_toggle' : true
+			};
+			console.log('connectGaze');
+			setData(data);
+			chrome.tabs.executeScript({file: 'src/js_ext/jquery-3.1.1.min.js'});
+			chrome.tabs.executeScript({file: 'src/js/gaze-controls-off.js'});
+			chrome.tabs.executeScript({file: 'src/js/voice-off.js'});
+			chrome.tabs.executeScript({file: 'src/js/gaze-controls.js'});
+			chrome.tabs.executeScript({file: 'src/js_ext/webgazer.js'}, function() {
+				chrome.tabs.executeScript({file: 'src/js/gaze-functions.js'});
+			});	
+		}
+	})
 }
 
-function connectVoice(tab_id) {
+function connectVoice() {
 	var data = {
 		'gaze_mode' : false,
 		'voice_mode' : true,
@@ -72,11 +71,11 @@ function connectVoice(tab_id) {
 	setData(data);
 	chrome.tabs.executeScript({file: 'src/js_ext/jquery-3.1.1.min.js'});
 	chrome.tabs.executeScript({file: 'src/js/gaze-controls-off.js'});
-	// script that will enable voice-controls
+	/* script that will enable voice-controls */
 	chrome.tabs.executeScript({file: 'src/js/voice.js'});
 }
 
-function connectBoth(tab_id) {
+function connectBoth() {
 	var data = {
 		'gaze_mode' : false,	
 		'voice_mode' : false,
@@ -85,14 +84,12 @@ function connectBoth(tab_id) {
 	alert('connectBoth');
 	setData(data);
 	chrome.tabs.executeScript({file: 'src/js_ext/jquery-3.1.1.min.js'});
-	// chrome.tabs.executeScript(tab_id, {file: 'src/js_ext/webgazer.js'}, function() {
-		chrome.tabs.executeScript({file: 'src/js/gaze-controls-off.js'});
-	// });
+	chrome.tabs.executeScript({file: 'src/js/gaze-controls-off.js'});
 	// chrome.tabs.executeScript(tab_id, {file: ''});   // script that will enable gaze-controls
 	// chrome.tabs.executeScript(tab_id, {file: ''});   // script that will enable voice-controls
 }
 
-function removeControls(tab_id) {
+function removeControls() {
 	var data = {
 		'gaze_mode' : false,
 		'voice_mode' : false,
@@ -102,16 +99,23 @@ function removeControls(tab_id) {
 	alert('Modes are turned off.');
 	setData(data);
 	chrome.tabs.executeScript({file: 'src/js_ext/jquery-3.1.1.min.js'});
-	// chrome.tabs.executeScript(tab_id, {file: 'src/js_ext/webgazer.js'}, function() {
-		chrome.tabs.executeScript({file: 'src/js/gaze-controls-off.js'});
-	// });
+	chrome.tabs.executeScript({file: 'src/js/gaze-controls-off.js'});
+	chrome.tabs.executeScript({file: 'src/js/voice-off.js'});	
 }
 
 chrome.runtime.onInstalled.addListener(function(extension) {
 	if(extension.reason == 'install') {
-		// var data = { 'gaze_calibrated' : false };
-		// setData(data);
 		alert('newly installed!');
 		chrome.tabs.create( {url: chrome.extension.getURL("src/howto.html")}, function(){});
 	}
 });
+
+chrome.runtime.onSuspend.addListener(function() {
+	var data = { 'gaze_toggle' : false };
+	setData(data);
+});
+
+window.onbeforeunload = function() {
+	var data = { 'gaze_toggle' : false };
+	setData(data);
+}

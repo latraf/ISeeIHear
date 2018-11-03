@@ -7,15 +7,8 @@ $(function() {
 	});
 });
 
-/* redirects to a new tab when "How To" is clicked */
-document.addEventListener('DOMContentLoaded', function() {
-	document.getElementById('how_to').addEventListener('click', howToTab);
-});
-
 function setData(data) {
-	chrome.storage.local.set(data, function() {
-		console.log(data);
-	});
+	chrome.storage.local.set(data, function() {});
 }
 
 function getData(callback) {
@@ -23,8 +16,7 @@ function getData(callback) {
 }
 
 function howToTab() {
-	chrome.tabs.create({'url': 'src/howto.html'}, function(tab) {
-	});
+	chrome.tabs.create({'url': 'src/howto.html'}, function(tab) {});
 }
 
 /* saves modality into chrome storage when button is clicked */
@@ -76,10 +68,8 @@ function removeControls() {
 	};
 	console.log('Modes are turned off.');
 	setData(data);
-	// chrome.tabs.executeScript(tab_id, {file: 'src/js_ext/webgazer.js'}, function() {
-		chrome.tabs.executeScript({file: 'src/js/gaze-controls-off2.js'});
-		chrome.tabs.executeScript({file: 'src/js/voice-off.js'});
-	// });
+	chrome.tabs.executeScript({file: 'src/js/gaze-controls-off2.js'});
+	chrome.tabs.executeScript({file: 'src/js/voice-off.js'});
 }
 
 /* calls loading function everytime popup.html loads */
@@ -92,4 +82,5 @@ window.onload = function() {
 	console.log("popup loaded!");
 	document.getElementById('save_btn').addEventListener('click', saveSettings);
 	document.getElementById('turn_off').addEventListener('click', removeControls);
+	document.getElementById('how_to').addEventListener('click', howToTab);
 }
