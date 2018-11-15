@@ -18,6 +18,17 @@ body {
 	background-color: white!important;
 }
 
+/*.big_divs {
+	top: 0;
+	bottom: 0;
+	left: 0;
+	right: 0;
+	height: 100%;
+	width: 100%;
+	position: fixed;
+	margin: auto;
+}*/
+
 #calibration_notes {
 	top: 0;
 	bottom: 0;

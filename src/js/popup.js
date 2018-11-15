@@ -27,12 +27,14 @@ function saveSettings() {
 	mode = $('input[name="radio"]:checked').val();
 	console.log('mode ' + mode);
 	switch(mode) {
-		case '1': mode_out = 'GAZE'; break;
+		case '1': mode_out = 'GAZE'; 
+							var calibrated = false;
+							break;
 		case '2': mode_out = 'VOICE'; break;
 		case '3': mode_out = 'BOTH'; break;
 	}
 
-	var data = {'mode' : mode_out}
+	var data = { 'mode' : mode_out, 'calibrated': calibrated };
 	setData(data);
 
 	chrome.tabs.reload();

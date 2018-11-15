@@ -20,6 +20,11 @@ var curr_tab_id = 0, curr_window_id = 0;
 function maintainScript(tabId, changeInfo, tab) {
 
 	console.log('tab reloaded');
+	// chrome.tabs.reload();
+	chrome.tabs.executeScript(tabId, {file: 'src/js_ext/jquery-3.1.1.min.js'}, function() {
+		chrome.tabs.executeScript(tabId, {file: 'src/js/gaze-controls-off.js'});
+		chrome.tabs.executeScript(tabId, {file: 'src/js/voice-off.js'});	
+	});
 	var data = { 'gaze_toggle' :  false };
 	setData(data);
 
@@ -50,12 +55,12 @@ function connectGaze() {
 			};
 			console.log('connectGaze');
 			setData(data);
-			chrome.tabs.executeScript({file: 'src/js_ext/jquery-3.1.1.min.js'});
-			chrome.tabs.executeScript({file: 'src/js/gaze-controls-off.js'});
-			chrome.tabs.executeScript({file: 'src/js/voice-off.js'});
-			chrome.tabs.executeScript({file: 'src/js/gaze-controls.js'});
-			chrome.tabs.executeScript({file: 'src/js_ext/webgazer.js'}, function() {
-				chrome.tabs.executeScript({file: 'src/js/gaze-functions.js'});
+			// chrome.tabs.executeScript({file: 'src/js_ext/jquery-3.1.1.min.js', runAt: 'document_start'});
+			// chrome.tabs.executeScript({file: 'src/js/gaze-controls-off.js', runAt: 'document_end'});
+			// chrome.tabs.executeScript({file: 'src/js/voice-off.js', runAt: 'document_end'});
+			chrome.tabs.executeScript({file: 'src/js_ext/webgazer.js', runAt: 'document_end'}, function() {
+				chrome.tabs.executeScript({file: 'src/js/gaze-controls.js', runAt: 'document_end'});
+				chrome.tabs.executeScript({file: 'src/js/gaze-functions.js', runAt: 'document_end'});
 			});	
 		}
 	})
@@ -106,16 +111,23 @@ function removeControls() {
 chrome.runtime.onInstalled.addListener(function(extension) {
 	if(extension.reason == 'install') {
 		alert('newly installed!');
+		var data = { 	'calibrated1' : false,
+									// 'calibrated2' : false,
+									// 'calibrated3' : false,
+									// 'calibrated4' : false,
+									// 'calibrated5' : false
+								};
+		setData(data);
 		chrome.tabs.create( {url: chrome.extension.getURL("src/howto.html")}, function(){});
 	}
 });
 
 chrome.runtime.onSuspend.addListener(function() {
 	var data = { 'gaze_toggle' : false };
-	setData(data);
+	setData(data);		
 });
 
 window.onbeforeunload = function() {
 	var data = { 'gaze_toggle' : false };
-	setData(data);
+	setData(data);	
 }

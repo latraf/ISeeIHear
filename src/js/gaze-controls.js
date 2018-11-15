@@ -126,194 +126,221 @@ calibration2_div.appendChild(focus_btn);
 calibration2_div.appendChild(open_btn);
 calibration2_div.appendChild(toggle2_btn);
 
-document.body.appendChild(calibration1_div);
+
 
 /* CALIBRATION */
 
-var calibrated=0;
+var calibrated1=0;
+// calibrated2=0, calibrated3=0, calibrated4=0, calibrated5=0;
 
 $(document).ready(function() {
 	setPosition();
 
-	var num_clicks;
-	$('#arrow_up').on('click', function() {
-		if(num_clicks===undefined) num_clicks=0;
 
-		num_clicks++;
-		console.log(num_clicks);
+	getData(function(data) {
 
-		if(num_clicks<10) {
-			var opacity = 0.1*num_clicks+0.1;
-			$(this).css('opacity', opacity);
-		}
-		else if(num_clicks===10) {
-			calibrated++;
-			num_clicks=0;
-			console.log('calibrated: ' + calibrated);
-			try{
-				calibration1_div.removeChild(arrow_up);
-			} 
-			catch (ex) { 
-				console.log(ex.message); 
-				calibrated--;
-			}
-			arrows_div.appendChild(arrow_up);
-		}
+		var num_clicks;
+		if(!data['calibrated1']) {
+			document.body.appendChild(calibration1_div);
+			$('#arrow_up').on('click', function() {
+				if(num_clicks===undefined) num_clicks=0;
 
-		if(calibrated===5) {
-			console.log('all calibrated');
-			document.body.removeChild(calibration1_div);
-			document.body.appendChild(arrows_div);
-			calibration1_div.removeChild(calibration_notes);
-			calibration2_div.appendChild(calibration_notes);
-			calibrated=0;
-			$(this).off('click');
+				num_clicks++;
+				console.log(num_clicks);
+
+				if(num_clicks<10) {
+					var opacity = 0.1*num_clicks+0.1;
+					$(this).css('opacity', opacity);
+				}
+				else if(num_clicks===10) {
+					calibrated1++;
+					num_clicks=0;
+					console.log('calibrated1: ' + calibrated1);
+					try{
+						calibration1_div.removeChild(arrow_up);
+					} 
+					catch (ex) { 
+						console.log(ex.message); 
+						calibrated1--;
+					}
+					arrows_div.appendChild(arrow_up);
+				}
+
+				if(calibrated1===5) {
+					console.log('all calibrated1');
+					document.body.removeChild(calibration1_div);
+					document.body.appendChild(arrows_div);
+					// calibration1_div.removeChild(calibration_notes);
+					// calibration2_div.appendChild(calibration_notes);
+					calibrated1=0;
+					var data = { 'calibrated1' : true };
+					setData(data);
+					$(this).off('click');
+				}
+			});
+
+
+			$('#arrow_down').on('click', function() {
+				if(num_clicks===undefined) num_clicks=0;
+
+				num_clicks++;
+				console.log(num_clicks);
+
+				if(num_clicks<10) {
+					var opacity = 0.1*num_clicks+0.1;
+					$(this).css('opacity', opacity);
+				}
+				else if(num_clicks===10) {
+					calibrated1++;
+					num_clicks=0;
+					console.log('calibrated1: ' + calibrated1);
+					try{
+						calibration1_div.removeChild(arrow_down);
+					} 
+					catch (ex) { 
+						console.log(ex.message); 
+						calibrated1--;
+					}
+					arrows_div.appendChild(arrow_down);
+				}
+
+				if(calibrated1===5) {
+					console.log('all calibrated1');
+					document.body.removeChild(calibration1_div);
+					document.body.appendChild(arrows_div);
+					// calibr ation1_div.removeChild(calibration_notes);
+					// calibration2_div.appendChild(calibration_notes);
+					calibrated1=0;
+					var data = { 'calibrated1' : true };
+					setData(data);
+					$(this).off('click');
+				}
+			});
+
+			$('#arrow_left').on('click', function() {
+				if(num_clicks===undefined) num_clicks=0;
+
+				num_clicks++;
+				console.log(num_clicks);
+
+				if(num_clicks<10) {
+					var opacity = 0.1*num_clicks+0.1;
+					$(this).css('opacity', opacity);
+				}
+				else if(num_clicks===10) {
+					calibrated1++;
+					num_clicks=0;
+					console.log('calibrated1: ' + calibrated1);
+					try{
+						calibration1_div.removeChild(arrow_left);
+					} 
+					catch (ex) { 
+						console.log(ex.message); 
+						calibrated1--;
+					}
+					arrows_div.appendChild(arrow_left);
+				}
+
+				if(calibrated1===5) {
+					console.log('all calibrated1');
+					document.body.removeChild(calibration1_div);
+					document.body.appendChild(arrows_div);
+					// calibration1_div.removeChild(calibration_notes);
+					// calibration2_div.appendChild(calibration_notes);
+					calibrated1=0;
+					var data = { 'calibrated1' : true };
+					setData(data);
+					$(this).off('click');
+				}
+			});
+
+			$('#arrow_right').on('click', function() {
+				if(num_clicks===undefined) num_clicks=0;
+
+				num_clicks++;
+				console.log(num_clicks);
+
+				if(num_clicks<10) {
+					var opacity = 0.1*num_clicks+0.1;
+					$(this).css('opacity', opacity);
+				}
+				else if(num_clicks===10) {
+					calibrated1++;
+					num_clicks=0;
+					console.log('calibrated1: ' + calibrated1);
+					try{
+						calibration1_div.removeChild(arrow_right);
+					} 
+					catch (ex) { 
+						console.log(ex.message); 
+						calibrated1--;
+					}
+					arrows_div.appendChild(arrow_right);
+				}
+
+				if(calibrated1===5) {
+					console.log('all calibrated1');
+					document.body.removeChild(calibration1_div);
+					document.body.appendChild(arrows_div);
+					// calibration1_div.removeChild(calibration_notes);
+					// calibration2_div.appendChild(calibration_notes);
+					calibrated1=0;
+					var data = { 'calibrated1' : true };
+					setData(data);
+					$(this).off('click');
+				}
+			});
+
+			$('#toggle1_btn').on('click', function() {
+				if(num_clicks===undefined) num_clicks=0;
+
+				num_clicks++;
+				console.log(num_clicks);
+
+				if(num_clicks<10) {
+					var opacity = 0.1*num_clicks+0.1;
+					$(this).css('opacity', opacity);
+				}
+				else if(num_clicks===10) {
+					calibrated1++;
+					num_clicks=0;
+					console.log('calibrated1: ' + calibrated1);
+					try{
+						calibration1_div.removeChild(toggle1_btn);
+					} 
+					catch (ex) { 
+						console.log(ex.message); 
+						calibrated1--;
+					}
+					// $(this).off('click');
+					arrows_div.appendChild(toggle1_btn);
+				}
+
+				if(calibrated1===5) {
+					console.log('all calibrated1');
+					document.body.removeChild(calibration1_div);
+					document.body.appendChild(arrows_div);
+					// calibration1_div.removeChild(calibration_notes);
+					// calibration2_div.appendChild(calibration_notes);
+					calibrated1=0;
+					var data = { 'calibrated1' : true };
+					setData(data);
+					$(this).off('click');
+				}
+			});
 		}
+		// else if(!data['calibrated2']) {
+
+		// }
+		// else if(!data['calibrated3']) {}
+		// else if(!data['calibrated4']) {}
+		// else if(!data['calibrated5']) {}
+		else if (data['calibrated1']) {
+			// alert('all calibrated');
+			showArrowsDiv();
+		}
+		else {}
 	});
-
-
-	$('#arrow_down').on('click', function() {
-		if(num_clicks===undefined) num_clicks=0;
-
-		num_clicks++;
-		console.log(num_clicks);
-
-		if(num_clicks<10) {
-			var opacity = 0.1*num_clicks+0.1;
-			$(this).css('opacity', opacity);
-		}
-		else if(num_clicks===10) {
-			calibrated++;
-			num_clicks=0;
-			console.log('calibrated: ' + calibrated);
-			try{
-				calibration1_div.removeChild(arrow_down);
-			} 
-			catch (ex) { 
-				console.log(ex.message); 
-				calibrated--;
-			}
-			arrows_div.appendChild(arrow_down);
-		}
-
-		if(calibrated===5) {
-			console.log('all calibrated');
-			document.body.removeChild(calibration1_div);
-			document.body.appendChild(arrows_div);
-			calibration1_div.removeChild(calibration_notes);
-			calibration2_div.appendChild(calibration_notes);
-			calibrated=0;
-			$(this).off('click');
-		}
-	});
-
-	$('#arrow_left').on('click', function() {
-		if(num_clicks===undefined) num_clicks=0;
-
-		num_clicks++;
-		console.log(num_clicks);
-
-		if(num_clicks<10) {
-			var opacity = 0.1*num_clicks+0.1;
-			$(this).css('opacity', opacity);
-		}
-		else if(num_clicks===10) {
-			calibrated++;
-			num_clicks=0;
-			console.log('calibrated: ' + calibrated);
-			try{
-				calibration1_div.removeChild(arrow_left);
-			} 
-			catch (ex) { 
-				console.log(ex.message); 
-				calibrated--;
-			}
-			arrows_div.appendChild(arrow_left);
-		}
-
-		if(calibrated===5) {
-			console.log('all calibrated');
-			document.body.removeChild(calibration1_div);
-			document.body.appendChild(arrows_div);
-			calibration1_div.removeChild(calibration_notes);
-			calibration2_div.appendChild(calibration_notes);
-			calibrated=0;
-			$(this).off('click');
-		}
-	});
-
-	$('#arrow_right').on('click', function() {
-		if(num_clicks===undefined) num_clicks=0;
-
-		num_clicks++;
-		console.log(num_clicks);
-
-		if(num_clicks<10) {
-			var opacity = 0.1*num_clicks+0.1;
-			$(this).css('opacity', opacity);
-		}
-		else if(num_clicks===10) {
-			calibrated++;
-			num_clicks=0;
-			console.log('calibrated: ' + calibrated);
-			try{
-				calibration1_div.removeChild(arrow_right);
-			} 
-			catch (ex) { 
-				console.log(ex.message); 
-				calibrated--;
-			}
-			arrows_div.appendChild(arrow_right);
-		}
-
-		if(calibrated===5) {
-			console.log('all calibrated');
-			document.body.removeChild(calibration1_div);
-			document.body.appendChild(arrows_div);
-			calibration1_div.removeChild(calibration_notes);
-			calibration2_div.appendChild(calibration_notes);
-			calibrated=0;
-			$(this).off('click');
-		}
-	});
-
-	$('#toggle1_btn').on('click', function() {
-		if(num_clicks===undefined) num_clicks=0;
-
-		num_clicks++;
-		console.log(num_clicks);
-
-		if(num_clicks<10) {
-			var opacity = 0.1*num_clicks+0.1;
-			$(this).css('opacity', opacity);
-		}
-		else if(num_clicks===10) {
-			calibrated++;
-			num_clicks=0;
-			console.log('calibrated: ' + calibrated);
-			try{
-				calibration1_div.removeChild(toggle1_btn);
-			} 
-			catch (ex) { 
-				console.log(ex.message); 
-				calibrated--;
-			}
-			// $(this).off('click');
-			arrows_div.appendChild(toggle1_btn);
-		}
-
-		if(calibrated===5) {
-			console.log('all calibrated');
-			document.body.removeChild(calibration1_div);
-			document.body.appendChild(arrows_div);
-			calibration1_div.removeChild(calibration_notes);
-			calibration2_div.appendChild(calibration_notes);
-			calibrated=0;
-			$(this).off('click');
-		}
-	});
-
-
 });
 
 /* INDIVIDUAL FUNCTIONALITIES ON UI ELEMENTS */
@@ -336,4 +363,21 @@ function setPosition() {
 function setElementCoordinates(element, x, y) {
 	element.style.left = x+'px';
 	element.style.top = y+'px';
+}
+
+function showArrowsDiv() {
+	arrow_up.style.opacity = 1;
+	arrow_down.style.opacity = 1;
+	arrow_left.style.opacity = 1;
+	arrow_right.style.opacity = 1;
+	toggle1_btn.style.opacity = 1;
+
+	arrows_div.appendChild(arrow_up);
+	arrows_div.appendChild(arrow_down);
+	arrows_div.appendChild(arrow_left);
+	arrows_div.appendChild(arrow_right);
+	arrows_div.appendChild(toggle1_btn);
+	document.body.appendChild(arrows_div);
+
+	console.log('calibrated1 done');
 }
