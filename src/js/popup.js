@@ -7,6 +7,10 @@ $(function() {
 	});
 });
 
+$(function() {
+	$("#tabs").tabs();
+});
+
 function setData(data) {
 	chrome.storage.local.set(data, function() {});
 }
