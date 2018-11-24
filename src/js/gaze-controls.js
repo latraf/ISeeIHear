@@ -204,6 +204,7 @@ $(document).ready(function() {
 			});
 		}
 		else arrows_div.style.opacity = 1;
+		setOpacity();
 	});
 	// arrows_div.style.opacity = 1;
 });
@@ -282,4 +283,18 @@ function setElementCoordinates(element, x, y) {
 	// console.log(x + y);
 	element.style.left = x+'px';
 	element.style.top = y+'px';
+}
+
+function setOpacity() {
+	var opacity = 0;
+	getData(function(data) {
+		opacity = data['opacity'];
+
+		var element_arr = [arrow_down, arrow_up, arrow_left, arrow_right, toggle1_btn, toggle2_btn,  click_btn, press_btn, focus_btn, open_btn];
+	
+		element_arr.forEach(function(element) {
+			if(element) element.style.opacity = opacity;
+		});
+	});
+	console.log('opacity set');
 }

@@ -20,21 +20,27 @@ function howToTab() {
 }
 
 /* saves modality into chrome storage when button is clicked */
-var mode_out = '', mode = 0;
+var mode_out = '', mode=0, opacity=1, opacity_val;
 
 function saveSettings() {
 
-	mode = $('input[name="radio"]:checked').val();
-	console.log('mode ' + mode);
+	mode = $('input[name="modality"]:checked').val();
+	console.log('mode: ' + mode);
 	switch(mode) {
-		case '1': mode_out = 'GAZE'; 
-							var calibrated = false;
-							break;
+		case '1': mode_out = 'GAZE'; break;
 		case '2': mode_out = 'VOICE'; break;
 		case '3': mode_out = 'BOTH'; break;
 	}
 
-	var data = { 'mode' : mode_out, 'calibrated': calibrated };
+	opacity_val = $('input[name="opacity"]:checked').val();
+	console.log('opacity: ' + opacity_val);
+	switch(opacity_val) {
+		case '1': opacity = 0.3; break;
+		case '2': opacity = 0.5; break;
+		case '3': opacity = 1; break;
+	}
+
+	var data = { 'mode' : mode_out, 'opacity' : opacity };
 	setData(data);
 
 	chrome.tabs.reload();
@@ -54,10 +60,22 @@ function loadSettings() {
 			$('#radio-1').prop("checked", false);
 			$('#radio-2').prop("checked", false);
 			$('#radio-3').prop("checked", false);
+
+			$('#opacity-1').prop("checked", false);
+			$('#opacity-2').prop("checked", false);
+			$('#opacity-3').prop("checked", false);
 		}
 		else console.log('Error!');
 
-		console.log("loaded " + mode_out);
+		opacity_val = data['opacity'];
+		if(opacity_val===0.3) $('#opacity-1').prop("checked", true);
+		else if(opacity_val===0.5) $('#opacity-2').prop("checked", true);
+		else if(opacity_val===1.0) $('#opacity-3').prop("checked", true);
+		else console.log('Error!');
+
+		console.log("loaded mode: " + mode_out);
+		console.log("loaded opacity: " + opacity_val);
+
 	});
 }
 
