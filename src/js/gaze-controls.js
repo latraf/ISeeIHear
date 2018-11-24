@@ -31,10 +31,10 @@ arrow_down.setAttribute('class', 'arrows');
 arrow_left.setAttribute('class', 'arrows');
 arrow_right.setAttribute('class', 'arrows');
 
-arrow_up.style.opacity = 0.1;
-arrow_down.style.opacity = 0.1;
-arrow_left.style.opacity = 0.1;
-arrow_right.style.opacity = 0.1;
+// arrow_up.style.opacity = 0.1;
+// arrow_down.style.opacity = 0.1;
+// arrow_left.style.opacity = 0.1;
+// arrow_right.style.opacity = 0.1;
 
 // create buttons
 var click_btn = document.createElement('div');
@@ -52,10 +52,10 @@ focus_btn.setAttribute('class', 'gaze_btns');
 press_btn.setAttribute('class', 'gaze_btns');
 open_btn.setAttribute('class', 'gaze_btns');
 
-click_btn.style.opacity = 0.1;
-press_btn.style.opacity = 0.1;
-focus_btn.style.opacity = 0.1;
-open_btn.style.opacity = 0.1;
+// click_btn.style.opacity = 0.1;
+// press_btn.style.opacity = 0.1;
+// focus_btn.style.opacity = 0.1;
+// open_btn.style.opacity = 0.1;
 
 click_btn.prepend('Click!');
 focus_btn.prepend('Focus!');
@@ -72,8 +72,8 @@ toggle2_btn.setAttribute('id', 'toggle2_btn');
 toggle1_btn.setAttribute('class', 'toggle_btn');
 toggle2_btn.setAttribute('class', 'toggle_btn');
 
-toggle1_btn.style.opacity = 0.1;
-toggle2_btn.style.opacity = 0.1;
+// toggle1_btn.style.opacity = 0.1;
+// toggle2_btn.style.opacity = 0.1;
 
 toggle1_btn.prepend('Toggle to Gaze Buttons!');
 toggle2_btn.prepend('Toggle to Arrows!');
@@ -133,7 +133,7 @@ calibration_notes.innerHTML = '<center> <h3> Calibration: </h3>' +
 var calibration_div = document.createElement('div');
 calibration_div.setAttribute('class', 'calibration_div');
 calibration_div.appendChild(calibration_notes);
-document.body.appendChild(calibration_div);
+// document.body.appendChild(calibration_div);
 
 // calibration1_div.setAttribute('id', 'calibration1_div');
 // calibration1_div.setAttribute('class', 'calibration_divs');
@@ -168,10 +168,12 @@ $(document).ready(function() {
 	plotPoints();
 
 	getData(function(data) {
+		console.log('calibrated: ' + data['gaze_calibrated']);
 		if(!data['gaze_calibrated']) {
 			document.body.appendChild(calibration_div);
-			$('.calibration_btn').on('click', function() {
 
+			$('.calibration_btn').on('click', function() {
+				console.log('clicked');
 				var id = $(this).attr('id');
 				if (!calibration_points[id]) { // initialises if not done
 					calibration_points[id]=0;
@@ -193,15 +195,17 @@ $(document).ready(function() {
 				// 4. after clicking all data points, hide points, show arrows
 				if (points_calibrated >= 9){ // last point is calibrated
 					alert('data collected');
-					$(".calibration_btn").hide();
-					showArrows();
+					document.body.removeChild(calibration_div);
+					arrows_div.style.opacity = 1;
 					var data = { 'gaze_calibrated' : true };
 					setData(data);
 					alert('Webgazer Calibrated');
 				}
 			});
 		}
+		else arrows_div.style.opacity = 1;
 	});
+	// arrows_div.style.opacity = 1;
 });
 
 /* INDIVIDUAL FUNCTIONALITIES ON UI ELEMENTS */
@@ -217,7 +221,7 @@ function setPosition() {
 			data[element] = element_coordinates;
 		}
 	});
-	console.log(data);
+	// console.log(data);
 	setData(data);
 	console.log('set position');
 }
@@ -275,7 +279,7 @@ function plotPoints() {
 }
 
 function setElementCoordinates(element, x, y) {
-	console.log(x + y);
+	// console.log(x + y);
 	element.style.left = x+'px';
 	element.style.top = y+'px';
 }
