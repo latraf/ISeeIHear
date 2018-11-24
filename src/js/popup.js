@@ -19,11 +19,22 @@ function getData(callback) {
 	chrome.storage.local.get(null, callback);
 }
 
-function howToTab() {
-	chrome.tabs.create({'url': 'src/howto.html'}, function(tab) {});
+/* calls loading function everytime popup.html loads */
+window.onload = function() {
+	chrome.tabs.executeScript({file: 'src/js_ext/jquery-3.1.1.min.js'});
+	chrome.tabs.executeScript({file: 'src/js/gaze-controls-off.js'});
+	chrome.tabs.executeScript({file: 'src/js/voice-off.js'});
+
+	loadSettings();
+	console.log("popup loaded!");
+	document.getElementById('save_btn').addEventListener('click', saveSettings);
+	document.getElementById('turn_off').addEventListener('click', removeControls);
+
+	document.getElementById('add_keyword').addEventListener('click', addKeyword);
+	document.getElementById('remove_keyword').addEventListener('click', removeKeyword);
 }
 
-/* saves modality into chrome storage when button is clicked */
+/* SAVES MODALITY AND OPACITY into chrome storage when button is clicked */
 var mode_out = '', mode=0, opacity=1, opacity_val;
 
 function saveSettings() {
@@ -92,19 +103,20 @@ function removeControls() {
 	};
 	console.log('Modes are turned off.');
 	setData(data);
+	chrome.tabs.executeScript({file: 'src/js/gaze-controls-off.js'});
 	chrome.tabs.executeScript({file: 'src/js/gaze-controls-off2.js'});
 	chrome.tabs.executeScript({file: 'src/js/voice-off.js'});
 }
 
-/* calls loading function everytime popup.html loads */
-window.onload = function() {
-	chrome.tabs.executeScript({file: 'src/js_ext/jquery-3.1.1.min.js'});
-	chrome.tabs.executeScript({file: 'src/js/gaze-controls-off.js'});
-	chrome.tabs.executeScript({file: 'src/js/voice-off.js'});
 
-	loadSettings();
-	console.log("popup loaded!");
-	document.getElementById('save_btn').addEventListener('click', saveSettings);
-	document.getElementById('turn_off').addEventListener('click', removeControls);
-	document.getElementById('how_to').addEventListener('click', howToTab);
+/* EDIT KEYWORDS */
+
+var keyword_arr = [];
+
+function addKeyword() {
+
+}
+
+function removeKeyword() {
+
 }
