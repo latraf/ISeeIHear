@@ -111,14 +111,9 @@ function removeControls() {
 chrome.runtime.onInstalled.addListener(function(extension) {
 	if(extension.reason == 'install') {
 		alert('newly installed!');
-		var data = { 	'calibrated1' : false,
-									// 'calibrated2' : false,
-									// 'calibrated3' : false,
-									// 'calibrated4' : false,
-									// 'calibrated5' : false
-								};
+		var data = { 'gaze_calibrated' : false };
 		setData(data);
-		chrome.tabs.create( {url: chrome.extension.getURL("src/howto.html")}, function(){});
+		// chrome.tabs.create( {url: chrome.extension.getURL("src/howto.html")}, function(){});
 	}
 });
 

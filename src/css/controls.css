@@ -6,7 +6,7 @@ body {
 }
 
 
-.calibration_divs {
+.calibration_div {
 	top: 0;
 	bottom: 0;
 	left: 0;
@@ -16,6 +16,13 @@ body {
 	position: fixed;
 	margin: auto;
 	background-color: white!important;
+}
+
+.calibration_btn {
+	border-radius: 50%;
+	background-color: red;
+	border: 1px solid black;
+	position: fixed;
 }
 
 /*.big_divs {
