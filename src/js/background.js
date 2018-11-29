@@ -23,7 +23,7 @@ function maintainScript(tabId, changeInfo, tab) {
 	// chrome.tabs.reload();
 	chrome.tabs.executeScript(tabId, {file: 'src/js_ext/jquery-3.1.1.min.js'}, function() {
 		chrome.tabs.executeScript(tabId, {file: 'src/js/gaze-controls-off.js'});
-		chrome.tabs.executeScript(tabId, {file: 'src/js/voice-off.js'});	
+		// chrome.tabs.executeScript(tabId, {file: 'src/js/voice-off.js'});	
 	});
 	var data = { 'gaze_toggle' :  false };
 	setData(data);
@@ -75,7 +75,7 @@ function connectVoice() {
 	console.log('connectVoice');
 	setData(data);
 	chrome.tabs.executeScript({file: 'src/js_ext/jquery-3.1.1.min.js'});
-	chrome.tabs.executeScript({file: 'src/js/gaze-controls-off.js'});
+	// chrome.tabs.executeScript({file: 'src/js/gaze-controls-off.js'});
 	/* script that will enable voice-controls */
 	chrome.tabs.executeScript({file: 'src/js/voice.js'});
 }

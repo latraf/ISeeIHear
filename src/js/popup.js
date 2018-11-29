@@ -30,8 +30,8 @@ window.onload = function() {
 	document.getElementById('save_btn').addEventListener('click', saveSettings);
 	document.getElementById('turn_off').addEventListener('click', removeControls);
 
-	document.getElementById('add_keyword').addEventListener('click', addKeyword);
-	document.getElementById('remove_keyword').addEventListener('click', removeKeyword);
+	// document.getElementById('add_keyword').addEventListener('click', addKeyword);
+	// document.getElementById('remove_keyword').addEventListener('click', removeKeyword);
 }
 
 /* SAVES MODALITY AND OPACITY into chrome storage when button is clicked */
@@ -101,22 +101,47 @@ function removeControls() {
 		'both_mode' : false,
 		'mode' : 'OFF'
 	};
-	console.log('Modes are turned off.');
 	setData(data);
-	chrome.tabs.executeScript({file: 'src/js/gaze-controls-off.js'});
-	chrome.tabs.executeScript({file: 'src/js/gaze-controls-off2.js'});
-	chrome.tabs.executeScript({file: 'src/js/voice-off.js'});
+	console.log('Modes are turned off.');
+	chrome.tabs.reload();
+	// chrome.tabs.executeScript({file: 'src/js_ext/webgazer.js', runAt: 'document_end'}, function() {
+	// 	chrome.tabs.executeScript({code: 'webgazer.end();'});
+	// });
+	// chrome.tabs.executeScript({file: 'src/js_ext/webgazer.js', runAt: 'document_end'}, function() {
+	// 	chrome.tabs.executeScript({file: 'src/js/gaze-controls-off.js'});
+	// 	chrome.tabs.executeScript({file: 'src/js/gaze-controls-off2.js'});
+	// 	// webgazer.end();
+	// });
+	// chrome.tabs.executeScript({file: 'src/js/voice-off.js'});
 }
 
 
 /* EDIT KEYWORDS */
 
-var keyword_arr = [];
+// var keyword_arr = [], link_arr = [], length=5;
 
-function addKeyword() {
+// function addKeyword() {
+// 	var keyword_input = document.getElementById('keyword_input');
+// 	var keyword = keyword_input.value;
+// 	var link = window.location.href;
+// 	keyword_arr.push(keyword);
+// 	link_arr.push(link);
 
-}
+// 	display(keyword, link);
 
-function removeKeyword() {
+// 	console.log('keyword added');
+// }
 
-}
+// function removeKeyword() {
+
+// }
+
+// /* displays keyword stored in array in the table on popup */
+// function display(keyword, link) {
+// 	var keyword_id = 'keyword-' + (keyword_arr.indexOf(keyword)+1);
+// 	var link_id = 'link-' + (link_arr.indexOf(link)+1);
+
+
+// 	document.getElementById(keyword_id).innerHTML = keyword;
+// 	document.getElementById(link_id).innerHTML = link;	
+// }
