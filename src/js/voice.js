@@ -116,6 +116,18 @@ if(window.SpeechRecognition !== null) {
 			default: inputNum(voice_results);		
 								break;
 		}		
+
+		getData(function(data) {
+			var tempkeyword = data['keyword_arr'];
+			var tempplink = data['plink_arr'];
+			switch(voice_results) {
+				case tempkeyword[0]: window.location.href=tempplink[0]; break;
+				case tempkeyword[1]: window.location.href=tempplink[1]; break;
+				case tempkeyword[2]: window.location.href=tempplink[2]; break;
+				case tempkeyword[3]: window.location.href=tempplink[3]; break;
+				case tempkeyword[4]: window.location.href=tempplink[4]; break;
+			}
+		});
 	}
 
 	/* after calling recognizer.stop() above, it will go here to start the recognizer and check if the 
