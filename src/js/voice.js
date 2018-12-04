@@ -337,19 +337,27 @@ function openButton() {
 // var keyword_arr=[], plink_arr=[];
 
 function addKeyword() {
-		// try to put here condition if length of data[keyword arr] & data[plink arr] <=5 or <=4 
-		add_toggle=!add_toggle;
-		if(add_toggle && !click_toggle && !focus_toggle && !press_toggle  && !open_toggle) {
-			voice_input.value='Say keyword to save...';
-		}
-		else if(click_toggle || focus_toggle || press_toggle || open_toggle) console.log('open function is toggled');
-		// else {}
-
-		// var data = { "keyword_arr" : keyword_arr, "plink_arr" :  tempplinks };
-
 	getData(function(data) {
-		console.log(data['keyword_arr']);
-		console.log(data['plink_arr']);
+		// try to put here condition if length of data[keyword arr] & data[plink arr] <=5 or <=4 
+		var tempkeyword = data['keyword_arr'];
+		var tempplink = data['plink_arr'];
+		console.log(tempkeyword.length);
+		console.log(tempplink.length);
+		if(tempkeyword.length<=4 && tempplink.length<=4){
+			add_toggle=!add_toggle;
+			if(add_toggle && !click_toggle && !focus_toggle && !press_toggle  && !open_toggle) {
+				voice_input.value='Say keyword to save...';
+			}
+			else if(click_toggle || focus_toggle || press_toggle || open_toggle) console.log('open function is toggled');
+			// else {}
+
+			// var data = { "keyword_arr" : keyword_arr, "plink_arr" :  tempplinks };
+
+			console.log(data['keyword_arr']);
+			console.log(data['plink_arr']);
+		}
+		else 
+			alert('Personalized is only limited up to five (5).');
 	});
 }
 
@@ -576,21 +584,20 @@ function inputNum(number) {
 		getData(function(data) {
 			var tempkeyword = data['keyword_arr'];
 			var tempplink = data['plink_arr'];
-			if(tempkeyword.length<=4 && tempplink.length<=4) {
+			// if(tempkeyword.length<=4 && tempplink.length<=4) {
 				tempkeyword.push(number);
 				tempplink.push(window.location.href);
 				var data = { "keyword_arr" : tempkeyword, "plink_arr" :  tempplink };
 				setData(data);
 				console.log(tempkeyword.length);
 				console.log(tempplink.length);
-			}
-			else 
-				alert('Personalized is only limited up to five (5).');
+			// }
+			// else 
+			// 	alert('Personalized is only limited up to five (5).');
 
 			// if(tempkeyword.includes(number) || tempplink.includes(window.location.href)) 
 			// 	alert('Keyword/Link is already saved.');
 			
-
 			console.log("keywords: " + data['keyword_arr']);
 			console.log("plinks: " + data['plink_arr']);
 		});

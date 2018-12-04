@@ -148,22 +148,17 @@ function deleteAllKeyword() {
 		console.log(data['keyword_arr']);
 		console.log(data['plink_arr']);
 	});
+
+	loadKeywords();
 }
 
 
 
 /* displays keyword stored in array in the table on popup */
 function loadKeywords() {
-
-
-	// document.getElementById("keyword-1").innerHTML = 'hello';
 	getData(function(data) {
-		// console.log("keywords: " + data['keyword_arr']);
-		// console.log("plinks: " + data['plink_arr']);
-
 		var tempkeyword = data['keyword_arr'], tempplink = data['plink_arr'];
-		// console.log(tempkeyword);
-		// console.log(tempplink);
+		
 		if(tempkeyword.length>0 && tempplink.length>0) {
 			var i=0;
 			tempkeyword.forEach(function(keyword) {
@@ -182,5 +177,4 @@ function loadKeywords() {
 			console.log("both arrays have length");
 		}
 	});
-
 }
