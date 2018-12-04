@@ -121,11 +121,11 @@ if(window.SpeechRecognition !== null) {
 			var tempkeyword = data['keyword_arr'];
 			var tempplink = data['plink_arr'];
 			switch(voice_results) {
-				case tempkeyword[0]: window.location.href=tempplink[0]; break;
-				case tempkeyword[1]: window.location.href=tempplink[1]; break;
-				case tempkeyword[2]: window.location.href=tempplink[2]; break;
-				case tempkeyword[3]: window.location.href=tempplink[3]; break;
-				case tempkeyword[4]: window.location.href=tempplink[4]; break;
+				case tempkeyword[0]: if(tempkeyword[0]!=undefined) window.location.href=tempplink[0]; break;
+				case tempkeyword[1]: if(tempkeyword[1]!=undefined) window.location.href=tempplink[1]; break;
+				case tempkeyword[2]: if(tempkeyword[2]!=undefined)window.location.href=tempplink[2]; break;
+				case tempkeyword[3]: if(tempkeyword[3]!=undefined)window.location.href=tempplink[3]; break;
+				case tempkeyword[4]: if(tempkeyword[4]!=undefined)window.location.href=tempplink[4]; break;
 			}
 		});
 	}

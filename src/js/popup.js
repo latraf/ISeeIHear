@@ -136,7 +136,17 @@ function removeControls() {
 // }
 
 function deleteKeyword() {
-	
+	var to_delete = parseInt(document.getElementById('to_delete').value, 10);
+	console.log(to_delete);
+	getData(function(data) {
+		var tempkeyword = data['keyword_arr'], tempplink = data['plink_arr'];
+		tempkeyword.splice(to_delete-1, 1);
+		tempplink.splice(to_delete-1, 1);
+
+		var data = { 'keyword_arr' : tempkeyword, 'plink_arr' : tempplink };
+		setData(data);
+	});
+	loadKeywords();
 }
 
 function deleteAllKeyword() {
