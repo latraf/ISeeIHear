@@ -337,14 +337,15 @@ function openButton() {
 // var keyword_arr=[], plink_arr=[];
 
 function addKeyword() {
-	add_toggle=!add_toggle;
-	if(add_toggle && !click_toggle && !focus_toggle && !press_toggle  && !open_toggle) {
-		voice_input.value='Say keyword to save...';
-	}
-	else if(click_toggle || focus_toggle || press_toggle || open_toggle) console.log('open function is toggled');
-	// else {}
+		// try to put here condition if length of data[keyword arr] & data[plink arr] <=5 or <=4 
+		add_toggle=!add_toggle;
+		if(add_toggle && !click_toggle && !focus_toggle && !press_toggle  && !open_toggle) {
+			voice_input.value='Say keyword to save...';
+		}
+		else if(click_toggle || focus_toggle || press_toggle || open_toggle) console.log('open function is toggled');
+		// else {}
 
-	// var data = { "keyword_arr" : keyword_arr, "plink_arr" :  tempplinks };
+		// var data = { "keyword_arr" : keyword_arr, "plink_arr" :  tempplinks };
 
 	getData(function(data) {
 		console.log(data['keyword_arr']);

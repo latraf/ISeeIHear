@@ -157,24 +157,30 @@ function loadKeywords() {
 
 
 	// document.getElementById("keyword-1").innerHTML = 'hello';
-	// getData(function(data) {
-	// 	console.log("keywords: " + data['keyword_arr']);
-	// 	console.log("plinks: " + data['plink_arr']);
-	// });
+	getData(function(data) {
+		// console.log("keywords: " + data['keyword_arr']);
+		// console.log("plinks: " + data['plink_arr']);
 
-	// var tempkeyword = data['keyword_arr'], tempplink = data['plink_arr'];
-	// if(tempkeyword.length>0 && tempplink.length>0) {
-	// 	var i=0;
-	// 	tempkeyword.forEach(function(keyword) {
-	// 		var id = 'keyword-'+(id+1);
-	// 		document.getElementById(id).innerHTML = keyword;
-	// 		i++;
-	// 	});
-	// 	tempplink.forEach(function(plink) {
-	// 		var id = 'plink-'+(id+1);
-	// 		document.getElementById(id).innerHTML = plink;
-	// 		i++;
-	// 	});
-	// }
+		var tempkeyword = data['keyword_arr'], tempplink = data['plink_arr'];
+		// console.log(tempkeyword);
+		// console.log(tempplink);
+		if(tempkeyword.length>0 && tempplink.length>0) {
+			var i=0;
+			tempkeyword.forEach(function(keyword) {
+				var id = 'keyword-'+(i+1);
+				console.log(id);
+				document.getElementById(id).innerHTML = keyword;
+				i++;
+			});
+			i=0;
+			tempplink.forEach(function(plink) {
+				var id = 'plink-'+(i+1);
+				console.log(id);
+				document.getElementById(id).innerHTML = plink;
+				i++;
+			});
+			console.log("both arrays have length");
+		}
+	});
 
 }
