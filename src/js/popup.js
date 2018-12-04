@@ -30,8 +30,8 @@ window.onload = function() {
 	document.getElementById('save_btn').addEventListener('click', saveSettings);
 	document.getElementById('turn_off').addEventListener('click', removeControls);
 
-	// document.getElementById('add_keyword').addEventListener('click', addKeyword);
-	// document.getElementById('remove_keyword').addEventListener('click', removeKeyword);
+	document.getElementById('delete_keyword').addEventListener('click', deleteKeyword);
+	document.getElementById('deleteAll_keyword').addEventListener('click', deleteAllKeyword);
 }
 
 /* SAVES MODALITY AND OPACITY into chrome storage when button is clicked */
@@ -91,7 +91,10 @@ function loadSettings() {
 		console.log("loaded mode: " + mode_out);
 		console.log("loaded opacity: " + opacity_val);
 
+
 	});
+
+	loadKeywords();
 }
 
 function removeControls() {
@@ -132,16 +135,27 @@ function removeControls() {
 // 	console.log('keyword added');
 // }
 
-// function removeKeyword() {
+function deleteKeyword() {
 
-// }
+}
+
+function deleteAllKeyword() {
+	var tempkeyword = [], tempplink = [];
+	var data = { 'keyword_arr' : tempkeyword, 'plink_arr' : tempplink };
+	setData(data);
+
+	getData(function(data) {
+		console.log(data['keyword_arr']);
+		console.log(data['plink_arr']);
+	});
+}
+
+
 
 // /* displays keyword stored in array in the table on popup */
-// function display(keyword, link) {
-// 	var keyword_id = 'keyword-' + (keyword_arr.indexOf(keyword)+1);
-// 	var link_id = 'link-' + (link_arr.indexOf(link)+1);
-
-
-// 	document.getElementById(keyword_id).innerHTML = keyword;
-// 	document.getElementById(link_id).innerHTML = link;	
-// }
+function loadKeywords() {
+	getData(function(data) {
+		console.log("keywords: " + data['keyword_arr']);
+		console.log("plinks: " + data['plink_arr']);
+	});
+}

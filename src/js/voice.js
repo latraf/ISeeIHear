@@ -334,7 +334,7 @@ function openButton() {
 	}
 }
 
-var keyword_arr=[];
+var keyword_arr=[], plink_arr=[];
 
 function addKeyword() {
 	add_toggle=!add_toggle;
@@ -342,9 +342,9 @@ function addKeyword() {
 		voice_input.value='Say keyword to save...';
 	}
 	else if(click_toggle || focus_toggle || press_toggle || open_toggle) console.log('open function is toggled');
-	else{
+	else {}
 
-	}
+	// var data = { "keyword_arr" : keyword_arr, "plink_arr" :  tempplinks };
 }
 
 
@@ -548,22 +548,40 @@ function inputNum(number) {
 		}
 	}
 
-	if(add_toggle && number!=='add') {
-		voice_input.value=number + ' saved.';
-	}
-
-	console.log('number: ' + number);
 	if(click_toggle && !focus_toggle && !press_toggle && !open_toggle && !add_toggle) {
+		console.log('number: ' + number);
 		selectElement(number, link_arr);
 	}
 	else if(focus_toggle && !click_toggle && !press_toggle && !open_toggle && !add_toggle) {
+		console.log('number: ' + number);
 		selectElement(number, field_arr);	
 	}
 	else if(press_toggle && !click_toggle && !focus_toggle && !open_toggle && !add_toggle) {
+		console.log('number: ' + number);
 		selectElement(number, button_arr);
 	}
 	else if(open_toggle && !click_toggle && !focus_toggle && !press_toggle && !add_toggle) {
+		console.log('number: ' + number);
 		selectElement(number, link_arr);
+	}
+	else if(add_toggle && number!=='add' && !click_toggle && !focus_toggle && !press_toggle && !open_toggle) {
+		voice_input.value=number + ' saved.';
+
+		getData(function(data) {
+			var tempkeyword = data['keyword_arr'];
+			var tempplinks = data['plink_arr'];
+			if(tempkeyword.length<=5 && tempplinks<=5) {
+				tempkeyword.push(number);
+				tempplinks.push(window.location.href);
+				var data = { "keyword_arr" : tempkeyword, "plink_arr" :  tempplinks };
+				setData(data);
+				console.log("keywords: " + data['keyword_arr']);
+				console.log("plinks: " + data['plink_arr']);
+			}
+			else if(tempkeyword.includes(number) || tempplinks.includes(window.location.href)) 
+				alert('Keyword/Link is already saved.');
+			else alert('Personalized is only limited up to five (5).');
+		});
 	}
 }
 
