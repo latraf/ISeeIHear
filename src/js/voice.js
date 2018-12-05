@@ -86,7 +86,7 @@ if(window.SpeechRecognition !== null) {
 
 		/* when user says the keyword, it calls the corresponding function */
 		var data, label_number;
-		console.log(voice_results);
+		// console.log(voice_results);
 		switch(voice_results) {
 			case 'scroll up': scrollUp();
 												recognizer.stop();
@@ -110,7 +110,7 @@ if(window.SpeechRecognition !== null) {
 										break;
 			case 'open': openButton();
 										break;
-			case 'stop': voice_stop_btn.click();
+			case 'stop listening': voice_stop_btn.click();
 										break;
 			case 'add': addKeyword();
 			default: inputNum(voice_results);		
@@ -128,6 +128,14 @@ if(window.SpeechRecognition !== null) {
 				case tempkeyword[4]: if(tempkeyword[4]!=undefined)window.location.href=tempplink[4]; break;
 			}
 		});
+
+		// if(focus_toggle) {
+		// 	if(voice_results==='stop focus') focus_toggle!=focus_toggle;
+		// 	// else{
+		// 	// 	$(document.activeElement).val(voice_results);
+		// 	// 		console.log("focus + " + voice_results);
+		// 	// }
+		// }
 	}
 
 	/* after calling recognizer.stop() above, it will go here to start the recognizer and check if the 
@@ -570,7 +578,7 @@ function inputNum(number) {
 			case 'seven': number=7; break;
 			case 'eight': number=8; break;
 			case 'nine': number=9; break;
-			// default: voice_input.value='wrong keyword';
+			// default: ;
 		}
 	}
 
@@ -579,8 +587,19 @@ function inputNum(number) {
 		selectElement(number, link_arr);
 	}
 	else if(focus_toggle && !click_toggle && !press_toggle && !open_toggle && !add_toggle) {
-		console.log('number: ' + number);
-		selectElement(number, field_arr);	
+		if(isNaN(number)) {
+			console.log('NaN: ' + number);
+			console.log(document.activeElement)
+			document.activeElement.innerHTML += number;
+			// if(number==='stop'){}
+			if(number==='stop focus') {
+				focus_toggle=!focus_toggle;
+				voice_input.focus();
+				// voice_stop_btn.click();
+			}
+		}
+		else selectElement(number, field_arr);	
+			
 	}
 	else if(press_toggle && !click_toggle && !focus_toggle && !open_toggle && !add_toggle) {
 		console.log('number: ' + number);
@@ -627,9 +646,10 @@ function selectElement(label_number, array) {
 	else if(focus_toggle && !click_toggle && !press_toggle && !open_toggle && !add_toggle) {
 		console.log('field focused');
 		array[label_number].focus();
+		array[label_number].innerHTML='';
 		removeLabels();
 		removeFields();
-		focus_toggle=false;
+		// focus_toggle=false;
 	}
 	else if(press_toggle && !click_toggle && !focus_toggle && !open_toggle && !add_toggle) {
 		console.log('button pressed');

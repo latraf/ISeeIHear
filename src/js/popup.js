@@ -119,50 +119,35 @@ function removeControls() {
 }
 
 
-/* EDIT KEYWORDS */
-
-// var keyword_arr = [], link_arr = [], length=5;
-
-// function addKeyword() {
-// 	var keyword_input = document.getElementById('keyword_input');
-// 	var keyword = keyword_input.value;
-// 	var link = window.location.href;
-// 	keyword_arr.push(keyword);
-// 	link_arr.push(link);
-
-// 	display(keyword, link);
-
-// 	console.log('keyword added');
-// }
+/* DELETE KEYWORDS */
 
 function deleteKeyword() {
 	var to_delete = parseInt(document.getElementById('to_delete').value, 10);
-	console.log(to_delete);
 	getData(function(data) {
 		var tempkeyword = data['keyword_arr'], tempplink = data['plink_arr'];
-		tempkeyword.splice(to_delete-1, 1);
-		tempplink.splice(to_delete-1, 1);
+		if(to_delete>tempkeyword.length || to_delete<0) alert('Wrong input.');
+		else{
+			console.log(to_delete);
+			tempkeyword.splice(to_delete-1, 1);
+			tempplink.splice(to_delete-1, 1);
 
-		var data = { 'keyword_arr' : tempkeyword, 'plink_arr' : tempplink };
-		setData(data);
+			var keyword_id='keyword-'+(to_delete), plink_id='plink-'+(to_delete);
+			document.getElementById(keyword_id).innerHTML = '';
+			document.getElementById(plink_id).innerHTML = '';
+
+			var data = { 'keyword_arr' : tempkeyword, 'plink_arr' : tempplink };
+			setData(data);
+			// loadKeywords();	
+		}
 	});
-	loadKeywords();
 }
 
 function deleteAllKeyword() {
 	var tempkeyword = [], tempplink = [];
 	var data = { 'keyword_arr' : tempkeyword, 'plink_arr' : tempplink };
 	setData(data);
-
-	getData(function(data) {
-		console.log(data['keyword_arr']);
-		console.log(data['plink_arr']);
-	});
-
 	loadKeywords();
 }
-
-
 
 /* displays keyword stored in array in the table on popup */
 function loadKeywords() {
@@ -184,7 +169,9 @@ function loadKeywords() {
 				document.getElementById(id).innerHTML = plink;
 				i++;
 			});
-			console.log("both arrays have length");
+			// console.log("both arrays have length");
 		}
+		console.log(tempkeyword);
+		console.log(tempplink);
 	});
 }
