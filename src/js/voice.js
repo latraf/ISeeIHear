@@ -588,14 +588,17 @@ function inputNum(number) {
 	}
 	else if(focus_toggle && !click_toggle && !press_toggle && !open_toggle && !add_toggle) {
 		if(isNaN(number)) {
-			console.log('NaN: ' + number);
-			console.log(document.activeElement)
-			document.activeElement.innerHTML += number;
-			// if(number==='stop'){}
+			var elem = document.activeElement;
 			if(number==='stop focus') {
+				console.log('FOCUS STOPPED')
+				elem.blur();
+				voice_input.value='FOCUS STOPPED';
 				focus_toggle=!focus_toggle;
-				voice_input.focus();
-				// voice_stop_btn.click();
+			}
+			else{
+				number += ' ';
+				if(document.activeElement.tagName === 'INPUT') document.activeElement.value += number;
+				else document.activeElement.innerHTML += number;	
 			}
 		}
 		else selectElement(number, field_arr);	
