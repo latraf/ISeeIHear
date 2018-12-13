@@ -23,7 +23,7 @@ function getData(callback) {
 window.onload = function() {
 	chrome.tabs.executeScript({file: 'src/js_ext/jquery-3.1.1.min.js'});
 	chrome.tabs.executeScript({file: 'src/js/gaze-controls-off.js'});
-	chrome.tabs.executeScript({file: 'src/js/voice-off.js'});
+	// chrome.tabs.executeScript({file: 'src/js/voice-off.js'});
 
 	loadSettings();
 	console.log("popup loaded!");
@@ -33,6 +33,10 @@ window.onload = function() {
 	document.getElementById('delete_keyword').addEventListener('click', deleteKeyword);
 	document.getElementById('deleteAll_keyword').addEventListener('click', deleteAllKeyword);
 }
+
+// window.onunload = function() {
+// 	chrome.tabs.executeScript({file: 'src/js/voice.js'});
+// }
 
 /* SAVES MODALITY AND OPACITY into chrome storage when button is clicked */
 var mode_out = '', mode=0, opacity=1, opacity_val;

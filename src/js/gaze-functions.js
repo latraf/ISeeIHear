@@ -137,9 +137,9 @@ webgazer
 
 
 window.onbeforeunload = function() {
-	webgazer.clearGazeListener();
-	console.log('webgazer ended');
-	// window.localStorage.clear(); //Comment out if you want to save data across different sessions	
+	// webgazer.clearGazeListener();
+	// console.log('webgazer ended');
+	window.localStorage.clear(); //Comment out if you want to save data across different sessions	
 	return;
 }
 

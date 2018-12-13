@@ -42,8 +42,7 @@ voice_help_span.innerHTML =
 	'<h3> Keywords: </h3><br>' +  '1. <i>Scroll Up/Scroll Down</i> <br>' + '2. <i>Back/Forward Page</i> <br>' +
 	'3. <strong>For links: </strong> <i> Click </i> + <tt>label_number</tt> <br>' + 
 	'4. <strong>For inputboxes: </strong> <i> Focus </i> + <tt>label_number</tt> <br>' +
-	'5. <strong>For buttons: </strong> <i> Press </i> + <tt>label_number</tt> <br>' + 
-	'6. <strong>For opening links in new tab: </strong> <br>&nbsp&nbsp&nbsp&nbsp<i>Open </i> + <tt>label_number</tt> <br>';
+	'5. <strong>For buttons: </strong> <i> Press </i> + <tt>label_number</tt> <br>';
 
 voice_help_btn.onmouseover = function() {
 	voice_help_span.style.display = 'block';
@@ -59,6 +58,9 @@ document.body.appendChild(voice_stop_btn);
 document.body.appendChild(voice_help_btn);
 document.body.appendChild(voice_help_span);
 
+/* detects all img tags in a document */
+// var images = document.images;
+// console.log(images);
 
 
 /* VOICE RECOGNITION */
@@ -97,24 +99,17 @@ if(window.SpeechRecognition !== null) {
 												console.log('stop');
 												break;
 			case 'backpage':												
-			case 'back page': backPage();
-												break;
+			case 'back page': backPage(); break;
 			case 'forwardpage':												
-			case 'forward page': forwardPage();
-										break;																								
-			case 'click': clickButton();
-										break;
-			case 'focus': focusButton();
-										break;
-			case 'press': pressButton();
-										break;
-			case 'open': openButton();
-										break;
-			case 'stop listening': voice_stop_btn.click();
-										break;
-			case 'add': addKeyword();
-			default: inputNum(voice_results);		
-								break;
+			case 'forward page': forwardPage(); break;																								
+			case 'click': clickButton(); break;
+			case 'focus': focusButton(); break;
+			case 'press': pressButton(); break;
+			case 'save image': saveImage(); break;
+			case 'stop listening': voice_stop_btn.click(); break;
+			case 'refresh': location.reload(); break;
+			case 'add': addKeyword(); break;
+			default: inputNum(voice_results); break;
 		}		
 
 		getData(function(data) {
@@ -170,8 +165,6 @@ if(window.SpeechRecognition !== null) {
 			else if(!data['voice_toggle']) {}
 			else {
 				recognizer.start();
-				// console.log('else');
-				// voice_input.value='wrong keyword';
 			}
 		});
 	}
@@ -224,7 +217,7 @@ $(document).ready(function() {
 
 var scrolled=0, scroll_var=300;
 var up_toggle=false, down_toggle=false, prev_toggle=false, next_toggle=false;
-var click_toggle=false, focus_toggle=false, press_toggle=false, open_toggle=false;
+var click_toggle=false, focus_toggle=false, press_toggle=false, save_toggle=false;
 var add_toggle=false;
 
 
@@ -278,20 +271,19 @@ function forwardPage() {
 }
 
 
-var link_labels = [], field_labels = [], button_labels = [];
+var link_labels = [], field_labels = [], button_labels = [], image_labels = [];
 
 function clickButton() {
 	click_toggle=!click_toggle;
-	if(click_toggle && !focus_toggle && !press_toggle && !open_toggle && !add_toggle) {
+	if(click_toggle && !focus_toggle && !press_toggle && !add_toggle && !save_toggle) {
 		voice_input.value='click';
 		highlightLinks();
 		collectLinks();
 		link_labels = createLabelArray(link_arr);
 		addLabels(link_arr, link_labels);
 	}
-	else if(focus_toggle || press_toggle || open_toggle || add_toggle) {
+	else if(focus_toggle || press_toggle || add_toggle || save_toggle) {
 		console.log('click function is toggled');
-		// clickButton();
 	}
 	else {
 		removeLinks();
@@ -301,16 +293,15 @@ function clickButton() {
 
 function focusButton() {
 	focus_toggle=!focus_toggle;
-	if(focus_toggle && !click_toggle && !press_toggle && !open_toggle && !add_toggle) {
+	if(focus_toggle && !click_toggle && !press_toggle && !add_toggle && !save_toggle) {
 		voice_input.value='focus';
 		highlightFields();
 		collectFields();
 		field_labels = createLabelArray(field_arr);
 		addLabels(field_arr, field_labels);
 	}
-	else if(click_toggle || press_toggle || open_toggle || add_toggle) {
+	else if(click_toggle || press_toggle || add_toggle || save_toggle) {
 		console.log('focus function is toggled');
-		// focusButton();
 	}
 	else {
 		removeFields();
@@ -320,14 +311,14 @@ function focusButton() {
 
 function pressButton() {
 	press_toggle=!press_toggle;
-	if(press_toggle && !click_toggle && !focus_toggle && !open_toggle && !add_toggle) {
+	if(press_toggle && !click_toggle && !focus_toggle && !add_toggle && !save_toggle) {
 		voice_input.value='press';
 		highlightButtons();
 		collectButtons();
 		button_labels = createLabelArray(button_arr);
 		addLabels(button_arr, button_labels);
 	}
-	else if(click_toggle || focus_toggle || open_toggle || add_toggle) {
+	else if(click_toggle || focus_toggle || add_toggle || save_toggle) {
 		console.log('press function is toggled');
 	}
 	else {
@@ -336,20 +327,22 @@ function pressButton() {
 	}
 }
 
-function openButton() {
-	open_toggle=!open_toggle;
-	if(open_toggle && !click_toggle && !focus_toggle && !press_toggle  && !add_toggle) {
-		voice_input.value='open';
-		highlightLinks();
-		collectLinks();
-		link_labels = createLabelArray(link_arr);
-		addLabels(link_arr, link_labels);
+var image_arr = document.images;
+// console.log(image_arr[2]);
+
+function saveImage() {
+	save_toggle=!save_toggle;
+	if(save_toggle && !click_toggle && !focus_toggle && !press_toggle && !add_toggle) {
+		voice_input.value='save image';
+		// highlightButtons();
+		// collectButtons();
+		image_labels = createLabelArray(image_arr);
+		addLabels(image_arr, image_labels);
 	}
 	else if(click_toggle || focus_toggle || press_toggle || add_toggle) {
-		console.log('open function is toggled');
+		console.log('Save Image is toggled');
 	}
 	else {
-		removeLinks();
 		removeLabels();
 	}
 }
@@ -365,13 +358,11 @@ function addKeyword() {
 		console.log(tempplink.length);
 		if(tempkeyword.length<=4 && tempplink.length<=4){
 			add_toggle=!add_toggle;
-			if(add_toggle && !click_toggle && !focus_toggle && !press_toggle  && !open_toggle) {
+			if(add_toggle && !click_toggle && !focus_toggle && !press_toggle && !save_toggle) {
 				voice_input.value='Say keyword to save...';
 			}
-			else if(click_toggle || focus_toggle || press_toggle || open_toggle) console.log('open function is toggled');
-			// else {}
-
-			// var data = { "keyword_arr" : keyword_arr, "plink_arr" :  tempplinks };
+			else if(click_toggle || focus_toggle || press_toggle || save_toggle) 
+				console.log('open function is toggled');
 
 			console.log(data['keyword_arr']);
 			console.log(data['plink_arr']);
@@ -414,7 +405,6 @@ function highlightFields() {
 
 
 var link_arr = [], button_arr = [], field_arr = [];
-
 
 function collectLinks() {
 	link_arr = $('a:visible').toArray();
@@ -569,6 +559,7 @@ function removeLabels() {
 function inputNum(number) {
 	if(typeof number !== 'number' && !add_toggle) {
 		switch(number) {
+			case 'zero': number=0; break;
 			case 'one': number=1; break;
 			case 'two': number=2; break;
 			case 'three': number=3; break;
@@ -582,37 +573,45 @@ function inputNum(number) {
 		}
 	}
 
-	if(click_toggle && !focus_toggle && !press_toggle && !open_toggle && !add_toggle) {
+	if(click_toggle && !focus_toggle && !press_toggle && !add_toggle && !save_toggle) {
 		console.log('number: ' + number);
 		selectElement(number, link_arr);
 	}
-	else if(focus_toggle && !click_toggle && !press_toggle && !open_toggle && !add_toggle) {
+	else if(focus_toggle && !click_toggle && !press_toggle && !add_toggle && !save_toggle) {
 		if(isNaN(number)) {
+			console.log('NaN: ' + number);
+			console.log(document.activeElement)
+
+			// document.activeElement.innerHTML += number;
+			// if(number==='stop'){}
 			var elem = document.activeElement;
 			if(number==='stop focus') {
-				console.log('FOCUS STOPPED')
+				console.log('FOCUS STOPPED');
 				elem.blur();
 				voice_input.value='FOCUS STOPPED';
 				focus_toggle=!focus_toggle;
+				// voice_input.focus();
+				// voice_stop_btn.click();
 			}
-			else{
+			else {
 				number += ' ';
-				if(document.activeElement.tagName === 'INPUT') document.activeElement.value += number;
-				else document.activeElement.innerHTML += number;	
+				if(document.activeElement.tagName === 'INPUT') 
+					document.activeElement.value += number;
+				else document.activeElement.innerHTML += number;
 			}
 		}
 		else selectElement(number, field_arr);	
 			
 	}
-	else if(press_toggle && !click_toggle && !focus_toggle && !open_toggle && !add_toggle) {
+	else if(press_toggle && !click_toggle && !focus_toggle && !add_toggle && !save_toggle) {
 		console.log('number: ' + number);
 		selectElement(number, button_arr);
 	}
-	else if(open_toggle && !click_toggle && !focus_toggle && !press_toggle && !add_toggle) {
+	else if(save_toggle && !click_toggle && !focus_toggle && !press_toggle && !add_toggle) {
 		console.log('number: ' + number);
-		selectElement(number, link_arr);
+		selectElement(number, image_arr);
 	}
-	else if(add_toggle && number!=='add' && !click_toggle && !focus_toggle && !press_toggle && !open_toggle) {
+	else if(add_toggle && number!=='add' && !click_toggle && !focus_toggle && !press_toggle) {
 		voice_input.value=number + ' saved.';
 
 		getData(function(data) {
@@ -639,14 +638,14 @@ function inputNum(number) {
 }
 
 function selectElement(label_number, array) {
-	if(click_toggle && !focus_toggle && !press_toggle && !open_toggle && !add_toggle) {
+	if(click_toggle && !focus_toggle && !press_toggle && !add_toggle && !save_toggle) {
 		console.log('link clicked');
 		array[label_number].click();
 		removeLabels();
 		removeLinks();
 		click_toggle=false;
 	}
-	else if(focus_toggle && !click_toggle && !press_toggle && !open_toggle && !add_toggle) {
+	else if(focus_toggle && !click_toggle && !press_toggle && !add_toggle && !save_toggle) {
 		console.log('field focused');
 		array[label_number].focus();
 		array[label_number].innerHTML='';
@@ -654,18 +653,33 @@ function selectElement(label_number, array) {
 		removeFields();
 		// focus_toggle=false;
 	}
-	else if(press_toggle && !click_toggle && !focus_toggle && !open_toggle && !add_toggle) {
+	else if(press_toggle && !click_toggle && !focus_toggle && !add_toggle && !save_toggle) {
 		console.log('button pressed');
 		array[label_number].click();
 		removeLabels();
 		removeButtons();
 		press_toggle=false;
 	}
-	else if(open_toggle && !click_toggle && !focus_toggle && !press_toggle && !add_toggle) {
-		var link = array[label_number].href;
-		console.log(link);
-		window.open(link, '_blank');
-		voice_stop_btn.click();
-		open_toggle=false;
+	else if(save_toggle && !click_toggle && !focus_toggle && !press_toggle && !add_toggle) {
+		console.log('image saved');
+		var image_link = document.createElement("a");
+		var img = array[label_number];
+		img.onload = function() {
+			console.log(img);
+			console.log(img.src);
+			image_link.setAttribute('href', img.src);
+			image_link.setAttribute('download', 'image');
+			image_link.click();
+		};
+		// var temp=document.images;
+		// saveImage()
+		// image_link.setAttribute('href', temp[0].src);
+		// image_link.setAttribute('download', 'image');
+		// console.log(temp);
+		// image_link.click();
+		// backPage();
+
+		removeLabels();
+		save_toggle=false;
 	}
 }
